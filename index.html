@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIOL 3111 / 5111: Genomics in Medicine & Disease | Temple University</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Tight:wght@600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --temple-cherry: #9D2235;
+            --temple-cherry-dark: #781827;
+            --temple-cherry-light: #FDF2F4;
+            --slate-900: #0F172A;
+            --slate-800: #1E293B;
+            --slate-600: #475569;
+            --slate-400: #94A3B8;
+            --slate-200: #E2E8F0;
+            --slate-100: #F1F5F9;
+            --slate-50: #F8FAFC;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Inter Tight', var(--font-sans);
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--slate-50);
+            color: var(--slate-900);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1E1B4B 0%, var(--slate-900) 50%, var(--temple-cherry-dark) 100%);
+            color: #FFFFFF;
+            padding: 48px 24px 40px 24px;
+            border-bottom: 3px solid var(--temple-cherry);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .course-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            backdrop-filter: blur(8px);
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .header-subtitle {
+            font-size: 1.05rem;
+            color: #CBD5E1;
+            max-width: 780px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .instructor-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 0.85rem;
+            color: #94A3B8;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .instructor-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 24px 60px 24px;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: var(--temple-cherry);
+            border-radius: 2px;
+        }
+
+        .lecture-card {
+            background: #FFFFFF;
+            border: 1px solid var(--slate-200);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .lecture-card:hover {
+            border-color: #CBD5E1;
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .lecture-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .lecture-num {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--temple-cherry);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 4px;
+        }
+
+        .lecture-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            line-height: 1.3;
+        }
+
+        .lecture-desc {
+            font-size: 0.88rem;
+            color: var(--slate-600);
+            line-height: 1.55;
+        }
+
+        .topics-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            list-style: none;
+        }
+
+        .topic-pill {
+            background: var(--slate-100);
+            border: 1px solid var(--slate-200);
+            border-radius: 6px;
+            padding: 3px 10px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--slate-800);
+        }
+
+        .lecture-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 14px;
+            border-top: 1px solid var(--slate-100);
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--temple-cherry);
+            color: #FFFFFF;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 0.86rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            box-shadow: 0 2px 6px rgba(157, 34, 53, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--temple-cherry-dark);
+            box-shadow: 0 4px 12px rgba(157, 34, 53, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #FFFFFF;
+            border: 1.5px solid var(--slate-200);
+            color: var(--slate-800);
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--slate-100);
+            border-color: #CBD5E1;
+        }
+
+        .card-upcoming {
+            opacity: 0.65;
+            background: #FAFAFA;
+            border: 1px dashed var(--slate-300);
+        }
+
+        .card-upcoming:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        footer {
+            background: var(--slate-900);
+            color: var(--slate-400);
+            font-size: 0.8rem;
+            padding: 24px;
+            text-align: center;
+            border-top: 1px solid var(--slate-800);
+        }
+
+        footer a {
+            color: #CBD5E1;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="course-badge">🏛️ Temple University &bull; Fall 2026</div>
+            <h1>BIOL 3111 / 5111: Genomics in Medicine &amp; Disease</h1>
+            <p class="header-subtitle">
+                A quantitative, mechanistic journey across evolutionary biology, molecular diagnostics, evidence-based pharmacology, and AI-driven precision therapeutics.
+            </p>
+            <div class="instructor-meta">
+                <span>👨‍🏫 <strong>Instructor:</strong> Prof. Sergei Pond</span>
+                <span>📍 <strong>Department:</strong> Biology / Institute for Genomics and Evolutionary Medicine</span>
+                <span>🎓 <strong>Portal:</strong> <a href="https://templeu.instructure.com/courses/178614" target="_blank" style="color: #93C5FD; text-decoration: none;">Temple Canvas &rarr;</a></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="section-header">
+            <h2 class="section-title">Course Slide Decks &amp; Materials</h2>
+            <a href="https://templeu.instructure.com/courses/178614/quizzes" target="_blank" class="btn-secondary" style="font-size: 0.8rem; padding: 6px 12px;">
+                🔗 Canvas Quizzes &rarr;
+            </a>
+        </div>
+
+        <!-- Lecture 1: Active -->
+        <div class="lecture-card">
+            <div class="lecture-header-row">
+                <div>
+                    <div class="lecture-num">Lecture 01 &bull; Week 1</div>
+                    <h3 class="lecture-title">Genomics in Medicine &amp; The AI Frontier</h3>
+                </div>
+                <span style="display: inline-block; background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46; padding: 4px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;">
+                    🟢 Active
+                </span>
+            </div>
+
+            <p class="lecture-desc">
+                Deconstructs foundational myths in modern medicine: why "normal" reference intervals are statistical fictions, how 1750 London infant mortality distorted life expectancy, the evolutionary scar of the Black Death, the economic trap of blockbuster clinical trial averages, and how structure-based genomics cured CML.
+            </p>
+
+            <ul class="topics-list">
+                <li class="topic-pill">Gaussian Distributions &amp; Lab Intervals</li>
+                <li class="topic-pill">1,000 Years of Mortality Dynamics</li>
+                <li class="topic-pill">The 7 Axes of Disease</li>
+                <li class="topic-pill">Ancient DNA &amp; ERAP2 Immune Selection</li>
+                <li class="topic-pill">Evidence-Based Medicine vs. NNT</li>
+                <li class="topic-pill">CML &amp; BCR-ABL Kinase Inhibition</li>
+                <li class="topic-pill">Live PGx Database Investigation</li>
+            </ul>
+
+            <div class="lecture-actions">
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <a href="L1.html" class="btn-primary">
+                        🖥️ Open Student Slide Deck &rarr;
+                    </a>
+                </div>
+                <span style="font-size: 0.78rem; color: var(--slate-400); font-family: var(--font-mono);">
+                    Interactive Simulators &bull; No Spoilers
+                </span>
+            </div>
+        </div>
+
+        <!-- Lecture 2: Upcoming -->
+        <div class="lecture-card card-upcoming">
+            <div class="lecture-header-row">
+                <div>
+                    <div class="lecture-num">Lecture 02 &bull; Week 2</div>
+                    <h3 class="lecture-title">The Architecture of the Human Genome: Variation &amp; Architecture</h3>
+                </div>
+                <span style="display: inline-block; background: #F1F5F9; border: 1px solid #CBD5E1; color: #475569; padding: 4px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;">
+                    ⏳ Scheduled
+                </span>
+            </div>
+            <p class="lecture-desc">
+                From SNPs to structural variants, repeat expansions, copy number alterations, and non-coding regulatory networks.
+            </p>
+        </div>
+
+        <!-- Lecture 3: Upcoming -->
+        <div class="lecture-card card-upcoming">
+            <div class="lecture-header-row">
+                <div>
+                    <div class="lecture-num">Lecture 03 &bull; Week 3</div>
+                    <h3 class="lecture-title">Next-Generation Sequencing &amp; Molecular Variant Calling</h3>
+                </div>
+                <span style="display: inline-block; background: #F1F5F9; border: 1px solid #CBD5E1; color: #475569; padding: 4px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;">
+                    ⏳ Scheduled
+                </span>
+            </div>
+            <p class="lecture-desc">
+                Short-read vs long-read sequencing technologies, alignment algorithms, Phred quality scores, and Bayesian variant filtration.
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <div style="max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div>&copy; 2026 Sergei Pond &bull; Department of Biology &bull; Temple University</div>
+            <div>
+                <a href="https://templeu.instructure.com/courses/178614" target="_blank">Temple Canvas</a> &bull;
+                <a href="http://silverback.temple.edu/" target="_blank">Silverback Server</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

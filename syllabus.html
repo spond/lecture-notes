@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus: BIOL 3111 / 5111 - Genomics in Medicine & Disease | Temple University</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Tight:wght@600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --temple-cherry: #9D2235;
+            --temple-cherry-dark: #781827;
+            --temple-cherry-light: #FDF2F4;
+            --slate-900: #0F172A;
+            --slate-800: #1E293B;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-400: #94A3B8;
+            --slate-200: #E2E8F0;
+            --slate-100: #F1F5F9;
+            --slate-50: #F8FAFC;
+            --text-main: #1E293B;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Inter Tight', var(--font-sans);
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--temple-cherry);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            z-index: 1000;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 0 0 6px 0;
+            transition: top 0.2s ease;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            background-color: var(--slate-50);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 48px 56px;
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+            border-left: 1px solid var(--slate-200);
+            border-right: 1px solid var(--slate-200);
+            min-height: 100vh;
+        }
+
+        header {
+            border-bottom: 3px solid var(--temple-cherry);
+            padding-bottom: 28px;
+            margin-bottom: 36px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--temple-cherry-light);
+            border: 1px solid #FECDD3;
+            color: var(--temple-cherry);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .lead-quote {
+            background: #F8FAFC;
+            border-left: 4px solid var(--slate-400);
+            padding: 12px 18px;
+            font-style: italic;
+            color: var(--slate-600);
+            font-size: 0.92rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 24px;
+        }
+
+        .logistics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-radius: 10px;
+            padding: 18px 20px;
+            font-size: 0.86rem;
+            color: var(--slate-700);
+            margin-bottom: 24px;
+        }
+
+        .logistics-grid div strong {
+            color: var(--slate-900);
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-top: 44px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--slate-100);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: var(--temple-cherry);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-family: var(--font-heading);
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--slate-800);
+            margin-top: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--slate-700);
+            margin-bottom: 16px;
+        }
+
+        /* Callouts */
+        .callout {
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .callout-red {
+            background: #FEF2F2;
+            border-left: 4px solid #DC2626;
+            color: #991B1B;
+        }
+
+        .callout-blue {
+            background: #EFF6FF;
+            border-left: 4px solid #2563EB;
+            color: #1E40AF;
+        }
+
+        .callout-green {
+            background: #F0FDF4;
+            border-left: 4px solid #16A34A;
+            color: #166534;
+        }
+
+        .callout-title {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.78rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.88rem;
+        }
+
+        th, td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--slate-200);
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--slate-100);
+            font-weight: 700;
+            color: var(--slate-900);
+            border-top: 1px solid var(--slate-300);
+        }
+
+        tr:nth-child(even) td {
+            background: var(--slate-50);
+        }
+
+        /* Code and Pre */
+        pre {
+            background: var(--slate-900);
+            color: #F8FAFC;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.86em;
+            background: var(--slate-100);
+            color: var(--temple-cherry-dark);
+            padding: 2px 5px;
+            border-radius: 4px;
+            border: 1px solid var(--slate-200);
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            border: none;
+            padding: 0;
+        }
+
+        .btn-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--slate-100);
+            border: 1px solid var(--slate-300);
+            color: var(--slate-800);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .btn-nav:hover {
+            background: var(--slate-200);
+            border-color: var(--slate-400);
+        }
+
+        footer {
+            margin-top: 50px;
+            padding-top: 24px;
+            border-top: 2px solid var(--slate-200);
+            font-size: 0.82rem;
+            color: var(--slate-500);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media print {
+            body { background: #FFFFFF; color: #000000; font-size: 9.5pt; }
+            .skip-link, .btn-nav { display: none !important; }
+            .container { max-width: 100%; padding: 0; box-shadow: none; border: none; }
+            h2 { page-break-after: avoid; margin-top: 20pt; }
+            h3 { page-break-after: avoid; }
+            .callout, table, pre { page-break-inside: avoid; border: 1pt solid #CCCCCC !important; background: #FFFFFF !important; }
+            th { background: #EEEEEE !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to syllabus content</a>
+
+    <div class="container">
+        
+        <header>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <div class="badge">🏛️ Temple University &bull; Fall 2026</div>
+                <a href="index.html" class="btn-nav">&larr; Back to Course Portal</a>
+            </div>
+            <h1>BIOL 3111 / 5111: Genomics in Medicine &amp; Disease</h1>
+            
+            <div class="lead-quote">
+                &ldquo;For every complex problem there is an answer that is clear, simple, and wrong.&rdquo; &mdash; H.L. Mencken<br>
+                <span style="font-size: 0.82rem; font-style: normal; color: var(--slate-500);">(Especially true when applied to precision oncology, polygenic risk scores, and 95% of biotech press releases).</span>
+            </div>
+
+            <div class="logistics-grid">
+                <div>
+                    <strong>🗓️ Schedule</strong>
+                    Thursdays, 17:30 &ndash; 20:00 (SERC 110AB)
+                </div>
+                <div>
+                    <strong>👨‍🏫 Instructor</strong>
+                    Prof. Sergei Pond (SERC 644)
+                </div>
+                <div>
+                    <strong>👩‍🏫 Teaching Assistant</strong>
+                    Violet Lange (Office Hours via Canvas)
+                </div>
+                <div>
+                    <strong>🎓 Course Hub</strong>
+                    <a href="https://templeu.instructure.com/courses/178614" target="_blank" style="color: var(--temple-cherry); font-weight: 600;">Temple Canvas &rarr;</a>
+                </div>
+            </div>
+        </header>
+
+        <main id="main-content">
+
+            <!-- 1. COURSE PHILOSOPHY -->
+            <section>
+                <h2>1. Course Philosophy: What Genomic Medicine Is (and Isn't)</h2>
+                <p>
+                    For most of human history, medicine has been an empirical, reactive art: wait for an organ to fail, describe the gross anatomy, and administer blockbuster therapies that&mdash;for the top 10 highest-grossing drugs in the US&mdash;<strong>fail to help between 75% and 90% of the patients who take them</strong>.
+                </p>
+                <p>
+                    Genomic medicine re-conceptualizes human pathology as an <strong>informational and evolutionary science</strong>. DNA and RNA are digital code with physical consequences. By reading the patient's molecular blueprint and tracking somatic evolutionary trajectories in real time, we can replace empirical trial-and-error with targeted molecular mechanisms.
+                </p>
+                <p>
+                    However, this field is also drowning in unvetted commercial hype, dubious algorithmic claims, and direct-to-consumer pseudoscience. In this course, we will not treat genomics or AI as magical black boxes. <strong>We question everything.</strong> Every paper, test, drug, and predictive model we examine will be subjected to a rigorous 4-step skeptical audit:
+                </p>
+
+                <div class="callout callout-blue">
+                    <div class="callout-title">🔍 The 4-Step Critical Scaffold</div>
+                    <ol style="margin: 0; padding-left: 20px; line-height: 1.6;">
+                        <li><strong>The Mechanism:</strong> What is the exact biophysical or molecular disruption?</li>
+                        <li><strong>The Data Rigor:</strong> What was the cohort size, ancestry diversity, and actual effect size (not just an inflated p-value)?</li>
+                        <li><strong>Clinical Value:</strong> Does this improve patient survival, or is it an expensive surrogate endpoint with zero clinical utility?</li>
+                        <li><strong>The Hype Audit:</strong> What did the marketing leave out? What did the LLM hallucinate? Where does the model fail?</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- 2. CLASSROOM FORMAT -->
+            <section>
+                <h2>2. Classroom Format: The Active 2.5-Hour Workshop</h2>
+                <p>
+                    Sitting passively through a 2.5-hour evening lecture produces near-zero retention. This course is run as a high-tempo, modular workshop divided into three distinct operational blocks:
+                </p>
+
+                <table aria-label="Workshop Timetable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Time</th>
+                            <th scope="col">Segment</th>
+                            <th scope="col">Operational Structure</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>17:30 &ndash; 18:35</strong><br>(65 min)</td>
+                            <td><strong>Part 1: High-Yield Interactive Lecture</strong></td>
+                            <td>Foundational biology, clinical case studies, and critical mechanisms interspersed with real-time conceptual check-ins and live simulations.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>18:35 &ndash; 18:45</strong><br>(10 min)</td>
+                            <td><strong>Intermission &amp; Tool Setup</strong></td>
+                            <td>Break and opening required databases / course webapps on laptops.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>18:45 &ndash; 19:15</strong><br>(30 min)</td>
+                            <td><strong>Part 2: Clinical Genomic Sprint</strong></td>
+                            <td>Work in pairs on browser-based clinical databases (ClinVar, gnomAD, GTEx, cBioPortal, Nextstrain). 1 submission per pair.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>19:15 &ndash; 19:40</strong><br>(25 min)</td>
+                            <td><strong>Part 3: Two-Stage Quiz &amp; Live Debrief</strong></td>
+                            <td><strong>Stage 1 (Solo - 7 min):</strong> Individual attempt on Canvas.<br><strong>Stage 2 (Peer - 8 min):</strong> Consensus debate with seat neighbors.<br><strong>Debrief (10 min):</strong> Live response histogram &amp; post-mortem.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>19:40</strong></td>
+                            <td><strong>Adjournment</strong></td>
+                            <td>(We rarely go past 19:40; nobody learns after two hours of evening lecture).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- 3. GRADING POLICY -->
+            <section>
+                <h2>3. Assessment &amp; Grading Policy: The 50/50 Pragmatic Split</h2>
+                <p>
+                    Grades reflect both <strong>real-time in-class competence</strong> and <strong>rigorous written synthesis</strong>.
+                </p>
+
+                <table aria-label="Grading Breakdown">
+                    <thead>
+                        <tr>
+                            <th scope="col">Component</th>
+                            <th scope="col" style="text-align: center;">Weight</th>
+                            <th scope="col">Operational Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Two-Stage Collaborative Quizzes</strong></td>
+                            <td style="text-align: center; font-weight: 700;">20%</td>
+                            <td>Weekly. Composite score: <code>0.60 &times; Solo + 0.40 &times; Group</code>. <strong>Lowest 2 dropped.</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>In-Class Data Sprints</strong></td>
+                            <td style="text-align: center; font-weight: 700;">20%</td>
+                            <td>Weekly pair workflows graded on a rapid 2/1/0 rubric. <strong>Lowest 2 dropped.</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Attendance &amp; Canvas Engagement</strong></td>
+                            <td style="text-align: center; font-weight: 700;">10%</td>
+                            <td>Verified in-person presence + active contribution to Canvas discussion boards.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Midterm Research Project</strong></td>
+                            <td style="text-align: center; font-weight: 700;">20%</td>
+                            <td>3–4 pages (5 pages for Honors/Grads). Due late October.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Final Capstone Project</strong></td>
+                            <td style="text-align: center; font-weight: 700;">30%</td>
+                            <td>6–8 pages (8–9 pages for Honors/Grads). Due mid-December.</td>
+                        </tr>
+                        <tr style="font-weight: 800; background: var(--slate-100);">
+                            <td>Total</td>
+                            <td style="text-align: center;">100%</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="callout callout-green">
+                    <div class="callout-title">⭐ The Early-Bird Incentive</div>
+                    To discourage sleep-deprived last-minute submissions, you can earn <strong>+12 points/day</strong> (Midterm) and <strong>+15 points/day</strong> (Final) for submitting up to 7 days prior to the official deadline.
+                </div>
+            </section>
+
+            <!-- 4. GENERATIVE AI POLICY -->
+            <section>
+                <h2>4. Generative AI Policy: The Two-Track Contract</h2>
+                
+                <div class="callout callout-blue">
+                    <div class="callout-title">🤖 Instructor AI Disclosure</div>
+                    Transparency is a two-way street. I actively use advanced AI systems as collaborative research, coding, and curriculum-design partners—helping refine lecture narratives, generate interactive clinical sprint datasets, update case studies to 2026 standards, and build our course webapp. AI is a scientific superpower when directed by human domain expertise; it is an embarrassing liability when used as a mindless substitute for thought.
+                </div>
+
+                <p>
+                    On the title page of your Midterm and Final projects, you must explicitly declare your track:
+                </p>
+
+                <h3>Track A: AI-Assisted (Graded Against Expert Reviewer Standards)</h3>
+                <ul style="margin-left: 20px; line-height: 1.6; margin-bottom: 16px;">
+                    <li><strong>Permitted Scope:</strong> You are encouraged to use LLMs (Claude, ChatGPT, Gemini) for structuring, outlining, iterative drafting, and literature exploration.</li>
+                    <li><strong>The Tradeoff:</strong> Your submission is evaluated against <strong>professional scientific standards</strong>. Superficial AI fluff (<em>"Cancer is a complex disease impacting millions worldwide..."</em>), vague generalities, or lack of granular mechanistic detail will be penalized ruthlessly.</li>
+                    <li><strong>Mandatory AI Audit Table:</strong> You must include a dedicated 1-page section documenting at least <strong>two specific instances</strong> where the AI produced an error, oversimplification, or hallucination, and provide the verified primary literature correction.</li>
+                    <li><strong>Zero-Tolerance Citation Policy:</strong> Every cited claim must include an authentic <strong>PubMed ID (PMID) or DOI</strong>. A single hallucinated citation results in an automatic zero for the bibliography and a 1-letter grade deduction.</li>
+                </ul>
+
+                <h3>Track B: 100% Human-Authored (Traditional Undergrad Standard)</h3>
+                <ul style="margin-left: 20px; line-height: 1.6; margin-bottom: 16px;">
+                    <li><strong>Standard:</strong> Graded on standard undergraduate rubrics (synthesis, clarity, and biological understanding).</li>
+                    <li><strong>The Guardrail:</strong> If an unacknowledged Track B paper is flagged for AI-generated text or fabricated citations, it is treated as an intentional academic integrity violation (automatic zero on the assignment).</li>
+                </ul>
+            </section>
+
+            <!-- 5. 14-WEEK MASTER SCHEDULE -->
+            <section>
+                <h2>5. Master 14-Week Course Roadmap (Fall 2026)</h2>
+
+                <table aria-label="14-Week Course Roadmap">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 50px;">Wk</th>
+                            <th scope="col" style="width: 75px;">Date</th>
+                            <th scope="col">Lecture Topic</th>
+                            <th scope="col">Focus &amp; Clinical Anchors</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1</strong></td>
+                            <td><strong>Aug 27</strong></td>
+                            <td><strong>Genomics in Medicine &amp; The AI Frontier</strong></td>
+                            <td>History of medical progress; what genomic medicine is vs. isn't; sequencing cost collapse; the 4-step critical scaffold; and the reality check of AI in healthcare.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2</strong></td>
+                            <td><strong>Sep 3</strong></td>
+                            <td><strong>Genomes, Sequencing, and the Myth of "Simple" Monogenic Disease</strong></td>
+                            <td>Units of genomes; T2T complete genome; sequencing coverage; Sickle Cell &amp; Thalassemia; variable expressivity; balanced polymorphism; and the <em>Casgevy</em> CRISPR bypass.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3</strong></td>
+                            <td><strong>Sep 10</strong></td>
+                            <td><strong>Thousands of Tiny Nudges: GWAS, Complex Traits, and Polygenic Risk Scores</strong></td>
+                            <td>Polygenic architecture; SNP microarrays &amp; Linkage Disequilibrium; Manhattan plots ($p < 5	imes 10^{-8}$); PRS utility vs. limitations; missing heritability; and the multi-ancestry crisis.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4</strong></td>
+                            <td><strong>Sep 17</strong></td>
+                            <td><strong>Missing Pages and Shuffled Chapters: Structural Variants, CNVs, and Prenatal Genomics</strong></td>
+                            <td>Chromosomal aneuploidies; copy number variants (CNVs); cytogenetics to NGS read-depth; cell-free fetal DNA (NIPT); Bayes' theorem &amp; PPV traps; and liquid biopsies for oncology.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5</strong></td>
+                            <td><strong>Sep 24</strong></td>
+                            <td><strong>The Regulatory Genome: Epigenetics, Chromatin Architecture, and Transcriptomics</strong></td>
+                            <td>DNA methylation (5mC), histone marks, ATAC-seq, and 3D TADs; bulk, single-cell (scRNA-seq), and spatial transcriptomics; eQTLs &amp; the GTEx atlas; and Horvath epigenetic aging clocks.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>6</strong></td>
+                            <td><strong>Oct 1</strong></td>
+                            <td><strong>Bacterial Genomics: Commensals vs. Pathogens (Good vs. Evil)</strong></td>
+                            <td>The 1:1 cell count reality; gut microbiome ecology; 16S vs. shotgun metagenomics; FMT for <em>C. diff</em>; bacterial virulence factors; outbreak tracing via WGS; and the Antimicrobial Resistance (AMR) plasmid crisis.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>7</strong></td>
+                            <td><strong>Oct 8</strong></td>
+                            <td><strong>Infectious Disease II: Viral Genomics, Rapid Evolution, and the Vaccine Revolution</strong></td>
+                            <td>RNA virus mutation rates; antigenic drift vs. shift; Nextstrain phylodynamics &amp; real-time variant tracking (<em>SARS-CoV-2, H5N1, Flu</em>); and synthetic mRNA vaccines.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>8</strong></td>
+                            <td><strong>Oct 15</strong></td>
+                            <td><strong>The Double-Edged Sword: Host Immunology, HLA Diversity, and Autoimmune Disease</strong></td>
+                            <td>V(D)J recombination &amp; immune repertoire sequencing (AIRR); HLA Class I/II polymorphism &amp; balancing selection; breaking tolerance (T1D, Celiac); and targeted biologics.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>9</strong></td>
+                            <td><strong>Oct 22</strong></td>
+                            <td><strong>Cancer Genomics I: The Rogue Genome — Evolution, Mutational Signatures, and Hallmarks</strong><br><em style="color: var(--temple-cherry); font-size: 0.8rem;">(Midterm Assigned)</em></td>
+                            <td>Cancer as somatic Darwinian evolution; oncogenes vs. tumor suppressors (Knudson's two-hit); COSMIC mutational signatures (UV, tobacco, APOBEC); TMB; and TCGA profiling.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>10</strong></td>
+                            <td><strong>Oct 29</strong></td>
+                            <td><strong>Cancer Genomics II: Precision Oncology — Targeted Therapies, Resistance, and Immuno-Oncology</strong><br><em style="color: var(--temple-cherry); font-size: 0.8rem;">(Midterm Due)</em></td>
+                            <td>Small-molecule kinase inhibitors (<em>Gleevec, Osimertinib</em>); gatekeeper resistance mutations (<em>EGFR T790M</em>); checkpoint blockade (anti-PD-1); neoantigens; and CAR-T engineering.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>11</strong></td>
+                            <td><strong>Nov 5</strong></td>
+                            <td><strong>Clinical Trials, Evidence-Based Medicine, and Drug Efficacy</strong></td>
+                            <td>Trial phases 1–4; double-blind RCT design; biomarker-driven basket &amp; umbrella trials; Hazard Ratios &amp; Kaplan-Meier curves; primary vs. surrogate endpoints; and ClinicalTrials.gov.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>12</strong></td>
+                            <td><strong>Nov 12</strong></td>
+                            <td><strong>Pharmacogenomics: Personalized Prescribing, Drug Metabolism, and Avoiding Fatal Dosing</strong></td>
+                            <td>Phase I/II CYP450 enzymes; star-allele nomenclature; active drugs vs. prodrugs; high-stakes cases (<em>Clopidogrel, Warfarin, 5-FU/DPYD, TPMT</em>); and CPIC dosing algorithms.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>13</strong></td>
+                            <td><strong>Nov 19</strong></td>
+                            <td><strong>Genomic Ethics, Direct-to-Consumer Testing, Forensic Genealogy, and Policy</strong><br><em style="color: var(--temple-cherry); font-size: 0.8rem;">(Final Assigned)</em></td>
+                            <td>23andMe privacy lessons; investigative genetic genealogy (GEDmatch / Golden State Killer); GINA protections; germline CRISPR ethics; and algorithmic equity.</td>
+                        </tr>
+                        <tr style="background: #FFFBEB;">
+                            <td><strong>&mdash;</strong></td>
+                            <td><strong>Nov 26</strong></td>
+                            <td><strong>THANKSGIVING BREAK (NO CLASS)</strong></td>
+                            <td><em>No class.</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>14</strong></td>
+                            <td><strong>Dec 3</strong></td>
+                            <td><strong>AI, Foundation Models, and The Autonomous Clinic</strong><br><em style="color: var(--temple-cherry); font-size: 0.8rem;">(Final Due ~Dec 15)</em></td>
+                            <td>Ambient clinical AI scribes (Abridge/DAX); biomolecular structure prediction (AlphaFold 3); diagnostic LLMs; clinical decision support; failure modes; and FDA regulation.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- 6. ACCOMMODATIONS & POLICIES -->
+            <section>
+                <h2>6. University Policies &amp; Accommodations</h2>
+                <p>
+                    <strong>Disability Accommodations (DRS):</strong> Any student who needs an accommodation based on the impact of a disability should contact Disability Resources and Services (DRS) at <code>drs@temple.edu</code> or (215) 204-1280 in 100 Ritter Annex to coordinate reasonable accommodations.
+                </p>
+                <p>
+                    <strong>Academic Honesty:</strong> Plagiarism, cheating, or presenting unacknowledged AI output / fabricated citations is a violation of the Temple University Student Conduct Code and results in formal referral to the Disciplinary Committee.
+                </p>
+            </section>
+
+        </main>
+
+        <footer>
+            <div>&copy; 2026 Sergei Pond &bull; Department of Biology &bull; Temple University</div>
+            <div>
+                <a href="index.html">Course Portal</a> &bull;
+                <a href="https://templeu.instructure.com/courses/178614">Temple Canvas</a>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

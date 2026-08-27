@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 1 Study Monograph: Genomics in Medicine & The AI Frontier | BIOL 3111/5111</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- MathJax for Accessible Mathematical Rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                enableMenu: true,
+                menuOptions: {
+                    settings: {
+                        assistiveMml: true,
+                        collapsible: false
+                    }
+                }
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --temple-cherry: #9D2235;
+            --temple-cherry-dark: #781827;
+            --slate-900: #0F172A;
+            --slate-800: #1E293B;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-300: #CBD5E1;
+            --slate-200: #E2E8F0;
+            --slate-100: #F1F5F9;
+            --slate-50: #F8FAFC;
+            --text-main: #1E293B;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Merriweather', Georgia, serif;
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        /* Accessibility: Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--temple-cherry);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            z-index: 1000;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 0 0 6px 0;
+            transition: top 0.2s ease;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            background-color: var(--slate-50);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .monograph-container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 48px 56px;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+            border-left: 1px solid var(--slate-200);
+            border-right: 1px solid var(--slate-200);
+            min-height: 100vh;
+        }
+
+        header {
+            border-bottom: 2px solid var(--slate-200);
+            padding-bottom: 24px;
+            margin-bottom: 36px;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--temple-cherry);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .monograph-subtitle {
+            font-size: 1.1rem;
+            color: var(--slate-600);
+            font-weight: 400;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .author-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 28px;
+            font-size: 0.86rem;
+            color: var(--slate-600);
+            background: var(--slate-50);
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: 1px solid var(--slate-200);
+        }
+
+        .toc-box {
+            background: #FAF5FF;
+            border: 1.5px solid #E9D5FF;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 40px;
+        }
+
+        .toc-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #6B21A8;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 24px;
+            font-size: 0.88rem;
+        }
+
+        .toc-list a {
+            color: #581C87;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+            color: var(--temple-cherry);
+        }
+
+        /* Typography & Headings */
+        h2 {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-top: 48px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--slate-100);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 22px;
+            background: var(--temple-cherry);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--slate-800);
+            margin-top: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-family: var(--font-serif);
+            font-size: 0.98rem;
+            line-height: 1.75;
+            color: var(--slate-800);
+            margin-bottom: 18px;
+        }
+
+        strong {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            color: var(--slate-900);
+        }
+
+        /* Accessible Callout Boxes */
+        .callout {
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 24px 0;
+            font-family: var(--font-sans);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            page-break-inside: avoid;
+        }
+
+        .callout-myth {
+            background: #FEF2F2;
+            border-left: 4px solid #DC2626;
+            color: #991B1B;
+        }
+
+        .callout-law {
+            background: #F0FDF4;
+            border-left: 4px solid #16A34A;
+            color: #166534;
+        }
+
+        .callout-clinical {
+            background: #EFF6FF;
+            border-left: 4px solid #2563EB;
+            color: #1E40AF;
+        }
+
+        .callout-title {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Accessible Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.88rem;
+            font-family: var(--font-sans);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--slate-200);
+        }
+
+        th {
+            background: var(--slate-100);
+            font-weight: 700;
+            color: var(--slate-900);
+            border-top: 1px solid var(--slate-300);
+        }
+
+        tr:nth-child(even) td {
+            background: var(--slate-50);
+        }
+
+        /* Images and Figures */
+        figure {
+            margin: 28px 0;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+
+        figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid var(--slate-200);
+        }
+
+        figcaption {
+            font-size: 0.82rem;
+            color: var(--slate-600);
+            margin-top: 8px;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        /* Math Block Styling */
+        .math-block {
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 20px 0;
+            overflow-x: auto;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+
+        /* Checkpoint Summary Cards */
+        .checkpoint-card {
+            background: #F8FAFC;
+            border: 1.5px solid var(--slate-300);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 28px 0;
+            page-break-inside: avoid;
+        }
+
+        .checkpoint-header {
+            font-weight: 800;
+            font-size: 0.88rem;
+            color: var(--temple-cherry);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 2px solid var(--slate-200);
+            font-size: 0.82rem;
+            color: var(--slate-600);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        /* =========================================================================
+           PRINT STYLESHEET (WCAG / SECTION 508 / PDF EXPORT COMPLIANT)
+           ========================================================================= */
+        @media print {
+            body {
+                background: #FFFFFF;
+                color: #000000;
+                font-size: 10pt;
+            }
+
+            .skip-link, .toc-box, .print-btn {
+                display: none !important;
+            }
+
+            .monograph-container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                border: none;
+            }
+
+            h2 {
+                margin-top: 24pt;
+                page-break-after: avoid;
+            }
+
+            h3 {
+                page-break-after: avoid;
+            }
+
+            p {
+                font-size: 10pt;
+                line-height: 1.6;
+            }
+
+            .callout, .checkpoint-card, .math-block, table, figure {
+                page-break-inside: avoid;
+                background: #FFFFFF !important;
+                border: 1pt solid #999999 !important;
+            }
+
+            th {
+                background: #EEEEEE !important;
+            }
+
+            a {
+                color: #000000;
+                text-decoration: underline;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main reading content</a>
+
+    <div class="monograph-container">
+        
+        <header>
+            <div class="course-meta">
+                <span>🏛️ Temple University &bull; Fall 2026</span>
+                <span>BIOL 3111 / 5111</span>
+            </div>
+            <h1>Genomics in Medicine &amp; The AI Frontier</h1>
+            <p class="monograph-subtitle">
+                Lecture 01 Study Monograph: Deconstructing Clinical Dogmas, Historical Demography, the Economics of Evidence-Based Medicine, and the Precision Revolution.
+            </p>
+            <div class="author-card">
+                <span><strong>Instructor:</strong> Prof. Sergei Pond</span>
+                <span><strong>Department:</strong> Biology / iGEM</span>
+                <span><strong>Format:</strong> Accessible Offline Reading Monograph</span>
+            </div>
+        </header>
+
+        <!-- Table of Contents -->
+        <nav class="toc-box" aria-label="Table of Contents">
+            <div class="toc-title">Table of Contents</div>
+            <ul class="toc-list">
+                <li><a href="#sec-1">1. The Epistemic Crisis of "Normal"</a></li>
+                <li><a href="#sec-2">2. Deep Time &amp; Historical Demography</a></li>
+                <li><a href="#sec-3">3. The 7 Axes of Human Disease</a></li>
+                <li><a href="#sec-4">4. Ancient DNA &amp; The ERAP2 Trade-off</a></li>
+                <li><a href="#sec-5">5. Beyond Humans: Pathogen Phylodynamics</a></li>
+                <li><a href="#sec-6">6. Evidence-Based Medicine vs NNT</a></li>
+                <li><a href="#sec-7">7. CML &amp; The Gleevec Precision Paradigm</a></li>
+                <li><a href="#sec-8">8. Pharmacogenomic Case Studies (Sprint)</a></li>
+            </ul>
+        </nav>
+
+        <main id="main-content">
+
+            <!-- ================================================================= -->
+            <!-- SECTION 1 -->
+            <!-- ================================================================= -->
+            <section id="sec-1">
+                <h2>1. The Epistemic Crisis of "Normal"</h2>
+                
+                <p>
+                    Every medical chart begins with reference intervals: numbers highlighted in green for "normal" and red for "abnormal." However, in clinical pathology, a "normal range" is rarely a biological boundary; it is a statistical convention defined as the central <strong>95% interval ($\mu \pm 1.96\sigma$)</strong> of a reference population.
+                </p>
+
+                <div class="callout callout-myth">
+                    <div class="callout-title">⚠️ The Gaussian Myth in Clinical Diagnostics</div>
+                    Defining normality as 95% guarantees that exactly <strong>5% of completely healthy people ($\alpha = 0.05$)</strong> will be classified as "abnormal" on any single laboratory test by mathematical definition.
+                </div>
+
+                <p>
+                    In modern multi-omic medicine, patients do not receive one test; they receive multiplex panels measuring 20 to 500 biomarkers simultaneously. When $k$ independent tests are performed, the probability of obtaining <em>at least one false abnormal result</em> in a perfectly healthy individual scales exponentially:
+                </p>
+
+                <div class="math-block" role="region" aria-label="Mathematical formula for False Abnormal Probability across multiple tests">
+                    <span role="math" aria-label="Probability of at least one false abnormal equals 1 minus 0.95 to the power of k">
+                        $$P(\ge 1\text{ False Positive}) = 1 - (1 - \alpha)^k = 1 - (0.95)^k$$
+                    </span>
+                </div>
+
+                <table aria-label="Lookup table of False Alarm Probability as the number of tests increases">
+                    <thead>
+                        <tr>
+                            <th scope="col">Number of Tests ($k$)</th>
+                            <th scope="col">Clinical Context</th>
+                            <th scope="col">Chance of $\ge 1$ False Alarm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>$k = 1$</td>
+                            <td>Single Fasting Glucose</td>
+                            <td><strong>5.0%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>$k = 14$</td>
+                            <td>Comprehensive Metabolic Panel (CMP)</td>
+                            <td><strong>51.2%</strong> (Coin flip)</td>
+                        </tr>
+                        <tr>
+                            <td>$k = 20$</td>
+                            <td>Routine Executive Wellness Screen</td>
+                            <td><strong>64.2%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>$k = 100$</td>
+                            <td>Targeted Metabolomics Panel</td>
+                            <td><strong>99.4%</strong></td>
+                        </tr>
+                        <tr>
+                            <td>$k = 500$</td>
+                            <td>Liquid Biopsy / Proteomic Screen</td>
+                            <td><strong>&gt; 99.999%</strong> (Certainty)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="callout callout-clinical">
+                    <div class="callout-title">💡 The High-Dimensional Screening Paradox (Spot Check 01)</div>
+                    If a liquid biopsy screens 500 proteins where 25 (5%) reflect early cancer, operating at 80% sensitivity (20 True Positives) and 95% specificity (23.75 False Positives on 475 healthy proteins), the <strong>False Discovery Rate (FDR)</strong> is:
+                    <div style="text-align: center; margin-top: 6px; font-weight: 700;">
+                        $$\text{FDR} = \frac{\text{FP}}{\text{TP} + \text{FP}} = \frac{23.75}{20.0 + 23.75} \approx 54.3\%$$
+                    </div>
+                    More than half of all positive cancer alerts are false alarms. High-dimensional diagnostics without Bayesian priors lead directly to unnecessary invasive biopsies and patient panic.
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 2 -->
+            <!-- ================================================================= -->
+            <section id="sec-2">
+                <h2>2. Deep Time &amp; Historical Demography</h2>
+
+                <p>
+                    A pervasive myth in popular biology states: <em>"In pre-modern times, life expectancy was 35 years, meaning ancient humans aged rapidly and became biological elders in their mid-thirties."</em>
+                </p>
+
+                <p>
+                    Historical demographic records (such as the 1750 London Parish Registers) reveal this to be a fundamental misinterpretation of mathematical averages driven by extreme right-skewed childhood mortality.
+                </p>
+
+                <div class="callout callout-myth">
+                    <div class="callout-title">⚠️ Deconstructing the 35-Year-Old Elder Myth (Spot Check 02)</div>
+                    A life expectancy at birth ($e_0 = 35$) was not caused by accelerated aging. It was driven by <strong>~40% infant and child mortality before age 5</strong> (due to cholera, dysentery, and smallpox). For an individual who survived past childhood (age 20), conditional life expectancy ($e_{20}$) was <strong>62 to 70 years</strong>.
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0;" role="group" aria-label="Historical founders of the Germ Theory revolution">
+                    <figure style="margin: 0;">
+                        <img src="assets/pasteur_lab.jpg" alt="Historical archival photograph of Louis Pasteur working with glassware and broth in his Paris laboratory (1885)." style="width: 100%; height: 260px; object-fit: cover; border-radius: 8px; border: 1px solid var(--slate-200);">
+                        <figcaption><strong>Louis Pasteur (1822–1895):</strong> Established germ theory, pasteurization, and attenuation of rabies and anthrax vaccines.</figcaption>
+                    </figure>
+                    <figure style="margin: 0;">
+                        <img src="assets/koch.jpg" alt="Historical portrait of Dr. Robert Koch seated in formal attire with spectacles (circa 1900)." style="width: 100%; height: 260px; object-fit: cover; border-radius: 8px; border: 1px solid var(--slate-200);">
+                        <figcaption><strong>Robert Koch (1843–1910):</strong> Isolated <em>B. anthracis</em>, <em>M. tuberculosis</em>, and <em>V. cholerae</em>; formalized Koch's Postulates.</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 3 -->
+            <!-- ================================================================= -->
+            <section id="sec-3">
+                <h2>3. The 7 Axes of Human Disease</h2>
+
+                <p>
+                    Human pathology does not fit into a single reductionist framework. Historically and conceptually, human illnesses span seven distinct mechanobiological axes:
+                </p>
+
+                <table aria-label="The 7 Axes of Human Pathology">
+                    <thead>
+                        <tr>
+                            <th scope="col">Axis</th>
+                            <th scope="col">Primary Mechanism</th>
+                            <th scope="col">Classic Paradigm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. Pathogenic</strong></td>
+                            <td>Exogenous microbial invasion &amp; virulence factors</td>
+                            <td>Plague (<em>Y. pestis</em>), Cholera, HIV, SARS-CoV-2</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Toxic / Environmental</strong></td>
+                            <td>Chemical poisoning &amp; metabolic disruption</td>
+                            <td>Lead neurotoxicity, Asbestos mesothelioma</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Mechanical / Structural</strong></td>
+                            <td>Physical wear, trauma, shear stress, &amp; ischemia</td>
+                            <td>Atherosclerotic plaque rupture, osteoarthritis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. Nutritional / Metabolic</strong></td>
+                            <td>Macronutrient excess or micronutrient deficiency</td>
+                            <td>Scurvy, Type 2 Diabetes, Pellagra</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5. Genetic / Congenital</strong></td>
+                            <td>Germline or somatic DNA variation</td>
+                            <td>Sickle cell anemia, Cystic Fibrosis, CML</td>
+                        </tr>
+                        <tr>
+                            <td><strong>6. Autoimmune / Degenerative</strong></td>
+                            <td>Loss of self-tolerance &amp; cellular senescence</td>
+                            <td>Type 1 Diabetes, Rheumatoid Arthritis, Alzheimer's</td>
+                        </tr>
+                        <tr>
+                            <td><strong>7. Psychosocial / Stress</strong></td>
+                            <td>Chronic HPA axis hyperactivation &amp; allostatic load</td>
+                            <td>Major depression, stress cardiomyopathy</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 4 -->
+            <!-- ================================================================= -->
+            <section id="sec-4">
+                <h2>4. Ancient DNA &amp; The ERAP2 Trade-off</h2>
+
+                <p>
+                    In 1348, the Black Death (<em>Yersinia pestis</em>) wiped out 30–50% of the European population in fewer than five years. This created one of the most intense natural selection events in human history.
+                </p>
+
+                <p>
+                    By extracting and sequencing ancient DNA from victims buried in East Smithfield plague pits in London before, during, and after the pandemic, geneticists discovered massive allele frequency shifts in immune loci—most notably the <strong><em>ERAP2</em> (Endoplasmic Reticulum Aminopeptidase 2)</strong> gene.
+                </p>
+
+                <div class="callout callout-law">
+                    <div class="callout-title">🧬 The Evolutionary Scar of Survival</div>
+                    Individuals carrying the protective <em>ERAP2</em> variant produced fully functional aminopeptidases that effectively cleaved bacterial antigens for MHC Class I presentation, conferring a <strong>40% survival advantage</strong> against the Black Death. However, in modern sanitized environments, this hyper-reactive variant is a major risk factor for <strong>Crohn's disease and autoimmune colitis</strong>.
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 5 -->
+            <!-- ================================================================= -->
+            <section id="sec-5">
+                <h2>5. Beyond Humans: Pathogen Phylodynamics</h2>
+
+                <p>
+                    Genomic medicine does not stop at the human nuclear membrane. Modern infectious disease surveillance tracks evolutionary changes across viral and bacterial phylogenies in real time.
+                </p>
+
+                <p>
+                    Using the molecular clock equation ($d = \mu \times t$), we infer transmission trees, detect cryptic zoonotic spillover events, and identify convergent escape mutations (e.g., SARS-CoV-2 Spike substitutions, H5N1 receptor-binding adaptations) before widespread clinical failure occurs.
+                </p>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 6 -->
+            <!-- ================================================================= -->
+            <section id="sec-6">
+                <h2>6. Evidence-Based Medicine vs. The Precision Trap</h2>
+
+                <p>
+                    For four decades, Evidence-Based Medicine (EBM) has relied on the double-blind Randomized Controlled Trial (RCT) as the gold standard. However, RCTs evaluate <strong>population average effects</strong>. In genetically heterogeneous populations, average benefits frequently mask individual non-response.
+                </p>
+
+                <p>
+                    Pharmaceutical marketing heavily emphasizes <strong>Relative Risk Reduction (RRR)</strong>, which inflates perceived efficacy, while clinical reality is governed by <strong>Absolute Risk Reduction (ARR)</strong> and the <strong>Number Needed to Treat (NNT)</strong>.
+                </p>
+
+                <div class="math-block" role="region" aria-label="Formulas for ARR, NNT, and RRR">
+                    <span role="math" aria-label="ARR equals Risk Control minus Risk Treated. NNT equals 1 divided by ARR. RRR equals ARR divided by Risk Control.">
+                        $$\text{ARR} = \text{Risk}_{\text{Control}} - \text{Risk}_{\text{Treated}}, \quad \text{NNT} = \frac{1}{\text{ARR}}, \quad \text{RRR} = \frac{\text{ARR}}{\text{Risk}_{\text{Control}}}$$
+                    </span>
+                </div>
+
+                <div class="callout callout-clinical">
+                    <div class="callout-title">💡 The Asymmetric NNT Ratio (Spot Check 03)</div>
+                    Consider two trials reporting an identical <strong>25% Relative Risk Reduction (RRR = 0.25)</strong>:
+                    <ul>
+                        <li><strong>Trial A (Unselected Population):</strong> Event risk drops from $2.0\%$ to $1.5\%$ ($\text{ARR} = 0.5\%$). $\text{NNT}_A = 1 / 0.005 = \mathbf{200}$. (You must treat 200 people for 5 years to prevent 1 event; 199 receive zero benefit).</li>
+                        <li><strong>Trial B (Genomic High-Risk Cohort):</strong> Event risk drops from $20.0\%$ to $15.0\%$ ($\text{ARR} = 5.0\%$). $\text{NNT}_B = 1 / 0.05 = \mathbf{20}$.</li>
+                    </ul>
+                    $$\text{Efficiency Ratio} = \frac{\text{NNT}_A}{\text{NNT}_B} = \frac{200}{20} = \mathbf{10.0 \times}$$
+                    Genomic enrichment increases clinical efficiency by an order of magnitude.
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 7 -->
+            <!-- ================================================================= -->
+            <section id="sec-7">
+                <h2>7. CML &amp; The Gleevec Precision Revolution</h2>
+
+                <p>
+                    Before 2001, Chronic Myeloid Leukemia (CML) was a fatal diagnosis with a 3–5 year median survival. Treatment consisted of non-specific cytotoxic chemotherapy (busulfan, hydroxyurea) and interferon, which produced debilitating toxicity without eradicating the malignant clone.
+                </p>
+
+                <p>
+                    In 1960, Nowell and Hungerford identified the tiny <strong>Philadelphia chromosome</strong> in Philadelphia, PA. Decades later, molecular cloning proved this was a reciprocal translocation between chromosomes 9 and 22:
+                </p>
+
+                <div class="math-block">
+                    $$t(9;22)(q34;q11) \longrightarrow \text{BCR-ABL1 Fusion Oncogene}$$
+                </div>
+
+                <p>
+                    The BCR-ABL fusion protein is a constitutively active tyrosine kinase that continually phosphorylates downstream substrates without requiring external growth signals, driving uncontrolled granulocyte proliferation.
+                </p>
+
+                <div class="callout callout-law">
+                    <div class="callout-title">💊 Rational Drug Design: The Imatinib (Gleevec) Paradigm</div>
+                    Rather than poisoning dividing cells, biochemists modeled the inactive ATP-binding pocket of the ABL kinase domain and synthesized <strong>Imatinib (STI-571 / Gleevec)</strong>. Gleevec forms precise hydrogen bonds within the pocket, locking the enzyme in an inactive conformation. 5-year survival jumped from &lt;30% to <strong>&gt;90%</strong> with minimal side effects.
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 8 -->
+            <!-- ================================================================= -->
+            <section id="sec-8">
+                <h2>8. Pharmacogenomic Case Studies in Practice</h2>
+
+                <p>
+                    Today, genomic stratification determines efficacy and toxicity across billions in prescription drug spending:
+                </p>
+
+                <table aria-label="Precision Pharmacogenomics Comparative Audit Matrix">
+                    <thead>
+                        <tr>
+                            <th scope="col">Drug</th>
+                            <th scope="col">Indication</th>
+                            <th scope="col">Biomarker</th>
+                            <th scope="col">Population Frequency</th>
+                            <th scope="col">Clinical Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Plavix</strong><br>(<em>clopidogrel</em>)</td>
+                            <td>Post-stent / Stroke Antiplatelet</td>
+                            <td><code>CYP2C19 (*2, *3)</code> Loss-of-Function</td>
+                            <td>~15% Europeans<br><strong>~30% East Asians</strong></td>
+                            <td>Prodrug cannot be activated; causes <strong>3.5× fatal stent thrombosis</strong>. Requires switch to Prasugrel.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Keytruda</strong><br>(<em>pembrolizumab</em>)</td>
+                            <td>Solid Tumors / Melanoma</td>
+                            <td><code>MSI-H / dMMR</code> or $\text{TMB} \ge 10$</td>
+                            <td>~2–4% Pan-cancer solid tumors</td>
+                            <td>Hypermutated tumors generate dense neoantigens; achieves <strong>&gt;50% objective response</strong> across tissue types.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Herceptin</strong><br>(<em>trastuzumab</em>)</td>
+                            <td>Invasive Breast Cancer</td>
+                            <td><code>ERBB2 / HER2</code> Amplification</td>
+                            <td>~15–20% Breast tumors</td>
+                            <td>Mandatory companion diagnostic (IHC 3+/FISH+). In unamplified patients, causes cardiotoxicity with zero benefit.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tagrisso</strong><br>(<em>osimertinib</em>)</td>
+                            <td>Non-Small Cell Lung Cancer</td>
+                            <td><code>EGFR T790M</code> Gatekeeper Mutation</td>
+                            <td>~50–60% of relapses on 1st-gen TKIs</td>
+                            <td>Overcomes steric hindrance from Darwinian resistance mutations at $17,000/month.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+
+        <footer>
+            <div>&copy; 2026 Sergei Pond &bull; Department of Biology &bull; Temple University</div>
+            <div>
+                <a href="L1.html">Interactive Presentation Deck</a> &bull;
+                <a href="https://templeu.instructure.com/courses/178614">Canvas Course</a>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
