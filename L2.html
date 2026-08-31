@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 2: Genomes, Sequencing, and the Myth of "Simple" Disease | BIOL 3111/5111</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Tight:wght@500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- MathJax for TeX Typography -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                packages: {'[+]': ['ams', 'textmacros']}
+            },
+            svg: {
+                fontCache: "global"
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #334155;
+            --primary-color: #0F172A;
+            --secondary-color: #475569;
+            --accent-color: #2563EB;
+            --accent-light: #EFF6FF;
+            --accent-border: #BFDBFE;
+            --temple-cherry: #9D2235;
+            --temple-cherry-light: #FDF2F4;
+            --bullet-color: #94A3B8;
+            --card-bg: #FFFFFF;
+            --card-border: #E2E8F0;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-heading: 'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Top Progress Bar */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 3px;
+            background: #E2E8F0;
+            z-index: 1000;
+        }
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #2563EB, #60A5FA);
+            transition: width var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* macOS-Style Autohide Top Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 52px;
+            padding: 0 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+            z-index: 1000;
+            transform: translateY(calc(-100% + 4px));
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
+        }
+        #header-trigger-zone {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 28px;
+            z-index: 999;
+        }
+        header:hover, header.header-visible, #header-trigger-zone:hover + header {
+            transform: translateY(0);
+        }
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 3px;
+            background: #CBD5E1;
+            border-radius: 9999px;
+            transition: opacity 0.2s ease;
+        }
+        header:hover::after, header.header-visible::after {
+            opacity: 0;
+        }
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: var(--primary-color);
+        }
+        .header-badge {
+            background: var(--temple-cherry);
+            color: #FFFFFF;
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.04em;
+        }
+        .header-series {
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Presentation Canvas */
+        main {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 40px;
+        }
+        .slide {
+            position: absolute;
+            top: 16px;
+            left: 40px;
+            right: 40px;
+            bottom: 18px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(30px);
+            transition: opacity var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1),
+                        transform var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .slide.active {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            transform: translateX(0) !important;
+            z-index: 10;
+        }
+
+        /* Typography & Layout */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            letter-spacing: -0.025em;
+            font-weight: 700;
+        }
+        p {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            color: var(--secondary-color);
+        }
+        .slide-meta {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .slide-meta::before {
+            content: "";
+            display: inline-block;
+            width: 14px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+        .slide-header {
+            margin-bottom: 14px;
+        }
+        .slide-title {
+            font-size: 1.95rem;
+            line-height: 1.18;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+        .slide-subtitle {
+            font-size: 0.92rem;
+            color: var(--secondary-color);
+            line-height: 1.4;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .grid-3col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 16px 18px;
+            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+        }
+        .card-blue    { border-top: 4px solid #2563EB; }
+        .card-emerald { border-top: 4px solid #10B981; }
+        .card-purple  { border-top: 4px solid #8B5CF6; }
+        .card-amber   { border-top: 4px solid #F59E0B; }
+        .card-cherry  { border-top: 4px solid #9D2235; }
+        
+        .card-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .card-pill {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            background: #F1F5F9;
+            color: #475569;
+            border: 1px solid #E2E8F0;
+        }
+        .card-title {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+            line-height: 1.25;
+        }
+        .card-body {
+            font-size: 0.84rem;
+            color: var(--secondary-color);
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .callout-strip {
+            margin-top: 12px;
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 6px;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .callout-strip-text {
+            font-size: 0.82rem;
+            color: var(--secondary-color);
+            line-height: 1.45;
+        }
+
+        /* Spotlight Progressive Disclosure & Within-Slide Translucency */
+        .fragment {
+            transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 0.32s ease, 
+                        border-color 0.25s ease, 
+                        box-shadow 0.25s ease;
+        }
+        .has-fragments .fragment {
+            opacity: 0.45;
+            filter: grayscale(15%);
+            transform: scale(0.99);
+            pointer-events: auto;
+        }
+        .has-fragments .fragment.fragment-focused {
+            opacity: 1 !important;
+            filter: none !important;
+            transform: scale(1.01) !important;
+            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12) !important;
+            border-color: #2563EB !important;
+            z-index: 10;
+            position: relative;
+        }
+        .all-fragments-focused .fragment {
+            opacity: 1 !important;
+            filter: none !important;
+            transform: scale(1) !important;
+            pointer-events: auto;
+        }
+
+        /* Title Slide */
+        .title-container {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 48px;
+            align-items: center;
+            height: 100%;
+            max-height: 560px;
+        }
+        .title-left {
+            border-left: 4px solid var(--temple-cherry);
+            padding-left: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .title-badge-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .title-pill-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: var(--temple-cherry-light);
+            color: var(--temple-cherry);
+            border: 1px solid #FECDD3;
+            padding: 5px 12px;
+            border-radius: 9999px;
+        }
+        .hero-title {
+            font-size: 2.7rem;
+            line-height: 1.12;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: -0.03em;
+            margin-bottom: 14px;
+        }
+        .hero-title em {
+            font-style: italic;
+            font-weight: 700;
+            color: var(--temple-cherry);
+        }
+        .hero-subtitle {
+            font-size: 1.05rem;
+            font-weight: 500;
+            line-height: 1.45;
+            color: var(--secondary-color);
+            margin-bottom: 24px;
+            max-width: 680px;
+        }
+
+        /* Log Scale Genome Size Chart Styles */
+        .log-chart-container {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 10px;
+            padding: 14px 18px;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .genome-bar-row {
+            display: grid;
+            grid-template-columns: 180px 1fr 110px;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.78rem;
+            padding: 2px 0;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .genome-bar-row:hover {
+            background: #F8FAFC;
+            border-radius: 6px;
+        }
+        .organism-name {
+            font-weight: 600;
+            color: #1E293B;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .organism-name em {
+            font-style: italic;
+            color: #475569;
+            font-weight: 500;
+        }
+        .bar-track {
+            height: 13px;
+            background: #F1F5F9;
+            border-radius: 7px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #E2E8F0;
+        }
+        .bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.4s ease;
+        }
+        .size-val {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 0.76rem;
+            text-align: right;
+            color: #0F172A;
+        }
+
+        /* macOS-Style Autohide Dock Footer */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 48px;
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-top: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.08);
+            z-index: 1000;
+            transform: translateY(calc(100% - 6px));
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
+        }
+        #dock-trigger-zone {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 28px;
+            z-index: 999;
+        }
+        footer:hover, footer.dock-visible, #dock-trigger-zone:hover + footer {
+            transform: translateY(0);
+        }
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 3px;
+            background: #94A3B8;
+            border-radius: 9999px;
+        }
+        .slide-jump-select {
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            font-weight: 600;
+            background: #F8FAFC;
+            border: 1px solid #CBD5E1;
+            color: var(--primary-color);
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            max-width: 280px;
+        }
+        .footer-progress {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border: 1px solid #E2E8F0;
+            background: #FFFFFF;
+            color: var(--primary-color);
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .nav-btn:hover {
+            background: #F8FAFC;
+            border-color: #CBD5E1;
+        }
+
+        /* =========================================================================
+           MOBILE RESPONSIVE ADAPTATION (iPhone & Mobile Touchscreens <= 768px)
+           ========================================================================= */
+        @media (max-width: 768px) {
+            html, body {
+                height: auto !important;
+                min-height: 100vh !important;
+                overflow-x: hidden !important;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                touch-action: pan-y !important;
+            }
+            header {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                height: 44px !important;
+                padding: 0 12px !important;
+                transform: none !important;
+                background: #FFFFFF !important;
+                border-bottom: 1.5px solid #E2E8F0 !important;
+                z-index: 9999 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+            }
+            #header-trigger-zone, header::after, .header-series { display: none !important; }
+            main {
+                max-width: 100% !important;
+                width: 100% !important;
+                padding: 52px 14px 74px 14px !important;
+                height: auto !important;
+                min-height: calc(100vh - 120px) !important;
+                overflow: visible !important;
+            }
+            .slide {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                bottom: auto !important;
+                width: 100% !important;
+                min-height: calc(100vh - 130px) !important;
+                padding: 8px 0 20px 0 !important;
+                display: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+                justify-content: flex-start !important;
+                overflow: visible !important;
+                pointer-events: auto !important;
+            }
+            .slide.active {
+                display: flex !important;
+                flex-direction: column !important;
+                opacity: 1 !important;
+                z-index: 1 !important;
+            }
+            .hero-title { font-size: 1.55rem !important; line-height: 1.2 !important; margin-bottom: 8px !important; }
+            .slide-title { font-size: 1.25rem !important; line-height: 1.25 !important; margin-bottom: 4px !important; }
+            .grid-2col, .grid-3col, .title-container {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                gap: 12px !important;
+            }
+            .genome-bar-row {
+                grid-template-columns: 120px 1fr 70px !important;
+                gap: 8px !important;
+                font-size: 0.72rem !important;
+            }
+            #dock-trigger-zone, footer::before, .footer-shortcuts { display: none !important; }
+            footer {
+                position: fixed !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                height: 60px !important;
+                padding: 6px 12px !important;
+                padding-bottom: max(10px, env(safe-area-inset-bottom, 10px)) !important;
+                transform: none !important;
+                background: rgba(255, 255, 255, 0.94) !important;
+                backdrop-filter: blur(20px) !important;
+                border-top: 1px solid #CBD5E1 !important;
+                box-shadow: 0 -4px 24px rgba(15, 23, 42, 0.08) !important;
+                z-index: 999999 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+            }
+            footer > div:nth-child(2) {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                flex: 1 !important;
+                max-width: 175px !important;
+                height: 40px !important;
+                background: #F8FAFC !important;
+                border: 1.5px solid #CBD5E1 !important;
+                border-radius: 20px !important;
+                padding: 0 8px !important;
+                order: 2 !important;
+            }
+            .slide-jump-select {
+                appearance: none !important;
+                -webkit-appearance: none !important;
+                width: 100% !important;
+                height: 100% !important;
+                background: transparent !important;
+                border: none !important;
+                font-family: var(--font-mono) !important;
+                font-weight: 700 !important;
+                font-size: 0.76rem !important;
+                text-align: center !important;
+                text-align-last: center !important;
+            }
+            .footer-progress { display: none !important; }
+            .footer-controls { display: contents !important; }
+            .nav-btn {
+                height: 40px !important;
+                padding: 0 14px !important;
+                font-size: 0.84rem !important;
+                font-weight: 700 !important;
+                border-radius: 10px !important;
+            }
+            #btn-prev { order: 1 !important; min-width: 76px !important; }
+            #btn-next {
+                order: 3 !important;
+                min-width: 82px !important;
+                background: linear-gradient(135deg, #2563EB, #1D4ED8) !important;
+                color: #FFFFFF !important;
+                border: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Progress Indicator -->
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <!-- macOS Header -->
+    <div id="header-trigger-zone"></div>
+    <header>
+        <div class="header-brand">
+            <span class="header-badge">BIOL 3111 / 5111</span>
+            <span>Genomics in Medicine &amp; Disease</span>
+        </div>
+        <div class="header-series">
+            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#2563EB;"></span>
+            <span>Lecture 02 &bull; Thursday, Sep 3, 2026 &bull; Genome Architecture &amp; Sequencing</span>
+        </div>
+    </header>
+
+    <main>
+        <!-- =========================================================================
+             SLIDE 1: TITLE SLIDE
+             ========================================================================= -->
+        <div class="slide active" data-slide="1">
+            <div class="title-container">
+                <div class="title-left">
+                    <div class="title-badge-row">
+                        <span class="title-pill-tag">Lecture 02 &bull; Thursday, September 3, 2026</span>
+                        <span style="font-size: 0.82rem; font-weight: 700; color: #475569; font-family: var(--font-mono);">SERC 110AB &bull; 17:30&ndash;20:00</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Genomes, Sequencing, &amp; The Myth of <em>"Simple"</em> Disease
+                    </h1>
+                    <p class="hero-subtitle">
+                        From Base Pairs and the C-Value Enigma to High-Throughput Sequencing, Coverage Statistics, and the Architecture of Mendelian Failure.
+                    </p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; border-top: 1px solid #E2E8F0; padding-top: 16px;">
+                        <div>
+                            <div style="font-size: 0.68rem; font-weight: 700; text-transform: uppercase; color: #94A3B8;">Instructor</div>
+                            <div style="font-size: 0.88rem; font-weight: 600; color: var(--primary-color);">Prof. Sergei Pond</div>
+                            <div style="font-size: 0.76rem; color: var(--secondary-color);">Institute for Genomics &amp; Evolutionary Medicine</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.68rem; font-weight: 700; text-transform: uppercase; color: #94A3B8;">Clinical &amp; Molecular Anchors</div>
+                            <div style="font-size: 0.88rem; font-weight: 600; color: #2563EB;">T2T Consortium &bull; Sickle Cell &bull; Casgevy</div>
+                            <div style="font-size: 0.76rem; color: var(--secondary-color);">Poisson Read Depth &bull; Balanced Polymorphism</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Hero Card -->
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px;">
+                    <div style="background: #0F172A; color: #FFFFFF; border-radius: 8px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 1.4rem; font-weight: 800; color: #38BDF8; font-family: var(--font-mono);">3,054,815,472</div>
+                            <div style="font-size: 0.65rem; text-transform: uppercase; color: #94A3B8; letter-spacing: 0.06em;">Base Pairs (T2T-CHM13 Haploid)</div>
+                        </div>
+                        <span style="font-size: 1.5rem;">🧬</span>
+                    </div>
+                    <div class="card card-blue" style="padding: 12px 14px;">
+                        <div class="card-title" style="font-size: 0.88rem;">Tonight's 3 Critical Inquiries</div>
+                        <ul style="margin: 0; padding-left: 16px; font-size: 0.78rem; line-height: 1.45; color: #334155;">
+                            <li><strong>Scale &amp; Enigma:</strong> Why does an onion have 5&times; more DNA than a human, while a worm has the same number of genes?</li>
+                            <li><strong>Statistical Sequencing:</strong> How many times must we read a genome to guarantee zero blind spots? (The Poisson Trap).</li>
+                            <li><strong>Mendelian Breakdown:</strong> Why do "identical" sickle-cell genotypes produce completely different clinical trajectories?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================================
+             SLIDE 2: THE CORE ABSTRACTION (WHAT IS A GENOME?)
+             ========================================================================= -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header">
+                <div class="slide-meta">Foundational Abstraction &bull; Molecular Informatics</div>
+                <h2 class="slide-title">The Genome as Digital Code &amp; Physical Macromolecule</h2>
+                <p class="slide-subtitle">
+                    Every living entity on Earth is driven by a linear polymer of nucleic acids represented abstractly as a string of letters \(\Sigma = \{A, C, G, T\}\).
+                </p>
+            </div>
+            <div class="grid-3col">
+                <!-- Card 1: 1D Informational Code -->
+                <div class="card card-blue fragment">
+                    <div class="card-header-row">
+                        <span class="card-title">1. The 1D Informational Code</span>
+                        <span class="card-pill">2 Bits / Base</span>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 8px;">
+                            DNA is digital code with directional polarity (5' &rarr; 3') and Watson-Crick base-pairing rules (A = T, G &equiv; C).
+                        </p>
+                        <div style="background: #0F172A; color: #38BDF8; font-family: var(--font-mono); font-size: 0.74rem; padding: 8px 12px; border-radius: 6px; line-height: 1.4; margin-bottom: 8px;">
+                            5'-A T G C C G T A A C G T-3'<br>
+                            3'-T A C G G C A T T G C A-5'
+                        </div>
+                        <p style="font-size: 0.8rem; color: #64748B;">
+                            With 4 states per nucleotide, raw information density is exactly 2 bits per base pair.
+                        </p>
+                    </div>
+                    <div style="border-top: 1px solid #F1F5F9; padding-top: 8px; font-size: 0.74rem; color: #2563EB; font-weight: 700;">
+                        Storage: ~775 MB raw (haploid) / &lt;100 MB compressed
+                    </div>
+                </div>
+
+                <!-- Card 2: 3D Physical Object -->
+                <div class="card card-emerald fragment">
+                    <div class="card-header-row">
+                        <span class="card-title">2. The 3D Physical Macromolecule</span>
+                        <span class="card-pill">2.0 Meters Stretched</span>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 8px;">
+                            In reality, DNA is not a text file &mdash; it is a flexible, highly charged polyanion packaged into nucleosomes.
+                        </p>
+                        <ul style="padding-left: 16px; font-size: 0.8rem; line-height: 1.45; color: #334155; margin-bottom: 8px;">
+                            <li><strong>Length:</strong> 2.0 meters of DNA per human cell.</li>
+                            <li><strong>Volume:</strong> Packed into a nucleus of diameter &approx; 6 &mu;m.</li>
+                            <li><strong>Compaction Ratio:</strong> &gt;300,000&times; folding through topologically associating domains (TADs).</li>
+                        </ul>
+                    </div>
+                    <div style="border-top: 1px solid #F1F5F9; padding-top: 8px; font-size: 0.74rem; color: #059669; font-weight: 700;">
+                        Physics dictates accessibility &amp; transcription
+                    </div>
+                </div>
+
+                <!-- Card 3: Dynamic Evolutionary Text -->
+                <div class="card card-purple fragment">
+                    <div class="card-header-row">
+                        <span class="card-title">3. The Dynamic Evolutionary Text</span>
+                        <span class="card-pill">Somatic Drift</span>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 8px;">
+                            The genome is not static. It undergoes replication errors, environmental chemical damage, mobile element transposition, and somatic selection.
+                        </p>
+                        <ul style="padding-left: 16px; font-size: 0.8rem; line-height: 1.45; color: #334155; margin-bottom: 8px;">
+                            <li><strong>Germline mutation rate:</strong> $P \approx 1.2 \times 10^{-8}$ per base per generation (&sim;50 de novo mutations per child).</li>
+                            <li><strong>Somatic mosaicism:</strong> Every tissue in your body harbors unique somatic mutations.</li>
+                        </ul>
+                    </div>
+                    <div style="border-top: 1px solid #F1F5F9; padding-top: 8px; font-size: 0.74rem; color: #7C3AED; font-weight: 700;">
+                        Pathology = Somatic evolutionary failure
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout-strip fragment" style="background: #FEF2F2; border-color: #FECDD3; border-left-color: var(--temple-cherry);">
+                <div class="callout-strip-text" style="color: #991B1B;">
+                    💡 <strong>The Digital Storage Reality:</strong> Your entire diploid biological blueprint (&sim;1.55 GB raw, &lt;100 MB compressed relative to reference) occupies <strong>less storage space than a short 1080p video on YouTube or a few clips on TikTok</strong>. The challenge of genomic medicine is never file storage &mdash; it is interpreting how 3 billion characters coordinate dynamic cellular physiology.
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================================
+             SLIDE 3: THE SPECTRUM OF GENOME SIZES (LOGARITHMIC CONTEXT CHART)
+             ========================================================================= -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header">
+                <div class="slide-meta">Comparative Genomics &bull; Logarithmic Spectrum</div>
+                <h2 class="slide-title">Genome Sizes Across the Tree of Life (8 Orders of Magnitude)</h2>
+                <p class="slide-subtitle">
+                    Genome lengths range from thousands of bases in viruses to hundreds of billions in plants and amphibians. Where does <em>Homo sapiens</em> sit?
+                </p>
+            </div>
+
+            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
+                <!-- Left: Interactive Log Bar Chart -->
+                <div class="log-chart-container">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: #94A3B8; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid #E2E8F0; padding-bottom: 4px;">
+                        <span>Organism &bull; Domain</span>
+                        <span>Log Scale (10<sup>3</sup> &rarr; 10<sup>11</sup> bp)</span>
+                        <span>Haploid Size</span>
+                    </div>
+
+                    <!-- Hepatitis B Virus -->
+                    <div class="genome-bar-row">
+                        <div class="organism-name"><span>🔴 HBV</span> <em>(Viral)</em></div>
+                        <div class="bar-track"><div class="bar-fill" style="width: 5%; background: #EF4444;"></div></div>
+                        <div class="size-val">3.2 kb</div>
+                    </div>
+
+                    <!-- SARS-CoV-2 -->
+                    <div class="genome-bar-row">
+                        <div class="organism-name"><span>🦠 SARS-CoV-2</span> <em>(RNA)</em></div>
+                        <div class="bar-track"><div class="bar-fill" style="width: 18%; background: #F97316;"></div></div>
+                        <div class="size-val">29.9 kb</div>
+                    </div>
+
+                    <!-- E. coli -->
+                    <div class="genome-bar-row">
+                        <div class="organism-name"><span>🧫 E. coli</span> <em>(Bacterium)</em></div>
+                        <div class="bar-track"><div class="bar-fill" style="width: 42%; background: #EAB308;"></div></div>
+                        <div class="size-val">4.6 Mb</div>
+                    </div>
+
+                    <!-- S. cerevisiae (Yeast) -->
+                    <div class="genome-bar-row">
+                        <div class="organism-name"><span>🍞 Yeast</span> <em>(Fungus)</em></div>
+                        <div class="bar-track"><div class="bar-fill" style="width: 48%; background: #10B981;"></div></div>
+                        <div class="size-val">12.1 Mb</div>
+                    </div>
+
+                    <!-- C. elegans -->
+                    <div class="genome-bar-row">
+                        <div class="organism-name"><span>🪱 C. elegans</span> <em>(Worm)</em></div>
+                        <div class="bar-track"><div class="bar-fill" style="width: 60%; background: #06B6D4;"></div></div>
+                        <div class="size-val">100 Mb</div>
+                    </div>
+
+                    <!-- D. melanogaster -->
+                    <div class="genome-bar-row">
+                        <div class="organism-name"><span>🪰 Fruit Fly</span> <em>(Insect)</em></div>
+                        <div class="bar-track"><div class="bar-fill" style="width: 64%; background: #3B82F6;"></div></div>
+                        <div class="size-val">140 Mb</div>
+                    </div>
+
+                    <!-- Human (Homo sapiens) -->
+                    <div class="genome-bar-row" style="background: #FEF2F2; padding: 4px 6px; border-radius: 6px; border-left: 3px solid var(--temple-cherry);">
+                        <div class="organism-name" style="font-weight: 800; color: var(--temple-cherry);"><span>👤 Human</span> <em>(Mammal)</em></div>
+                        <div class="bar-track"><div class="bar-fill" style="width: 78%; background: var(--temple-cherry);"></div></div>
+                        <div class="size-val" style="color: var(--temple-cherry); font-weight: 800;">3.05 Gb</div>
+                    </div>
+
+                    <!-- Onion (Allium cepa) -->
+                    <div class="genome-bar-row">
+                        <div class="organism-name"><span>🧅 Onion</span> <em>(Plant)</em></div>
+                        <div class="bar-track"><div class="bar-fill" style="width: 87%; background: #8B5CF6;"></div></div>
+                        <div class="size-val">16.0 Gb</div>
+                    </div>
+
+                    <!-- Axolotl -->
+                    <div class="genome-bar-row">
+                        <div class="organism-name"><span>🦎 Axolotl</span> <em>(Amphibian)</em></div>
+                        <div class="bar-track"><div class="bar-fill" style="width: 92%; background: #EC4899;"></div></div>
+                        <div class="size-val">32.0 Gb</div>
+                    </div>
+
+                    <!-- Fork Fern (Tmesipteris) -->
+                    <div class="genome-bar-row">
+                        <div class="organism-name"><span>🌿 Fork Fern</span> <em>(Plant)</em></div>
+                        <div class="bar-track"><div class="bar-fill" style="width: 100%; background: #0F172A;"></div></div>
+                        <div class="size-val">160.0 Gb</div>
+                    </div>
+                </div>
+
+                <!-- Right: Quantitative Insights -->
+                <div style="display: flex; flex-direction: column; gap: 12px; justify-content: space-between;">
+                    <div class="card card-cherry fragment" style="padding: 14px 18px;">
+                        <div class="card-title" style="font-size: 0.95rem;">Key Takeaway: The Human Scale</div>
+                        <p style="font-size: 0.84rem; line-height: 1.5; color: #334155; margin-bottom: 8px;">
+                            Human DNA is &sim;100,000&times; larger than an RNA virus and &sim;650&times; larger than <em>E. coli</em>.
+                        </p>
+                        <div style="background: #FDF2F4; border: 1px solid #FECDD3; border-radius: 6px; padding: 8px 12px; font-size: 0.78rem; color: #9D2235; font-weight: 600;">
+                            ⚠️ But human genome size is nowhere near the biological record!
+                        </div>
+                    </div>
+
+                    <div class="card card-purple fragment" style="padding: 14px 18px;">
+                        <div class="card-title" style="font-size: 0.95rem;">The Anthropocentric Fallacy</div>
+                        <p style="font-size: 0.84rem; line-height: 1.5; color: #334155;">
+                            A common kitchen onion (<em>Allium cepa</em>) has <strong>5&times; more DNA</strong> than a human. The Mexican Axolotl salamander has <strong>10&times; more DNA</strong>. The New Caledonian fork fern has <strong>52&times; more DNA</strong> (160 Gb).
+                        </p>
+                    </div>
+
+                    <div class="callout-strip fragment" style="margin-top: 0; background: #EFF6FF; border-color: #BFDBFE; border-left-color: #2563EB;">
+                        <div class="callout-strip-text" style="font-size: 0.78rem; color: #1E40AF;">
+                            <strong>The Central Question:</strong> If humans are so complex, why do onions and salamanders have vastly larger genomes? (Enter the <strong>C-Value Enigma</strong>).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================================
+             SLIDE 4: NUCLEAR CHROMOSOMES & STRUCTURAL ANATOMY (ILLUSTRATED)
+             ========================================================================= -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header">
+                <div class="slide-meta">Physical Architecture &bull; Part 1 of 3: Nuclear Organization</div>
+                <h2 class="slide-title">Nuclear Chromosomes: Mechanical Segregation &amp; Karyotypes</h2>
+                <p class="slide-subtitle">
+                    Human nuclear DNA is partitioned into 23 linear chromosome pairs (2n = 46). Why multiple linear blocks rather than one giant continuous strand?
+                </p>
+            </div>
+
+            <div class="grid-2col" style="gap: 24px; align-items: stretch;">
+                <!-- Left: Theoretical & Evolutionary Insights -->
+                <div style="display: flex; flex-direction: column; gap: 12px; justify-content: space-between;">
+                    <div class="card card-blue fragment" style="padding: 14px 18px;">
+                        <div class="card-header-row">
+                            <span class="card-title">1. Essential Chromosome Anatomy</span>
+                            <span class="card-pill">Structural Core</span>
+                        </div>
+                        <ul style="padding-left: 16px; font-size: 0.78rem; line-height: 1.45; color: #334155; margin: 0;">
+                            <li><strong>Centromeres:</strong> Megabases of tandem &alpha;-satellite repeats that assemble the kinetochore protein complex to attach mitotic spindle fibers.</li>
+                            <li><strong>Telomeres:</strong> Thousands of tandem hexamer repeats <code>(TTAGGG)n</code> capped by the 6-protein <strong>Shelterin complex</strong> to prevent DNA repair machinery from treating chromosome ends as double-strand breaks.</li>
+                            <li><strong>Arm Architecture:</strong> Constricted at the centromere into a short arm (<em>p</em> = <em>petit</em>) and a long arm (<em>q</em> = <em>queue</em>).</li>
+                        </ul>
+                    </div>
+
+                    <div class="card card-purple fragment" style="padding: 14px 18px;">
+                        <div class="card-header-row">
+                            <span class="card-title">2. Karyotypic Evolution: Chromosome 2 Fusion</span>
+                            <span class="card-pill">Evolutionary Scar</span>
+                        </div>
+                        <p style="font-size: 0.78rem; line-height: 1.45; color: #334155; margin-bottom: 6px;">
+                            Great apes have 24 chromosome pairs (2n = 48), while humans have 23 (2n = 46). Human <strong>Chromosome 2</strong> arose from an end-to-end Robertsonian fusion of two ancestral ape chromosomes.
+                        </p>
+                        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 10px; font-size: 0.72rem; color: #475569; font-family: var(--font-mono);">
+                            📍 <strong>Molecular evidence:</strong> Inactive fossil centromere + Head-to-head telomere fusion sequence <code>(TTAGGG)n-(CCCTAA)n</code> at locus 2q13.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: High-Yield Chromosome Anatomy Schematic (SVG) -->
+                <div class="card card-emerald fragment" style="padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="card-header-row" style="margin-bottom: 6px;">
+                        <span class="card-title">Chromosome Anatomy &amp; Fusion Schematic</span>
+                        <span class="card-pill">Metaphase Architecture</span>
+                    </div>
+
+                    <!-- SVG Chromosome & Robertsonian Fusion Diagram -->
+                    <div style="background: #0F172A; border-radius: 8px; padding: 12px; display: flex; align-items: center; justify-content: center; flex: 1;">
+                        <svg viewBox="0 0 420 220" style="width: 100%; height: 100%; max-height: 200px;" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background Grid Lines -->
+                            <line x1="10" y1="110" x2="410" y2="110" stroke="#1E293B" stroke-dasharray="4" stroke-width="1"/>
+                            
+                            <!-- CHROMOSOME 1: Human Metaphase Anatomy (Left) -->
+                            <g transform="translate(70, 110)">
+                                <!-- p-arm (top) -->
+                                <path d="M -12 -80 C -12 -95 12 -95 12 -80 L 10 -15 C 10 -5 4 0 0 0 C -4 0 -10 -5 -10 -15 Z" fill="#38BDF8" stroke="#0284C7" stroke-width="2"/>
+                                <!-- q-arm (bottom) -->
+                                <path d="M 0 0 C 4 0 12 5 12 18 L 14 80 C 14 95 -14 95 -14 80 L -12 18 C -12 5 -4 0 0 0 Z" fill="#38BDF8" stroke="#0284C7" stroke-width="2"/>
+                                
+                                <!-- G-Banding Dark Bands -->
+                                <rect x="-11" y="-65" width="22" height="12" fill="#0369A1" rx="2"/>
+                                <rect x="-10" y="-40" width="20" height="10" fill="#0369A1" rx="2"/>
+                                <rect x="-13" y="28" width="26" height="16" fill="#0369A1" rx="2"/>
+                                <rect x="-14" y="54" width="28" height="14" fill="#0369A1" rx="2"/>
+                                
+                                <!-- Centromere Constriction (Orange) -->
+                                <circle cx="0" cy="0" r="7" fill="#F59E0B" stroke="#D97706" stroke-width="2"/>
+                                <text x="0" y="3" font-size="7" font-family="sans-serif" font-weight="bold" fill="#0F172A" text-anchor="middle">CEN</text>
+                                
+                                <!-- Telomere Caps (Green) -->
+                                <rect x="-10" y="-94" width="20" height="7" rx="3" fill="#10B981"/>
+                                <rect x="-12" y="87" width="24" height="7" rx="3" fill="#10B981"/>
+
+                                <!-- Labels -->
+                                <text x="26" y="-88" font-size="9" font-family="sans-serif" font-weight="bold" fill="#34D399">Telomere (TTAGGG)n</text>
+                                <text x="24" y="-45" font-size="9" font-family="sans-serif" font-weight="bold" fill="#38BDF8">p-arm (short)</text>
+                                <text x="24" y="3" font-size="9" font-family="sans-serif" font-weight="bold" fill="#FBBF24">Centromere</text>
+                                <text x="26" y="55" font-size="9" font-family="sans-serif" font-weight="bold" fill="#38BDF8">q-arm (long)</text>
+                                <text x="26" y="93" font-size="9" font-family="sans-serif" font-weight="bold" fill="#34D399">Telomere Cap</text>
+                            </g>
+
+                            <!-- SEPARATOR -->
+                            <line x1="220" y1="20" x2="220" y2="200" stroke="#334155" stroke-dasharray="3" stroke-width="1.5"/>
+
+                            <!-- RIGHT: Chromosome 2 Fusion Model -->
+                            <g transform="translate(245, 20)">
+                                <text x="80" y="12" font-size="10" font-family="sans-serif" font-weight="bold" fill="#F8FAFC" text-anchor="middle">Chr 2 Fusion Event</text>
+                                
+                                <!-- Ancestral 2A -->
+                                <rect x="20" y="30" width="12" height="40" rx="4" fill="#60A5FA"/>
+                                <circle cx="26" cy="50" r="4" fill="#F59E0B"/>
+                                <text x="26" y="82" font-size="8" font-family="sans-serif" fill="#94A3B8" text-anchor="middle">Ape 2A</text>
+
+                                <text x="48" y="52" font-size="12" font-family="sans-serif" font-weight="bold" fill="#F87171">+</text>
+
+                                <!-- Ancestral 2B -->
+                                <rect x="62" y="30" width="12" height="40" rx="4" fill="#60A5FA"/>
+                                <circle cx="68" cy="50" r="4" fill="#F59E0B"/>
+                                <text x="68" y="82" font-size="8" font-family="sans-serif" fill="#94A3B8" text-anchor="middle">Ape 2B</text>
+
+                                <text x="92" y="52" font-size="12" font-family="sans-serif" font-weight="bold" fill="#F8FAFC">&rarr;</text>
+
+                                <!-- Human Chr 2 -->
+                                <rect x="115" y="24" width="16" height="70" rx="5" fill="#A855F7" stroke="#9333EA" stroke-width="1.5"/>
+                                <!-- Active Centromere -->
+                                <circle cx="123" cy="42" r="4.5" fill="#F59E0B"/>
+                                <!-- Telomere-Telomere Fusion Scar -->
+                                <rect x="115" y="57" width="16" height="4" fill="#EF4444"/>
+                                <!-- Inactive Fossil Centromere -->
+                                <circle cx="123" cy="72" r="3.5" fill="#64748B" stroke="#94A3B8"/>
+                                
+                                <text x="123" y="104" font-size="8" font-family="sans-serif" font-weight="bold" fill="#C084FC" text-anchor="middle">Human Chr 2</text>
+                                
+                                <!-- Annotations -->
+                                <text x="138" y="44" font-size="7.5" font-family="sans-serif" fill="#FBBF24">Active CEN</text>
+                                <text x="138" y="61" font-size="7.5" font-family="sans-serif" font-weight="bold" fill="#F87171">Fusion (2q13)</text>
+                                <text x="138" y="75" font-size="7.5" font-family="sans-serif" fill="#94A3B8">Fossil CEN</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div style="font-size: 0.73rem; color: #475569; margin-top: 6px; line-height: 1.35;">
+                        💡 <strong>Biomechanical Mandate:</strong> Partitioning into multiple chromosomes reduces mechanical shear stress during cell division and allows independent assortment during meiosis.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================================
+             SLIDE 5: ORGANELLAR GENOMES, mtDNA, & HETEROPLASMY (ILLUSTRATED)
+             ========================================================================= -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header">
+                <div class="slide-meta">Physical Architecture &bull; Part 2 of 3: Extranuclear Compartments</div>
+                <h2 class="slide-title">Organellar Genomes: The Mitochondrial Channel &amp; Heteroplasmy</h2>
+                <p class="slide-subtitle">
+                    Eukaryotic cells harbor a second, extranuclear genome: circular mitochondrial DNA (mtDNA) with high copy number, maternal inheritance, and non-Mendelian genetics.
+                </p>
+            </div>
+
+            <div class="grid-2col" style="gap: 24px; align-items: stretch;">
+                <!-- Left: Theoretical & Clinical Concepts -->
+                <div style="display: flex; flex-direction: column; gap: 12px; justify-content: space-between;">
+                    <div class="card card-emerald fragment" style="padding: 14px 18px;">
+                        <div class="card-header-row">
+                            <span class="card-title">1. Anatomy of the Mitochondrial Genome</span>
+                            <span class="card-pill">16,569 bp Circular</span>
+                        </div>
+                        <ul style="padding-left: 16px; font-size: 0.78rem; line-height: 1.45; color: #334155; margin: 0;">
+                            <li><strong>37 Essential Genes:</strong> Encodes 13 core subunits of the Oxidative Phosphorylation (OXPHOS) respiratory chain, 22 tRNAs, and 2 rRNAs.</li>
+                            <li><strong>Extreme Compaction:</strong> Virtually zero introns; minimal non-coding space aside from the control D-loop region.</li>
+                            <li><strong>High Somatic Vulnerability:</strong> Lacks protective histone proteins and operates adjacent to reactive oxygen species (ROS) &rarr; <strong>&sim;10&times; higher mutation rate</strong> than nuclear DNA.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card card-cherry fragment" style="padding: 14px 18px;">
+                        <div class="card-header-row">
+                            <span class="card-title">2. Heteroplasmy &amp; The Clinical Threshold Effect</span>
+                            <span class="card-pill">Non-Mendelian Shift</span>
+                        </div>
+                        <p style="font-size: 0.78rem; line-height: 1.45; color: #334155; margin-bottom: 6px;">
+                            Each cell contains <strong>1,000 to 10,000 mtDNA copies</strong>. In mitochondrial disorders, cells harbor a mixture of wild-type and mutant molecules (<strong>Heteroplasmy</strong>).
+                        </p>
+                        <ul style="padding-left: 16px; font-size: 0.76rem; line-height: 1.4; color: #7F1D1D; margin: 0;">
+                            <li><strong>Threshold Penetrance:</strong> Clinical symptoms (e.g. in MELAS or Leigh Syndrome) only trigger when mutant mtDNA exceeds a tissue-specific threshold (typically <strong>&gt;60% to 85%</strong>).</li>
+                            <li><strong>Replicative Segregation:</strong> During cell division, mitochondria partition randomly into daughter cells, causing rapid shifts in mutant load across tissues.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right: SVG Diagram of Circular mtDNA & Heteroplasmy Dial -->
+                <div class="card card-blue fragment" style="padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="card-header-row" style="margin-bottom: 6px;">
+                        <span class="card-title">Circular mtDNA &amp; Heteroplasmy Threshold Dial</span>
+                        <span class="card-pill">Copy Number Dynamics</span>
+                    </div>
+
+                    <!-- SVG Circular mtDNA & Heteroplasmy Graphic -->
+                    <div style="background: #0F172A; border-radius: 8px; padding: 12px; display: flex; align-items: center; justify-content: center; flex: 1;">
+                        <svg viewBox="0 0 420 220" style="width: 100%; height: 100%; max-height: 200px;" xmlns="http://www.w3.org/2000/svg">
+                            <!-- LEFT: Circular mtDNA Map -->
+                            <g transform="translate(100, 110)">
+                                <!-- Outer Heavy Strand Circle -->
+                                <circle cx="0" cy="0" r="70" fill="none" stroke="#1E293B" stroke-width="12"/>
+                                <!-- D-Loop / Origin of Replication -->
+                                <path d="M -15 -68 A 70 70 0 0 1 15 -68" fill="none" stroke="#F59E0B" stroke-width="14"/>
+                                <!-- OXPHOS Complex I (ND1-6) - Blue -->
+                                <path d="M 22 -66 A 70 70 0 0 1 68 15" fill="none" stroke="#38BDF8" stroke-width="12"/>
+                                <!-- Complex IV (COX1-3) - Green -->
+                                <path d="M 68 20 A 70 70 0 0 1 15 68" fill="none" stroke="#10B981" stroke-width="12"/>
+                                <!-- Complex V (ATP6/8) - Purple -->
+                                <path d="M 10 69 A 70 70 0 0 1 -45 53" fill="none" stroke="#A855F7" stroke-width="12"/>
+                                <!-- Cyt b (Complex III) - Cyan -->
+                                <path d="M -50 48 A 70 70 0 0 1 -68 -15" fill="none" stroke="#06B6D4" stroke-width="12"/>
+                                
+                                <!-- Center Text -->
+                                <text x="0" y="-6" font-size="11" font-family="sans-serif" font-weight="bold" fill="#F8FAFC" text-anchor="middle">Human mtDNA</text>
+                                <text x="0" y="10" font-size="8" font-family="var(--font-mono)" fill="#38BDF8" text-anchor="middle">16,569 bp</text>
+                                <text x="0" y="24" font-size="7" font-family="sans-serif" fill="#94A3B8" text-anchor="middle">37 Genes</text>
+                                
+                                <text x="0" y="-82" font-size="8" font-family="sans-serif" font-weight="bold" fill="#FBBF24" text-anchor="middle">D-Loop (Control)</text>
+                            </g>
+
+                            <!-- SEPARATOR -->
+                            <line x1="205" y1="20" x2="205" y2="200" stroke="#334155" stroke-dasharray="3" stroke-width="1.5"/>
+
+                            <!-- RIGHT: Heteroplasmy Spectrum -->
+                            <g transform="translate(225, 25)">
+                                <text x="90" y="12" font-size="10" font-family="sans-serif" font-weight="bold" fill="#F8FAFC" text-anchor="middle">Clinical Heteroplasmy Threshold</text>
+                                
+                                <!-- Bar 1: Low Mutant Load (Asymptomatic) -->
+                                <g transform="translate(0, 30)">
+                                    <text x="0" y="14" font-size="8" font-family="sans-serif" fill="#94A3B8">15% Mutant (Asymptomatic)</text>
+                                    <rect x="0" y="20" width="180" height="12" rx="4" fill="#334155"/>
+                                    <rect x="0" y="20" width="27" height="12" rx="4" fill="#EF4444"/>
+                                    <rect x="27" y="20" width="153" height="12" rx="4" fill="#10B981"/>
+                                </g>
+
+                                <!-- Bar 2: Moderate Load (Subclinical) -->
+                                <g transform="translate(0, 75)">
+                                    <text x="0" y="14" font-size="8" font-family="sans-serif" fill="#94A3B8">50% Mutant (Subclinical/Tired)</text>
+                                    <rect x="0" y="20" width="180" height="12" rx="4" fill="#334155"/>
+                                    <rect x="0" y="20" width="90" height="12" rx="4" fill="#EF4444"/>
+                                    <rect x="90" y="20" width="90" height="12" rx="4" fill="#10B981"/>
+                                </g>
+
+                                <!-- Bar 3: Critical Load (Severe Disease / Stroke) -->
+                                <g transform="translate(0, 120)">
+                                    <text x="0" y="14" font-size="8" font-family="sans-serif" font-weight="bold" fill="#F87171">85% Mutant (MELAS / Myopathy)</text>
+                                    <rect x="0" y="20" width="180" height="12" rx="4" fill="#334155"/>
+                                    <rect x="0" y="20" width="153" height="12" rx="4" fill="#DC2626"/>
+                                    <rect x="153" y="20" width="27" height="12" rx="4" fill="#10B981"/>
+                                    
+                                    <!-- Threshold Line -->
+                                    <line x1="126" y1="5" x2="126" y2="36" stroke="#FBBF24" stroke-width="2" stroke-dasharray="2"/>
+                                    <text x="126" y="2" font-size="7" font-family="sans-serif" font-weight="bold" fill="#FBBF24" text-anchor="middle">Threshold (70%)</text>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div style="font-size: 0.73rem; color: #475569; margin-top: 6px; line-height: 1.35;">
+                        ⚠️ <strong>Clinical Consequence:</strong> A mother with 20% mutant load can pass 85% mutant load to one child and 5% to another due to the mitochondrial genetic bottleneck during oogenesis.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <!-- =========================================================================
+             SLIDE 6: PLOIDY, HOMOLOGY, & THE PHASING CHALLENGE (ILLUSTRATED)
+             ========================================================================= -->
+        <div class="slide" data-slide="6">
+            <div class="slide-header">
+                <div class="slide-meta">Physical Architecture &bull; Part 3 of 3: Homologous Multiplicity</div>
+                <h2 class="slide-title">Ploidy &amp; The Molecular Genetics of Phasing: <em>Cis</em> vs. <em>Trans</em></h2>
+                <p class="slide-subtitle">
+                    Diploid organisms inherit two homologous chromosomes per locus. Distinguishing whether two mutations sit on the same or opposite parental strands is clinically decisive.
+                </p>
+            </div>
+
+            <div class="grid-2col" style="gap: 24px; align-items: stretch;">
+                <!-- Left: Theoretical & Clinical Concepts -->
+                <div style="display: flex; flex-direction: column; gap: 12px; justify-content: space-between;">
+                    <div class="card card-purple fragment" style="padding: 14px 18px;">
+                        <div class="card-header-row">
+                            <span class="card-title">1. Diploidy &amp; Mutational Buffering</span>
+                            <span class="card-pill">2n = 46</span>
+                        </div>
+                        <ul style="padding-left: 16px; font-size: 0.78rem; line-height: 1.45; color: #334155; margin: 0;">
+                            <li><strong>Recessive Protection:</strong> A severe loss-of-function mutation in one parental allele is buffered if the homologous allele produces sufficient functional protein (&ge;50% dosage / haplosufficiency).</li>
+                            <li><strong>Compound Heterozygosity:</strong> When an individual inherits two <em>different</em> pathogenic variants within the same gene locus (rather than being homozygous for one mutation).</li>
+                        </ul>
+                    </div>
+
+                    <div class="card card-cherry fragment" style="padding: 14px 18px;">
+                        <div class="card-header-row">
+                            <span class="card-title">2. The Physical Phasing Problem</span>
+                            <span class="card-pill">Linkage Architecture</span>
+                        </div>
+                        <p style="font-size: 0.78rem; line-height: 1.45; color: #334155; margin-bottom: 6px;">
+                            If an individual carries two damaging mutations separated by 15,000 base pairs within the same gene, knowing both mutations exist is not enough to predict health:
+                        </p>
+                        <div style="background: #FDF2F4; border: 1px solid #FECDD3; border-radius: 6px; padding: 6px 10px; font-size: 0.74rem; color: #991B1B;">
+                            ⚠️ You must determine their <strong>physical linkage (Phase)</strong>: Did both mutations travel together on one parental chromosome, or did one come from mother and one from father?
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: SVG Cis vs Trans Compound Heterozygosity Diagram -->
+                <div class="card card-blue fragment" style="padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="card-header-row" style="margin-bottom: 6px;">
+                        <span class="card-title">Molecular Phasing: <em>Cis</em> (Carrier) vs <em>Trans</em> (Disease)</span>
+                        <span class="card-pill">Homology Dynamics</span>
+                    </div>
+
+                    <!-- SVG Cis vs Trans Schematic -->
+                    <div style="background: #0F172A; border-radius: 8px; padding: 12px; display: flex; align-items: center; justify-content: center; flex: 1;">
+                        <svg viewBox="0 0 420 220" style="width: 100%; height: 100%; max-height: 200px;" xmlns="http://www.w3.org/2000/svg">
+                            <!-- CIS CONFIGURATION (LEFT) -->
+                            <g transform="translate(15, 15)">
+                                <rect x="0" y="0" width="185" height="185" rx="8" fill="#1E293B" stroke="#334155"/>
+                                <text x="92" y="20" font-size="11" font-family="sans-serif" font-weight="bold" fill="#34D399" text-anchor="middle">CIS CONFIGURATION</text>
+                                <text x="92" y="34" font-size="8" font-family="sans-serif" fill="#94A3B8" text-anchor="middle">(Both mutations on SAME strand)</text>
+
+                                <!-- Paternal Chromosome (Mutant) -->
+                                <g transform="translate(15, 50)">
+                                    <text x="0" y="12" font-size="8" font-family="sans-serif" fill="#94A3B8">Paternal:</text>
+                                    <line x1="45" y1="10" x2="155" y2="10" stroke="#60A5FA" stroke-width="4" stroke-linecap="round"/>
+                                    <!-- Mutation 1 -->
+                                    <circle cx="70" cy="10" r="5" fill="#EF4444"/>
+                                    <text x="70" y="26" font-size="7" font-family="sans-serif" font-weight="bold" fill="#F87171" text-anchor="middle">Var 1</text>
+                                    <!-- Mutation 2 -->
+                                    <circle cx="130" cy="10" r="5" fill="#EF4444"/>
+                                    <text x="130" y="26" font-size="7" font-family="sans-serif" font-weight="bold" fill="#F87171" text-anchor="middle">Var 2</text>
+                                </g>
+
+                                <!-- Maternal Chromosome (Wild-Type Intact) -->
+                                <g transform="translate(15, 95)">
+                                    <text x="0" y="12" font-size="8" font-family="sans-serif" fill="#94A3B8">Maternal:</text>
+                                    <line x1="45" y1="10" x2="155" y2="10" stroke="#34D399" stroke-width="4" stroke-linecap="round"/>
+                                    <text x="100" y="26" font-size="7.5" font-family="sans-serif" font-weight="bold" fill="#34D399" text-anchor="middle">100% Intact Wild-Type</text>
+                                </g>
+
+                                <!-- Result Box -->
+                                <rect x="15" y="135" width="155" height="36" rx="4" fill="#064E3B" stroke="#059669"/>
+                                <text x="92" y="149" font-size="8.5" font-family="sans-serif" font-weight="bold" fill="#A7F3D0" text-anchor="middle">CLINICAL OUTCOME: ASYMPTOMATIC</text>
+                                <text x="92" y="162" font-size="7.5" font-family="sans-serif" fill="#ECFDF5" text-anchor="middle">One intact allele produces 50% protein</text>
+                            </g>
+
+                            <!-- TRANS CONFIGURATION (RIGHT) -->
+                            <g transform="translate(220, 15)">
+                                <rect x="0" y="0" width="185" height="185" rx="8" fill="#1E293B" stroke="#334155"/>
+                                <text x="92" y="20" font-size="11" font-family="sans-serif" font-weight="bold" fill="#F87171" text-anchor="middle">TRANS CONFIGURATION</text>
+                                <text x="92" y="34" font-size="8" font-family="sans-serif" fill="#94A3B8" text-anchor="middle">(Mutations on OPPOSITE strands)</text>
+
+                                <!-- Paternal Chromosome -->
+                                <g transform="translate(15, 50)">
+                                    <text x="0" y="12" font-size="8" font-family="sans-serif" fill="#94A3B8">Paternal:</text>
+                                    <line x1="45" y1="10" x2="155" y2="10" stroke="#60A5FA" stroke-width="4" stroke-linecap="round"/>
+                                    <!-- Mutation 1 -->
+                                    <circle cx="70" cy="10" r="5" fill="#EF4444"/>
+                                    <text x="70" y="26" font-size="7" font-family="sans-serif" font-weight="bold" fill="#F87171" text-anchor="middle">Var 1</text>
+                                </g>
+
+                                <!-- Maternal Chromosome -->
+                                <g transform="translate(15, 95)">
+                                    <text x="0" y="12" font-size="8" font-family="sans-serif" fill="#94A3B8">Maternal:</text>
+                                    <line x1="45" y1="10" x2="155" y2="10" stroke="#60A5FA" stroke-width="4" stroke-linecap="round"/>
+                                    <!-- Mutation 2 -->
+                                    <circle cx="130" cy="10" r="5" fill="#EF4444"/>
+                                    <text x="130" y="26" font-size="7" font-family="sans-serif" font-weight="bold" fill="#F87171" text-anchor="middle">Var 2</text>
+                                </g>
+
+                                <!-- Result Box -->
+                                <rect x="15" y="135" width="155" height="36" rx="4" fill="#7F1D1D" stroke="#DC2626"/>
+                                <text x="92" y="149" font-size="8.5" font-family="sans-serif" font-weight="bold" fill="#FECDD3" text-anchor="middle">CLINICAL OUTCOME: SEVERE RECESSIVE</text>
+                                <text x="92" y="162" font-size="7.5" font-family="sans-serif" fill="#FFF1F2" text-anchor="middle">Zero functional protein produced</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div style="font-size: 0.73rem; color: #475569; margin-top: 6px; line-height: 1.35;">
+                        💡 <strong>The Fundamental Genetic Distinction:</strong> Physical phase determines whether a patient retains one fully intact, functional gene copy (carrier) or zero functional copies (severe genetic disorder).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================================
+             SLIDE 7: THE MODULAR GENOME (THE SMARTPHONE STORAGE ANALOGY)
+             ========================================================================= -->
+        <div class="slide" data-slide="7">
+            <div class="slide-header">
+                <div class="slide-meta">Systems Architecture &bull; Informational Modularity</div>
+                <h2 class="slide-title">The Modular Genome: If DNA Were Your Smartphone Storage</h2>
+                <p class="slide-subtitle">
+                    Open <em>Settings &rarr; Storage</em>: How does our 3.05 Gb genome partition between Apps, Settings, Media, and System Infrastructure?
+                </p>
+            </div>
+
+            <!-- iOS-Style Segmented Storage Bar Visual -->
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 10px 16px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: #1E293B; margin-bottom: 6px;">
+                    <span>📱 Genomic Storage Allocation (3.05 Gb Total)</span>
+                    <span style="font-family: var(--font-mono); color: #64748B;">3.05 Gb Used</span>
+                </div>
+                <!-- Segmented Multi-Color Track -->
+                <div style="height: 14px; background: #E2E8F0; border-radius: 7px; overflow: hidden; display: flex; border: 1px solid #CBD5E1;">
+                    <div style="width: 1.5%; background: #DC2626;" title="Apps / Exons: 1.5%"></div>
+                    <div style="width: 10%; background: #2563EB;" title="Settings & Permissions / Regulatory: 10%"></div>
+                    <div style="width: 54%; background: #7C3AED;" title="Downloaded Media & Memes / Transposons: 54%"></div>
+                    <div style="width: 34.5%; background: #F59E0B;" title="System Infrastructure / Scaffolding: 34.5%"></div>
+                </div>
+                <!-- Legend Row -->
+                <div style="display: flex; gap: 16px; margin-top: 6px; font-size: 0.72rem; color: #475569; flex-wrap: wrap;">
+                    <span style="display: flex; align-items: center; gap: 4px;"><span style="width:8px; height:8px; border-radius:2px; background:#DC2626;"></span><strong>Apps (Exons):</strong> ~1.5%</span>
+                    <span style="display: flex; align-items: center; gap: 4px;"><span style="width:8px; height:8px; border-radius:2px; background:#2563EB;"></span><strong>Settings/OS (Regulatory):</strong> ~10%</span>
+                    <span style="display: flex; align-items: center; gap: 4px;"><span style="width:8px; height:8px; border-radius:2px; background:#7C3AED;"></span><strong>Media/Memes (Mobile Elements):</strong> ~54%</span>
+                    <span style="display: flex; align-items: center; gap: 4px;"><span style="width:8px; height:8px; border-radius:2px; background:#F59E0B;"></span><strong>System &amp; Scaffolding:</strong> ~34.5%</span>
+                </div>
+            </div>
+
+            <div class="grid-3col">
+                <!-- Card 1: Apps (Exons) -->
+                <div class="card card-cherry fragment">
+                    <div class="card-header-row">
+                        <span class="card-title">1. Installed Apps (Exons)</span>
+                        <span class="card-pill">~1.5% of Phone</span>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 6px;">
+                            <strong>Functional Engines:</strong> The active protein machinery (Hemoglobin, Insulin, DNA Polymerase) that executes cellular tasks.
+                        </p>
+                        <ul style="padding-left: 16px; font-size: 0.78rem; line-height: 1.4; color: #334155;">
+                            <li>~19,900 protein-coding genes.</li>
+                            <li>Average gene is &sim;27 kb, but the compiled "app code" is only <strong>&sim;1.3 kb</strong>.</li>
+                        </ul>
+                    </div>
+                    <div style="border-top: 1px solid #F1F5F9; padding-top: 6px; font-size: 0.74rem; color: #9D2235; font-weight: 700;">
+                        Target of Whole Exome Sequencing (&gt;85% disease variants)
+                    </div>
+                </div>
+
+                <!-- Card 2: Settings & Permissions (Regulatory Elements) -->
+                <div class="card card-blue fragment">
+                    <div class="card-header-row">
+                        <span class="card-title">2. Settings &amp; Permissions</span>
+                        <span class="card-pill">~8&ndash;12% of Phone</span>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 6px;">
+                            <strong>Control Logic:</strong> Notification toggles, volume sliders, and background refresh limits controlling <em>when</em> and <em>where</em> apps run.
+                        </p>
+                        <ul style="padding-left: 16px; font-size: 0.78rem; line-height: 1.4; color: #334155;">
+                            <li><strong>Promoters &amp; Enhancers:</strong> Tissue-specific timing &amp; dosage switches.</li>
+                            <li><strong>3D Chromatin Loops:</strong> Physical contact across megabases.</li>
+                        </ul>
+                    </div>
+                    <div style="border-top: 1px solid #F1F5F9; padding-top: 6px; font-size: 0.74rem; color: #2563EB; font-weight: 700;">
+                        Mutations cause expression dosage / regulatory disease
+                    </div>
+                </div>
+
+                <!-- Card 3: Downloaded Media & Memes (Transposons) -->
+                <div class="card card-purple fragment">
+                    <div class="card-header-row">
+                        <span class="card-title">3. Viral Media &amp; Memes</span>
+                        <span class="card-pill">~50&ndash;54% of Phone</span>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 6px;">
+                            <strong>Self-Replicating Content:</strong> Duplicate TikTok downloads, memes, and cached videos copying themselves across storage.
+                        </p>
+                        <ul style="padding-left: 16px; font-size: 0.78rem; line-height: 1.4; color: #334155;">
+                            <li><strong>LINE-1 &amp; Alu elements:</strong> Ancient copy-paste retroelements.</li>
+                            <li><strong>HERVs:</strong> Fossilized retroviruses trapped in our genome.</li>
+                        </ul>
+                    </div>
+                    <div style="border-top: 1px solid #F1F5F9; padding-top: 6px; font-size: 0.74rem; color: #7C3AED; font-weight: 700;">
+                        Genomic bloatware &amp; raw material for evolutionary novelty
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Width Critical Analysis: What is "System Data"? -->
+            <div class="card card-amber fragment" style="margin-top: 10px; padding: 12px 18px;">
+                <div class="card-header-row" style="margin-bottom: 4px;">
+                    <strong style="color: #92400E; font-size: 0.86rem;">⚠️ What is Genomic "System Data"? (Deconstructing "Junk DNA")</strong>
+                    <span class="card-pill" style="background: #FEF3C7; color: #92400E; border-color: #FDE68A;">~34.5% of Genome</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 16px; font-size: 0.78rem; line-height: 1.45; color: #451A03;">
+                    <div>
+                        <strong>What Biological Elements Constitute "System Infrastructure"?</strong>
+                        <ul style="padding-left: 14px; margin-top: 4px;">
+                            <li><strong>Hardware Scaffolding:</strong> Centromeres (mitotic spindle anchors) &amp; Telomeres (end caps).</li>
+                            <li><strong>Universal Runtime Engines:</strong> Ribosomal RNA clusters (rDNA repeats), tRNAs, and snRNAs (spliceosome core daemons).</li>
+                            <li><strong>Filesystem Architecture:</strong> CTCF insulator boundary elements (TAD barriers) and heterochromatic spacers preventing illicit gene crosstalk.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>The "Junk DNA" Debate:</strong>
+                        <p style="margin-top: 4px;">
+                            Susumu Ohno (1972) called non-coding DNA "junk" to explain mutational load limits. ENCODE (2012) claimed 80% is functional based on protein binding. <em>Reality:</em> Much DNA neutrally drifts, but "System" sequences provide the indispensable structural physics and runtime machinery that keep the biological OS from crashing!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================================
+             SLIDE 8: THE C-VALUE ENIGMA (WHY SIZE != GENES != COMPLEXITY)
+             ========================================================================= -->
+        <div class="slide" data-slide="8">
+            <div class="slide-header">
+                <div class="slide-meta">Evolutionary Paradox &bull; Functional Genomic Architecture</div>
+                <h2 class="slide-title">The C-Value Enigma: Why Genome Size &ne; Gene Count</h2>
+                <p class="slide-subtitle">
+                    Across eukaryotes, genome size varies by over <strong>100,000-fold</strong>, yet the number of protein-coding genes remains astonishingly constrained.
+                </p>
+            </div>
+
+            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
+                <!-- Left: The Gene Count Invariance Table -->
+                <div class="card card-blue fragment" style="padding: 16px 20px;">
+                    <div class="card-header-row">
+                        <span class="card-title">Genome Size vs. Protein-Coding Gene Count</span>
+                        <span class="card-pill">Paradox</span>
+                    </div>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.78rem; margin: 4px 0 8px 0;">
+                        <thead>
+                            <tr style="border-bottom: 1.5px solid #CBD5E1; color: #64748B; font-size: 0.7rem; text-transform: uppercase;">
+                                <th style="padding: 4px 0; text-align: left;">Organism</th>
+                                <th style="padding: 4px 0; text-align: right;">Genome Size</th>
+                                <th style="padding: 4px 0; text-align: right;">Coding Genes</th>
+                                <th style="padding: 4px 0; text-align: right;">% Coding</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #F1F5F9;">
+                                <td style="padding: 6px 0; font-weight: 600;">🧫 <em>E. coli</em></td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono);">4.6 Mb</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono);">~4,300</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #059669;">88.0%</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;">
+                                <td style="padding: 6px 0; font-weight: 600;">🍞 Yeast (<em>S. cerevisiae</em>)</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono);">12.1 Mb</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono);">~6,000</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #059669;">70.0%</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9;">
+                                <td style="padding: 6px 0; font-weight: 600;">🪱 Nematode (<em>C. elegans</em>)</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono);">100 Mb</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono);">~20,100</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #D97706;">25.0%</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #F1F5F9; background: #FEF2F2;">
+                                <td style="padding: 6px 0; font-weight: 800; color: var(--temple-cherry);">👤 Human (<em>H. sapiens</em>)</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono); font-weight: 800; color: var(--temple-cherry);">3,055 Mb</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono); font-weight: 800; color: var(--temple-cherry);">~19,900</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono); font-weight: 800; color: #DC2626;">~1.5%</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 6px 0; font-weight: 600;">🧅 Onion (<em>A. cepa</em>)</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono);">16,000 Mb</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono);">~35,000</td>
+                                <td style="padding: 6px 0; text-align: right; font-family: var(--font-mono); font-weight: 700; color: #DC2626;">&lt; 0.3%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="font-size: 0.74rem; color: #64748B; line-height: 1.4;">
+                        A microscopic nematode worm with exactly 959 somatic cells has <strong>more protein-coding genes (~20,100)</strong> than a human (~19,900)!
+                    </div>
+                </div>
+
+                <!-- Right: What Fills the Other 98.5%? -->
+                <div class="card card-emerald fragment" style="padding: 16px 20px;">
+                    <div class="card-header-row">
+                        <span class="card-title">Anatomy of the Human Genome: Where is the Rest?</span>
+                        <span class="card-pill">Composition</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <!-- Segment 1: Exons -->
+                        <div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.76rem; font-weight: 700; color: #1E293B; margin-bottom: 2px;">
+                                <span>Protein-Coding Exons (The Target of WES)</span>
+                                <span style="font-family: var(--font-mono); color: #DC2626;">~1.5% (45 Mb)</span>
+                            </div>
+                            <div style="height: 6px; background: #E2E8F0; border-radius: 3px; overflow: hidden;">
+                                <div style="width: 1.5%; height: 100%; background: #DC2626; border-radius: 3px;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Segment 2: Introns & UTRs -->
+                        <div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.76rem; font-weight: 700; color: #1E293B; margin-bottom: 2px;">
+                                <span>Introns, Promoters &amp; UTRs (Gene Bodies)</span>
+                                <span style="font-family: var(--font-mono); color: #2563EB;">~26.0% (800 Mb)</span>
+                            </div>
+                            <div style="height: 6px; background: #E2E8F0; border-radius: 3px; overflow: hidden;">
+                                <div style="width: 26%; height: 100%; background: #2563EB; border-radius: 3px;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Segment 3: Transposable Elements (LINEs, SINEs, LTRs) -->
+                        <div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.76rem; font-weight: 700; color: #1E293B; margin-bottom: 2px;">
+                                <span>Transposable Elements (LINE-1, Alu, LTRs)</span>
+                                <span style="font-family: var(--font-mono); color: #7C3AED;">~54.0% (1,650 Mb)</span>
+                            </div>
+                            <div style="height: 6px; background: #E2E8F0; border-radius: 3px; overflow: hidden;">
+                                <div style="width: 54%; height: 100%; background: #7C3AED; border-radius: 3px;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Segment 4: Heterochromatin & Satellite Repeats -->
+                        <div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.76rem; font-weight: 700; color: #1E293B; margin-bottom: 2px;">
+                                <span>Centromeric / Telomeric Satellites (The T2T Gap)</span>
+                                <span style="font-family: var(--font-mono); color: #D97706;">~8.0% (240 Mb)</span>
+                            </div>
+                            <div style="height: 6px; background: #E2E8F0; border-radius: 3px; overflow: hidden;">
+                                <div style="width: 8%; height: 100%; background: #D97706; border-radius: 3px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 8px 12px; font-size: 0.74rem; color: #475569; margin-top: 6px;">
+                        Over <strong>half of our DNA</strong> is derived from ancestral retrotransposons ("genomic parasites") that duplicated across millions of years.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                                <!-- =========================================================================
+             SLIDE 9: CONCEPT 1 - PARTICULATE INHERITANCE (MENDEL 1865)
+             ========================================================================= -->
+        <div class="slide" data-slide="9">
+            <div class="slide-header">
+                <div class="slide-meta">History of Genetics &bull; Concept 1 of 4: Particulate Heredity</div>
+                <h2 class="slide-title">Mendel &amp; The Overthrow of Blending Inheritance (1865)</h2>
+                <p class="slide-subtitle">
+                    How an Augustinian monk resolved the fundamental paradox of 19th-century evolutionary biology by proving heredity is particulate, not fluid.
+                </p>
+            </div>
+
+            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
+                <!-- Left: Historical Context & Theory -->
+                <div style="display: flex; flex-direction: column; gap: 10px; justify-content: space-between;">
+                    <div class="card card-blue fragment" style="padding: 12px 16px;">
+                        <div class="card-header-row">
+                            <span class="card-title">1. The Crisis: The Blending Fallacy</span>
+                            <span class="card-pill">19th-Century Paradigm</span>
+                        </div>
+                        <p style="font-size: 0.78rem; line-height: 1.45; color: #334155; margin-bottom: 4px;">
+                            Pre-Mendelian biologists assumed inheritance acted like <strong>mixing paints</strong> (blending).
+                        </p>
+                        <div style="background: #FDF2F4; border: 1px solid #FECDD3; border-radius: 6px; padding: 6px 10px; font-size: 0.73rem; color: #991B1B;">
+                            ⚠️ <strong>The Darwinian Paradox:</strong> If traits blend like paint, novel advantageous mutations would dilute by 50% every generation, destroying the variation needed for Natural Selection!
+                        </div>
+                    </div>
+
+                    <div class="card card-emerald fragment" style="padding: 12px 16px;">
+                        <div class="card-header-row">
+                            <span class="card-title">2. The Breakthrough: Discrete "Anlagen"</span>
+                            <span class="card-pill">Pisum sativum</span>
+                        </div>
+                        <ul style="padding-left: 16px; font-size: 0.77rem; line-height: 1.4; color: #334155; margin: 0;">
+                            <li>Gregor Mendel crossed <strong>&gt;28,000 pea plants</strong> tracking 7 binary traits.</li>
+                            <li><strong>Law of Segregation:</strong> Traits do not blend; they are mediated by discrete, indivisible particles (<em>Anlagen</em>) that separate intact during gamete formation.</li>
+                            <li><strong>Law of Independent Assortment:</strong> Unlinked trait pairs assort into gametes independently.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Etymology Callout: Why P, F1, F2? -->
+                    <div class="card card-amber fragment" style="padding: 10px 14px; background: #FFFBEB; border-color: #FDE68A;">
+                        <div style="font-size: 0.76rem; font-weight: 700; color: #92400E; margin-bottom: 2px;">
+                            📜 Why Are Generations Named <em>P</em>, <em>F<sub>1</sub></em>, and <em>F<sub>2</sub></em>?
+                        </div>
+                        <p style="font-size: 0.73rem; line-height: 1.4; color: #78350F; margin: 0;">
+                            <strong><em>P</em> = Parental Generation:</strong> The pure-breeding, homozygous original parents.<br>
+                            <strong><em>F</em> = Filial Generation (from Latin <em>filius</em> = son, <em>filia</em> = daughter):</strong> Codified by William Bateson (1902) to designate generational offspring: <strong><em>F<sub>1</sub></em></strong> = direct children; <strong><em>F<sub>2</sub></em></strong> = grandchildren (selfed <em>F<sub>1</sub> &times; F<sub>1</sub></em>).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Portrait & Punnett Vector Diagram -->
+                <div class="card card-purple fragment" style="padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div style="display: flex; gap: 14px; align-items: center; border-bottom: 1px solid #E2E8F0; padding-bottom: 10px;">
+                        <img src="assets/mendel.jpg" alt="Gregor Mendel" style="width: 74px; height: 92px; object-fit: cover; border-radius: 6px; border: 2px solid #CBD5E1; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                        <div>
+                            <div style="font-size: 0.92rem; font-weight: 700; color: #0F172A;">Gregor Johann Mendel (1822&ndash;1884)</div>
+                            <div style="font-size: 0.74rem; color: #64748B;">Abbey of St. Thomas, Brno, Moravia</div>
+                            <div style="font-size: 0.72rem; color: #7C3AED; font-weight: 600; margin-top: 2px;">Published 1865 &bull; Rediscovered 1900</div>
+                        </div>
+                    </div>
+
+                    <!-- SVG Punnett & Non-Blending Concept -->
+                    <div style="background: #0F172A; border-radius: 8px; padding: 10px; margin: 8px 0; display: flex; align-items: center; justify-content: center; flex: 1;">
+                        <svg viewBox="0 0 380 140" style="width: 100%; height: 100%; max-height: 140px;" xmlns="http://www.w3.org/2000/svg">
+                            <!-- P Generation -->
+                            <text x="15" y="22" font-size="8.5" font-family="sans-serif" font-weight="bold" fill="#94A3B8">P (Parental):</text>
+                            <circle cx="110" cy="18" r="9" fill="#FBBF24"/>
+                            <text x="110" y="21" font-size="8" font-weight="bold" fill="#0F172A" text-anchor="middle">AA</text>
+                            
+                            <text x="135" y="22" font-size="12" font-weight="bold" fill="#F8FAFC">&times;</text>
+                            
+                            <circle cx="165" cy="18" r="9" fill="#38BDF8"/>
+                            <text x="165" y="21" font-size="8" font-weight="bold" fill="#0F172A" text-anchor="middle">aa</text>
+
+                            <!-- F1 Generation -->
+                            <text x="15" y="60" font-size="8.5" font-family="sans-serif" font-weight="bold" fill="#94A3B8">F1 (1st Filial):</text>
+                            <circle cx="110" cy="56" r="9" fill="#FBBF24"/>
+                            <text x="110" y="59" font-size="8" font-weight="bold" fill="#0F172A" text-anchor="middle">Aa</text>
+                            <text x="135" y="60" font-size="7.5" font-family="sans-serif" fill="#FBBF24">(100% Yellow &bull; Recessive Hidden)</text>
+
+                            <!-- F2 Generation -->
+                            <text x="15" y="105" font-size="8.5" font-family="sans-serif" font-weight="bold" fill="#94A3B8">F2 (2nd Filial):</text>
+                            
+                            <!-- 1 AA -->
+                            <circle cx="105" cy="102" r="9" fill="#FBBF24"/>
+                            <text x="105" y="105" font-size="8" font-weight="bold" fill="#0F172A" text-anchor="middle">AA</text>
+                            
+                            <!-- 2 Aa -->
+                            <circle cx="130" cy="102" r="9" fill="#FBBF24"/>
+                            <text x="130" y="105" font-size="8" font-weight="bold" fill="#0F172A" text-anchor="middle">Aa</text>
+                            <circle cx="155" cy="102" r="9" fill="#FBBF24"/>
+                            <text x="155" y="105" font-size="8" font-weight="bold" fill="#0F172A" text-anchor="middle">Aa</text>
+                            
+                            <!-- 1 aa -->
+                            <circle cx="180" cy="102" r="9" fill="#38BDF8"/>
+                            <text x="180" y="105" font-size="8" font-weight="bold" fill="#0F172A" text-anchor="middle">aa</text>
+
+                            <!-- 3:1 Ratio Callout -->
+                            <rect x="205" y="90" width="165" height="28" rx="4" fill="#1E293B" stroke="#F59E0B"/>
+                            <text x="287" y="102" font-size="8" font-family="sans-serif" font-weight="bold" fill="#FBBF24" text-anchor="middle">3 Yellow : 1 Green (F2)</text>
+                            <text x="287" y="113" font-size="7" font-family="sans-serif" fill="#94A3B8" text-anchor="middle">Recessive "aa" re-emerges intact!</text>
+                        </svg>
+                    </div>
+
+                    <div style="font-size: 0.73rem; color: #475569; line-height: 1.35;">
+                        💡 <strong>The Epistemological Shift:</strong> Particles do not dilute. Hereditary units remain completely dormant across generations and re-emerge in exact integer ratios.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================================
+             SLIDE 10: CONCEPT 2 - ALLELES & LINKAGE MAPPING (1902-1915)
+             ========================================================================= -->
+        <div class="slide" data-slide="10">
+            <div class="slide-header">
+                <div class="slide-meta">History of Genetics &bull; Concept 2 of 4: The Physical Locus</div>
+                <h2 class="slide-title">Alleles, Chromosomes, &amp; The First Linkage Maps (1902&ndash;1915)</h2>
+                <p class="slide-subtitle">
+                    How Morgan’s "Fly Room" at Columbia University transformed abstract mathematical factors into physical loci arranged linearly along chromosomes.
+                </p>
+            </div>
+
+            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
+                <!-- Left: Historical Context & Theory -->
+                <div style="display: flex; flex-direction: column; gap: 10px; justify-content: space-between;">
+                    <div class="card card-purple fragment" style="padding: 14px 18px;">
+                        <div class="card-header-row">
+                            <span class="card-title">1. Bateson &amp; The Vocabulary of Genetics (1902)</span>
+                            <span class="card-pill">Nomenclature</span>
+                        </div>
+                        <ul style="padding-left: 16px; font-size: 0.78rem; line-height: 1.45; color: #334155; margin: 0;">
+                            <li>William Bateson coined <strong>"Genetics"</strong> (1905) and <strong>"Allelomorph"</strong> (shortened to <strong>Allele</strong> = alternative functional versions of a gene).</li>
+                            <li>Coined <em>Homozygote</em> (two identical alleles) and <em>Heterozygote</em> (two different alleles).</li>
+                            <li>Boveri &amp; Sutton (1902) hypothesized that chromosome pairs during meiosis physically behave like Mendel's segregating factors.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card card-blue fragment" style="padding: 14px 18px;">
+                        <div class="card-header-row">
+                            <span class="card-title">2. Morgan's Fly Room &amp; Linear Linkage (1910&ndash;1913)</span>
+                            <span class="card-pill">Columbia University</span>
+                        </div>
+                        <ul style="padding-left: 16px; font-size: 0.78rem; line-height: 1.45; color: #334155; margin: 0;">
+                            <li><strong>The White-Eyed Fly (1910):</strong> Thomas Hunt Morgan discovered a white-eyed male <em>Drosophila</em> and proved the trait tracked with the X-chromosome (first proof of sex-linked inheritance).</li>
+                            <li><strong>Sturtevant's Epiphany (1913):</strong> Undergraduate Alfred Sturtevant realized crossover frequency between linked traits directly measures <strong>physical distance along the chromosome</strong> (1% recombination = 1 centiMorgan).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right: Portrait & Linkage Mapping Vector Diagram -->
+                <div class="card card-emerald fragment" style="padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div style="display: flex; gap: 14px; align-items: center; border-bottom: 1px solid #E2E8F0; padding-bottom: 10px;">
+                        <img src="assets/morgan.jpg" alt="Thomas Hunt Morgan" style="width: 74px; height: 92px; object-fit: cover; border-radius: 6px; border: 2px solid #CBD5E1; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                        <div>
+                            <div style="font-size: 0.92rem; font-weight: 700; color: #0F172A;">Thomas Hunt Morgan (1866&ndash;1945)</div>
+                            <div style="font-size: 0.74rem; color: #64748B;">Columbia University &bull; Nobel Prize 1933</div>
+                            <div style="font-size: 0.72rem; color: #059669; font-weight: 600; margin-top: 2px;">The Chromosome Theory of Heredity</div>
+                        </div>
+                    </div>
+
+                    <!-- SVG Chromosome Crossing Over & Linkage Map -->
+                    <div style="background: #0F172A; border-radius: 8px; padding: 10px; margin: 8px 0; display: flex; align-items: center; justify-content: center; flex: 1;">
+                        <svg viewBox="0 0 380 140" style="width: 100%; height: 100%; max-height: 140px;" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Chromosome 1: Linear Beads on String -->
+                            <g transform="translate(15, 20)">
+                                <text x="0" y="12" font-size="8" font-family="sans-serif" font-weight="bold" fill="#94A3B8">Drosophila X-Chr:</text>
+                                <line x1="90" y1="10" x2="340" y2="10" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                                
+                                <!-- Locus y (yellow body) 0.0 -->
+                                <circle cx="100" cy="10" r="4" fill="#F59E0B"/>
+                                <text x="100" y="26" font-size="7" font-family="sans-serif" fill="#FBBF24" text-anchor="middle">y (0.0)</text>
+                                
+                                <!-- Locus w (white eyes) 1.5 -->
+                                <circle cx="120" cy="10" r="4" fill="#EF4444"/>
+                                <text x="120" y="26" font-size="7" font-family="sans-serif" fill="#F87171" text-anchor="middle">w (1.5)</text>
+                                
+                                <!-- Locus v (vermilion) 33.0 -->
+                                <circle cx="210" cy="10" r="4" fill="#A855F7"/>
+                                <text x="210" y="26" font-size="7" font-family="sans-serif" fill="#C084FC" text-anchor="middle">v (33.0)</text>
+                                
+                                <!-- Locus m (miniature wings) 36.1 -->
+                                <circle cx="230" cy="10" r="4" fill="#10B981"/>
+                                <text x="230" y="26" font-size="7" font-family="sans-serif" fill="#34D399" text-anchor="middle">m (36.1)</text>
+
+                                <!-- Locus r (rudimentary) 57.0 -->
+                                <circle cx="320" cy="10" r="4" fill="#EC4899"/>
+                                <text x="320" y="26" font-size="7" font-family="sans-serif" fill="#F472B6" text-anchor="middle">r (57.0)</text>
+                            </g>
+
+                            <!-- Crossing Over Schematic -->
+                            <g transform="translate(15, 68)">
+                                <text x="0" y="16" font-size="8" font-family="sans-serif" font-weight="bold" fill="#94A3B8">Meiotic Crossover:</text>
+                                <!-- Strand 1 (Maternal Blue) -->
+                                <path d="M 90 12 L 170 12 L 210 32 L 340 32" stroke="#38BDF8" stroke-width="3" fill="none"/>
+                                <!-- Strand 2 (Paternal Coral) -->
+                                <path d="M 90 32 L 170 32 L 210 12 L 340 12" stroke="#F87171" stroke-width="3" fill="none"/>
+                                <!-- Crossover Chiasma indicator -->
+                                <circle cx="190" cy="22" r="5" fill="none" stroke="#FBBF24" stroke-width="1.5" stroke-dasharray="2"/>
+                                <text x="190" y="44" font-size="7" font-family="sans-serif" fill="#FBBF24" text-anchor="middle">Recombination Chiasma</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div style="font-size: 0.73rem; color: #475569; line-height: 1.35;">
+                        💡 <strong>The Epistemological Shift:</strong> Genes are no longer abstract algebraic symbols; they are discrete physical addresses (loci) arranged in a 1-dimensional array along chromosomes.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================================
+             SLIDE 11: CONCEPT 3 - THE CHEMICAL REVOLUTION (1928-1953)
+             ========================================================================= -->
+        <div class="slide" data-slide="11">
+            <div class="slide-header">
+                <div class="slide-meta">History of Genetics &bull; Concept 3 of 4: The Physical Molecule</div>
+                <h2 class="slide-title">The Chemical Revolution: DNA as the Hereditary Molecule (1928&ndash;1953)</h2>
+                <p class="slide-subtitle">
+                    How the 50-year dogma of the "Protein Gene" was dismantled by bacterial transformation, bacteriophage blenders, and X-ray diffraction.
+                </p>
+            </div>
+
+            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
+                <!-- Left: Historical Context & Key Experiments -->
+                <div style="display: flex; flex-direction: column; gap: 10px; justify-content: space-between;">
+                    <div class="card card-amber fragment" style="padding: 12px 16px;">
+                        <div class="card-header-row">
+                            <span class="card-title">1. The Fallacy of the "Protein Dogma"</span>
+                            <span class="card-pill">Phoebus Levene</span>
+                        </div>
+                        <p style="font-size: 0.76rem; line-height: 1.45; color: #451A03; margin: 0;">
+                            Proteins boast 20 chemically diverse amino acids. DNA was dismissed under Levene’s "Tetranucleotide Hypothesis" as an uninformative structural repeat \(\text{(ACGT)}_n\). The scientific consensus was unanimous: <em>genes must be proteins</em>.
+                        </p>
+                    </div>
+
+                    <div class="card card-emerald fragment" style="padding: 12px 16px;">
+                        <div class="card-header-row">
+                            <span class="card-title">2. Avery-MacLeod-McCarty (1944) &amp; Hershey-Chase (1952)</span>
+                            <span class="card-pill">Crucial Experiments</span>
+                        </div>
+                        <ul style="padding-left: 16px; font-size: 0.76rem; line-height: 1.4; color: #334155; margin: 0;">
+                            <li><strong>Avery (1944):</strong> Fractionated virulent <em>Pneumococcus</em>. Transforming activity was destroyed <em>only</em> by <strong>DNase</strong> (not protease, not RNase).</li>
+                            <li><strong>Hershey-Chase (1952):</strong> Labeled T2 phage protein with \(^{35}\text{S}\) and DNA with \(^{32}\text{P}\). The Waring blender showed <em>only</em> \(^{32}\text{P}\) entered the host cell to direct viral reproduction.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card card-blue fragment" style="padding: 12px 16px;">
+                        <div class="card-header-row">
+                            <span class="card-title">3. The Double Helix (1953)</span>
+                            <span class="card-pill">Mechanism Revealed</span>
+                        </div>
+                        <p style="font-size: 0.76rem; line-height: 1.4; color: #334155; margin: 0;">
+                            Rosalind Franklin's <strong>Photo 51</strong> revealed B-DNA helical geometry. Watson &amp; Crick deduced base complementarity: \(A=T\), \(G\equiv C\), explaining both information storage and self-templating replication.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Dual Portraits & Concept Graphic -->
+                <div class="card card-purple fragment" style="padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-bottom: 1px solid #E2E8F0; padding-bottom: 10px;">
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <img src="assets/avery.jpg" alt="Oswald Avery" style="width: 54px; height: 68px; object-fit: cover; border-radius: 5px; border: 1.5px solid #CBD5E1;">
+                            <div>
+                                <div style="font-size: 0.78rem; font-weight: 700; color: #0F172A;">Oswald Avery</div>
+                                <div style="font-size: 0.68rem; color: #64748B;">Transforming Principle (1944)</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <img src="assets/franklin.jpg" alt="Rosalind Franklin" style="width: 54px; height: 68px; object-fit: cover; border-radius: 5px; border: 1.5px solid #CBD5E1;">
+                            <div>
+                                <div style="font-size: 0.78rem; font-weight: 700; color: #0F172A;">Rosalind Franklin</div>
+                                <div style="font-size: 0.68rem; color: #64748B;">Photo 51 X-Ray (1952)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SVG Hershey-Chase & Base Complementarity -->
+                    <div style="background: #0F172A; border-radius: 8px; padding: 10px; margin: 8px 0; display: flex; align-items: center; justify-content: center; flex: 1;">
+                        <svg viewBox="0 0 380 130" style="width: 100%; height: 100%; max-height: 130px;" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Left: Phage Blender -->
+                            <g transform="translate(10, 15)">
+                                <text x="40" y="10" font-size="8" font-family="sans-serif" font-weight="bold" fill="#38BDF8" text-anchor="middle">Hershey-Chase (1952)</text>
+                                <!-- Phage Head -->
+                                <polygon points="30,20 50,20 60,35 50,50 30,50 20,35" fill="#334155" stroke="#94A3B8" stroke-width="1.5"/>
+                                <!-- 32P DNA inside -->
+                                <path d="M 32 30 Q 40 22 48 30 T 40 44" fill="none" stroke="#F59E0B" stroke-width="2"/>
+                                <text x="40" y="38" font-size="6.5" font-family="sans-serif" font-weight="bold" fill="#FBBF24" text-anchor="middle">32P DNA</text>
+                                <!-- Phage Tail & Legs -->
+                                <line x1="40" y1="50" x2="40" y2="70" stroke="#94A3B8" stroke-width="2"/>
+                                <line x1="40" y1="70" x2="25" y2="85" stroke="#94A3B8" stroke-width="1.5"/>
+                                <line x1="40" y1="70" x2="55" y2="85" stroke="#94A3B8" stroke-width="1.5"/>
+                                <!-- Bacterium Surface -->
+                                <rect x="5" y="85" width="70" height="20" rx="4" fill="#065F46"/>
+                                <text x="40" y="98" font-size="6.5" font-family="sans-serif" fill="#A7F3D0" text-anchor="middle">Host Cell (DNA Injected)</text>
+                            </g>
+
+                            <!-- SEPARATOR -->
+                            <line x1="105" y1="10" x2="105" y2="120" stroke="#334155" stroke-dasharray="2"/>
+
+                            <!-- Right: Watson-Crick Base Complementarity -->
+                            <g transform="translate(125, 15)">
+                                <text x="110" y="10" font-size="8" font-family="sans-serif" font-weight="bold" fill="#34D399" text-anchor="middle">Watson-Crick Replication Logic</text>
+                                
+                                <!-- Strand 1 (5' to 3') -->
+                                <rect x="10" y="25" width="200" height="14" rx="3" fill="#1E293B" stroke="#2563EB"/>
+                                <text x="110" y="35" font-size="7.5" font-family="var(--font-mono)" font-weight="bold" fill="#60A5FA" text-anchor="middle">5'- A  T  G  C  C  G  T  A -3'</text>
+                                
+                                <!-- Hydrogen Bonds -->
+                                <text x="110" y="55" font-size="7" font-family="var(--font-mono)" fill="#FBBF24" text-anchor="middle">||  ||  ||| ||| ||| ||| ||  ||</text>
+                                
+                                <!-- Strand 2 (3' to 5') -->
+                                <rect x="10" y="65" width="200" height="14" rx="3" fill="#1E293B" stroke="#DC2626"/>
+                                <text x="110" y="75" font-size="7.5" font-family="var(--font-mono)" font-weight="bold" fill="#F87171" text-anchor="middle">3'- T  A  C  G  G  C  A  T -5'</text>
+
+                                <rect x="10" y="90" width="200" height="18" rx="3" fill="#0F766E"/>
+                                <text x="110" y="102" font-size="7" font-family="sans-serif" font-weight="bold" fill="#CCFBF1" text-anchor="middle">Complementarity = Automatic Template for Replication</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div style="font-size: 0.73rem; color: #475569; line-height: 1.35;">
+                        💡 <strong>The Epistemological Shift:</strong> The double helix revealed that digital information encoding and physical self-replication are governed by Watson-Crick hydrogen bonding geometry.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================================
+             SLIDE 12: CONCEPT 4 - THE EVOLVING GENE (1941-PRESENT)
+             ========================================================================= -->
+        <div class="slide" data-slide="12">
+            <div class="slide-header">
+                <div class="slide-meta">History of Genetics &bull; Concept 4 of 4: Informational Modularity</div>
+                <h2 class="slide-title">The Evolving Gene: From "One-Gene-One-Enzyme" to Modular Networks</h2>
+                <p class="slide-subtitle">
+                    How the discovery of split genes, alternative splicing, and non-coding RNAs demolished the simple linear definition of a gene.
+                </p>
+            </div>
+
+            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
+                <!-- Left: Historical Paradigm Shifts -->
+                <div style="display: flex; flex-direction: column; gap: 10px; justify-content: space-between;">
+                    <div class="card card-blue fragment" style="padding: 12px 16px;">
+                        <div class="card-header-row">
+                            <span class="card-title">1. Beadle &amp; Tatum (1941): One Gene &rarr; One Enzyme</span>
+                            <span class="card-pill">Colinearity Dogma</span>
+                        </div>
+                        <p style="font-size: 0.76rem; line-height: 1.45; color: #334155; margin: 0;">
+                            Using irradiated <em>Neurospora crassa</em> auxotrophs, Beadle &amp; Tatum established that genes act by regulating specific chemical events. This evolved into "One Gene &rarr; One Polypeptide" &mdash; assuming uninterrupted 1-to-1 colinearity from DNA to protein.
+                        </p>
+                    </div>
+
+                    <div class="card card-purple fragment" style="padding: 12px 16px;">
+                        <div class="card-header-row">
+                            <span class="card-title">2. The Intron Shock: Sharp &amp; Roberts (1977)</span>
+                            <span class="card-pill">Split Genes</span>
+                        </div>
+                        <p style="font-size: 0.76rem; line-height: 1.45; color: #334155; margin: 0;">
+                            Adenovirus mRNA hybridized to genomic DNA looped out non-hybridized loops &mdash; revealing <strong>introns</strong>. Eukaryotic genes are mosaic islands of <strong>exons</strong> interrupted by non-coding space!
+                        </p>
+                    </div>
+
+                    <div class="card card-emerald fragment" style="padding: 12px 16px;">
+                        <div class="card-header-row">
+                            <span class="card-title">3. The Modern Consensus Definition (2026)</span>
+                            <span class="card-pill">Sequence Ontology</span>
+                        </div>
+                        <p style="font-size: 0.76rem; line-height: 1.45; color: #065F46; margin: 0;">
+                            <strong>A gene is a locatable region of genomic sequence</strong> corresponding to a unit of inheritance, associated with regulatory regions, transcribed regions, and/or other functional sequence elements encoding potentially overlapping products.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Portrait & Modern Split Gene Schematic -->
+                <div class="card card-cherry fragment" style="padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div style="display: flex; gap: 14px; align-items: center; border-bottom: 1px solid #E2E8F0; padding-bottom: 10px;">
+                        <img src="assets/beadle.jpg" alt="George Beadle" style="width: 74px; height: 92px; object-fit: cover; border-radius: 6px; border: 2px solid #CBD5E1; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                        <div>
+                            <div style="font-size: 0.92rem; font-weight: 700; color: #0F172A;">George Wells Beadle (1903&ndash;1989)</div>
+                            <div style="font-size: 0.74rem; color: #64748B;">Nobel Prize 1958 &bull; One Gene &rarr; One Enzyme</div>
+                            <div style="font-size: 0.72rem; color: #9D2235; font-weight: 600; margin-top: 2px;">From Colinearity to Alternative Splicing</div>
+                        </div>
+                    </div>
+
+                    <!-- SVG Modern Modular Gene Anatomy Diagram -->
+                    <div style="background: #0F172A; border-radius: 8px; padding: 10px; margin: 8px 0; display: flex; align-items: center; justify-content: center; flex: 1;">
+                        <svg viewBox="0 0 380 135" style="width: 100%; height: 100%; max-height: 135px;" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Genomic DNA Axis -->
+                            <g transform="translate(10, 15)">
+                                <text x="0" y="10" font-size="7.5" font-family="sans-serif" font-weight="bold" fill="#94A3B8">Genomic Locus:</text>
+                                <line x1="75" y1="8" x2="355" y2="8" stroke="#475569" stroke-width="3"/>
+                                
+                                <!-- Promoter / Enhancer (Amber) -->
+                                <rect x="75" y="2" width="22" height="12" rx="2" fill="#F59E0B"/>
+                                <text x="86" y="10" font-size="6" font-family="sans-serif" font-weight="bold" fill="#0F172A" text-anchor="middle">PROM</text>
+                                
+                                <!-- Exon 1 (Red) -->
+                                <rect x="110" y="0" width="28" height="16" rx="2" fill="#EF4444"/>
+                                <text x="124" y="11" font-size="6.5" font-family="sans-serif" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Exon 1</text>
+                                
+                                <!-- Intron 1 Line -->
+                                <text x="155" y="6" font-size="6" font-family="sans-serif" fill="#64748B" text-anchor="middle">Intron 1 (15kb)</text>
+                                
+                                <!-- Exon 2 (Red) -->
+                                <rect x="185" y="0" width="32" height="16" rx="2" fill="#EF4444"/>
+                                <text x="201" y="11" font-size="6.5" font-family="sans-serif" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Exon 2</text>
+                                
+                                <!-- Exon 3 (Red) -->
+                                <rect x="260" y="0" width="28" height="16" rx="2" fill="#EF4444"/>
+                                <text x="274" y="11" font-size="6.5" font-family="sans-serif" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Exon 3</text>
+                                
+                                <!-- Poly-A Signal -->
+                                <rect x="300" y="2" width="22" height="12" rx="2" fill="#06B6D4"/>
+                                <text x="311" y="10" font-size="5.5" font-family="sans-serif" font-weight="bold" fill="#0F172A" text-anchor="middle">p(A)</text>
+                            </g>
+
+                            <!-- Alternative Splicing Paths -->
+                            <g transform="translate(10, 58)">
+                                <text x="0" y="12" font-size="7.5" font-family="sans-serif" font-weight="bold" fill="#38BDF8">Alternative Splicing:</text>
+                                
+                                <!-- Isoform A (Exon 1 + 2 + 3) -->
+                                <g transform="translate(90, 0)">
+                                    <rect x="0" y="4" width="24" height="12" rx="2" fill="#EF4444"/>
+                                    <rect x="28" y="4" width="28" height="12" rx="2" fill="#EF4444"/>
+                                    <rect x="60" y="4" width="24" height="12" rx="2" fill="#EF4444"/>
+                                    <text x="92" y="13" font-size="7" font-family="sans-serif" fill="#A7F3D0">&rarr; Isoform A (Brain)</text>
+                                </g>
+                                
+                                <!-- Isoform B (Exon 1 + 3 only) -->
+                                <g transform="translate(90, 22)">
+                                    <rect x="0" y="4" width="24" height="12" rx="2" fill="#EF4444"/>
+                                    <rect x="28" y="4" width="24" height="12" rx="2" fill="#EF4444"/>
+                                    <text x="60" y="13" font-size="7" font-family="sans-serif" fill="#FBBF24">&rarr; Isoform B (Liver)</text>
+                                </g>
+                            </g>
+
+                            <g transform="translate(10, 110)">
+                                <rect x="75" y="0" width="260" height="16" rx="3" fill="#1E293B" stroke="#8B5CF6"/>
+                                <text x="205" y="11" font-size="7" font-family="sans-serif" font-weight="bold" fill="#C084FC" text-anchor="middle">1 Gene Locus &rarr; Multiple Distinct Transcripts &amp; Non-coding RNAs</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div style="font-size: 0.73rem; color: #475569; line-height: 1.35;">
+                        💡 <strong>The Epistemological Shift:</strong> A gene is not a single protein blueprint; it is a modular transcriptional cassette that produces diverse molecular machines depending on cellular context.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <!-- =========================================================================
+             SLIDE 13: THE GREAT GENE COUNT COLLAPSE (THE GENESWEEP BET)
+             ========================================================================= -->
+        <div class="slide" data-slide="13">
+            <div class="slide-header">
+                <div class="slide-meta">Historical Genomics &bull; The Methodological Odyssey</div>
+                <h2 class="slide-title">The Great Gene Count Collapse: How Were Estimates Derived?</h2>
+                <p class="slide-subtitle">
+                    Before sequencing the human genome, top geneticists estimated 100,000+ genes. What specific biochemical, statistical, and algorithmic methods produced those predictions?
+                </p>
+            </div>
+
+            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
+                <!-- Left: How Each Historical Estimate Was Derived -->
+                <div style="display: flex; flex-direction: column; gap: 8px; justify-content: space-between;">
+                    <!-- Method 1: 1970s-80s -->
+                    <div class="card card-purple fragment" style="padding: 10px 14px;">
+                        <div class="card-header-row" style="margin-bottom: 2px;">
+                            <span class="card-title" style="font-size: 0.84rem;">1. Hybridization Kinetics &amp; 2D Gels (1970s&ndash;80s)</span>
+                            <span class="card-pill">100k&ndash;200k Genes</span>
+                        </div>
+                        <p style="font-size: 0.74rem; line-height: 1.4; color: #334155; margin: 0;">
+                            <strong>How derived:</strong> RNA-DNA reassociation curves (\(R_0t\) kinetics) measured total unique mRNA complexity. Combined with 2D gel electrophoresis protein spot counts across tissues, scientists assumed physiological complexity required a massive parts list.
+                        </p>
+                    </div>
+
+                    <!-- Method 2: CpG Islands -->
+                    <div class="card card-emerald fragment" style="padding: 10px 14px;">
+                        <div class="card-header-row" style="margin-bottom: 2px;">
+                            <span class="card-title" style="font-size: 0.84rem;">2. CpG Island Extrapolation (Antequera &amp; Bird 1993)</span>
+                            <span class="card-pill">~80,000 Genes</span>
+                        </div>
+                        <p style="font-size: 0.74rem; line-height: 1.4; color: #334155; margin: 0;">
+                            <strong>How derived:</strong> Identified that \(\sim 56\%\) of known genes have an unmethylated 5' <strong>CpG island</strong> promoter. Experimentally estimated \(\sim 45,000\) CpG islands in human DNA &rarr; extrapolated \(45,000 / 0.56 \approx \mathbf{80,000\text{ genes}}\).
+                        </p>
+                    </div>
+
+                    <!-- Method 3: EST Sampling -->
+                    <div class="card card-blue fragment" style="padding: 10px 14px;">
+                        <div class="card-header-row" style="margin-bottom: 2px;">
+                            <span class="card-title" style="font-size: 0.84rem;">3. EST Capture-Recapture Statistics (1990s)</span>
+                            <span class="card-pill">60k&ndash;120k Genes</span>
+                        </div>
+                        <p style="font-size: 0.74rem; line-height: 1.4; color: #334155; margin: 0;">
+                            <strong>How derived:</strong> Craig Venter &amp; Walter Gilbert sampled thousands of 300bp cDNA tags (ESTs) from tissue libraries and applied ecological "capture-recapture" models. <em>Flaw:</em> Counted alternative splice isoforms and spurious non-coding transcripts as distinct genes!
+                        </p>
+                    </div>
+
+                    <!-- Method 4: Modern Evolutionary Filtering -->
+                    <div class="card card-cherry fragment" style="padding: 10px 14px;">
+                        <div class="card-header-row" style="margin-bottom: 2px;">
+                            <span class="card-title" style="font-size: 0.84rem;">4. Evolutionary Conservation (GENCODE &bull; T2T 2022)</span>
+                            <span class="card-pill">19,969 Genes</span>
+                        </div>
+                        <p style="font-size: 0.74rem; line-height: 1.4; color: #334155; margin: 0;">
+                            <strong>How derived:</strong> Cross-species constraint across 29+ mammals (PhyloCSF) + mass-spec proteomics. Purged &gt;15,000 pseudogenes, retrotransposon fragments, and lncRNAs that early algorithms misclassified as genes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: The GeneSweep Bet & Why We Were Wrong -->
+                <div class="card card-amber fragment" style="padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div class="card-header-row">
+                            <span class="card-title">The Cold Spring Harbor "GeneSweep" (2000)</span>
+                            <span class="card-pill">Ewan Birney's Pool</span>
+                        </div>
+                        
+                        <!-- Timeline of Bets -->
+                        <div style="display: flex; flex-direction: column; gap: 5px; font-family: var(--font-mono); font-size: 0.72rem; margin: 6px 0 10px 0;">
+                            <div style="display: flex; justify-content: space-between; padding: 3px 8px; background: #FEF2F2; border-radius: 4px;">
+                                <span>2000 GeneSweep Median Bet:</span>
+                                <strong style="color: #DC2626;">62,000 (Range: 40k &ndash; 150k+)</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 3px 8px; background: #EFF6FF; border-radius: 4px;">
+                                <span>2001 (Human Genome Project Draft):</span>
+                                <strong style="color: #2563EB;">30,000 &ndash; 35,000</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 3px 8px; background: #ECFDF5; border-radius: 4px;">
+                                <span>2022 (T2T-CHM13 Complete):</span>
+                                <strong style="color: #059669;">19,969 Protein-Coding</strong>
+                            </div>
+                        </div>
+
+                        <!-- Why Were We So Wrong -->
+                        <div style="font-size: 0.76rem; font-weight: 700; color: #92400E; margin-bottom: 4px;">
+                            Why Did Early Estimators Fail So Drastically?
+                        </div>
+                        <ul style="padding-left: 14px; font-size: 0.74rem; line-height: 1.4; color: #451A03; margin: 0;">
+                            <li><strong>Alternative Splicing:</strong> &gt;95% of human genes undergo alternative splicing (1 gene locus &rarr; average 4&ndash;10 distinct protein isoforms).</li>
+                            <li><strong>Combinatorial Regulatory Logic:</strong> Organismal complexity is an emergent property of <em>network wiring</em> and enhancer topology, not a giant parts inventory.</li>
+                            <li><strong>The Pseudogene Trap:</strong> ~15,000 fossilized non-functional gene copies inflated early computational ORF counters.</li>
+                        </ul>
+                    </div>
+
+                    <div style="font-size: 0.72rem; color: #78350F; font-weight: 600; border-top: 1px solid #FDE68A; padding-top: 6px; margin-top: 6px;">
+                        💡 A microscopic nematode worm has ~20,100 genes; humans have ~19,900. Complexity is generated in the <em>regulatory software</em>, not the hardware parts list!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================================
+             SLIDE 14: THE 20-YEAR ILLUSION (SETTING UP T2T / NURK 2022)
+             ========================================================================= -->
+        <div class="slide" data-slide="14">
+            <div class="slide-header">
+                <div class="slide-meta">Genomic History &bull; The Missing 8%</div>
+                <h2 class="slide-title">The 20-Year Illusion of the "Completed" Genome</h2>
+                <p class="slide-subtitle">
+                    In April 2003, headlines announced the human genome was 100% finished. In reality, an entire chromosome's worth of sequence was completely missing.
+                </p>
+            </div>
+
+            <div class="grid-3col">
+                <!-- Card 1: What GRCh38 Actually Had -->
+                <div class="card card-amber fragment">
+                    <div class="card-header-row">
+                        <span class="card-title">1. The 2003 Gaps</span>
+                        <span class="card-pill">GRCh38</span>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 8px;">
+                            The reference genome (GRCh38) left <strong>238 million base pairs</strong> across thousands of unresolved gaps marked with placeholder <code>"NNNNN"</code> letters.
+                        </p>
+                        <ul style="padding-left: 16px; font-size: 0.78rem; line-height: 1.4; color: #334155;">
+                            <li>Centromeres: 100% unresolved heterochromatin.</li>
+                            <li>Acrocentric short arms (Chr 13, 14, 15, 21, 22): Completely blank.</li>
+                            <li>Segmental duplications: Collapsed into artificial single copies.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 2: The Short-Read Puzzle Trap -->
+                <div class="card card-blue fragment">
+                    <div class="card-header-row">
+                        <span class="card-title">2. The 150bp Puzzle Trap</span>
+                        <span class="card-pill">Assembly Limit</span>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 8px;">
+                            Why couldn't Illumina short reads finish it?
+                        </p>
+                        <div style="background: #0F172A; color: #38BDF8; font-family: var(--font-mono); font-size: 0.72rem; padding: 6px 10px; border-radius: 6px; margin-bottom: 8px;">
+                            [Read 150bp] ... (Repeat 100,000bp) ... [Read 150bp]
+                        </div>
+                        <p style="font-size: 0.78rem; color: #334155; line-height: 1.4;">
+                            Imagine assembling a 5,000-piece jigsaw puzzle where 400 pieces are identical solid blue sky. You cannot assemble a sequence if the repeat unit is longer than the sequencing read!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3: The T2T Revolution (Nurk et al. 2022) -->
+                <div class="card card-emerald fragment">
+                    <div class="card-header-row">
+                        <span class="card-title">3. The T2T Breakthrough</span>
+                        <span class="card-pill">Nurk et al. 2022</span>
+                    </div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 8px;">
+                            The Telomere-to-Telomere (T2T) Consortium solved this using complementary third-generation long-read technologies:
+                        </p>
+                        <ul style="padding-left: 16px; font-size: 0.78rem; line-height: 1.4; color: #334155;">
+                            <li><strong>PacBio HiFi:</strong> <strong>20 kb reads</strong> with <strong>&gt;99.9%</strong> consensus accuracy.</li>
+                            <li><strong>Oxford Nanopore (ONT):</strong> Ultra-long reads (<strong>&gt;100 kb</strong> to <strong>1 Mb</strong>) spanning entire centromeric repeat arrays.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout-strip fragment" style="background: #F0FDF4; border-color: #BBF7D0; border-left-color: #16A34A;">
+                <div class="callout-strip-text" style="color: #166534;">
+                    📄 <strong>Assigned Reading Bridge (Nurk et al., Science 2022):</strong> Closing the final 8% added <strong>115 novel protein-coding genes</strong>, 3,604 novel paralogous gene copies, and corrected thousands of false-positive clinical variant calls caused by short reads mapping incorrectly to collapsed repeat regions!
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Dock Trigger Zone -->
+    <div id="dock-trigger-zone"></div>
+    
+    <!-- macOS Bottom Dock -->
+    <footer>
+        <div class="footer-shortcuts">
+            <span style="font-size: 0.74rem; color: #94A3B8; font-family: var(--font-mono);">
+                <kbd style="background:#F1F5F9; border:1px solid #CBD5E1; padding:1px 5px; border-radius:3px;">&larr;</kbd> 
+                <kbd style="background:#F1F5F9; border:1px solid #CBD5E1; padding:1px 5px; border-radius:3px;">&rarr;</kbd> Flip Slides &bull; 
+                <kbd style="background:#F1F5F9; border:1px solid #CBD5E1; padding:1px 5px; border-radius:3px;">Space</kbd> Step Points
+            </span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <select id="slide-jump-select" class="slide-jump-select" title="Jump directly to any slide">
+                <!-- Populated by JS -->
+            </select>
+            <div class="footer-progress">
+                <span id="current-slide">1</span>
+                <span style="opacity: 0.4;">/</span>
+                <span id="total-slides">14</span>
+            </div>
+        </div>
+        <div class="footer-controls">
+            <button id="btn-prev" class="nav-btn" title="Previous Slide (or step back)">&larr; Prev</button>
+            <button id="btn-next" class="nav-btn" title="Next Slide (or advance step)">Next &rarr;</button>
+        </div>
+    </footer>
+
+    <!-- Slide Controller Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const totalSlidesSpan = document.getElementById('total-slides');
+            const currentSlideSpan = document.getElementById('current-slide');
+            const progressBar = document.getElementById('progress-bar');
+            const prevBtn = document.getElementById('btn-prev');
+            const nextBtn = document.getElementById('btn-next');
+            const slideSelect = document.getElementById('slide-jump-select');
+            let currentSlideIndex = 0;
+            const totalSlides = slides.length;
+            if (totalSlidesSpan) totalSlidesSpan.textContent = totalSlides;
+
+            // 1. Auto-populate Slide Jump Dropdown
+            if (slideSelect) {
+                slideSelect.innerHTML = '';
+                slides.forEach((slide, idx) => {
+                    const option = document.createElement('option');
+                    option.value = idx;
+                    const titleEl = slide.querySelector('.slide-title') || slide.querySelector('.hero-title');
+                    let titleText = titleEl ? titleEl.innerText.trim() : `Slide ${idx + 1}`;
+                    if (titleText.length > 45) titleText = titleText.substring(0, 42) + '...';
+                    option.textContent = `${idx + 1}. ${titleText}`;
+                    slideSelect.appendChild(option);
+                });
+                slideSelect.addEventListener('change', (e) => {
+                    slideSelect.blur();
+                    goToSlide(parseInt(e.target.value, 10));
+                });
+            }
+
+            // 2. Fragment & Slide Engine
+            let currentFragmentStep = 0;
+            function applyFragmentState(slide, step) {
+                const fragments = slide.querySelectorAll('.fragment');
+                if (fragments.length === 0) return;
+                fragments.forEach(f => f.classList.remove('fragment-focused'));
+                if (step >= fragments.length) {
+                    slide.classList.add('all-fragments-focused');
+                } else {
+                    slide.classList.remove('all-fragments-focused');
+                    if (fragments[step]) fragments[step].classList.add('fragment-focused');
+                }
+                if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+            }
+
+            function showSlide(index, fromBack = false) {
+                if (index < 0) index = 0;
+                if (index >= totalSlides) index = totalSlides - 1;
+                slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+                currentSlideIndex = index;
+                const currentSlide = slides[currentSlideIndex];
+                const fragments = currentSlide.querySelectorAll('.fragment');
+                if (fragments.length === 0) {
+                    currentSlide.classList.remove('has-fragments', 'all-fragments-focused');
+                    currentFragmentStep = 0;
+                } else {
+                    currentSlide.classList.add('has-fragments');
+                    currentFragmentStep = fromBack ? fragments.length : 0;
+                    applyFragmentState(currentSlide, currentFragmentStep);
+                }
+                if (currentSlideSpan) currentSlideSpan.textContent = currentSlideIndex + 1;
+                if (progressBar) progressBar.style.width = `${((currentSlideIndex + 1) / totalSlides) * 100}%`;
+                if (slideSelect) slideSelect.value = currentSlideIndex;
+                history.replaceState(null, null, `#${currentSlideIndex + 1}`);
+
+                if (prevBtn) prevBtn.disabled = (currentSlideIndex === 0 && currentFragmentStep === 0);
+                if (nextBtn) nextBtn.disabled = (currentSlideIndex === totalSlides - 1 && currentFragmentStep >= (fragments.length || 0));
+                if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+            }
+
+            function goToSlide(index) { showSlide(index, false); }
+            function nextSlideDirect() { if (currentSlideIndex < totalSlides - 1) showSlide(currentSlideIndex + 1, false); }
+            function prevSlideDirect() { if (currentSlideIndex > 0) showSlide(currentSlideIndex - 1, false); }
+
+            function advance() {
+                const currentSlide = slides[currentSlideIndex];
+                const fragments = currentSlide.querySelectorAll('.fragment');
+                if (fragments.length === 0) {
+                    if (currentSlideIndex < totalSlides - 1) showSlide(currentSlideIndex + 1, false);
+                } else {
+                    if (currentFragmentStep < fragments.length) {
+                        currentFragmentStep++;
+                        applyFragmentState(currentSlide, currentFragmentStep);
+                    } else if (currentSlideIndex < totalSlides - 1) {
+                        showSlide(currentSlideIndex + 1, false);
+                    }
+                }
+            }
+
+            function stepBack() {
+                const currentSlide = slides[currentSlideIndex];
+                const fragments = currentSlide.querySelectorAll('.fragment');
+                if (fragments.length === 0) {
+                    if (currentSlideIndex > 0) showSlide(currentSlideIndex - 1, true);
+                } else {
+                    if (currentFragmentStep > 0) {
+                        currentFragmentStep--;
+                        applyFragmentState(currentSlide, currentFragmentStep);
+                    } else if (currentSlideIndex > 0) {
+                        showSlide(currentSlideIndex - 1, true);
+                    }
+                }
+            }
+
+            window.advance = advance;
+            window.stepBack = stepBack;
+            window.nextSlideDirect = nextSlideDirect;
+            window.prevSlideDirect = prevSlideDirect;
+            window.goToSlide = goToSlide;
+
+            // Button Event Listeners
+            if (nextBtn) {
+                ['click', 'touchend'].forEach(evt => {
+                    nextBtn.addEventListener(evt, (e) => { e.preventDefault(); advance(); }, { passive: false });
+                });
+            }
+            if (prevBtn) {
+                ['click', 'touchend'].forEach(evt => {
+                    prevBtn.addEventListener(evt, (e) => { e.preventDefault(); stepBack(); }, { passive: false });
+                });
+            }
+
+            // Keyboard Shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+                if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                    e.preventDefault(); advance();
+                } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                    e.preventDefault(); stepBack();
+                } else if (e.key === 'Home') {
+                    e.preventDefault(); goToSlide(0);
+                } else if (e.key === 'End') {
+                    e.preventDefault(); goToSlide(totalSlides - 1);
+                }
+            });
+
+            // Touch Swipe & Tap Gestures (Mobile)
+            let touchStartX = 0, touchStartY = 0, touchStartTime = 0, isSwiping = false;
+            window.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                    touchStartTime = Date.now();
+                    isSwiping = false;
+                }
+            }, { passive: true });
+
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1) {
+                    const moveX = e.touches[0].clientX - touchStartX;
+                    const moveY = e.touches[0].clientY - touchStartY;
+                    if (Math.abs(moveX) > 15 && Math.abs(moveX) > Math.abs(moveY)) isSwiping = true;
+                }
+            }, { passive: true });
+
+            window.addEventListener('touchend', (e) => {
+                if (e.changedTouches.length === 1) {
+                    const touchEndX = e.changedTouches[0].clientX;
+                    const touchEndY = e.changedTouches[0].clientY;
+                    const diffX = touchEndX - touchStartX;
+                    const diffY = touchEndY - touchStartY;
+                    const duration = Date.now() - touchStartTime;
+
+                    const target = e.target;
+                    if (target && (target.closest('button') || target.closest('input') || target.closest('select') || target.closest('a') || target.closest('footer') || target.closest('header'))) return;
+
+                    // Swipe between slides
+                    if (isSwiping || (duration < 600 && Math.abs(diffX) >= 35 && Math.abs(diffX) > Math.abs(diffY) * 1.2)) {
+                        if (diffX < 0) nextSlideDirect();
+                        else prevSlideDirect();
+                        return;
+                    }
+
+                    // Tap within slide
+                    if (window.innerWidth <= 768 && duration < 300 && Math.abs(diffX) < 10 && Math.abs(diffY) < 10) {
+                        advance();
+                    }
+                }
+            }, { passive: true });
+
+            // Initial slide
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>
