@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        // Automatic Trailing-Slash Enforcer for Directory-style URLs
+        // Prevents relative link resolution bugs (e.g. resolving /web/lectures/L1.html instead of /web/lectures/BIO3111_2026/L1.html)
+        (function() {
+            var path = window.location.pathname;
+            if (path && !path.endsWith('/') && !path.split('/').pop().includes('.')) {
+                window.location.replace(path + '/' + window.location.search + window.location.hash);
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BIOL 3111 / 5111: Genomics in Medicine &amp; Disease | Temple University</title>
