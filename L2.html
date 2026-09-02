@@ -42,8 +42,7 @@
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    <style>
-        :root {
+    <style>:root {
             --bg-color: #FFFFFF;
             --text-color: #334155;
             --primary-color: #0F172A;
@@ -527,25 +526,7 @@
         }
 
         /* macOS-Style Autohide Dock Footer */
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 48px;
-            padding: 0 28px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border-top: 1px solid rgba(226, 232, 240, 0.9);
-            box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.08);
-            z-index: 1000;
-            transform: translateY(calc(100% - 6px));
-            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
-        }
+        
         #dock-trigger-zone {
             position: fixed;
             bottom: 0;
@@ -558,9 +539,7 @@
         footer:hover,
         footer:focus-within,
         footer.dock-visible,
-        #dock-trigger-zone:hover + footer {
-            transform: translateY(0) !important;
-        }
+        #dock-trigger-zone:hover + 
         footer::before {
             content: "";
             position: absolute;
@@ -648,10 +627,7 @@
 
         /* Title Slide Visibility Override */
         body.is-title-slide header,
-        body.is-title-slide footer {
-            transform: translateY(0) !important;
-            box-shadow: none;
-        }
+        body.is-title-slide 
         body.is-title-slide header::after,
         body.is-title-slide footer::before {
             display: none !important;
@@ -689,19 +665,147 @@
         }
 
         /* Mobile Responsive */
-        @media (max-width: 768px) {
-            html, body { overflow-y: auto !important; height: auto !important; }
-            header, footer { position: fixed !important; transform: none !important; }
-            header { top: 0 !important; }
-            footer { bottom: 0 !important; }
-            #header-trigger-zone, #dock-trigger-zone { display: none !important; }
-            main { padding: 56px 12px 60px 12px !important; height: auto !important; }
-            .slide { position: relative !important; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; display: none !important; }
-            .slide.active { display: flex !important; }
-            .grid-2col, .grid-3col, .title-container { grid-template-columns: 1fr !important; gap: 16px !important; }
+
+
+        /* ===================================================================
+           macOS Frosted Glass Bottom Dock (Desktop)
+           =================================================================== */
+        #dock-trigger-zone {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 48px;
+            z-index: 99998;
+            pointer-events: auto;
         }
-    
-        /* Sleek "Disease Trading Card" Styles from L1 */
+
+        footer {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 8px 18px;
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1.5px solid rgba(203, 213, 225, 0.85);
+            border-radius: 40px;
+            box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.12),
+                        0 4px 12px -2px rgba(15, 23, 42, 0.08);
+            z-index: 99999;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.25s ease;
+            opacity: 0;
+            pointer-events: none;
+            min-width: 540px;
+            max-width: 90vw;
+            box-sizing: border-box;
+        }
+
+        #dock-trigger-zone:hover ~ footer,
+        footer:hover,
+        footer.dock-visible {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .footer-shortcuts {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.72rem;
+            color: #64748B;
+        }
+
+        .key-hint {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .key-hint kbd {
+            background: #F1F5F9;
+            border: 1px solid #CBD5E1;
+            border-radius: 4px;
+            padding: 1px 5px;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: #334155;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+        }
+
+        .footer-center {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slide-jump-select {
+            background: #F8FAFC;
+            border: 1px solid #CBD5E1;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1E293B;
+            outline: none;
+            cursor: pointer;
+            max-width: 250px;
+            transition: all 0.15s ease;
+        }
+
+        .slide-jump-select:hover {
+            border-color: #94A3B8;
+            background: #FFFFFF;
+        }
+
+        .footer-progress {
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: #475569;
+            min-width: 48px;
+            text-align: center;
+        }
+
+        .nav-btn {
+            background: #F8FAFC;
+            border: 1px solid #CBD5E1;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-family: var(--font-sans);
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: #1E293B;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            user-select: none;
+            box-sizing: border-box;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #2563EB;
+            border-color: #1D4ED8;
+            color: #FFFFFF;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        /* Sleek Component Styles */
         .vignette-layout {
             display: grid;
             grid-template-columns: 1.15fr 0.85fr;
@@ -722,26 +826,12 @@
             position: relative;
             overflow: hidden;
         }
-        .trading-card::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(190, 18, 60, 0.15) 0%, transparent 70%);
-            pointer-events: none;
-        }
         .tc-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 8px;
-        }
-        .tc-title-group {
-            display: flex;
-            flex-direction: column;
         }
         .tc-name {
             font-family: var(--font-heading);
@@ -805,7 +895,6 @@
             color: #CBD5E1;
             line-height: 1.4;
         }
-    
         .ref-pill {
             display: inline-flex;
             align-items: center;
@@ -826,8 +915,6 @@
             color: #1D4ED8;
             transform: translateY(-1px);
         }
-
-    
         .sc-option {
             transition: all 0.15s ease;
         }
@@ -848,9 +935,6 @@
             opacity: 0.5;
             background: #F8FAFC !important;
         }
-
-    
-        /* Sprint Tabs and Quick-Launch Links */
         .sprint-tab-btn {
             flex: 1;
             padding: 8px 12px;
@@ -934,9 +1018,6 @@
             font-size: 0.65rem;
             cursor: pointer;
         }
-
-    
-        /* Quiz Tab Stepper & Question Cards */
         .quiz-tab-bar {
             display: flex;
             gap: 6px;
@@ -1022,7 +1103,265 @@
             color: #FFFFFF;
         }
 
-    </style>
+
+        /* ===================================================================
+           Responsive Engine: Mobile & Portrait Tablets (<= 768px)
+           =================================================================== */
+        @media (max-width: 768px) {
+            html, body {
+                height: auto !important;
+                min-height: 100vh !important;
+                overflow-x: hidden !important;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                touch-action: pan-y !important;
+            }
+
+            /* Header: Sleek fixed top bar */
+            header {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                height: 44px !important;
+                padding: 0 12px !important;
+                transform: none !important;
+                background: #FFFFFF !important;
+                border-bottom: 1.5px solid #E2E8F0 !important;
+                box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05) !important;
+                z-index: 9999 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+            }
+            #header-trigger-zone, header::after, .header-tagline, .header-series {
+                display: none !important;
+            }
+            .header-brand {
+                font-size: 0.78rem !important;
+                gap: 6px !important;
+            }
+            .header-badge {
+                font-size: 0.62rem !important;
+                padding: 2px 6px !important;
+            }
+
+            /* Main Canvas: Natural vertical flow */
+            main {
+                max-width: 100% !important;
+                width: 100% !important;
+                padding: 52px 14px 76px 14px !important;
+                height: auto !important;
+                min-height: calc(100vh - 120px) !important;
+                overflow: visible !important;
+                box-sizing: border-box !important;
+            }
+
+            /* Slide container: Display active slide in vertical flow */
+            .slide {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                bottom: auto !important;
+                width: 100% !important;
+                min-height: calc(100vh - 130px) !important;
+                padding: 8px 0 20px 0 !important;
+                display: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+                justify-content: flex-start !important;
+                overflow: visible !important;
+                pointer-events: auto !important;
+                touch-action: pan-y !important;
+            }
+            .slide.active {
+                display: flex !important;
+                flex-direction: column !important;
+                opacity: 1 !important;
+                z-index: 1 !important;
+                pointer-events: auto !important;
+            }
+
+            /* Typography Scaling */
+            .hero-title { font-size: 1.55rem !important; line-height: 1.2 !important; margin-bottom: 8px !important; }
+            .slide-title { font-size: 1.25rem !important; line-height: 1.25 !important; margin-bottom: 4px !important; }
+            .slide-header { margin-bottom: 12px !important; }
+            .hero-subtitle, .slide-subtitle { font-size: 0.82rem !important; line-height: 1.4 !important; margin-bottom: 12px !important; }
+            p, li { font-size: 0.82rem !important; line-height: 1.48 !important; }
+
+            /* Multi-Column Grids -> Clean 1-Column Stacking */
+            .grid-2col, .grid-3col, .title-container, .title-meta-grid, 
+            .sprint-layout, .evidence-layout, .vignette-layout, .spot-options-grid {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+
+            /* Auditorium sprint tabs 2x2 grid */
+            #sprint-tabs, #quiz-tabs {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 6px !important;
+                margin-bottom: 10px !important;
+            }
+            .sprint-tab-btn, .quiz-tab-btn {
+                padding: 6px 8px !important;
+                font-size: 0.72rem !important;
+            }
+
+            .title-left {
+                padding-left: 12px !important;
+                border-left-width: 3px !important;
+            }
+            .title-badge-row {
+                margin-bottom: 10px !important;
+                gap: 6px !important;
+                flex-wrap: wrap !important;
+            }
+
+            .card {
+                padding: 12px 14px !important;
+                border-radius: 8px !important;
+            }
+            .card-title { font-size: 0.92rem !important; margin-bottom: 4px !important; }
+            .card-body { font-size: 0.78rem !important; }
+            .card-pill { font-size: 0.62rem !important; padding: 1px 6px !important; }
+
+            /* Desktop footer shortcuts & trigger zone hidden on mobile */
+            .footer-shortcuts, #dock-trigger-zone {
+                display: none !important;
+                visibility: hidden !important;
+            }
+
+            /* Sleek Mobile Bottom Navigation Floating Pill Dock */
+            footer {
+                position: fixed !important;
+                bottom: max(10px, env(safe-area-inset-bottom, 10px)) !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: calc(100% - 24px) !important;
+                max-width: 380px !important;
+                height: 50px !important;
+                padding: 4px 8px !important;
+                opacity: 1 !important;
+                background: rgba(255, 255, 255, 0.95) !important;
+                backdrop-filter: blur(20px) !important;
+                -webkit-backdrop-filter: blur(20px) !important;
+                border: 1.5px solid rgba(203, 213, 225, 0.95) !important;
+                border-radius: 28px !important;
+                box-shadow: 0 4px 20px rgba(15, 23, 42, 0.12) !important;
+                z-index: 999999 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 6px !important;
+                box-sizing: border-box !important;
+                pointer-events: auto !important;
+            }
+
+            #btn-prev {
+                width: 74px !important;
+                min-width: 74px !important;
+                height: 38px !important;
+                padding: 0 !important;
+                font-size: 0.80rem !important;
+                font-weight: 700 !important;
+                border-radius: 19px !important;
+                background: #F1F5F9 !important;
+                color: #334155 !important;
+                border: 1.5px solid #CBD5E1 !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-sizing: border-box !important;
+                flex-shrink: 0 !important;
+            }
+            #btn-prev:active {
+                background: #E2E8F0 !important;
+                transform: scale(0.96) !important;
+            }
+
+            .footer-center {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                flex: 1 1 0 !important;
+                min-width: 0 !important;
+                max-width: 100% !important;
+                height: 38px !important;
+                background: #F8FAFC !important;
+                border: 1.5px solid #CBD5E1 !important;
+                border-radius: 19px !important;
+                padding: 0 8px !important;
+                margin: 0 !important;
+                box-sizing: border-box !important;
+                box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+                overflow: hidden !important;
+            }
+
+            .slide-jump-select {
+                appearance: none !important;
+                -webkit-appearance: none !important;
+                width: 100% !important;
+                min-width: 0 !important;
+                max-width: 100% !important;
+                height: 100% !important;
+                background: transparent !important;
+                border: none !important;
+                font-family: var(--font-mono) !important;
+                font-weight: 700 !important;
+                font-size: 0.74rem !important;
+                color: #0F172A !important;
+                text-align: center !important;
+                text-align-last: center !important;
+                padding: 0 16px 0 2px !important;
+                cursor: pointer !important;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748B'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") !important;
+                background-repeat: no-repeat !important;
+                background-position: right 2px center !important;
+                background-size: 13px 13px !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                white-space: nowrap !important;
+                outline: none !important;
+            }
+
+            .footer-progress {
+                display: none !important;
+            }
+
+            #btn-next {
+                width: 74px !important;
+                min-width: 74px !important;
+                height: 38px !important;
+                padding: 0 !important;
+                font-size: 0.80rem !important;
+                font-weight: 700 !important;
+                border-radius: 19px !important;
+                background: linear-gradient(135deg, #2563EB, #1D4ED8) !important;
+                color: #FFFFFF !important;
+                border: none !important;
+                box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3) !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-sizing: border-box !important;
+                flex-shrink: 0 !important;
+            }
+            #btn-next:active {
+                filter: brightness(0.92) !important;
+                transform: scale(0.96) !important;
+            }
+
+            #btn-prev:disabled, #btn-next:disabled {
+                opacity: 0.3 !important;
+                pointer-events: none !important;
+                box-shadow: none !important;
+            }
+        }
+
+</style>
 </head>
 <body class="is-title-slide">
     <div id="progress-container"><div id="progress-bar"></div></div>
@@ -5545,7 +5884,7 @@
 
 </main>
 
-    <!-- Bottom Dock Trigger Zone -->
+                    <!-- Bottom Dock Trigger Zone -->
     <div id="dock-trigger-zone"></div>
     <!-- macOS Frosted Glass Bottom Dock -->
     <footer>
@@ -5553,7 +5892,8 @@
             <span class="key-hint"><kbd>&larr;</kbd> <kbd>&rarr;</kbd> Navigate</span>
             <span class="key-hint"><kbd>Space</kbd> Step / Next</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 12px;">
+        <button id="btn-prev" class="nav-btn" title="Previous Slide (or step back)">&larr; Prev</button>
+        <div class="footer-center">
             <select id="slide-jump-select" class="slide-jump-select" title="Jump directly to any slide">
                 <!-- Auto-populated by JS -->
             </select>
@@ -5563,10 +5903,7 @@
                 <span id="total-slides">51</span>
             </div>
         </div>
-        <div class="footer-controls">
-            <button id="btn-prev" class="nav-btn" title="Previous Slide (or step back)">&larr; Prev</button>
-            <button id="btn-next" class="nav-btn" title="Next Slide (or advance step)">Next &rarr;</button>
-        </div>
+        <button id="btn-next" class="nav-btn" title="Next Slide (or advance step)">Next &rarr;</button>
     </footer>
 
     <!-- Presentation Engine & Interactivity Script -->
@@ -5880,30 +6217,6 @@
 
             
             
-                });
-
-                revealBtn.addEventListener('click', () => {
-                    const isHidden = debrief.style.display === 'none';
-                    if (isHidden) {
-                        debrief.style.display = 'block';
-                        revealBtn.textContent = '🙈 Hide Mechanistic Debrief';
-                        options.forEach(opt => {
-                            if (opt.classList.contains('sc-correct')) {
-                                opt.classList.add('revealed-correct');
-                            } else {
-                                opt.classList.add('revealed-wrong');
-                            }
-                        });
-                    } else {
-                        debrief.style.display = 'none';
-                        revealBtn.textContent = '👁️ Reveal Verified Answer & Mechanistic Debrief';
-                        options.forEach(opt => {
-                            opt.classList.remove('revealed-correct', 'revealed-wrong');
-                        });
-                    }
-                });
-            }
-            [1, 2, 3].forEach(initSpotCheck);
 
             
             // In-Class Precision Data Sprint Data (Slide 53)
