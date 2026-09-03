@@ -5009,54 +5009,128 @@
                 </p>
             </div>
 
-            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
-                <!-- Left: Figure 1 Contrast (Gapped vs End-to-End) -->
-                <div class="card card-blue fragment" style="padding: 18px 22px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="grid-2col" style="grid-template-columns: 1fr 1.25fr; gap: 18px; align-items: stretch;">
+                <!-- Left Column: Figure 1 - Acrocentric Stalk Resolution -->
+                <div class="card card-blue fragment" style="padding: 16px 18px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <div class="card-header-row" style="margin-bottom: 6px;">
-                            <span class="card-title" style="font-size: 1.05rem;">Figure 1: GRCh38 Gaps vs. T2T Closed</span>
-                            <span class="card-pill" style="font-size: 0.70rem;">Zero Gaps Achieved</span>
+                            <span class="card-title" style="font-size: 1.02rem;">Figure 1: GRCh38 Gaps vs. T2T Closed</span>
+                            <span class="card-pill" style="background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE;">Zero Gaps Achieved</span>
                         </div>
-                        <ul style="padding-left: 18px; font-size: 0.85rem; line-height: 1.48; color: #334155; margin: 0;">
-                            <li><strong>GRCh38 Reference:</strong> Contained <strong>hundreds of unsequenced gaps</strong> across euchromatin and left every single centromere unresolved.</li>
-                            <li><strong>The 5 Acrocentric Stalks:</strong> Chromosomes 13, 14, 15, 21, and 22 had their short (<em>p</em>) arms represented merely as empty placeholder scaffolds.</li>
-                            <li><strong>T2T-CHM13 Milestone:</strong> Completed all 24 human chromosomes from telomere to telomere with <strong>zero gaps</strong> across all 3,054,815,472 base pairs.</li>
-                        </ul>
+                        
+                        <div style="font-size: 0.82rem; line-height: 1.40; color: #334155; margin-bottom: 6px;">
+                            Chromosomes <strong>13, 14, 15, 21, and 22 (acrocentric)</strong> had short (<em>p</em>) arms represented as empty placeholder scaffolds:
+                        </div>
+
+                        <!-- Dark Console: Acrocentric Chromosome Architecture -->
+                        <div style="background: #0F172A; border-radius: 8px; padding: 10px; border: 1px solid #334155;">
+                            <div style="font-size: 0.70rem; font-weight: 700; color: #38BDF8; font-family: var(--font-mono); margin-bottom: 8px; display: flex; justify-content: space-between;">
+                                <span>ACROCENTRIC CHROMOSOME (Chr 21):</span>
+                                <span style="color: #94A3B8;">p-Arm &bull; Centromere &bull; q-Arm</span>
+                            </div>
+
+                            <svg viewBox="0 0 380 145" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+                                <!-- TRACK 1: GRCh38 Gapped Placeholder -->
+                                <g transform="translate(10, 5)">
+                                    <text x="0" y="11" font-size="8" font-weight="bold" fill="#F87171">GRCh38 (2013):</text>
+                                    
+                                    <!-- p-arm gap -->
+                                    <rect x="0" y="16" width="95" height="18" rx="2" fill="#450A0A" stroke="#EF4444" stroke-dasharray="2,2"/>
+                                    <text x="47" y="28" font-size="6.5" font-weight="bold" fill="#FCA5A5" text-anchor="middle">❌ p-Arm Missing (NNN)</text>
+
+                                    <!-- Centromere gap -->
+                                    <rect x="100" y="16" width="35" height="18" rx="2" fill="#450A0A" stroke="#EF4444" stroke-dasharray="2,2"/>
+                                    <text x="117" y="28" font-size="6" font-weight="bold" fill="#FCA5A5" text-anchor="middle">CEN GAP</text>
+
+                                    <!-- q-arm sequenced -->
+                                    <rect x="140" y="16" width="220" height="18" rx="3" fill="#1E3A8A" stroke="#3B82F6"/>
+                                    <text x="250" y="28" font-size="7" font-weight="bold" fill="#BFDBFE" text-anchor="middle">Long q-Arm (Euchromatin Sequenced)</text>
+                                </g>
+
+                                <!-- Evolution Divider -->
+                                <line x1="10" y1="58" x2="370" y2="58" stroke="#334155" stroke-width="1"/>
+                                <text x="190" y="56" font-size="7" fill="#38BDF8" text-anchor="middle" font-weight="bold">&darr; T2T-CHM13 Resolves All Heterochromatin &darr;</text>
+
+                                <!-- TRACK 2: T2T Complete Resolution -->
+                                <g transform="translate(10, 68)">
+                                    <text x="0" y="11" font-size="8" font-weight="bold" fill="#34D399">T2T-CHM13 (2022):</text>
+                                    
+                                    <!-- p-arm rDNA & Satellites -->
+                                    <rect x="0" y="16" width="95" height="22" rx="3" fill="#065F46" stroke="#34D399"/>
+                                    <text x="47" y="27" font-size="7" font-weight="bold" fill="#ECFDF5" text-anchor="middle">✅ rDNA Arrays (45S)</text>
+                                    <text x="47" y="35" font-size="5.5" fill="#A7F3D0" text-anchor="middle">Ribosome Factories</text>
+
+                                    <!-- Centromere HOR array -->
+                                    <rect x="100" y="16" width="35" height="22" rx="3" fill="#047857" stroke="#10B981"/>
+                                    <text x="117" y="27" font-size="6.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">CEN</text>
+                                    <text x="117" y="35" font-size="5.5" fill="#A7F3D0" text-anchor="middle">HOR Array</text>
+
+                                    <!-- q-arm complete -->
+                                    <rect x="140" y="16" width="220" height="22" rx="3" fill="#064E3B" stroke="#10B981" stroke-width="1.2"/>
+                                    <text x="250" y="27" font-size="7" font-weight="bold" fill="#ECFDF5" text-anchor="middle">Complete q-Arm + Segmental Duplications</text>
+                                    <text x="250" y="35" font-size="5.5" fill="#A7F3D0" text-anchor="middle">Zero Gaps &bull; Telomere-to-Telomere</text>
+                                </g>
+
+                                <!-- Bottom Summary Callout -->
+                                <rect x="10" y="118" width="360" height="20" rx="3" fill="#1E293B" stroke="#475569"/>
+                                <text x="190" y="131" font-size="6.5" font-family="var(--font-mono)" font-weight="bold" fill="#38BDF8" text-anchor="middle">
+                                    Unlocked +238 Mb Novel Sequence &bull; Closed 5 Acrocentric Stalks
+                                </text>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="card-footer-metric" style="margin-top: 10px;">
+                    <div class="card-footer-metric" style="margin-top: 6px;">
                         <span>New Bases Added:</span>
-                        <span class="metric-highlight">238 Mb of Novel Sequence Unlocked</span>
+                        <span class="metric-highlight" style="color: #2563EB;">238 Mb of Novel Sequence Unlocked</span>
                     </div>
                 </div>
 
-                <!-- Right: Figure 2 Breakdown (What Was Inside the Repeats) -->
-                <div class="card card-emerald fragment" style="padding: 18px 22px; display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Right Column: Figure 2 - What Was Hidden in the Repeats? -->
+                <div class="card card-emerald fragment" style="padding: 16px 18px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <div class="card-header-row" style="margin-bottom: 6px;">
-                            <span class="card-title" style="font-size: 1.05rem;">Figure 2: What Was Hidden in the Repeats?</span>
-                            <span class="card-pill" style="font-size: 0.70rem;">Functional Machinery</span>
+                            <span class="card-title" style="font-size: 1.02rem;">Figure 2: What Was Hidden in the Repeats?</span>
+                            <span class="card-pill" style="background: #ECFDF5; color: #047857; border-color: #A7F3D0;">Functional Machinery</span>
                         </div>
-                        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px;">
+
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
                             <!-- HORs -->
-                            <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 6px; padding: 7px 10px;">
-                                <div style="font-weight: 800; font-size: 0.84rem; color: #065F46; margin-bottom: 2px;">1. Centromeric Higher-Order Repeats (HORs):</div>
-                                <div style="font-size: 0.80rem; line-height: 1.40; color: #064E3B;">Multi-megabase satellite arrays that assemble the <strong>kinetochore</strong> (the protein handle pulling chromosomes apart during mitosis).</div>
+                            <div style="background: #F0FDF4; border: 1.5px solid #BBF7D0; border-left: 4px solid #059669; border-radius: 8px; padding: 8px 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                                    <span style="font-weight: 800; font-size: 0.82rem; color: #065F46;">1. Centromeric Higher-Order Repeats (HORs)</span>
+                                    <span style="font-size: 0.65rem; font-weight: 700; background: #DCFCE7; color: #166534; padding: 1px 6px; border-radius: 4px;">Kinetochore</span>
+                                </div>
+                                <div style="font-size: 0.77rem; line-height: 1.38; color: #14532D;">
+                                    Multi-megabase alpha-satellite tandem arrays that bind CENP-A and assemble the <strong>kinetochore</strong> &mdash; the mechanical handle pulled by spindle microtubules during mitotic division.
+                                </div>
                             </div>
+
                             <!-- rDNA -->
-                            <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 6px; padding: 7px 10px;">
-                                <div style="font-weight: 800; font-size: 0.84rem; color: #166534; margin-bottom: 2px;">2. Ribosomal DNA (rDNA) Arrays:</div>
-                                <div style="font-size: 0.80rem; line-height: 1.40; color: #14532D;">Hundreds of tandem copies of 45S rRNA genes on acrocentric short arms that manufacture the cell's <strong>protein-building factories</strong>.</div>
+                            <div style="background: #EFF6FF; border: 1.5px solid #BFDBFE; border-left: 4px solid #2563EB; border-radius: 8px; padding: 8px 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                                    <span style="font-weight: 800; font-size: 0.82rem; color: #1E40AF;">2. Ribosomal DNA (rDNA) Arrays</span>
+                                    <span style="font-size: 0.65rem; font-weight: 700; background: #DBEAFE; color: #1E40AF; padding: 1px 6px; border-radius: 4px;">Ribosomes</span>
+                                </div>
+                                <div style="font-size: 0.77rem; line-height: 1.38; color: #1E3A8A;">
+                                    Hundreds of tandem copies of <strong>45S rRNA genes</strong> clustered on the 5 acrocentric short arms (13, 14, 15, 21, 22) that build the cell's entire protein-translation machinery.
+                                </div>
                             </div>
+
                             <!-- Segmental Duplications -->
-                            <div style="background: #FDF4FF; border: 1px solid #F0ABFC; border-radius: 6px; padding: 7px 10px;">
-                                <div style="font-weight: 800; font-size: 0.84rem; color: #A21CAF; margin-bottom: 2px;">3. Human-Specific Segmental Duplications:</div>
-                                <div style="font-size: 0.80rem; line-height: 1.40; color: #701A75;">Copy-pasted gene families harboring human brain expansion genes (<em>NOTCH2NL</em>, <em>SRGAP2C</em>) and immune diversity loci.</div>
+                            <div style="background: #FAF5FF; border: 1.5px solid #E9D5FF; border-left: 4px solid #7C3AED; border-radius: 8px; padding: 8px 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                                    <span style="font-weight: 800; font-size: 0.82rem; color: #6B21A8;">3. Human-Specific Segmental Duplications</span>
+                                    <span style="font-size: 0.65rem; font-weight: 700; background: #F3E8FF; color: #6B21A8; padding: 1px 6px; border-radius: 4px;">Brain Expansion</span>
+                                </div>
+                                <div style="font-size: 0.77rem; line-height: 1.38; color: #581C87;">
+                                    Large copy-pasted gene blocks (&gt;1 kb, &gt;90% identical) containing human lineage-specific genes driving evolutionary cortical brain growth (<em>NOTCH2NL</em>, <em>SRGAP2C</em>) and immune defenses.
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer-metric" style="margin-top: 8px;">
+                    <div class="card-footer-metric" style="margin-top: 6px;">
                         <span>Gene Discovery:</span>
-                        <span class="metric-highlight">&gt;3,600 Genes Updated &bull; 115 Protein-Coding Discovered</span>
+                        <span class="metric-highlight" style="color: #059669;">&gt;3,600 Genes Updated &bull; 115 Protein-Coding Discovered</span>
                     </div>
                 </div>
             </div>
