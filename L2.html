@@ -5391,48 +5391,91 @@
 
             <div class="vignette-layout">
                 <!-- Left Column: The Disease Trading Card / 7-Axis Stat Block -->
-                <div class="trading-card fragment" style="border-color: #BE123C;">
-                    <!-- Card Top Header -->
-                    <div class="tc-header">
-                        <div class="tc-title-group">
-                            <div class="tc-name">
-                                <span>Sickle Cell Disease (Drepanocytosis)</span>
+                <div class="trading-card fragment" style="border-color: #BE123C; padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <!-- Card Top Header -->
+                        <div class="tc-header" style="border-bottom: 1px solid #334155; padding-bottom: 6px; margin-bottom: 8px;">
+                            <div class="tc-title-group">
+                                <div class="tc-name" style="font-size: 1.05rem; font-weight: 800; color: #FFFFFF;">
+                                    <span>Sickle Cell Disease (Drepanocytosis)</span>
+                                </div>
+                                <span class="tc-pathogen" style="font-size: 0.70rem; font-family: var(--font-mono); color: #94A3B8;">HBB c.20A&gt;T (p.Glu6Val) &bull; Chromosome 11p15.5</span>
                             </div>
-                            <span class="tc-pathogen">HBB c.20A&gt;T (p.Glu6Val) &bull; Chromosome 11p15.5</span>
+                            <span class="tc-type-badge" style="background: #BE123C; font-size: 0.65rem; font-weight: 800; padding: 2px 8px; border-radius: 4px; text-transform: uppercase;">Autosomal Recessive</span>
                         </div>
-                        <span class="tc-type-badge" style="background: #BE123C;">Autosomal Recessive</span>
-                    </div>
 
-                    <!-- 7-Axis Stat Block -->
-                    <div class="tc-stats-grid">
-                        <div class="tc-stat-row">
-                            <span class="tc-stat-label">1. Origin</span>
-                            <span class="tc-stat-val" style="color: #F87171;">Monogenic Point Mutation (HBB)</span>
+                        <!-- 7-Axis Stat Block -->
+                        <div class="tc-stats-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; margin-bottom: 8px;">
+                            <div class="tc-stat-row">
+                                <span class="tc-stat-label" style="font-size: 0.62rem; font-weight: 700; text-transform: uppercase; color: #64748B;">1. Origin</span>
+                                <span class="tc-stat-val" style="color: #F87171; font-size: 0.74rem; font-weight: 700;">Monogenic Point Mutation (HBB)</span>
+                            </div>
+                            <div class="tc-stat-row">
+                                <span class="tc-stat-label" style="font-size: 0.62rem; font-weight: 700; text-transform: uppercase; color: #64748B;">2. Target Demographics</span>
+                                <span class="tc-stat-val" style="color: #C084FC; font-size: 0.74rem; font-weight: 700;">Equatorial / Malaria Ancestry</span>
+                            </div>
+                            <div class="tc-stat-row">
+                                <span class="tc-stat-label" style="font-size: 0.62rem; font-weight: 700; text-transform: uppercase; color: #64748B;">3. Speed / Dynamics</span>
+                                <span class="tc-stat-val" style="color: #FBBF24; font-size: 0.74rem; font-weight: 700;">⚡ Acute Pain Crises + Hemolysis</span>
+                            </div>
+                            <div class="tc-stat-row">
+                                <span class="tc-stat-label" style="font-size: 0.62rem; font-weight: 700; text-transform: uppercase; color: #64748B;">4. Duration</span>
+                                <span class="tc-stat-val" style="color: #60A5FA; font-size: 0.74rem; font-weight: 700;">♾️ Lifelong (From Conception)</span>
+                            </div>
+                            <div class="tc-stat-row">
+                                <span class="tc-stat-label" style="font-size: 0.62rem; font-weight: 700; text-transform: uppercase; color: #64748B;">5. Lethality (Untreated)</span>
+                                <span class="tc-stat-val" style="color: #F87171; font-size: 0.74rem; font-weight: 700;">☠️ 50&ndash;90% Under-5 Mortality</span>
+                            </div>
+                            <div class="tc-stat-row">
+                                <span class="tc-stat-label" style="font-size: 0.62rem; font-weight: 700; text-transform: uppercase; color: #64748B;">6. Visibility</span>
+                                <span class="tc-stat-val" style="color: #34D399; font-size: 0.74rem; font-weight: 700;">Dactylitis, Jaundice, Stroke</span>
+                            </div>
                         </div>
-                        <div class="tc-stat-row">
-                            <span class="tc-stat-label">2. Target Demographics</span>
-                            <span class="tc-stat-val" style="color: #C084FC;">Equatorial / Malaria Ancestry</span>
-                        </div>
-                        <div class="tc-stat-row">
-                            <span class="tc-stat-label">3. Speed / Dynamics</span>
-                            <span class="tc-stat-val" style="color: #FBBF24;">⚡ Acute Pain Crises + Hemolysis</span>
-                        </div>
-                        <div class="tc-stat-row">
-                            <span class="tc-stat-label">4. Duration</span>
-                            <span class="tc-stat-val" style="color: #60A5FA;">♾️ Lifelong (From Conception)</span>
-                        </div>
-                        <div class="tc-stat-row">
-                            <span class="tc-stat-label">5. Lethality (Untreated)</span>
-                            <span class="tc-stat-val" style="color: #F87171;">☠️ 50&ndash;90% Under-5 Mortality</span>
-                        </div>
-                        <div class="tc-stat-row">
-                            <span class="tc-stat-label">6. Visibility</span>
-                            <span class="tc-stat-val" style="color: #34D399;">Dactylitis, Jaundice, Stroke</span>
+
+                        <!-- Cellular Morphology & Molecular Switch Diagram -->
+                        <div style="background: #090D16; border: 1px solid #334155; border-radius: 8px; padding: 8px 10px; margin: 6px 0;">
+                            <div style="font-size: 0.65rem; font-weight: 700; color: #38BDF8; font-family: var(--font-mono); margin-bottom: 6px; display: flex; justify-content: space-between;">
+                                <span>CELLULAR MORPHOLOGY &amp; MOLECULAR SWITCH:</span>
+                                <span style="color: #94A3B8;">HbA vs. HbS</span>
+                            </div>
+
+                            <svg viewBox="0 0 380 95" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Normal RBC -->
+                                <g transform="translate(10, 8)">
+                                    <ellipse cx="40" cy="30" rx="34" ry="22" fill="#E11D48" stroke="#FB7185" stroke-width="1.5"/>
+                                    <ellipse cx="40" cy="30" rx="16" ry="10" fill="#9F1239" opacity="0.8"/>
+                                    <text x="40" y="66" font-size="6.5" font-weight="bold" fill="#FDF2F8" text-anchor="middle">Normal Biconcave RBC</text>
+                                    <text x="40" y="76" font-size="5.5" fill="#A7F3D0" text-anchor="middle">120-Day Life &bull; Flexible</text>
+                                </g>
+
+                                <!-- Molecular Switch Box in Middle -->
+                                <g transform="translate(115, 8)">
+                                    <rect x="0" y="8" width="140" height="52" rx="4" fill="#1E293B" stroke="#475569"/>
+                                    <text x="70" y="22" font-size="6" font-family="var(--font-mono)" font-weight="bold" fill="#38BDF8" text-anchor="middle">Codon 6: GAG &rarr; GTG</text>
+                                    <line x1="10" y1="27" x2="130" y2="27" stroke="#334155" stroke-width="1"/>
+                                    <text x="70" y="38" font-size="6.5" font-weight="bold" fill="#FECDD3" text-anchor="middle">Glu6Val Mutation</text>
+                                    <text x="70" y="48" font-size="5.5" fill="#CBD5E1" text-anchor="middle">Negative Glu &rarr; Hydrophobic Val</text>
+                                    <text x="70" y="56" font-size="5.2" font-weight="bold" fill="#FBBF24" text-anchor="middle">&rarr; Creates "Sticky Patch" &rarr;</text>
+                                </g>
+
+                                <!-- Sickle RBC -->
+                                <g transform="translate(280, 8)">
+                                    <path d="M 15,10 C 45,5 75,25 70,55 C 65,40 50,30 30,28 C 15,26 5,18 15,10 Z" fill="#991B1B" stroke="#EF4444" stroke-width="1.5"/>
+                                    <path d="M 28,20 Q 45,25 58,40" stroke="#FDE047" stroke-width="1.2" stroke-dasharray="2,2"/>
+                                    <text x="45" y="66" font-size="6.5" font-weight="bold" fill="#FECDD3" text-anchor="middle">Sickled Crescent RBC</text>
+                                    <text x="45" y="76" font-size="5.5" fill="#F87171" text-anchor="middle">10&ndash;20d Life &bull; Rigid Polymer</text>
+                                </g>
+
+                                <!-- Capillary occlusion note at bottom -->
+                                <text x="190" y="90" font-size="5.8" font-weight="bold" fill="#FCA5A5" text-anchor="middle">
+                                    ⚠️ Rigid sickle fibers occlude microcapillaries &rarr; Local ischemia &amp; excruciating pain crises
+                                </text>
+                            </svg>
                         </div>
                     </div>
 
                     <!-- Flavor Box / Global Impact -->
-                    <div class="tc-flavor-box" style="border-left-color: #BE123C;">
+                    <div class="tc-flavor-box" style="border-left-color: #BE123C; background: rgba(15, 23, 42, 0.6); border: 1px solid #334155; border-left: 3px solid #BE123C; border-radius: 6px; padding: 6px 10px; font-size: 0.72rem; line-height: 1.35; color: #CBD5E1; margin-top: 6px;">
                         <strong>🌍 2026 Global Burden:</strong> ~300,000&ndash;400,000 newborns diagnosed annually; ~20 million living patients worldwide (~100,000 in the USA).
                     </div>
                 </div>
