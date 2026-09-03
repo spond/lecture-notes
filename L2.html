@@ -4179,57 +4179,113 @@
                 </p>
             </div>
 
-            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
-                <!-- Left: Short Reads -->
-                <div class="card card-blue fragment" style="padding: 22px 24px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="grid-2col" style="gap: 18px; align-items: stretch;">
+                <!-- Left: Short Reads Card with Embedded Vector Diagram -->
+                <div class="card card-blue fragment" style="padding: 16px 20px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
-                        <div class="card-header-row" style="margin-bottom: 8px;">
-                            <span class="card-title" style="font-size: 1.08rem;">Short Reads (100&ndash;300 bp)</span>
-                            <span class="card-pill" style="font-size: 0.72rem;">Illumina / MGI</span>
+                        <div class="card-header-row" style="margin-bottom: 6px;">
+                            <span class="card-title" style="font-size: 1.05rem;">Short Reads (100&ndash;300 bp)</span>
+                            <span class="card-pill" style="background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE;">Illumina / MGI</span>
                         </div>
-                        <p style="font-size: 0.88rem; line-height: 1.50; color: #334155; margin-bottom: 10px;">
+                        <div style="font-size: 0.83rem; line-height: 1.42; color: #334155; margin-bottom: 8px;">
                             <strong>The Strengths:</strong> Massive data volume (billions of reads), rock-bottom cost ($200/genome), and near-perfect base accuracy (<strong>&gt;99.9% accuracy</strong>).
-                        </p>
-                        <div style="background: #FFF1F2; border: 1px solid #FECDD3; border-radius: 8px; padding: 12px 14px; margin-top: 8px;">
-                            <div style="font-weight: 800; font-size: 0.86rem; color: #9F1239; margin-bottom: 4px;">⚠️ The &ldquo;Blue Sky&rdquo; Repeat Dilemma:</div>
-                            <p style="font-size: 0.84rem; line-height: 1.45; color: #881337; margin: 0;">
-                                Like assembling a jigsaw puzzle with 1,000 identical blue-sky pieces: if a repetitive transposon is 5,000 bp long, a 150 bp read cannot span it, leaving the assembly fragmented.
-                            </p>
+                        </div>
+
+                        <!-- Short Read Repeat Collapse Diagram -->
+                        <div style="background: #0F172A; border-radius: 8px; padding: 10px; margin: 6px 0; border: 1px solid #334155;">
+                            <div style="font-size: 0.72rem; font-weight: 700; color: #FCA5A5; font-family: var(--font-mono); margin-bottom: 6px;">
+                                ⚠️ THE "BLUE SKY" REPEAT COLLAPSE:
+                            </div>
+                            <svg viewBox="0 0 360 115" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Genomic Reference Track -->
+                                <text x="10" y="14" font-size="8.5" font-weight="bold" fill="#94A3B8">Genome:</text>
+                                <rect x="55" y="6" width="60" height="12" rx="3" fill="#1E3A8A" stroke="#3B82F6"/>
+                                <text x="85" y="15" font-size="7.5" fill="#BFDBFE" text-anchor="middle" font-weight="bold">Flank A</text>
+                                <rect x="120" y="4" width="130" height="16" rx="3" fill="#78350F" stroke="#F59E0B" stroke-dasharray="3,2"/>
+                                <text x="185" y="15" font-size="8" fill="#FDE68A" text-anchor="middle" font-weight="bold">5 kb LINE-1 Repeat</text>
+                                <rect x="255" y="6" width="60" height="12" rx="3" fill="#064E3B" stroke="#10B981"/>
+                                <text x="285" y="15" font-size="7.5" fill="#A7F3D0" text-anchor="middle" font-weight="bold">Flank B</text>
+
+                                <!-- Short Reads Floating Inside Repeat -->
+                                <text x="10" y="45" font-size="8.5" font-weight="bold" fill="#F87171">150 bp:</text>
+                                <rect x="135" y="32" width="30" height="6" rx="2" fill="#38BDF8"/>
+                                <rect x="175" y="38" width="30" height="6" rx="2" fill="#38BDF8"/>
+                                <rect x="205" y="46" width="30" height="6" rx="2" fill="#38BDF8"/>
+                                <text x="185" y="62" font-size="7.5" fill="#FDA4AF" text-anchor="middle">Reads fall entirely inside repeat</text>
+
+                                <!-- Resulting Assembly -->
+                                <line x1="10" y1="72" x2="350" y2="72" stroke="#334155" stroke-width="1"/>
+                                <text x="10" y="88" font-size="8.5" font-weight="bold" fill="#94A3B8">Assembly:</text>
+                                <rect x="55" y="78" width="60" height="14" rx="3" fill="#1E3A8A" stroke="#3B82F6"/>
+                                <text x="85" y="88" font-size="7.5" fill="#BFDBFE" text-anchor="middle">Contig A</text>
+                                <rect x="125" y="78" width="120" height="14" rx="3" fill="#450A0A" stroke="#EF4444" stroke-dasharray="3,3"/>
+                                <text x="185" y="88" font-size="7.5" font-weight="bold" fill="#FCA5A5" text-anchor="middle">❌ UNRESOLVED GAP</text>
+                                <rect x="255" y="78" width="60" height="14" rx="3" fill="#064E3B" stroke="#10B981"/>
+                                <text x="285" y="88" font-size="7.5" fill="#A7F3D0" text-anchor="middle">Contig B</text>
+
+                                <text x="185" y="106" font-size="7.5" fill="#94A3B8" text-anchor="middle">Cannot span 5 kb &rarr; Collapses into fragmented draft contigs</text>
+                            </svg>
                         </div>
                     </div>
-                    <div class="card-footer-metric" style="margin-top: 14px;">
-                        <span>Ideal For:</span>
-                        <span class="metric-highlight">Counting &bull; Variant Screening &bull; RNA-Seq</span>
+                    <div class="card-footer-metric" style="margin-top: 8px;">
+                        <span>Ideal Clinical For:</span>
+                        <span class="metric-highlight">Counting &bull; SNV Screening &bull; RNA-Seq</span>
                     </div>
                 </div>
 
-                <!-- Right: Long Reads -->
-                <div class="card card-emerald fragment" style="padding: 22px 24px; display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Right: Long Reads Card with Embedded Vector Diagram -->
+                <div class="card card-emerald fragment" style="padding: 16px 20px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
-                        <div class="card-header-row" style="margin-bottom: 8px;">
-                            <span class="card-title" style="font-size: 1.08rem;">Long Reads (10,000&ndash;1,000,000+ bp)</span>
-                            <span class="card-pill" style="font-size: 0.72rem;">PacBio / Nanopore</span>
+                        <div class="card-header-row" style="margin-bottom: 6px;">
+                            <span class="card-title" style="font-size: 1.05rem;">Long Reads (10,000&ndash;1,000,000+ bp)</span>
+                            <span class="card-pill" style="background: #ECFDF5; color: #047857; border-color: #A7F3D0;">PacBio / Nanopore</span>
                         </div>
-                        <p style="font-size: 0.88rem; line-height: 1.50; color: #334155; margin-bottom: 10px;">
+                        <div style="font-size: 0.83rem; line-height: 1.42; color: #334155; margin-bottom: 8px;">
                             <strong>The Strengths:</strong> Continuous native strands span across entire repeat islands, structural rearrangements, and centromeres without assembly guesswork.
-                        </p>
-                        <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 8px; padding: 12px 14px; margin-top: 8px;">
-                            <div style="font-weight: 800; font-size: 0.86rem; color: #065F46; margin-bottom: 4px;">✨ The Assembly Bridge:</div>
-                            <p style="font-size: 0.84rem; line-height: 1.45; color: #064E3B; margin: 0;">
-                                Like having large panoramic photo strips that instantly connect entire scenes. High raw error rates have now been conquered by consensus algorithms (PacBio HiFi).
-                            </p>
+                        </div>
+
+                        <!-- Long Read Spanning Bridge Diagram -->
+                        <div style="background: #0F172A; border-radius: 8px; padding: 10px; margin: 6px 0; border: 1px solid #334155;">
+                            <div style="font-size: 0.72rem; font-weight: 700; color: #6EE7B7; font-family: var(--font-mono); margin-bottom: 6px;">
+                                ✨ THE ASSEMBLY SPANNING BRIDGE:
+                            </div>
+                            <svg viewBox="0 0 360 115" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Genomic Reference Track -->
+                                <text x="10" y="14" font-size="8.5" font-weight="bold" fill="#94A3B8">Genome:</text>
+                                <rect x="55" y="6" width="60" height="12" rx="3" fill="#1E3A8A" stroke="#3B82F6"/>
+                                <text x="85" y="15" font-size="7.5" fill="#BFDBFE" text-anchor="middle" font-weight="bold">Flank A</text>
+                                <rect x="120" y="4" width="130" height="16" rx="3" fill="#78350F" stroke="#F59E0B" stroke-dasharray="3,2"/>
+                                <text x="185" y="15" font-size="8" fill="#FDE68A" text-anchor="middle" font-weight="bold">5 kb LINE-1 Repeat</text>
+                                <rect x="255" y="6" width="60" height="12" rx="3" fill="#064E3B" stroke="#10B981"/>
+                                <text x="285" y="15" font-size="7.5" fill="#A7F3D0" text-anchor="middle" font-weight="bold">Flank B</text>
+
+                                <!-- Single Continuous Long Read -->
+                                <text x="10" y="45" font-size="8.5" font-weight="bold" fill="#34D399">25 kb:</text>
+                                <rect x="65" y="36" width="240" height="9" rx="4" fill="#059669" stroke="#34D399" stroke-width="1.2"/>
+                                <circle cx="70" cy="40.5" r="2.5" fill="#FFF"/>
+                                <circle cx="300" cy="40.5" r="2.5" fill="#FFF"/>
+                                <text x="185" y="58" font-size="7.5" font-weight="bold" fill="#A7F3D0" text-anchor="middle">Single continuous read anchors Flank A &rarr; Flank B</text>
+
+                                <!-- Resulting Assembly -->
+                                <line x1="10" y1="72" x2="350" y2="72" stroke="#334155" stroke-width="1"/>
+                                <text x="10" y="88" font-size="8.5" font-weight="bold" fill="#94A3B8">Assembly:</text>
+                                <rect x="55" y="78" width="260" height="14" rx="3" fill="#064E3B" stroke="#10B981"/>
+                                <text x="185" y="88" font-size="7.5" font-weight="bold" fill="#ECFDF5" text-anchor="middle">✅ GAPLESS TELOMERE-TO-TELOMERE CONTIG</text>
+
+                                <text x="185" y="106" font-size="7.5" fill="#34D399" text-anchor="middle">Spans entire 5 kb &bull; Resolves structural variants &amp; phasing</text>
+                            </svg>
                         </div>
                     </div>
-                    <div class="card-footer-metric" style="margin-top: 14px;">
-                        <span>Ideal For:</span>
+                    <div class="card-footer-metric" style="margin-top: 8px;">
+                        <span>Ideal Clinical For:</span>
                         <span class="metric-highlight">De Novo Assembly &bull; Structural Variants &bull; Telomeres</span>
                     </div>
                 </div>
             </div>
 
-            <div class="callout-strip fragment" style="margin-top: 18px; padding: 12px 20px;">
-                <div class="callout-strip-text" style="font-size: 0.90rem; line-height: 1.45;">
-                    <strong>💡 The Analogy:</strong> Short reads give you millions of ultra-sharp 1-inch puzzle pieces; long reads give you panoramic strips that bridge the entire puzzle border-to-border.
+            <div class="callout-strip fragment" style="margin-top: 14px; padding: 10px 18px;">
+                <div class="callout-strip-text" style="font-size: 0.86rem; line-height: 1.42;">
+                    <strong>💡 The Jigsaw Analogy:</strong> Short reads give you millions of ultra-sharp 1-inch puzzle pieces (great for seeing individual pixels, hopeless for monochromatic blue sky). Long reads give you panoramic photo strips that bridge the entire puzzle border-to-border.
                 </div>
             </div>
         </div>
