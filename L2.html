@@ -4245,52 +4245,134 @@
                 </p>
             </div>
 
-            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
-                <!-- Left: The Core Concept of Massive Parallelism -->
-                <div class="card card-blue fragment" style="padding: 22px 24px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="grid-2col" style="grid-template-columns: 1fr 1.25fr; gap: 18px; align-items: stretch;">
+                <!-- Left Column: What Does Massively Parallel Mean? -->
+                <div class="card card-blue fragment" style="padding: 16px 18px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
-                        <div class="card-header-row" style="margin-bottom: 8px;">
-                            <span class="card-title" style="font-size: 1.08rem;">1. What Does &ldquo;Massively Parallel&rdquo; Mean?</span>
-                            <span class="card-pill" style="font-size: 0.72rem;">Billions at Once</span>
+                        <div class="card-header-row" style="margin-bottom: 6px;">
+                            <span class="card-title" style="font-size: 1.02rem;">1. What Does &ldquo;Massively Parallel&rdquo; Mean?</span>
+                            <span class="card-pill" style="background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE;">Billions at Once</span>
                         </div>
-                        <p style="font-size: 0.88rem; line-height: 1.52; color: #334155; margin-bottom: 12px;">
-                            Traditional Sanger sequencing read DNA one template at a time across 96 capillary tubes. Next-Generation Sequencing (NGS) abandoned tubes entirely:
-                        </p>
-                        <ul style="padding-left: 20px; font-size: 0.86rem; line-height: 1.50; color: #334155; margin: 0;">
-                            <li><strong>Surface Miniaturization:</strong> Billions of distinct DNA fragments are immobilized across a microscopic glass or silicon chip (flow cell).</li>
-                            <li><strong>Simultaneous Querying:</strong> A single camera or sensor reads the chemical state of <strong>all billions of spots simultaneously</strong> in one optical snapshot.</li>
-                            <li><strong>Throughput Explosion:</strong> Instead of generating 1 sequence per run, a single machine generates <strong>billions of reads in 24 hours</strong>.</li>
-                        </ul>
+                        
+                        <div style="font-size: 0.82rem; line-height: 1.40; color: #334155; margin-bottom: 6px;">
+                            Traditional Sanger read DNA one template per capillary tube. NGS abandoned physical tubes for extreme spatial miniaturization:
+                        </div>
+
+                        <!-- Dark Console: Capillary vs Flow Cell Diagram -->
+                        <div style="background: #0F172A; border-radius: 8px; padding: 10px; border: 1px solid #334155;">
+                            <div style="font-size: 0.70rem; font-weight: 700; color: #38BDF8; font-family: var(--font-mono); margin-bottom: 8px; display: flex; justify-content: space-between;">
+                                <span>SPATIAL PARALLELISM SHIFT:</span>
+                                <span style="color: #94A3B8;">96 Tubes &rarr; Billions on a Chip</span>
+                            </div>
+
+                            <svg viewBox="0 0 380 145" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Left Panel: 96 Capillary Tubes -->
+                                <g transform="translate(10, 8)">
+                                    <text x="0" y="10" font-size="8" font-weight="bold" fill="#F87171">SANGER: 96 Capillary Tubes</text>
+                                    <rect x="0" y="16" width="160" height="82" rx="4" fill="#1E293B" stroke="#475569"/>
+                                    
+                                    <!-- Capillary tubes representation -->
+                                    <line x1="15" y1="28" x2="145" y2="28" stroke="#64748B" stroke-width="2.5"/>
+                                    <text x="15" y="25" font-size="6" fill="#94A3B8">Capillary 1</text>
+                                    <line x1="15" y1="46" x2="145" y2="46" stroke="#64748B" stroke-width="2.5"/>
+                                    <text x="15" y="43" font-size="6" fill="#94A3B8">Capillary 2</text>
+                                    <text x="75" y="60" font-size="7" fill="#64748B" text-anchor="middle">&bull; &bull; &bull;</text>
+                                    <line x1="15" y1="74" x2="145" y2="74" stroke="#64748B" stroke-width="2.5"/>
+                                    <text x="15" y="71" font-size="6" fill="#94A3B8">Capillary 96</text>
+
+                                    <text x="80" y="92" font-size="6.5" font-weight="bold" fill="#FCA5A5" text-anchor="middle">Max 96 reads per run (~50 kb/day)</text>
+                                </g>
+
+                                <!-- Right Panel: NGS Flow Cell Surface -->
+                                <g transform="translate(195, 8)">
+                                    <text x="0" y="10" font-size="8" font-weight="bold" fill="#34D399">NGS: Flow Cell Surface Grid</text>
+                                    <rect x="0" y="16" width="175" height="82" rx="4" fill="#064E3B" stroke="#10B981" stroke-width="1.2"/>
+                                    
+                                    <!-- Microscopic Fluorescent Cluster Spots -->
+                                    <g transform="translate(12, 24)">
+                                        <!-- Row 1 -->
+                                        <circle cx="10" cy="8" r="4" fill="#38BDF8"/>
+                                        <circle cx="35" cy="8" r="4" fill="#FBBF24"/>
+                                        <circle cx="60" cy="8" r="4" fill="#34D399"/>
+                                        <circle cx="85" cy="8" r="4" fill="#F43F5E"/>
+                                        <circle cx="110" cy="8" r="4" fill="#38BDF8"/>
+                                        <circle cx="135" cy="8" r="4" fill="#34D399"/>
+                                        <!-- Row 2 -->
+                                        <circle cx="10" cy="24" r="4" fill="#F43F5E"/>
+                                        <circle cx="35" cy="24" r="4" fill="#34D399"/>
+                                        <circle cx="60" cy="24" r="4" fill="#38BDF8"/>
+                                        <circle cx="85" cy="24" r="4" fill="#FBBF24"/>
+                                        <circle cx="110" cy="24" r="4" fill="#F43F5E"/>
+                                        <circle cx="135" cy="24" r="4" fill="#38BDF8"/>
+                                        <!-- Row 3 -->
+                                        <circle cx="10" cy="40" r="4" fill="#34D399"/>
+                                        <circle cx="35" cy="40" r="4" fill="#38BDF8"/>
+                                        <circle cx="60" cy="40" r="4" fill="#F43F5E"/>
+                                        <circle cx="85" cy="40" r="4" fill="#38BDF8"/>
+                                        <circle cx="110" cy="40" r="4" fill="#FBBF24"/>
+                                        <circle cx="135" cy="40" r="4" fill="#34D399"/>
+                                    </g>
+
+                                    <!-- Optical Camera Field Note -->
+                                    <text x="87" y="78" font-size="6" font-weight="bold" fill="#ECFDF5" text-anchor="middle">Single Camera Snapshot Imaged at Once</text>
+                                    <text x="87" y="92" font-size="6.5" font-weight="bold" fill="#34D399" text-anchor="middle">&gt;3 Billion reads per run (&gt;1 Tb/day)</text>
+                                </g>
+
+                                <!-- Bottom Summary Bar -->
+                                <rect x="10" y="114" width="360" height="24" rx="3" fill="#1E293B" stroke="#475569"/>
+                                <text x="190" y="129" font-size="7" font-family="var(--font-mono)" font-weight="bold" fill="#38BDF8" text-anchor="middle">
+                                    Throughput Leap: 30,000,000&times; Expansion in Simultaneous Querying
+                                </text>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="card-footer-metric" style="margin-top: 14px;">
+                    <div class="card-footer-metric" style="margin-top: 6px;">
                         <span>Throughput Scaling:</span>
-                        <span class="metric-highlight">96 Tubes &rarr; 3,000,000,000+ Reactions</span>
+                        <span class="metric-highlight" style="color: #2563EB;">96 Tubes &rarr; 3,000,000,000+ Reactions</span>
                     </div>
                 </div>
 
-                <!-- Right: The Two Main Readout Modalities -->
-                <div class="card card-purple fragment" style="padding: 22px 24px; display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Right Column: Two Major Architectural Paths -->
+                <div class="card card-purple fragment" style="padding: 16px 18px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
-                        <div class="card-header-row" style="margin-bottom: 8px;">
-                            <span class="card-title" style="font-size: 1.08rem;">2. Two Major Architectural Paths</span>
-                            <span class="card-pill" style="font-size: 0.72rem;">Amplified vs. Single Molecule</span>
+                        <div class="card-header-row" style="margin-bottom: 6px;">
+                            <span class="card-title" style="font-size: 1.02rem;">2. Two Major Architectural Paths</span>
+                            <span class="card-pill" style="background: #FAF5FF; color: #7C3AED; border-color: #E9D5FF;">Amplified vs Single-Molecule</span>
                         </div>
-                        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px 16px; margin-bottom: 12px;">
-                            <div style="font-weight: 800; font-size: 0.90rem; color: #0284C7; margin-bottom: 4px;">A. Microfluidic Amplification (e.g., Illumina):</div>
-                            <p style="font-size: 0.84rem; line-height: 1.45; color: #334155; margin: 0;">
-                                Single molecules are amplified locally into dense <strong>clonal clusters (~1,000 copies)</strong> on a glass surface to emit bright, easily detectable fluorescent signals.
-                            </p>
-                        </div>
-                        <div style="background: #FDF4FF; border: 1px solid #F0ABFC; border-radius: 8px; padding: 12px 16px;">
-                            <div style="font-weight: 800; font-size: 0.90rem; color: #A21CAF; margin-bottom: 4px;">B. Single-Molecule Real-Time Readout (e.g., Nanopore &amp; PacBio):</div>
-                            <p style="font-size: 0.84rem; line-height: 1.45; color: #334155; margin: 0;">
-                                Skips PCR amplification entirely; measures single unamplified native DNA molecules as they pass through microscopic electrical pores or optical wells.
-                            </p>
+
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <!-- Path A: Microfluidic Cluster Amplification -->
+                            <div style="background: #F0FDF4; border: 1.5px solid #BBF7D0; border-left: 4px solid #059669; border-radius: 8px; padding: 10px 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                                    <span style="font-weight: 800; font-size: 0.84rem; color: #065F46;">A. Microfluidic Clonal Amplification (Illumina / MGI)</span>
+                                    <span style="font-size: 0.65rem; font-weight: 700; background: #DCFCE7; color: #166534; padding: 1px 6px; border-radius: 4px;">Clusters (~1,000x)</span>
+                                </div>
+                                <div style="font-size: 0.77rem; line-height: 1.38; color: #14532D; margin-bottom: 4px;">
+                                    Single DNA molecules are captured on a glass flow cell and amplified via <em>bridge PCR</em> into dense <strong>clonal clusters (~1,000 identical copies)</strong>.
+                                </div>
+                                <div style="font-size: 0.72rem; color: #047857; font-weight: 600;">
+                                    &bull; <strong>Advantage:</strong> Giant photon signal &rarr; cheap optics, &gt;99.9% base accuracy, massive gigabase throughput.
+                                </div>
+                            </div>
+
+                            <!-- Path B: Single-Molecule Real-Time Readout -->
+                            <div style="background: #FAF5FF; border: 1.5px solid #E9D5FF; border-left: 4px solid #7C3AED; border-radius: 8px; padding: 10px 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                                    <span style="font-weight: 800; font-size: 0.84rem; color: #6B21A8;">B. Single-Molecule Real-Time Readout (Nanopore &amp; PacBio)</span>
+                                    <span style="font-size: 0.65rem; font-weight: 700; background: #F3E8FF; color: #6B21A8; padding: 1px 6px; border-radius: 4px;">No PCR</span>
+                                </div>
+                                <div style="font-size: 0.77rem; line-height: 1.38; color: #581C87; margin-bottom: 4px;">
+                                    Skips PCR amplification entirely; directly measures individual unamplified native DNA molecules threading through <strong>protein nanopores</strong> or optical Zero-Mode Waveguides.
+                                </div>
+                                <div style="font-size: 0.72rem; color: #7C3AED; font-weight: 600;">
+                                    &bull; <strong>Advantage:</strong> Direct readout of native epigenetic modifications (5mC) and ultra-long continuous reads (&gt;100 kb).
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer-metric" style="margin-top: 14px;">
+                    <div class="card-footer-metric" style="margin-top: 6px;">
                         <span>Core Strategy:</span>
-                        <span class="metric-highlight">Extreme Spatial Multiplexing</span>
+                        <span class="metric-highlight" style="color: #7C3AED;">Extreme Spatial Multiplexing</span>
                     </div>
                 </div>
             </div>
