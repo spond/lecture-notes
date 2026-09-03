@@ -4792,49 +4792,118 @@
                 </p>
             </div>
 
-            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
-                <!-- Left: The False-Positive Alignment Mechanism -->
-                <div class="card card-cherry fragment" style="padding: 18px 22px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="grid-2col" style="gap: 18px; align-items: stretch;">
+                <!-- Left: GRCh38 Cross-Mapping Trap with Embedded Diagram -->
+                <div class="card card-cherry fragment" style="padding: 16px 20px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <div class="card-header-row" style="margin-bottom: 6px;">
-                            <span class="card-title" style="font-size: 1.05rem;">The Misalignment Mechanism</span>
-                            <span class="card-pill" style="font-size: 0.70rem;">Cross-Mapping Trap</span>
+                            <span class="card-title" style="font-size: 1.05rem;">1. The Cross-Mapping Trap (GRCh38)</span>
+                            <span class="card-pill" style="background: #FEF2F2; color: #991B1B; border-color: #FECDD3;">Gapped Reference</span>
                         </div>
-                        <p style="font-size: 0.85rem; line-height: 1.48; color: #334155; margin-bottom: 8px;">
-                            How missing reference sequence fools standard clinical sequencing software:
-                        </p>
-                        <ol style="padding-left: 18px; font-size: 0.84rem; line-height: 1.46; color: #334155; margin: 0;">
-                            <li><strong>Patient Has Repeat Copies:</strong> A healthy patient carries DNA fragments from a segmental duplication or repeat region.</li>
-                            <li><strong>Reference Has a Gap:</strong> Because GRCh38 is missing that specific repeat copy, the alignment algorithm cannot place the read at its true home.</li>
-                            <li><strong>Forced Homologous Placement:</strong> The algorithm forces the read onto the &ldquo;closest matching&rdquo; related gene or pseudogene elsewhere in the genome.</li>
-                            <li><strong>Phantom Mutation Flagged:</strong> Natural sequence differences between the two paralogs look like <strong>hundreds of heterozygous &ldquo;disease mutations&rdquo;</strong>!</li>
-                        </ol>
+                        <div style="font-size: 0.82rem; line-height: 1.40; color: #334155; margin-bottom: 6px;">
+                            When an older reference genome contains an unsequenced gap, reads from the missing duplicate locus are forced to misalign elsewhere:
+                        </div>
+
+                        <!-- SVG Diagram: Forced Misalignment -->
+                        <div style="background: #0F172A; border-radius: 8px; padding: 10px; margin: 6px 0; border: 1px solid #334155;">
+                            <div style="font-size: 0.72rem; font-weight: 700; color: #FCA5A5; font-family: var(--font-mono); margin-bottom: 6px;">
+                                ⚠️ INCOMPLETE GRCh38: COPY B MISSING
+                            </div>
+                            <svg viewBox="0 0 360 140" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Patient DNA Track -->
+                                <text x="10" y="16" font-size="8.5" font-weight="bold" fill="#94A3B8">Patient DNA:</text>
+                                <rect x="75" y="6" width="115" height="14" rx="3" fill="#1E3A8A" stroke="#3B82F6"/>
+                                <text x="132" y="16" font-size="7.5" fill="#BFDBFE" text-anchor="middle">Gene Copy A (Normal)</text>
+
+                                <rect x="205" y="6" width="145" height="14" rx="3" fill="#881337" stroke="#F43F5E"/>
+                                <text x="260" y="16" font-size="7.5" fill="#FECDD3" text-anchor="middle">Segmental Dup B</text>
+                                <circle cx="335" cy="13" r="4.5" fill="#FBBF24" stroke="#FFF" stroke-width="0.8"/>
+                                <text x="335" y="16" font-size="6.5" font-weight="bold" fill="#000" text-anchor="middle">C</text>
+
+                                <!-- GRCh38 Reference Track -->
+                                <text x="10" y="58" font-size="8.5" font-weight="bold" fill="#EF4444">GRCh38 Ref:</text>
+                                <rect x="75" y="48" width="115" height="14" rx="3" fill="#1E3A8A" stroke="#3B82F6"/>
+                                <text x="132" y="58" font-size="7.5" fill="#BFDBFE" text-anchor="middle">Gene Copy A (Ref Base: T)</text>
+
+                                <!-- The Gap in GRCh38 -->
+                                <rect x="205" y="48" width="145" height="14" rx="3" fill="#450A0A" stroke="#EF4444" stroke-dasharray="3,3"/>
+                                <text x="277" y="58" font-size="7.5" font-weight="bold" fill="#FCA5A5" text-anchor="middle">❌ REFERENCE GAP (Missing)</text>
+
+                                <!-- Forced Cross-Mapping Arrow -->
+                                <path d="M 335 22 C 335 38, 175 30, 160 46" fill="none" stroke="#F87171" stroke-width="2" stroke-dasharray="3,2"/>
+                                <polygon points="160,46 166,40 169,45" fill="#F87171"/>
+                                <rect x="200" y="27" width="105" height="14" rx="3" fill="#0F172A" stroke="#F87171" stroke-width="0.8"/>
+                                <text x="252" y="37" font-size="7" fill="#FCA5A5" font-weight="bold" text-anchor="middle">Forced Misalignment &rarr;</text>
+
+                                <!-- Artifact Callout Box -->
+                                <rect x="15" y="76" width="330" height="52" rx="5" fill="#1E293B" stroke="#EF4444" stroke-width="1.2"/>
+                                <text x="180" y="93" font-size="8.5" font-weight="bold" fill="#EF4444" text-anchor="middle">🚨 FALSE PATHOGENIC CALL: "c.452T&gt;C Mutation!"</text>
+                                <text x="180" y="106" font-size="7.5" fill="#CBD5E1" text-anchor="middle">Natural paralog difference between Copy A &amp; B is misread as a mutation.</text>
+                                <text x="180" y="118" font-size="7" fill="#94A3B8" text-anchor="middle">Multiplied across genome &rarr; Thousands of bogus clinical variant calls!</text>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="card-footer-metric" style="margin-top: 10px;">
-                        <span>The Trap:</span>
-                        <span class="metric-highlight">Normal Repeats Misaligned &rarr; Bogus Pathogenic Calls</span>
+                    <div class="card-footer-metric" style="margin-top: 6px;">
+                        <span>The Diagnostic Risk:</span>
+                        <span class="metric-highlight" style="color: #DC2626;">Healthy Patients Misdiagnosed with Rare Disease</span>
                     </div>
                 </div>
 
-                <!-- Right: The T2T Clinical Correction -->
-                <div class="card card-emerald fragment" style="padding: 18px 22px; display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Right: T2T Clinical Resolution with Embedded Diagram -->
+                <div class="card card-emerald fragment" style="padding: 16px 20px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <div class="card-header-row" style="margin-bottom: 6px;">
-                            <span class="card-title" style="font-size: 1.05rem;">The T2T Clinical Resolution</span>
-                            <span class="card-pill" style="font-size: 0.70rem;">Accurate Diagnostics</span>
+                            <span class="card-title" style="font-size: 1.05rem;">2. The T2T Clinical Resolution</span>
+                            <span class="card-pill" style="background: #ECFDF5; color: #047857; border-color: #A7F3D0;">Complete Reference</span>
                         </div>
-                        <ul style="padding-left: 18px; font-size: 0.85rem; line-height: 1.48; color: #334155; margin: 0;">
-                            <li><strong>True Genomic Decoys Available:</strong> With T2T-CHM13, every repeat, paralog, and segmental duplication has its exact coordinate address on the reference map.</li>
-                            <li><strong>Reads Go Home:</strong> Short reads from duplicate loci now map to their proper physical locations instead of cross-contaminating medical genes.</li>
-                            <li><strong>Purging Clinical Databases:</strong> Re-aligning 1000 Genomes and clinical cohorts against T2T eliminated <strong>tens of thousands of false-positive variant calls</strong> across medically actionable gene panels.</li>
-                        </ul>
-                        <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 6px; padding: 8px 12px; margin-top: 10px; font-size: 0.82rem; color: #065F46;">
-                            🛡️ <strong>Diagnostic Safety:</strong> Resolving the complete sequence ensures that patients are not misdiagnosed with rare genetic syndromes due to reference gaps.
+                        <div style="font-size: 0.82rem; line-height: 1.40; color: #334155; margin-bottom: 6px;">
+                            With T2T-CHM13, every duplicate locus has its true physical coordinate address. Reads map cleanly home:
+                        </div>
+
+                        <!-- SVG Diagram: Clean Resolution -->
+                        <div style="background: #0F172A; border-radius: 8px; padding: 10px; margin: 6px 0; border: 1px solid #334155;">
+                            <div style="font-size: 0.72rem; font-weight: 700; color: #6EE7B7; font-family: var(--font-mono); margin-bottom: 6px;">
+                                ✨ T2T-CHM13: GAP RESOLVED & DECOYS PRESENT
+                            </div>
+                            <svg viewBox="0 0 360 140" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Patient DNA Track -->
+                                <text x="10" y="16" font-size="8.5" font-weight="bold" fill="#94A3B8">Patient DNA:</text>
+                                <rect x="75" y="6" width="115" height="14" rx="3" fill="#1E3A8A" stroke="#3B82F6"/>
+                                <text x="132" y="16" font-size="7.5" fill="#BFDBFE" text-anchor="middle">Gene Copy A (Normal)</text>
+
+                                <rect x="205" y="6" width="145" height="14" rx="3" fill="#881337" stroke="#F43F5E"/>
+                                <text x="260" y="16" font-size="7.5" fill="#FECDD3" text-anchor="middle">Segmental Dup B</text>
+                                <circle cx="335" cy="13" r="4.5" fill="#FBBF24" stroke="#FFF" stroke-width="0.8"/>
+                                <text x="335" y="16" font-size="6.5" font-weight="bold" fill="#000" text-anchor="middle">C</text>
+
+                                <!-- T2T Reference Track -->
+                                <text x="10" y="58" font-size="8.5" font-weight="bold" fill="#34D399">T2T Ref:</text>
+                                <rect x="75" y="48" width="115" height="14" rx="3" fill="#1E3A8A" stroke="#3B82F6"/>
+                                <text x="132" y="58" font-size="7.5" fill="#BFDBFE" text-anchor="middle">Gene Copy A (Ref Base: T)</text>
+
+                                <!-- Copy B Fully Resolved in T2T -->
+                                <rect x="205" y="48" width="145" height="14" rx="3" fill="#064E3B" stroke="#10B981"/>
+                                <text x="260" y="58" font-size="7.5" font-weight="bold" fill="#A7F3D0" text-anchor="middle">✅ Copy B Present</text>
+                                <circle cx="335" cy="55" r="4.5" fill="#10B981" stroke="#FFF" stroke-width="0.8"/>
+                                <text x="335" y="58" font-size="6.5" font-weight="bold" fill="#FFF" text-anchor="middle">C</text>
+
+                                <!-- Direct Home Alignment Arrow -->
+                                <line x1="335" y1="22" x2="335" y2="44" stroke="#34D399" stroke-width="2"/>
+                                <polygon points="335,46 331,40 339,40" fill="#34D399"/>
+                                <rect x="220" y="27" width="95" height="14" rx="3" fill="#064E3B" stroke="#34D399" stroke-width="0.8"/>
+                                <text x="267" y="37" font-size="7" fill="#A7F3D0" font-weight="bold" text-anchor="middle">Reads Map Home &darr;</text>
+
+                                <!-- Resolution Callout Box -->
+                                <rect x="15" y="76" width="330" height="52" rx="5" fill="#064E3B" stroke="#10B981" stroke-width="1.2"/>
+                                <text x="180" y="93" font-size="8.5" font-weight="bold" fill="#34D399" text-anchor="middle">✅ ZERO FALSE MUTATIONS: RECORD CLEARED</text>
+                                <text x="180" y="106" font-size="7.5" fill="#ECFDF5" text-anchor="middle">Reads match Copy B reference perfectly (C == C). Gene A remains 100% intact.</text>
+                                <text x="180" y="118" font-size="7" fill="#A7F3D0" text-anchor="middle">Tens of thousands of phantom variants purged from medical databases!</text>
+                            </svg>
                         </div>
                     </div>
-                    <div class="card-footer-metric" style="margin-top: 8px;">
-                        <span>Clinical Impact:</span>
-                        <span class="metric-highlight">Tens of Thousands of False Variants Corrected</span>
+                    <div class="card-footer-metric" style="margin-top: 6px;">
+                        <span>The T2T Payoff:</span>
+                        <span class="metric-highlight" style="color: #059669;">Tens of Thousands of False Variants Corrected</span>
                     </div>
                 </div>
             </div>
