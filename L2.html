@@ -1988,33 +1988,101 @@
                         </p>
                     </div>
                 </div>
-                <div class="card card-cherry fragment" style="padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                        <div class="card-header-row">
-                            <span class="card-title">The Critical Clinical Distinction: <em>Cis</em> vs. <em>Trans</em></span>
-                            <span class="card-pill">Phasing</span>
-                        </div>
-                        <div style="background: #0F172A; border-radius: 8px; padding: 12px; margin: 8px 0;">
-                            <div style="margin-bottom: 10px; border-bottom: 1px solid #334155; padding-bottom: 8px;">
-                                <div style="font-size: 0.74rem; font-weight: 700; color: #34D399; font-family: var(--font-mono);">CONFIGURATION 1: CIS (Same Chromosome)</div>
-                                <div style="font-family: var(--font-mono); font-size: 0.74rem; color: #38BDF8; margin-top: 3px;">
-                                    Strand 1 (Maternal): [ Mutation 1 ] ── [ Mutation 2 ] &rarr; Broken Copy<br>
-                                    Strand 2 (Paternal): [ Wild-Type  ] ── [ Wild-Type  ] &rarr; <span style="color:#34D399; font-weight:bold;">100% Functional Copy!</span>
-                                </div>
-                                <div style="font-size: 0.70rem; color: #94A3B8; margin-top: 3px;">&rarr; <strong>Outcome: Healthy Carrier (Asymptomatic)</strong></div>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.74rem; font-weight: 700; color: #FB7185; font-family: var(--font-mono);">CONFIGURATION 2: TRANS (Opposite Chromosomes)</div>
-                                <div style="font-family: var(--font-mono); font-size: 0.74rem; color: #38BDF8; margin-top: 3px;">
-                                    Strand 1 (Maternal): [ Mutation 1 ] ── [ Wild-Type  ] &rarr; Broken Copy<br>
-                                    Strand 2 (Paternal): [ Wild-Type  ] ── [ Mutation 2 ] &rarr; Broken Copy
-                                </div>
-                                <div style="font-size: 0.70rem; color: #FB7185; margin-top: 3px;">&rarr; <strong>Outcome: Affected with Genetic Disease (0 Functional Copies)</strong></div>
-                            </div>
-                        </div>
+                <div class="card" style="padding: 12px 16px; background: #1E293B; border: 1.5px solid #334155; border-radius: 10px; color: #F8FAFC; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 20px rgba(0,0,0,0.25);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span style="font-size: 0.92rem; font-weight: 800; color: #F8FAFC; display: flex; align-items: center; gap: 6px;">
+                            🧬 The Clinical Distinction: <em>Cis</em> vs. <em>Trans</em> Phasing
+                        </span>
+                        <span class="card-pill" style="background: #312E81; color: #C7D2FE; border: 1px solid #6366F1; font-size: 0.68rem;">
+                            Maternal vs. Paternal
+                        </span>
                     </div>
-                    <div style="font-size: 0.74rem; color: #991B1B; font-weight: 700;">
-                        ⚠️ Without phasing, standard genome sequencing cannot distinguish between a healthy carrier and a severely affected patient.
+
+                    <svg viewBox="0 0 520 275" style="width: 100%; height: auto; display: block; background: #0A0F1D; border-radius: 8px; border: 1px solid #1E293B;" xmlns="http://www.w3.org/2000/svg">
+                        <!-- ================= LEFT PANEL: CIS ================= -->
+                        <rect x="8" y="8" width="248" height="175" rx="6" fill="#0F172A" stroke="#10B981" stroke-width="1.2"/>
+                        <text x="132" y="25" font-size="10" font-family="var(--font-mono)" font-weight="bold" fill="#34D399" text-anchor="middle">CONFIGURATION 1: IN CIS</text>
+                        <text x="132" y="38" font-size="8" fill="#94A3B8" text-anchor="middle">(Both mutations on SAME homolog)</text>
+
+                        <!-- Maternal Homolog (Cis) -->
+                        <text x="20" y="58" font-size="8.5" font-weight="bold" fill="#FDA4AF">Maternal (Chr A):</text>
+                        <rect x="20" y="64" width="224" height="14" rx="7" fill="#881337" stroke="#F43F5E" stroke-width="1"/>
+                        <circle cx="65" cy="71" r="5" fill="#EF4444" stroke="#FFF" stroke-width="1"/>
+                        <text x="65" y="74" font-size="7" font-weight="bold" fill="#FFF" text-anchor="middle">M1</text>
+                        <circle cx="185" cy="71" r="5" fill="#EF4444" stroke="#FFF" stroke-width="1"/>
+                        <text x="185" y="74" font-size="7" font-weight="bold" fill="#FFF" text-anchor="middle">M2</text>
+                        <text x="240" y="90" font-size="7.5" fill="#F87171" text-anchor="end">&rarr; Double Mutant (Null / 0%)</text>
+
+                        <!-- Paternal Homolog (Cis) -->
+                        <text x="20" y="106" font-size="8.5" font-weight="bold" fill="#7DD3FC">Paternal (Chr B):</text>
+                        <rect x="20" y="112" width="224" height="14" rx="7" fill="#0C4A6E" stroke="#38BDF8" stroke-width="1"/>
+                        <circle cx="65" cy="119" r="4.5" fill="#10B981" stroke="#FFF" stroke-width="0.8"/>
+                        <text x="65" y="122" font-size="7.5" font-weight="bold" fill="#FFF" text-anchor="middle">+</text>
+                        <circle cx="185" cy="119" r="4.5" fill="#10B981" stroke="#FFF" stroke-width="0.8"/>
+                        <text x="185" y="122" font-size="7.5" font-weight="bold" fill="#FFF" text-anchor="middle">+</text>
+                        <text x="240" y="138" font-size="7.5" fill="#34D399" font-weight="bold" text-anchor="end">&rarr; Intact Wild-Type (100%)</text>
+
+                        <!-- Cis Clinical Outcome Badge -->
+                        <rect x="20" y="146" width="224" height="28" rx="5" fill="#064E3B" stroke="#059669" stroke-width="1"/>
+                        <text x="132" y="159" font-size="8.8" font-weight="bold" fill="#34D399" text-anchor="middle">✅ HEALTHY ASYMPTOMATIC CARRIER</text>
+                        <text x="132" y="169" font-size="7.5" fill="#A7F3D0" text-anchor="middle">50% normal enzyme dose protects patient</text>
+
+                        <!-- ================= RIGHT PANEL: TRANS ================= -->
+                        <rect x="264" y="8" width="248" height="175" rx="6" fill="#0F172A" stroke="#EF4444" stroke-width="1.2"/>
+                        <text x="388" y="25" font-size="10" font-family="var(--font-mono)" font-weight="bold" fill="#F87171" text-anchor="middle">CONFIGURATION 2: IN TRANS</text>
+                        <text x="388" y="38" font-size="8" fill="#94A3B8" text-anchor="middle">(Mutations on OPPOSITE homologs)</text>
+
+                        <!-- Maternal Homolog (Trans) -->
+                        <text x="276" y="58" font-size="8.5" font-weight="bold" fill="#FDA4AF">Maternal (Chr A):</text>
+                        <rect x="276" y="64" width="224" height="14" rx="7" fill="#881337" stroke="#F43F5E" stroke-width="1"/>
+                        <circle cx="321" cy="71" r="5" fill="#EF4444" stroke="#FFF" stroke-width="1"/>
+                        <text x="321" y="74" font-size="7" font-weight="bold" fill="#FFF" text-anchor="middle">M1</text>
+                        <circle cx="441" cy="71" r="4.5" fill="#10B981" stroke="#FFF" stroke-width="0.8"/>
+                        <text x="441" y="74" font-size="7.5" font-weight="bold" fill="#FFF" text-anchor="middle">+</text>
+                        <text x="496" y="90" font-size="7.5" fill="#F87171" text-anchor="end">&rarr; Mutated at M1 (Null / 0%)</text>
+
+                        <!-- Paternal Homolog (Trans) -->
+                        <text x="276" y="106" font-size="8.5" font-weight="bold" fill="#7DD3FC">Paternal (Chr B):</text>
+                        <rect x="276" y="112" width="224" height="14" rx="7" fill="#0C4A6E" stroke="#38BDF8" stroke-width="1"/>
+                        <circle cx="321" cy="119" r="4.5" fill="#10B981" stroke="#FFF" stroke-width="0.8"/>
+                        <text x="321" y="122" font-size="7.5" font-weight="bold" fill="#FFF" text-anchor="middle">+</text>
+                        <circle cx="441" cy="119" r="5" fill="#EF4444" stroke="#FFF" stroke-width="1"/>
+                        <text x="441" y="122" font-size="7.5" font-weight="bold" fill="#FFF" text-anchor="middle">M2</text>
+                        <text x="496" y="138" font-size="7.5" fill="#F87171" text-anchor="end">&rarr; Mutated at M2 (Null / 0%)</text>
+
+                        <!-- Trans Clinical Outcome Badge -->
+                        <rect x="276" y="146" width="224" height="28" rx="5" fill="#450A0A" stroke="#DC2626" stroke-width="1"/>
+                        <text x="388" y="159" font-size="8.8" font-weight="bold" fill="#FCA5A5" text-anchor="middle">🚨 COMPOUND HETEROZYGOTE (DISEASE)</text>
+                        <text x="388" y="169" font-size="7.5" fill="#FECDD3" text-anchor="middle">0% functional enzyme &rarr; Clinical phenotype</text>
+
+                        <!-- ================= BOTTOM INSET: THE SHORT READ BLIND SPOT ================= -->
+                        <rect x="8" y="191" width="504" height="76" rx="6" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+                        <text x="18" y="205" font-size="8.8" font-weight="bold" fill="#FBBF24">⚠️ Why Standard Short-Read NGS is Blind to Phase:</text>
+
+                        <!-- Read 1 covering M1 -->
+                        <rect x="50" y="213" width="70" height="15" rx="3" fill="#3B82F6" stroke="#60A5FA"/>
+                        <text x="85" y="224" font-size="7.5" font-family="var(--font-mono)" fill="#FFF" font-weight="bold" text-anchor="middle">150 bp Read</text>
+                        <circle cx="85" cy="233" r="3" fill="#EF4444"/>
+                        <text x="85" y="244" font-size="7.5" fill="#FDA4AF" text-anchor="middle">Mut 1</text>
+
+                        <!-- Gap -->
+                        <line x1="125" y1="220" x2="385" y2="220" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4,4"/>
+                        <rect x="180" y="212" width="150" height="16" rx="3" fill="#0F172A" stroke="#475569"/>
+                        <text x="255" y="223" font-size="7.2" font-family="var(--font-mono)" fill="#CBD5E1" text-anchor="middle">~15 kb Unsequenced Intron Gap</text>
+
+                        <!-- Read 2 covering M2 -->
+                        <rect x="390" y="213" width="70" height="15" rx="3" fill="#3B82F6" stroke="#60A5FA"/>
+                        <text x="425" y="224" font-size="7.5" font-family="var(--font-mono)" fill="#FFF" font-weight="bold" text-anchor="middle">150 bp Read</text>
+                        <circle cx="425" cy="233" r="3" fill="#EF4444"/>
+                        <text x="425" y="244" font-size="7.5" fill="#FDA4AF" text-anchor="middle">Mut 2</text>
+
+                        <text x="255" y="258" font-size="7.8" fill="#94A3B8" text-anchor="middle">
+                            Reads cannot span the gap &rarr; NGS sees two heterozygous variants, but cannot determine phase!
+                        </text>
+                    </svg>
+
+                    <div style="font-size: 0.74rem; color: #94A3B8; margin-top: 6px; line-height: 1.35;">
+                        💡 <strong>Clinical Resolution:</strong> Resolving phase requires <strong>parental trio sequencing</strong> or <strong>long-read sequencing</strong> (>20 kb) to span both loci on a single intact molecule.
                     </div>
                 </div>
             </div>
