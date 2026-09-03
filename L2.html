@@ -5489,58 +5489,134 @@
                 </p>
             </div>
 
-            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
-                <!-- Left: BCL11A, GWAS & Variance Explained -->
-                <div class="card card-purple fragment" style="padding: 16px 20px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="grid-2col" style="grid-template-columns: 1.02fr 1.18fr; gap: 18px; align-items: stretch;">
+                <!-- Left Column: The Genetic Discoveries & Modifiers -->
+                <div class="card card-purple fragment" style="padding: 16px 18px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <div class="card-header-row" style="margin-bottom: 4px;">
-                            <span class="card-title" style="font-size: 1.08rem;">1. BCL11A &amp; The Power of GWAS</span>
-                            <span class="card-pill" style="font-size: 0.74rem;">Chr 2p16.1</span> <a href="https://doi.org/10.1038/ng2144" target="_blank" rel="noopener" class="ref-pill" style="margin-left: 6px;">Menzel 2007 ↗</a>
+                            <span class="card-title" style="font-size: 1.02rem;">1. The Epistatic Modifier Network</span>
+                            <span class="card-pill" style="background: #FAF5FF; color: #6B21A8; border-color: #E9D5FF;">Chr 2 &bull; 6 &bull; 19</span> <a href="https://doi.org/10.1038/ng2144" target="_blank" rel="noopener" class="ref-pill" style="margin-left: 6px;">Menzel 2007 ↗</a>
                         </div>
 
                         <!-- Conceptual Box: GWAS & Variance Explained -->
-                        <div style="background: #FAF5FF; border: 1.5px solid #E9D5FF; border-radius: 6px; padding: 8px 12px; font-size: 0.86rem; line-height: 1.40; color: #581C87; margin-bottom: 8px;">
-                            <div style="margin-bottom: 4px;">
-                                <strong style="color: #6B21A8;">🔬 GWAS (Genome-Wide Association):</strong> Unbiased statistical scan testing millions of SNPs across all chromosomes to link DNA markers to a measurable trait.
+                        <div style="background: #FAF5FF; border: 1.5px solid #E9D5FF; border-radius: 6px; padding: 8px 12px; font-size: 0.81rem; line-height: 1.40; color: #581C87; margin-bottom: 8px;">
+                            <div><strong style="color: #6B21A8;">🔬 GWAS Discovery:</strong> Scanned millions of SNPs across all chromosomes to find what controls adult fetal hemoglobin (HbF, 0.5%&ndash;8%).</div>
+                            <div style="margin-top: 4px;"><strong style="color: #6B21A8;">📊 Variance Explained:</strong> Non-coding SNPs in intron 2 of <em>BCL11A</em> explain <strong>~50% of adult HbF variation</strong> &mdash; the single largest modifier effect in human genetics!</div>
+                        </div>
+
+                        <!-- Upstream Modifiers -->
+                        <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px;">
+                            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 10px; font-size: 0.79rem; line-height: 1.35; color: #334155;">
+                                <strong style="color: #0284C7;">Chr 19p13 (KLF1):</strong> Master erythroid transcription factor that directly activates the <em>BCL11A</em> promoter.
                             </div>
-                            <div>
-                                <strong style="color: #6B21A8;">📊 Concept &bull; "Variance Explained":</strong> The proportion of total population spread in a trait (why adult HbF ranges from 0.5% to 8%) accounted for purely by a person's DNA at that specific locus.
+                            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 10px; font-size: 0.79rem; line-height: 1.35; color: #334155;">
+                                <strong style="color: #7C3AED;">Chr 6q23 (HBS1L-MYB):</strong> Regulates erythroid precursor proliferation rates and cell-cycle kinetics.
+                            </div>
+                            <div style="background: #FDF4FF; border: 1px solid #F0ABFC; border-radius: 6px; padding: 6px 10px; font-size: 0.79rem; line-height: 1.35; color: #701A75;">
+                                <strong style="color: #A21CAF;">Chr 2p16.1 (BCL11A):</strong> Master repressor silencing &gamma;-globin expression after infancy.
                             </div>
                         </div>
 
-                        <ul style="padding-left: 18px; font-size: 0.88rem; line-height: 1.42; color: #334155; margin: 0;">
-                            <li><strong>Massive Effect Size:</strong> GWAS revealed that non-coding SNPs in intron 2 of <em>BCL11A</em> (Chromosome 2) explain <strong>~50% of all adult HbF variation</strong> &mdash; an enormous single-gene effect!</li>
-                            <li><strong>The Master Repressor:</strong> BCL11A protein binds directly to &gamma;-globin promoters on Chr 11, physically silencing fetal hemoglobin expression after infancy.</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer-metric" style="margin-top: 6px;">
-                        <span>Genetic Impact:</span>
-                        <span class="metric-highlight">Chr 2 Locus Explains ~50% of Chr 11 Globin Variance</span>
-                    </div>
-                </div>
-
-                <!-- Right: Supporting Network (MYB & KLF1) -->
-                <div class="card card-blue fragment" style="padding: 16px 20px; display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                        <div class="card-header-row" style="margin-bottom: 4px;">
-                            <span class="card-title" style="font-size: 1.08rem;">2. Upstream Epistatic Modifiers</span>
-                            <span class="card-pill" style="font-size: 0.74rem;">Chr 6q23 &bull; Chr 19p13</span>
+                        <div style="font-size: 0.78rem; line-height: 1.36; color: #475569;">
+                            <strong>💡 Epistasis Defined:</strong> The clinical severity of the <em>HBB</em> mutation on Chr 11 is fundamentally masked or amplified by genetic variation at chromosomes 2, 6, and 19.
                         </div>
-                        <div style="display: flex; flex-direction: column; gap: 6px;">
-                            <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 6px; padding: 7px 10px; font-size: 0.86rem; color: #1E40AF;">
-                                <strong>HBS1L-MYB Locus (Chr 6q23):</strong> Regulates erythroid precursor proliferation rates and cell-cycle kinetics, modulating HbF output.
-                            </div>
-                            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 7px 10px; font-size: 0.86rem; color: #334155;">
-                                <strong>KLF1 (Chr 19p13):</strong> Master transcription factor that directly activates <em>BCL11A</em>. Loss-of-function variants induce hereditary persistence of HbF.
-                            </div>
-                        </div>
-                        <p style="font-size: 0.88rem; line-height: 1.42; color: #334155; margin-top: 6px; margin-bottom: 0;">
-                            <strong>Epistasis Defined:</strong> The clinical severity of the <em>HBB</em> mutation on Chr 11 is fundamentally masked or amplified by genetic variation at chromosomes 2, 6, and 19.
-                        </p>
                     </div>
                     <div class="card-footer-metric" style="margin-top: 6px;">
                         <span>Genetic Architecture:</span>
-                        <span class="metric-highlight">Monogenic Core + Polygenic Modifier Network</span>
+                        <span class="metric-highlight">Monogenic Core + Multi-Chromosomal Circuit</span>
+                    </div>
+                </div>
+
+                <!-- Right Column: The 4-Chromosome Regulatory Circuit Vector Graphic -->
+                <div class="card card-blue fragment" style="padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div class="card-header-row" style="margin-bottom: 6px;">
+                            <span class="card-title" style="font-size: 1.02rem;">2. The 4-Chromosome Molecular Circuit</span>
+                            <span class="card-pill" style="background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE;">Physical Wiring</span>
+                        </div>
+
+                        <!-- Dark Console SVG Diagram -->
+                        <div style="background: #0F172A; border-radius: 8px; padding: 10px; border: 1px solid #334155;">
+                            <div style="font-size: 0.70rem; font-weight: 700; color: #38BDF8; font-family: var(--font-mono); margin-bottom: 8px; display: flex; justify-content: space-between;">
+                                <span>DISTRIBUTED GENOMIC NETWORK:</span>
+                                <span style="color: #94A3B8;">Chr 19 &bull; Chr 6 &bull; Chr 2 &rarr; Chr 11</span>
+                            </div>
+
+                            <svg viewBox="0 0 440 255" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+                                <!-- CHROMOSOME 19 (KLF1) -->
+                                <g transform="translate(10, 8)">
+                                    <rect x="0" y="0" width="125" height="36" rx="5" fill="#1E293B" stroke="#38BDF8" stroke-width="1.2"/>
+                                    <text x="8" y="15" font-size="7.5" font-weight="bold" fill="#38BDF8">Chr 19p13</text>
+                                    <text x="8" y="28" font-size="9" font-weight="900" fill="#FFFFFF">KLF1</text>
+                                    <text x="50" y="27" font-size="7" fill="#94A3B8">Activator TF</text>
+                                </g>
+
+                                <!-- CHROMOSOME 6 (HBS1L-MYB) -->
+                                <g transform="translate(10, 56)">
+                                    <rect x="0" y="0" width="125" height="36" rx="5" fill="#1E293B" stroke="#A78BFA" stroke-width="1.2"/>
+                                    <text x="8" y="15" font-size="7.5" font-weight="bold" fill="#A78BFA">Chr 6q23</text>
+                                    <text x="8" y="28" font-size="9" font-weight="900" fill="#FFFFFF">HBS1L-MYB</text>
+                                    <text x="75" y="27" font-size="7" fill="#94A3B8">Cell Rate</text>
+                                </g>
+
+                                <!-- ARROWS FROM CHR 19 & 6 TO CHR 2 -->
+                                <path d="M 135 26 C 155 26, 160 48, 175 48" fill="none" stroke="#38BDF8" stroke-width="1.8"/>
+                                <polygon points="178,48 172,44 172,52" fill="#38BDF8"/>
+                                <text x="156" y="32" font-size="6.5" font-weight="bold" fill="#38BDF8">Activates</text>
+
+                                <path d="M 135 74 C 155 74, 160 56, 175 56" fill="none" stroke="#A78BFA" stroke-width="1.8" stroke-dasharray="2,2"/>
+                                <polygon points="178,56 172,52 172,60" fill="#A78BFA"/>
+
+                                <!-- CHROMOSOME 2 (BCL11A) -->
+                                <g transform="translate(180, 24)">
+                                    <rect x="0" y="0" width="135" height="54" rx="5" fill="#3B0764" stroke="#C084FC" stroke-width="1.5"/>
+                                    <text x="8" y="15" font-size="7.5" font-weight="bold" fill="#E9D5FF">Chr 2p16.1</text>
+                                    <text x="8" y="32" font-size="11" font-weight="900" fill="#F472B6">BCL11A</text>
+                                    <text x="8" y="46" font-size="7.5" fill="#FBCFE8">Master Repressor</text>
+                                    <rect x="80" y="6" width="48" height="15" rx="3" fill="#701A75" stroke="#F472B6"/>
+                                    <text x="104" y="17" font-size="6.5" font-weight="bold" fill="#FDF4FF" text-anchor="middle">~50% Var</text>
+                                </g>
+
+                                <!-- REPRESSION BAR DOWN TO CHR 11 -->
+                                <path d="M 315 51 C 340 51, 340 92, 280 92" fill="none" stroke="#EF4444" stroke-width="2.2"/>
+                                <line x1="280" y1="86" x2="280" y2="98" stroke="#EF4444" stroke-width="3"/>
+                                <text x="345" y="74" font-size="7.5" font-weight="bold" fill="#F87171" text-anchor="middle">Silences (┫)</text>
+
+                                <!-- CHROMOSOME 11 TARGET CONTAINER -->
+                                <g transform="translate(10, 104)">
+                                    <rect x="0" y="0" width="420" height="142" rx="6" fill="#1E293B" stroke="#64748B" stroke-width="1"/>
+                                    <text x="12" y="16" font-size="8.5" font-weight="bold" fill="#F1F5F9">TARGET: Chromosome 11p15.5 (&beta;-Globin Locus)</text>
+
+                                    <!-- Branch A: High BCL11A (Default Sickle) -->
+                                    <g transform="translate(12, 26)">
+                                        <rect x="0" y="0" width="192" height="106" rx="4" fill="#450A0A" stroke="#EF4444" stroke-width="1.2"/>
+                                        <text x="10" y="16" font-size="8" font-weight="bold" fill="#FCA5A5">DEFAULT: High BCL11A Active</text>
+                                        <text x="10" y="34" font-size="7.5" fill="#FECDD3">&bull; &gamma;-Globin (HBG1/2): <tspan font-weight="bold" fill="#EF4444">SILENCED (0%)</tspan></text>
+                                        <text x="10" y="50" font-size="7.5" fill="#FECDD3">&bull; HbF Level: <tspan font-weight="bold" fill="#EF4444">&lt; 1% (Minimal)</tspan></text>
+                                        <text x="10" y="66" font-size="7.5" fill="#FECDD3">&bull; Blood Makeup: <tspan font-weight="bold" fill="#F87171">100% HbS (&beta;S&beta;S)</tspan></text>
+                                        
+                                        <rect x="10" y="78" width="172" height="20" rx="3" fill="#7F1D1D"/>
+                                        <text x="96" y="92" font-size="7.5" font-weight="bold" fill="#FEE2E2" text-anchor="middle">🚨 Severe Vaso-Occlusive Crisis</text>
+                                    </g>
+
+                                    <!-- Branch B: Low BCL11A (Protective Modifier / Casgevy) -->
+                                    <g transform="translate(216, 26)">
+                                        <rect x="0" y="0" width="192" height="106" rx="4" fill="#064E3B" stroke="#10B981" stroke-width="1.2"/>
+                                        <text x="10" y="16" font-size="8" font-weight="bold" fill="#A7F3D0">PROTECTIVE: BCL11A Silenced</text>
+                                        <text x="10" y="34" font-size="7.5" fill="#D1FAE5">&bull; &gamma;-Globin (HBG1/2): <tspan font-weight="bold" fill="#34D399">RE-ACTIVATED (&uarr;)</tspan></text>
+                                        <text x="10" y="50" font-size="7.5" fill="#D1FAE5">&bull; HbF Level: <tspan font-weight="bold" fill="#34D399">&gt; 20&ndash;30% (&alpha;2&gamma;2)</tspan></text>
+                                        <text x="10" y="66" font-size="7.5" fill="#D1FAE5">&bull; Delay: <tspan font-weight="bold" fill="#6EE7B7">1000&times; Transit Safety Window</tspan></text>
+                                        
+                                        <rect x="10" y="78" width="172" height="20" rx="3" fill="#065F46"/>
+                                        <text x="96" y="92" font-size="7.5" font-weight="bold" fill="#ECFDF5" text-anchor="middle">✅ Polymerization Blocked (Cure)</text>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="card-footer-metric" style="margin-top: 6px;">
+                        <span>The Clinical Mechanism:</span>
+                        <span class="metric-highlight" style="color: #059669;">HbF Induction Breaks the Polymerization Chain</span>
                     </div>
                 </div>
             </div>
