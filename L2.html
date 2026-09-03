@@ -4571,64 +4571,135 @@
                 </p>
             </div>
 
-            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
-                <!-- Left Column: The Coordinate Standard & The Mosaic Origin -->
-                <div style="display: flex; flex-direction: column; gap: 14px; justify-content: space-between;">
-                    <!-- Card 1: The Master Coordinate System -->
-                    <div class="card card-blue fragment" style="padding: 18px 22px;">
+            <div class="grid-2col" style="grid-template-columns: 1fr 1.22fr; gap: 18px; align-items: stretch;">
+                <!-- Left Column: What It IS vs What It Is NOT -->
+                <div class="card card-blue fragment" style="padding: 16px 18px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
                         <div class="card-header-row" style="margin-bottom: 6px;">
-                            <span class="card-title" style="font-size: 1.05rem;">1. The &ldquo;Prime Meridian&rdquo; of Biology</span>
-                            <span class="card-pill" style="font-size: 0.72rem;">Coordinate System</span>
+                            <span class="card-title" style="font-size: 1.02rem;">1. The &ldquo;Prime Meridian&rdquo; of Biology</span>
+                            <span class="card-pill" style="background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE;">Coordinate System</span>
                         </div>
-                        <ul style="padding-left: 20px; font-size: 0.86rem; line-height: 1.50; color: #334155; margin: 0;">
-                            <li>A standardized linear sequence establishing an official <strong>numerical address system</strong> for every base in the human genome.</li>
-                            <li><strong>Clinical Reporting:</strong> All patient mutations are recorded as coordinate offsets relative to this standard (e.g., <code style="background: #F1F5F9; padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.80rem;">chr7:117,559,590 A&rarr;T</code> for Cystic Fibrosis).</li>
-                        </ul>
-                    </div>
-
-                    <!-- Card 2: The GRCh38 Mosaic -->
-                    <div class="card card-purple fragment" style="padding: 18px 22px;">
-                        <div class="card-header-row" style="margin-bottom: 6px;">
-                            <span class="card-title" style="font-size: 1.05rem;">2. The Historical Standard (GRCh38)</span>
-                            <span class="card-pill" style="font-size: 0.72rem;">RP11 &bull; Gapped Mosaic</span>
-                        </div>
-                        <p style="font-size: 0.85rem; line-height: 1.48; color: #334155; margin-bottom: 6px;">
-                            Over <strong>70% of GRCh38</strong> came from a single anonymous donor from Buffalo, NY (the <em>RP11</em> BAC library), spliced with several other volunteer donors.
+                        
+                        <p style="font-size: 0.84rem; line-height: 1.45; color: #334155; margin-bottom: 8px;">
+                            The reference genome is a standardized linear sequence establishing an official <strong>numerical coordinate address</strong> for every base in human DNA.
                         </p>
-                        <div style="background: #FFF1F2; border: 1px solid #FECDD3; border-radius: 6px; padding: 6px 10px; font-size: 0.80rem; color: #9F1239;">
-                            ⚠️ <strong>The 8% Gap:</strong> Left centromeres, telomeres, and repeat deserts unresolved with hundreds of unsequenced physical gaps (<code>NNNNN</code>).
+
+                        <div style="background: #0F172A; border-radius: 6px; padding: 8px 12px; margin-bottom: 10px;">
+                            <div style="font-size: 0.70rem; color: #94A3B8; font-family: var(--font-mono); margin-bottom: 3px;">UNIVERSAL CLINICAL ADDRESS EXAMPLE:</div>
+                            <div style="font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: #38BDF8;">
+                                chr7:117,559,590 A&rarr;T <span style="color: #FBBF24;">(CFTR &bull; Cystic Fibrosis)</span>
+                            </div>
                         </div>
+
+                        <!-- Crucial Misconceptions Debunk Box -->
+                        <div style="background: #FEF2F2; border: 1.5px solid #FECDD3; border-radius: 8px; padding: 10px 12px;">
+                            <div style="font-size: 0.78rem; font-weight: 800; color: #991B1B; margin-bottom: 4px;">
+                                ⚠️ CRUCIAL MISCONCEPTIONS:
+                            </div>
+                            <ul style="padding-left: 16px; font-size: 0.78rem; line-height: 1.40; color: #7F1D1D; margin: 0;">
+                                <li style="margin-bottom: 4px;"><strong>Not a &ldquo;Gold Standard Human&rdquo;:</strong> The reference carries rare disease-risk alleles and non-functional pseudogenes purely by chance from its donors.</li>
+                                <li><strong>Not Adam or Eve:</strong> It is an arbitrary coordinate street grid, not a biological benchmark of evolutionary perfection or health.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer-metric" style="margin-top: 8px;">
+                        <span>The Core Purpose:</span>
+                        <span class="metric-highlight">Universal Indexing for 8 Billion Genomes</span>
                     </div>
                 </div>
 
-                <!-- Right Column: Crucial Misconceptions & Where T2T Fits -->
-                <div style="display: flex; flex-direction: column; gap: 14px; justify-content: space-between;">
-                    <!-- Card 3: Crucial Misconceptions -->
-                    <div class="card card-cherry fragment" style="padding: 18px 22px;">
+                <!-- Right Column: The Mosaic Chimera (GRCh38) vs Single-Source (T2T) -->
+                <div class="card card-purple fragment" style="padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
                         <div class="card-header-row" style="margin-bottom: 6px;">
-                            <span class="card-title" style="font-size: 1.05rem;">3. Crucial Misconceptions</span>
-                            <span class="card-pill" style="font-size: 0.72rem;">What It Is NOT</span>
+                            <span class="card-title" style="font-size: 1.02rem;">2. The Mosaic Chimera vs. Gapless Standard</span>
+                            <span class="card-pill" style="background: #FAF5FF; color: #7C3AED; border-color: #E9D5FF;">GRCh38 vs. T2T</span>
                         </div>
-                        <div style="font-size: 0.85rem; line-height: 1.48; color: #334155;">
-                            <div style="margin-bottom: 6px;">
-                                <strong style="color: #BE123C;">❌ Not a &ldquo;Gold Standard Human&rdquo;:</strong> The reference carries rare disease-risk mutations and non-functional pseudogenes purely by chance from its donors.
+
+                        <!-- Dark Console SVG Diagram -->
+                        <div style="background: #0F172A; border-radius: 8px; padding: 10px; border: 1px solid #334155;">
+                            <div style="font-size: 0.70rem; font-weight: 700; color: #C084FC; font-family: var(--font-mono); margin-bottom: 8px; display: flex; justify-content: space-between;">
+                                <span>GENOMIC CARTOGRAPHY:</span>
+                                <span style="color: #94A3B8;">Patchwork Chimera vs Complete Track</span>
                             </div>
-                            <div>
-                                <strong style="color: #BE123C;">❌ Not Adam or Eve:</strong> It is an arbitrary cartographic grid, not a biological benchmark of evolutionary perfection or health.
-                            </div>
+
+                            <svg viewBox="0 0 440 220" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+                                <!-- TRACK 1: GRCh38 Mosaic Chimera -->
+                                <g transform="translate(10, 8)">
+                                    <text x="0" y="12" font-size="8.5" font-weight="bold" fill="#F87171">GRCh38 (The Patchwork Chimera):</text>
+                                    
+                                    <!-- Chromosome Bar with Spliced Donors & Gaps -->
+                                    <g transform="translate(0, 18)">
+                                        <!-- Donor 1: RP11 (Blue) -->
+                                        <rect x="0" y="0" width="130" height="22" rx="3" fill="#1E3A8A" stroke="#3B82F6"/>
+                                        <text x="65" y="14" font-size="7" font-weight="bold" fill="#BFDBFE" text-anchor="middle">Donor RP11 (~70%)</text>
+
+                                        <!-- Unsequenced Gap 1 -->
+                                        <rect x="133" y="0" width="30" height="22" rx="2" fill="#450A0A" stroke="#EF4444" stroke-dasharray="2,2"/>
+                                        <text x="148" y="14" font-size="6.5" font-weight="bold" fill="#FCA5A5" text-anchor="middle">GAP</text>
+
+                                        <!-- Donor 2 (Purple) -->
+                                        <rect x="166" y="0" width="80" height="22" rx="3" fill="#581C87" stroke="#A855F7"/>
+                                        <text x="206" y="14" font-size="7" font-weight="bold" fill="#E9D5FF" text-anchor="middle">Donor 2 (BAC)</text>
+
+                                        <!-- Centromeric Gap 2 -->
+                                        <rect x="249" y="0" width="40" height="22" rx="2" fill="#450A0A" stroke="#EF4444" stroke-dasharray="2,2"/>
+                                        <text x="269" y="14" font-size="6.5" font-weight="bold" fill="#FCA5A5" text-anchor="middle">GAP</text>
+
+                                        <!-- Donor 3 (Amber) -->
+                                        <rect x="292" y="0" width="70" height="22" rx="3" fill="#78350F" stroke="#F59E0B"/>
+                                        <text x="327" y="14" font-size="7" font-weight="bold" fill="#FDE68A" text-anchor="middle">Donor 3</text>
+
+                                        <!-- Donor 1: RP11 End -->
+                                        <rect x="365" y="0" width="55" height="22" rx="3" fill="#1E3A8A" stroke="#3B82F6"/>
+                                        <text x="392" y="14" font-size="7" font-weight="bold" fill="#BFDBFE" text-anchor="middle">RP11</text>
+                                    </g>
+
+                                    <!-- Explanatory note -->
+                                    <text x="0" y="52" font-size="7" fill="#CBD5E1">
+                                        &bull; Spliced from ~20 anonymous donors from Buffalo, NY (RP11 library).
+                                    </text>
+                                    <text x="0" y="63" font-size="7" fill="#FCA5A5">
+                                        &bull; Left centromeres, telomeres, and repeat deserts as hundreds of gaps (<tspan font-family="var(--font-mono)">NNNNN</tspan>).
+                                    </text>
+                                </g>
+
+                                <!-- TRACK 2: T2T-CHM13 Gapless Reference -->
+                                <g transform="translate(10, 100)">
+                                    <text x="0" y="12" font-size="8.5" font-weight="bold" fill="#34D399">T2T-CHM13 (The Complete Standard):</text>
+                                    
+                                    <!-- Continuous Gapless Chromosome Bar -->
+                                    <g transform="translate(0, 18)">
+                                        <rect x="0" y="0" width="420" height="24" rx="4" fill="#064E3B" stroke="#10B981" stroke-width="1.5"/>
+                                        <circle cx="10" cy="12" r="5" fill="#34D399"/>
+                                        <text x="30" y="15" font-size="7.5" font-weight="bold" fill="#A7F3D0">TELOMERE</text>
+                                        
+                                        <rect x="185" y="2" width="50" height="20" rx="3" fill="#047857" stroke="#34D399"/>
+                                        <text x="210" y="15" font-size="7.5" font-weight="bold" fill="#ECFDF5" text-anchor="middle">CENTROMERE</text>
+
+                                        <text x="390" y="15" font-size="7.5" font-weight="bold" fill="#A7F3D0" text-anchor="end">TELOMERE</text>
+                                        <circle cx="410" cy="12" r="5" fill="#34D399"/>
+                                    </g>
+
+                                    <!-- Explanatory note -->
+                                    <text x="0" y="54" font-size="7" fill="#ECFDF5">
+                                        &bull; 100% single homozygous source (CHM13) &mdash; zero donor seams or phasing bubbles.
+                                    </text>
+                                    <text x="0" y="65" font-size="7" font-weight="bold" fill="#34D399">
+                                        &bull; Zero gaps (0 bp missing) across all 3,054,815,472 base pairs (2022 landmark).
+                                    </text>
+                                </g>
+
+                                <!-- Comparison Divider -->
+                                <line x1="10" y1="88" x2="430" y2="88" stroke="#334155" stroke-width="1"/>
+                                <!-- Evolution Arrow -->
+                                <text x="220" y="86" font-size="7.5" fill="#38BDF8" text-anchor="middle" font-weight="bold">&darr; Long Reads Close All Seams &amp; Gaps (2022) &darr;</text>
+                            </svg>
                         </div>
                     </div>
-
-                    <!-- Card 4: Where T2T Fits (The Gapless Milestone) -->
-                    <div class="card card-emerald fragment" style="padding: 18px 22px;">
-                        <div class="card-header-row" style="margin-bottom: 6px;">
-                            <span class="card-title" style="font-size: 1.05rem;">4. Where T2T Fits: The Gapless Reference</span>
-                            <span class="card-pill" style="font-size: 0.72rem;">T2T-CHM13 (2022)</span>
-                        </div>
-                        <ul style="padding-left: 20px; font-size: 0.85rem; line-height: 1.48; color: #334155; margin: 0;">
-                            <li>In 2022, the <strong>Telomere-to-Telomere (T2T) Consortium</strong> used long-read sequencing to generate the <strong>first truly complete, gapless 3.055 Gb human genome</strong>.</li>
-                            <li>Added <strong>200 million novel base pairs</strong>, closing every single physical gap across all 24 human chromosomes (1&ndash;22, X, Y).</li>
-                        </ul>
+                    <div class="card-footer-metric" style="margin-top: 6px;">
+                        <span>The Historical Leap:</span>
+                        <span class="metric-highlight" style="color: #059669;">200 Mb of Novel Bases &bull; 0 Physical Gaps</span>
                     </div>
                 </div>
             </div>
