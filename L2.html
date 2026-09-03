@@ -6384,48 +6384,136 @@
                 </p>
             </div>
 
-            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
-                <!-- Left: Clinical Efficacy (Pivotal Trial Data) -->
-                <div class="card card-blue fragment" style="padding: 16px 20px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="grid-2col" style="grid-template-columns: 1fr 1.22fr; gap: 18px; align-items: stretch;">
+                <!-- Left Column: Clinical Triumph & The Ex Vivo Pipeline -->
+                <div class="card card-blue fragment" style="padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <div class="card-header-row" style="margin-bottom: 6px;">
-                            <span class="card-title" style="font-size: 1.08rem;">1. Clinical Triumph (NEJM 2024)</span>
-                            <span class="card-pill" style="font-size: 0.74rem;">FDA &bull; EMA Approved</span> <a href="https://doi.org/10.1056/NEJMoa2309673" target="_blank" rel="noopener" class="ref-pill" style="margin-left: 6px;">NEJM 2024 ↗</a>
+                            <span class="card-title" style="font-size: 1.00rem;">1. Clinical Triumph (NEJM 2024)</span>
+                            <div>
+                                <span class="card-pill" style="background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE;">FDA Approved</span>
+                                <a href="https://doi.org/10.1056/NEJMoa2309673" target="_blank" rel="noopener" class="ref-pill" style="margin-left: 4px;">NEJM 2024 ↗</a>
+                            </div>
                         </div>
-                        <ul style="padding-left: 18px; font-size: 0.90rem; line-height: 1.50; color: #334155; margin: 0;">
-                            <li><strong>&gt;95% VOC Elimination:</strong> Over 95% of treated patients achieved complete freedom from severe vaso-occlusive pain crises for &ge;12 consecutive months.</li>
-                            <li><strong>Transfusion Independence:</strong> Severe transfusion-dependent patients achieved sustained normal hemoglobin with HbF stabilizing at <strong>&gt;40% of total globin</strong>.</li>
-                            <li><strong>First in History:</strong> The world's first approved CRISPR therapeutic to achieve functional clinical cure of a severe hereditary disease.</li>
-                        </ul>
+                        
+                        <div style="font-size: 0.80rem; line-height: 1.40; color: #334155; margin-bottom: 6px;">
+                            <strong>&gt;95% VOC Pain Free:</strong> Treated patients achieve sustained functional cure with protective Fetal Hemoglobin stabilizing at <strong>HbF &gt; 40%</strong>.
+                        </div>
+
+                        <!-- Dark Console: The 4-Step Ex Vivo Pipeline -->
+                        <div style="background: #0F172A; border-radius: 8px; padding: 10px; border: 1px solid #334155;">
+                            <div style="font-size: 0.68rem; font-weight: 700; color: #38BDF8; font-family: var(--font-mono); margin-bottom: 6px; display: flex; justify-content: space-between;">
+                                <span>THE EX VIVO HOSPITAL PIPELINE:</span>
+                                <span style="color: #F87171;">Cost: $2.2M &ndash; $2.8M</span>
+                            </div>
+
+                            <svg viewBox="0 0 360 145" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Step 1: Mobilization & Apheresis -->
+                                <g transform="translate(10, 8)">
+                                    <rect x="0" y="0" width="75" height="42" rx="3" fill="#1E293B" stroke="#38BDF8" stroke-width="1.2"/>
+                                    <text x="37" y="14" font-size="6.5" font-weight="bold" fill="#38BDF8" text-anchor="middle">1. Apheresis</text>
+                                    <text x="37" y="24" font-size="5.5" fill="#CBD5E1" text-anchor="middle">Mobilize &amp; harvest</text>
+                                    <text x="37" y="34" font-size="5.5" fill="#94A3B8" text-anchor="middle">CD34+ HSPCs</text>
+                                </g>
+
+                                <text x="91" y="32" font-size="9" fill="#64748B">&rarr;</text>
+
+                                <!-- Step 2: Cleanroom Editing -->
+                                <g transform="translate(98, 8)">
+                                    <rect x="0" y="0" width="75" height="42" rx="3" fill="#581C87" stroke="#C084FC" stroke-width="1.2"/>
+                                    <text x="37" y="14" font-size="6.5" font-weight="bold" fill="#FDF4FF" text-anchor="middle">2. GMP Facility</text>
+                                    <text x="37" y="24" font-size="5.5" fill="#E9D5FF" text-anchor="middle">Cas9 RNP electrop.</text>
+                                    <text x="37" y="34" font-size="5.5" font-weight="bold" fill="#F472B6" text-anchor="middle">($2,200,000)</text>
+                                </g>
+
+                                <text x="179" y="32" font-size="9" fill="#64748B">&rarr;</text>
+
+                                <!-- Step 3: Busulfan Conditioning -->
+                                <g transform="translate(186, 8)">
+                                    <rect x="0" y="0" width="75" height="42" rx="3" fill="#450A0A" stroke="#EF4444" stroke-width="1.2"/>
+                                    <text x="37" y="14" font-size="6.5" font-weight="bold" fill="#FCA5A5" text-anchor="middle">3. Busulfan</text>
+                                    <text x="37" y="24" font-size="5.5" fill="#FECDD3" text-anchor="middle">Myeloablative chemo</text>
+                                    <text x="37" y="34" font-size="5.5" fill="#F87171" text-anchor="middle">Clear marrow</text>
+                                </g>
+
+                                <text x="267" y="32" font-size="9" fill="#64748B">&rarr;</text>
+
+                                <!-- Step 4: Reinfusion & Isolation -->
+                                <g transform="translate(274, 8)">
+                                    <rect x="0" y="0" width="75" height="42" rx="3" fill="#064E3B" stroke="#10B981" stroke-width="1.2"/>
+                                    <text x="37" y="14" font-size="6.5" font-weight="bold" fill="#A7F3D0" text-anchor="middle">4. Inpatient</text>
+                                    <text x="37" y="24" font-size="5.5" fill="#D1FAE5" text-anchor="middle">4&ndash;6 weeks ward</text>
+                                    <text x="37" y="34" font-size="5.5" font-weight="bold" fill="#34D399" text-anchor="middle">Engraftment</text>
+                                </g>
+
+                                <!-- Bottom Summary Bar -->
+                                <rect x="10" y="62" width="340" height="72" rx="4" fill="#1E293B" stroke="#475569"/>
+                                <text x="20" y="78" font-size="7" font-weight="bold" fill="#FBBF24">Hospital Infrastructure Barrier:</text>
+                                <text x="20" y="92" font-size="6.5" fill="#CBD5E1">&bull; Requires high-tech apheresis centers &amp; GMP cell processing facilities.</text>
+                                <text x="20" y="105" font-size="6.5" fill="#CBD5E1">&bull; Toxic busulfan chemotherapy causes infertility, hair loss, infection risk.</text>
+                                <text x="20" y="118" font-size="6.5" font-weight="bold" fill="#38BDF8">&bull; Restricted to top-tier university hospitals in high-income nations.</text>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="card-footer-metric" style="margin-top: 8px;">
+                    <div class="card-footer-metric" style="margin-top: 6px;">
                         <span>Clinical Efficacy:</span>
-                        <span class="metric-highlight">&gt;95% Crisis-Free &bull; Transfusion-Independent</span>
+                        <span class="metric-highlight" style="color: #059669;">&gt;95% Crisis-Free &bull; Transfusion-Independent</span>
                     </div>
                 </div>
 
-                <!-- Right: The Financial & Global Inequity Reality -->
-                <div class="card card-cherry fragment" style="padding: 16px 20px; display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Right Column: The Financial & Global Inequity Reality -->
+                <div class="card card-cherry fragment" style="padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <div class="card-header-row" style="margin-bottom: 6px;">
-                            <span class="card-title" style="font-size: 1.08rem;">2. The Financials &amp; Global Reality</span>
-                            <span class="card-pill" style="font-size: 0.74rem;">$2.2M Price Tag</span> <a href="https://www.fda.gov/news-events/press-announcements/fda-approves-first-gene-therapies-treat-patients-sickle-cell-disease" target="_blank" rel="noopener" class="ref-pill" style="margin-left: 6px;">FDA Press ↗</a>
+                            <span class="card-title" style="font-size: 1.00rem;">2. The Financials &amp; Global Access Paradox</span>
+                            <div>
+                                <span class="card-pill" style="background: #FEF2F2; color: #991B1B; border-color: #FECDD3;">$2.2M Sticker Price</span>
+                                <a href="https://www.fda.gov/news-events/press-announcements/fda-approves-first-gene-therapies-treat-patients-sickle-cell-disease" target="_blank" rel="noopener" class="ref-pill" style="margin-left: 4px;">FDA Press ↗</a>
+                            </div>
                         </div>
-                        <div style="display: flex; flex-direction: column; gap: 8px;">
-                            <div style="background: #FFF1F2; border: 1px solid #FECDD3; border-radius: 6px; padding: 7px 10px; font-size: 0.88rem; color: #9F1239;">
-                                <strong>The $2.2M Sticker Price:</strong> Priced at <strong>$2,200,000 per patient</strong> (plus $300k&ndash;$500k in myeloablative chemotherapy and intensive hospitalization).
+
+                        <!-- Dark Console: Geographic Mismatch & In Vivo Solution -->
+                        <div style="background: #0F172A; border-radius: 8px; padding: 10px; border: 1px solid #334155; margin-bottom: 6px;">
+                            <div style="font-size: 0.68rem; font-weight: 700; color: #FCA5A5; font-family: var(--font-mono); margin-bottom: 6px; display: flex; justify-content: space-between;">
+                                <span>GLOBAL DISEASE BURDEN MISMATCH:</span>
+                                <span style="color: #94A3B8;">~300,000 Births / Year</span>
                             </div>
-                            <div style="background: #FFF5F5; border: 1px solid #FED7D7; border-radius: 6px; padding: 7px 10px; font-size: 0.88rem; color: #C53030;">
-                                <strong>The Global Inequity:</strong> Over <strong>80% of global sickle cell births (~300,000/year)</strong> occur in Sub-Saharan Africa and rural India &mdash; where patients often cannot afford $5/month hydroxyurea.
-                            </div>
-                            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 7px 10px; font-size: 0.88rem; color: #334155;">
-                                <strong>The Unsolved Frontier:</strong> A miraculous molecular cure that is economically and logistically out of reach for <strong>99% of the world's patients</strong>.
-                            </div>
+
+                            <svg viewBox="0 0 380 145" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Disparity Bar -->
+                                <g transform="translate(10, 8)">
+                                    <text x="0" y="10" font-size="7.5" font-weight="bold" fill="#CBD5E1">Where Do Sickle Cell Patients Live?</text>
+                                    
+                                    <!-- Africa / India block (85%) -->
+                                    <rect x="0" y="16" width="300" height="22" rx="3" fill="#881337" stroke="#F43F5E"/>
+                                    <text x="150" y="27" font-size="7" font-weight="bold" fill="#FFF" text-anchor="middle">Sub-Saharan Africa &amp; India: ~85% of Cases (~300k births/yr)</text>
+                                    <text x="150" y="35" font-size="5.5" fill="#FECDD3" text-anchor="middle">Average healthcare spending: &lt;$50/year per capita</text>
+
+                                    <!-- US / Europe block (3%) -->
+                                    <rect x="305" y="16" width="55" height="22" rx="3" fill="#1E3A8A" stroke="#3B82F6"/>
+                                    <text x="332" y="27" font-size="6.5" font-weight="bold" fill="#BFDBFE" text-anchor="middle">US/EU</text>
+                                    <text x="332" y="35" font-size="5.5" fill="#93C5FD" text-anchor="middle">&lt;3% Cases</text>
+                                </g>
+
+                                <!-- The Next Frontier: In Vivo Delivery -->
+                                <g transform="translate(10, 62)">
+                                    <rect x="0" y="0" width="360" height="72" rx="4" fill="#064E3B" stroke="#10B981" stroke-width="1.2"/>
+                                    <text x="10" y="15" font-size="7.5" font-weight="bold" fill="#34D399">🚀 The Scalable Frontier: Targeted In Vivo Delivery</text>
+                                    <text x="10" y="29" font-size="6.8" fill="#D1FAE5">&bull; Target bone marrow stem cells directly via <tspan font-weight="bold" fill="#FFFFFF">targeted lipid nanoparticles (LNPs)</tspan>.</text>
+                                    <text x="10" y="42" font-size="6.8" fill="#D1FAE5">&bull; Injected as a simple IV infusion &mdash; <tspan font-weight="bold" fill="#FDE047">ZERO apheresis, ZERO chemo, ZERO cleanroom</tspan>.</text>
+                                    <text x="10" y="55" font-size="6.8" fill="#D1FAE5">&bull; Can be administered at outpatient clinics in Nigeria, Kenya, or rural India.</text>
+                                    <text x="10" y="66" font-size="6.5" font-weight="bold" fill="#A7F3D0">&rarr; Drops production cost from $2,200,000 to &lt;$1,000 per dose!</text>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <div style="font-size: 0.76rem; line-height: 1.36; color: #881337;">
+                            <strong>The Unsolved Frontier:</strong> A miraculous molecular cure that is economically and logistically out of reach for <strong>99% of the world's patients</strong>.
                         </div>
                     </div>
-                    <div class="card-footer-metric" style="margin-top: 8px;">
+                    <div class="card-footer-metric" style="margin-top: 6px;">
                         <span>Global Access Paradox:</span>
-                        <span class="metric-highlight">80% Burden in Low-Resource Regions &bull; $2.2M Cost</span>
+                        <span class="metric-highlight" style="color: #DC2626;">85% Burden in Global South &bull; $2.2M US Cost</span>
                     </div>
                 </div>
             </div>
