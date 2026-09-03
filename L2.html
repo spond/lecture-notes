@@ -4654,46 +4654,128 @@
                 </p>
             </div>
 
-            <div class="grid-2col" style="gap: 20px; align-items: stretch;">
-                <!-- Left: The Short-Read Collapse & The Diploid Assembly Trap -->
-                <div class="card card-cherry fragment" style="padding: 18px 22px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="grid-2col" style="gap: 18px; align-items: stretch;">
+                <!-- Left: The Diploid Assembly Trap with Embedded Diagram -->
+                <div class="card card-cherry fragment" style="padding: 16px 18px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <div class="card-header-row" style="margin-bottom: 6px;">
-                            <span class="card-title" style="font-size: 1.05rem;">The Technical &amp; Biological Barriers</span>
-                            <span class="card-pill" style="font-size: 0.70rem;">2003 &ndash; 2022 Deadlock</span>
+                            <span class="card-title" style="font-size: 1.02rem;">1. The Diploid Assembly Trap</span>
+                            <span class="card-pill" style="background: #FEF2F2; color: #991B1B; border-color: #FECDD3;">2003&ndash;2022 Deadlock</span>
                         </div>
-                        <ul style="padding-left: 18px; font-size: 0.85rem; line-height: 1.48; color: #334155; margin: 0;">
-                            <li><strong>Short Reads Collapse in Repeats:</strong> 150 bp short reads cannot span multi-kilobase identical repeats (like solving a puzzle made of identical blue sky pieces).</li>
-                            <li><strong>Heterochromatin Density:</strong> Centromeres and telomeres consist of millions of tandemly repeated satellite &ldquo;words&rdquo; that broke assembly algorithms.</li>
-                            <li><strong>The Diploid Trap:</strong> Normal human cells inherit 2 copies of each chromosome. Small differences between maternal and paternal homologs create tangled, branching loops in assembly graphs.</li>
-                        </ul>
+                        <div style="font-size: 0.82rem; line-height: 1.40; color: #334155; margin-bottom: 6px;">
+                            Normal human cells have maternal and paternal homologs. In repetitive regions, heterozygous SNPs create tangled branching loops:
+                        </div>
+
+                        <!-- Dark Console SVG Diagram -->
+                        <div style="background: #0F172A; border-radius: 8px; padding: 10px; margin: 6px 0; border: 1px solid #334155;">
+                            <div style="font-size: 0.70rem; font-weight: 700; color: #FCA5A5; font-family: var(--font-mono); margin-bottom: 8px;">
+                                ⚠️ DE BRUIJN GRAPH: HETEROZYGOUS BUBBLE
+                            </div>
+
+                            <svg viewBox="0 0 360 135" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Input Homologs -->
+                                <text x="10" y="16" font-size="8.5" font-weight="bold" fill="#94A3B8">Chromosomes:</text>
+                                <rect x="80" y="6" width="125" height="13" rx="3" fill="#1E3A8A" stroke="#3B82F6"/>
+                                <text x="142" y="16" font-size="7" fill="#BFDBFE" text-anchor="middle">Maternal: ...ATCG<tspan font-weight="bold" fill="#FDE047">A</tspan>GTCA...</text>
+
+                                <rect x="215" y="6" width="125" height="13" rx="3" fill="#881337" stroke="#F43F5E"/>
+                                <text x="277" y="16" font-size="7" fill="#FECDD3" text-anchor="middle">Paternal: ...ATCG<tspan font-weight="bold" fill="#FDE047">G</tspan>GTCA...</text>
+
+                                <!-- Graph Branching / Bubble -->
+                                <text x="10" y="48" font-size="8.5" font-weight="bold" fill="#F87171">Graph Bubble:</text>
+                                
+                                <!-- Incoming Contig 1 -->
+                                <rect x="75" y="40" width="44" height="16" rx="3" fill="#1E293B" stroke="#64748B"/>
+                                <text x="97" y="51" font-size="6.5" fill="#CBD5E1" text-anchor="middle">Contig 1</text>
+
+                                <!-- Branch Upper (Allele A) -->
+                                <path d="M 119 48 C 130 32, 138 32, 148 32" fill="none" stroke="#38BDF8" stroke-width="1.8"/>
+                                <rect x="148" y="23" width="58" height="18" rx="4" fill="#1E3A8A" stroke="#38BDF8" stroke-width="1.2"/>
+                                <text x="177" y="35" font-size="7.5" font-weight="bold" fill="#BFDBFE" text-anchor="middle">Allele A</text>
+
+                                <!-- Branch Lower (Allele G) -->
+                                <path d="M 119 48 C 130 64, 138 64, 148 64" fill="none" stroke="#F43F5E" stroke-width="1.8"/>
+                                <rect x="148" y="55" width="58" height="18" rx="4" fill="#881337" stroke="#F43F5E" stroke-width="1.2"/>
+                                <text x="177" y="67" font-size="7.5" font-weight="bold" fill="#FECDD3" text-anchor="middle">Allele G</text>
+
+                                <!-- Convergence to Contig 2 -->
+                                <path d="M 206 32 C 216 32, 224 48, 235 48" fill="none" stroke="#38BDF8" stroke-width="1.8"/>
+                                <path d="M 206 64 C 216 64, 224 48, 235 48" fill="none" stroke="#F43F5E" stroke-width="1.8"/>
+                                <rect x="235" y="40" width="44" height="16" rx="3" fill="#1E293B" stroke="#64748B"/>
+                                <text x="257" y="51" font-size="6.5" fill="#CBD5E1" text-anchor="middle">Contig 2</text>
+
+                                <!-- Resulting Assembly Failure -->
+                                <rect x="15" y="84" width="330" height="42" rx="4" fill="#450A0A" stroke="#EF4444" stroke-width="1.2"/>
+                                <text x="180" y="99" font-size="8" font-weight="bold" fill="#FCA5A5" text-anchor="middle">❌ REPEAT BUBBLE TANGLE &rarr; ALGORITHM FAILS</text>
+                                <text x="180" y="112" font-size="7" fill="#FECDD3" text-anchor="middle">Assembler cannot resolve phase in repeats &rarr; ~200 Mb left as gaps (NNNNN)</text>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="card-footer-metric" style="margin-top: 10px;">
-                        <span>The Result:</span>
-                        <span class="metric-highlight">~200 Mb Left as Gaps (<code>NNNNN</code>) in GRCh38</span>
+                    <div class="card-footer-metric" style="margin-top: 6px;">
+                        <span>The 2003-2022 Deadlock:</span>
+                        <span class="metric-highlight" style="color: #DC2626;">Diploid Bubbles Broke Repeat Assembly</span>
                     </div>
                 </div>
 
-                <!-- Right: The CHM13 Solution & Long Reads -->
-                <div class="card card-purple fragment" style="padding: 18px 22px; display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Right: The CHM13 Solution & Long Reads with Embedded Diagram -->
+                <div class="card card-purple fragment" style="padding: 16px 18px; display: flex; flex-direction: column; justify-content: space-between;">
                     <div>
                         <div class="card-header-row" style="margin-bottom: 6px;">
-                            <span class="card-title" style="font-size: 1.05rem;">The Breakthrough: CHM13 + Long Reads</span>
-                            <span class="card-pill" style="font-size: 0.70rem;">Homozygous Assembly</span>
+                            <span class="card-title" style="font-size: 1.02rem;">2. The CHM13 Biological "Hack"</span>
+                            <span class="card-pill" style="background: #FAF5FF; color: #7C3AED; border-color: #E9D5FF;">Homozygous Genome</span>
                         </div>
-                        <p style="font-size: 0.85rem; line-height: 1.48; color: #334155; margin-bottom: 8px;">
-                            The T2T Consortium bypassed diploid complexity using an extraordinary biological model:
-                        </p>
-                        <div style="background: #FAF5FF; border: 1px solid #E9D5FF; border-radius: 8px; padding: 10px 12px; font-size: 0.82rem; line-height: 1.45; color: #581C87; margin-bottom: 8px;">
-                            🔬 <strong>The Complete Hydatidiform Mole (CHM13):</strong> An abnormal pregnancy tissue formed when a single sperm fertilizes an egg that lost its nucleus and duplicates its DNA. It is <strong>100% homozygous (effectively haploid)</strong>, completely eliminating maternal/paternal phasing collisions!
+                        <div style="font-size: 0.82rem; line-height: 1.40; color: #334155; margin-bottom: 6px;">
+                            An abnormal hydatidiform mole cell line with an enucleated egg fertilized by a single sperm that duplicated its DNA:
                         </div>
-                        <p style="font-size: 0.83rem; line-height: 1.44; color: #334155; margin: 0;">
-                            <strong>Dual Sequencing Power:</strong> High-accuracy PacBio HiFi reads (&gt;99.9% accuracy, ~20 kb) + ultra-long Oxford Nanopore reads (&gt;100 kb) bridged across repeat arrays.
-                        </p>
+
+                        <!-- Dark Console SVG Diagram -->
+                        <div style="background: #0F172A; border-radius: 8px; padding: 10px; margin: 6px 0; border: 1px solid #334155;">
+                            <div style="font-size: 0.70rem; font-weight: 700; color: #34D399; font-family: var(--font-mono); margin-bottom: 8px;">
+                                ✨ 100% HOMOZYGOUS: PURE LINEAR RESOLUTION
+                            </div>
+
+                            <svg viewBox="0 0 360 135" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Origin Formula -->
+                                <text x="10" y="16" font-size="8.5" font-weight="bold" fill="#94A3B8">Origin:</text>
+                                <rect x="55" y="6" width="75" height="13" rx="3" fill="#1E293B" stroke="#64748B"/>
+                                <text x="92" y="15" font-size="6.5" fill="#CBD5E1" text-anchor="middle">Empty Egg (0)</text>
+                                <text x="135" y="16" font-size="8" fill="#F1F5F9">+</text>
+                                <rect x="145" y="6" width="75" height="13" rx="3" fill="#0284C7" stroke="#38BDF8"/>
+                                <text x="182" y="15" font-size="6.5" fill="#FFFFFF" text-anchor="middle">Sperm (23,X)</text>
+                                <text x="226" y="16" font-size="8" fill="#F1F5F9">&rarr;</text>
+                                <rect x="235" y="6" width="115" height="13" rx="3" fill="#581C87" stroke="#C084FC"/>
+                                <text x="292" y="15" font-size="6.5" font-weight="bold" fill="#FDF4FF" text-anchor="middle">Duplicates (46,XX)</text>
+
+                                <!-- Pure Linear Graph -->
+                                <text x="10" y="48" font-size="8.5" font-weight="bold" fill="#34D399">Linear Graph:</text>
+                                
+                                <!-- Straight Contig Flow -->
+                                <rect x="75" y="40" width="44" height="16" rx="3" fill="#1E293B" stroke="#64748B"/>
+                                <text x="97" y="51" font-size="6.5" fill="#CBD5E1" text-anchor="middle">Contig 1</text>
+                                
+                                <line x1="119" y1="48" x2="135" y2="48" stroke="#34D399" stroke-width="2.2"/>
+                                
+                                <rect x="135" y="38" width="85" height="20" rx="4" fill="#064E3B" stroke="#10B981" stroke-width="1.5"/>
+                                <text x="177" y="51" font-size="7.5" font-weight="bold" fill="#ECFDF5" text-anchor="middle">100% Allele A</text>
+                                
+                                <line x1="220" y1="48" x2="235" y2="48" stroke="#34D399" stroke-width="2.2"/>
+                                
+                                <rect x="235" y="40" width="44" height="16" rx="3" fill="#1E293B" stroke="#64748B"/>
+                                <text x="257" y="51" font-size="6.5" fill="#CBD5E1" text-anchor="middle">Contig 2</text>
+                                
+                                <rect x="285" y="40" width="65" height="16" rx="3" fill="#065F46" stroke="#34D399"/>
+                                <text x="317" y="51" font-size="6.5" font-weight="bold" fill="#ECFDF5" text-anchor="middle">Zero Bubbles</text>
+
+                                <!-- Resulting Gapless Contig -->
+                                <rect x="15" y="84" width="330" height="42" rx="4" fill="#064E3B" stroke="#10B981" stroke-width="1.2"/>
+                                <text x="180" y="99" font-size="8" font-weight="bold" fill="#34D399" text-anchor="middle">✅ GAPLESS TELOMERE-TO-TELOMERE CONTIG</text>
+                                <text x="180" y="112" font-size="7" fill="#A7F3D0" text-anchor="middle">PacBio HiFi (20 kb) + Nanopore (&gt;100 kb) bridge multi-megabase repeats!</text>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="card-footer-metric" style="margin-top: 10px;">
-                        <span>Key Insight:</span>
-                        <span class="metric-highlight">Homozygous Biology + Long Reads = Gapless Assembly</span>
+                    <div class="card-footer-metric" style="margin-top: 6px;">
+                        <span>The T2T Breakthrough:</span>
+                        <span class="metric-highlight" style="color: #059669;">100% Homozygosity Solved the Graphs</span>
                     </div>
                 </div>
             </div>
