@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 3 Study Monograph: Complex Traits, GWAS &amp; The Genetics of Human Personality | BIOL 3111/5111</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- MathJax for Accessible Mathematical Rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\(', '\)']],
+                displayMath: [['92253', '92253'], ['\[', '\]']],
+                processEscapes: true
+            },
+            options: {
+                enableMenu: true,
+                menuOptions: {
+                    settings: {
+                        assistiveMml: true,
+                        collapsible: false
+                    }
+                }
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --temple-cherry: #9D2235;
+            --temple-cherry-dark: #781827;
+            --slate-900: #0F172A;
+            --slate-800: #1E293B;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-300: #CBD5E1;
+            --slate-200: #E2E8F0;
+            --slate-100: #F1F5F9;
+            --slate-50: #F8FAFC;
+            --text-main: #1E293B;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Merriweather', Georgia, serif;
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--temple-cherry);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            z-index: 1000;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 0 0 6px 0;
+            transition: top 0.2s ease;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            background-color: var(--slate-50);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .monograph-container {
+            max-width: 880px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 48px 56px;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+            border-left: 1px solid var(--slate-200);
+            border-right: 1px solid var(--slate-200);
+            min-height: 100vh;
+        }
+
+        header {
+            border-bottom: 2px solid var(--slate-200);
+            padding-bottom: 24px;
+            margin-bottom: 36px;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--temple-cherry);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .monograph-subtitle {
+            font-size: 1.1rem;
+            color: var(--slate-600);
+            font-weight: 400;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .author-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 28px;
+            font-size: 0.86rem;
+            color: var(--slate-600);
+            background: var(--slate-50);
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: 1px solid var(--slate-200);
+        }
+
+        .paper-pill-banner {
+            margin-top: 14px;
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.86rem;
+            line-height: 1.45;
+            color: #1E40AF;
+        }
+
+        .paper-pill-banner a {
+            color: #1D4ED8;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .toc-box {
+            background: #FAF5FF;
+            border: 1.5px solid #E9D5FF;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 40px;
+        }
+
+        .toc-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #6B21A8;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 24px;
+            font-size: 0.88rem;
+        }
+
+        .toc-list a {
+            color: #581C87;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+            color: var(--temple-cherry);
+        }
+
+        h2 {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-top: 48px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--slate-100);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            page-break-after: avoid;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 22px;
+            background: var(--temple-cherry);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--slate-800);
+            margin-top: 24px;
+            margin-bottom: 10px;
+            page-break-after: avoid;
+        }
+
+        p {
+            font-family: var(--font-serif);
+            font-size: 0.98rem;
+            line-height: 1.75;
+            color: var(--slate-800);
+            margin-bottom: 18px;
+        }
+
+        strong {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            color: var(--slate-900);
+        }
+
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.88em;
+            background: var(--slate-100);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #0F172A;
+            border: 1px solid var(--slate-200);
+        }
+
+        .callout {
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 24px 0;
+            font-family: var(--font-sans);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            page-break-inside: avoid;
+        }
+
+        .callout-myth {
+            background: #FEF2F2;
+            border-left: 4px solid #DC2626;
+            color: #991B1B;
+        }
+
+        .callout-law {
+            background: #F0FDF4;
+            border-left: 4px solid #16A34A;
+            color: #166534;
+        }
+
+        .callout-clinical {
+            background: #EFF6FF;
+            border-left: 4px solid #2563EB;
+            color: #1E40AF;
+        }
+
+        .callout-purple {
+            background: #FAF5FF;
+            border-left: 4px solid #7C3AED;
+            color: #581C87;
+        }
+
+        .callout-title {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .math-block {
+            margin: 20px 0;
+            padding: 14px 20px;
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.05rem;
+            overflow-x: auto;
+            page-break-inside: avoid;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.88rem;
+            font-family: var(--font-sans);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--slate-200);
+        }
+
+        th {
+            background-color: var(--slate-100);
+            font-weight: 700;
+            color: var(--slate-900);
+        }
+
+        tr:nth-child(even) td {
+            background-color: #FAFAFA;
+        }
+
+        .quiz-card {
+            background: #FFFFFF;
+            border: 2px solid var(--slate-200);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 28px 0;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+            page-break-inside: avoid;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--slate-100);
+            padding-bottom: 8px;
+        }
+
+        .quiz-badge {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: #EFF6FF;
+            color: #1D4ED8;
+            border: 1px solid #BFDBFE;
+        }
+
+        .llm-trap-badge {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: #FEF2F2;
+            color: #DC2626;
+            border: 1px solid #FECDD3;
+            letter-spacing: 0.04em;
+        }
+
+        .quiz-question {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 1.02rem;
+            color: var(--slate-900);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .quiz-options {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .quiz-option {
+            background: var(--slate-50);
+            border: 1.5px solid var(--slate-200);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: var(--font-sans);
+            font-size: 0.90rem;
+            line-height: 1.45;
+            color: var(--slate-800);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .quiz-option.correct {
+            border-color: #10B981;
+            background: #ECFDF5;
+            color: #065F46;
+        }
+
+        .quiz-option.llm-trap {
+            border-color: #F87171;
+            background: #FFF1F2;
+        }
+
+        .opt-letter {
+            font-weight: 800;
+            font-family: var(--font-mono);
+            min-width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            background: var(--slate-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .quiz-option.correct .opt-letter {
+            background: #059669;
+            color: #FFFFFF;
+        }
+
+        .quiz-explanation {
+            background: #F8FAFC;
+            border-top: 1px dashed var(--slate-300);
+            padding-top: 14px;
+            margin-top: 14px;
+            font-size: 0.86rem;
+            line-height: 1.55;
+            color: var(--slate-700);
+        }
+
+        .llm-trap-box {
+            background: #FFF5F5;
+            border: 1px solid #FED7D7;
+            border-left: 4px solid #E53E3E;
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #742A2A;
+            line-height: 1.45;
+        }
+
+        footer {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 2px solid var(--slate-200);
+            font-size: 0.82rem;
+            color: var(--slate-600);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        footer a {
+            color: var(--temple-cherry);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .monograph-container {
+                padding: 24px 18px;
+            }
+            .toc-list {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main reading monograph</a>
+
+    <div class="monograph-container">
+
+        <header>
+            <div class="course-meta">
+                <span>BIOL 3111 / 5111 &bull; Fall 2026</span>
+                <span>Week 3 &bull; Lecture 03</span>
+            </div>
+            <h1>Study Monograph: Complex Traits, GWAS &amp; The Genetics of Human Personality</h1>
+            <div class="monograph-subtitle">
+                Moving from Mendelian monogenic certainties to millions of tiny polygenic nudges, within-family direct genetic effects, and the rigorous audit of behavioural genomics.
+            </div>
+            
+            <div class="author-card">
+                <div><strong>Instructor:</strong> Prof. Sergei Pond (SERC 644)</div>
+                <div><strong>Core Primary Article:</strong> Schwaba et al., <em>Nature</em> (2026)</div>
+                <div><strong>Classroom Session:</strong> Thursday, Sep 10, 2026</div>
+            </div>
+
+            <div class="paper-pill-banner">
+                📄 <strong>Required Primary Reading:</strong> Ted Schwaba, Priya Gupta, Tõnu Esko, Kari Stefansson, Daniel F. Levey, et al. 
+                <em>"Robust inference and correlates from genetic associations with personality."</em> 
+                <strong>Nature</strong> (Published online September 2, 2026). 
+                <a href="https://doi.org/10.1038/s41586-026-10992-9" target="_blank" rel="noopener">DOI: 10.1038/s41586-026-10992-9 ↗</a>
+            </div>
+        </header>
+
+        <nav class="toc-box" aria-label="Table of Contents">
+            <div class="toc-title">Table of Contents &bull; Study Roadmap</div>
+            <ul class="toc-list">
+                <li><a href="#sec-1">1. The Paradigm Shift: From Mendelian to Polygenic</a></li>
+                <li><a href="#sec-2">2. Architecture of the 1.14M Cohort Meta-Analysis</a></li>
+                <li><a href="#sec-3">3. Heritability &amp; The Missing Heritability Gap</a></li>
+                <li><a href="#sec-4">4. Debunking the Neurotransmitter Dogma</a></li>
+                <li><a href="#sec-5">5. Within-Family GWAS &amp; Familial Confounding</a></li>
+                <li><a href="#sec-6">6. The Assortative Mating Reality</a></li>
+                <li><a href="#sec-7">7. Predictive Limits of Polygenic Indices (PGIs)</a></li>
+                <li><a href="#sec-8">8. Multi-Ancestry &amp; Phenome-Wide Portability</a></li>
+                <li><a href="#sec-quiz">9. 5-Question Reading Mastery Quiz &amp; LLM Audit</a></li>
+            </ul>
+        </nav>
+
+        <main id="main-content">
+
+            <!-- ================================================================= -->
+            <!-- SECTION 1 -->
+            <!-- ================================================================= -->
+            <section id="sec-1">
+                <h2>1. The Paradigm Shift: From Mendelian to Polygenic</h2>
+                <p>
+                    In Lecture 2, we examined history's first recognized "molecular disease": sickle cell anemia. There, a single biophysical switch on Chromosome 11p15.5 (	ext{ c.20A>T}$, p.Glu6Val) alters a single amino acid, creates an exposed hydrophobic patch, and drives a catastrophic 30th-power nucleation cascade. In monogenic diseases, causality is localized, penetrance is high, and the biological chain from nucleotide to phenotype can be mapped with atomic precision.
+                </p>
+                <p>
+                    In <strong>Lecture 3</strong>, we cross an intellectual rubicon. The vast majority of human traits, common diseases, and psychological phenotypes do not obey simple Mendelian rules. They are <strong>complex traits</strong> governed by the <em>infinitesimal model</em> first formalized by R.A. Fisher in 1918 and expanded into modern <strong>omnigenic architecture</strong> by Boyle, Pritchard, and colleagues in 2017:
+                </p>
+                <div class="math-block" role="region" aria-label="Omnigenic Linear Additive Model">
+                    92253Y_i = \mu + \sum_{j=1}^{M} eta_j X_{ij} + \epsilon_i92253
+                </div>
+                <p>
+                    Here, phenotypic variance ($) is driven not by one rogue gene, but by hundreds or thousands of causal single-nucleotide polymorphisms (SNPs, {ij}$), each contributing an infinitesimal effect size ($eta_j pprox 0.001	ext{ to } 0.01$). Simultaneously, environmental inputs ($\epsilon_i$), developmental noise, and gene-environment interactions shape the final outcome.
+                </p>
+                <div class="callout callout-myth">
+                    <div class="callout-title">⚠️ The 1990s Candidate-Gene Wasteland</div>
+                    For decades, behavioral genetics was dominated by small-sample ( pprox 50	ext{--}500$) "candidate gene" studies claiming that complex behavioral traits were governed by a handful of intuitive master switches: e.g., the serotonin transporter promoter polymorphism (<em>5-HTTLPR</em>) for depression and neuroticism, or dopamine receptor 4 (<em>DRD4</em>) for risk-taking and extraversion. 
+                    <br><br>
+                    <strong>The Verdict:</strong> With the dawn of well-powered Genome-Wide Association Studies (GWAS), virtually <em>every single candidate-gene association in behavioral science failed to replicate</em>. They were statistical mirages generated by severe publication bias, small sample artifacts, and uncontrolled population stratification. True complex trait architecture requires sample sizes in the hundreds of thousands to millions.
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 2 -->
+            <!-- ================================================================= -->
+            <section id="sec-2">
+                <h2>2. Architecture of the 1.14M Cohort Meta-Analysis</h2>
+                <p>
+                    The landmark study by <strong>Schwaba et al. (Nature 2026)</strong> represents the most comprehensive, rigorously controlled genomic exploration of human personality ever conducted. The authors assembled <strong>46 international cohorts</strong> spanning between <strong>611,037 and 1,141,408 participants</strong> with European-like (EUR-like) genomes and up to <strong>44,000 participants</strong> with African-like (AFR-like) genomes.
+                </p>
+                <p>
+                    The study evaluated the <strong>"Big Five" personality dimensions</strong> (the canonical Five-Factor Model of personality psychology):
+                </p>
+                <ul>
+                    <li><strong>Extraversion (E):</strong> Sociability, assertiveness, positive emotionality, and reward-seeking.</li>
+                    <li><strong>Agreeableness (A):</strong> Compassion, trust, empathy, and prosocial cooperation.</li>
+                    <li><strong>Conscientiousness (C):</strong> Goal-directed self-discipline, organization, impulse control, and reliability.</li>
+                    <li><strong>Neuroticism (N):</strong> Emotional instability, anxiety, threat sensitivity, and negative affect.</li>
+                    <li><strong>Openness to Experience (O):</strong> Intellectual curiosity, aesthetic sensitivity, and cognitive flexibility.</li>
+                </ul>
+                <p>
+                    Across $\sim 10	ext{ million}$ tested SNPs, the meta-analysis identified <strong>1,260 approximately independent</strong> (^2 &lt; 0.10$ within 	ext{ kb}$) lead SNPs exceeding the canonical genome-wide significance threshold ( &lt; 5 	imes 10^{-8}$). Crucially, <strong>824 of these loci (65%) were entirely novel</strong>.
+                </p>
+                <div class="callout callout-law">
+                    <div class="callout-title">🔬 Trait-Specific Architecture vs. Overlapping Biology</div>
+                    <strong>82% of genomic loci</strong> containing a lead SNP were associated with <em>only a single Big Five trait</em>. Pairwise genetic correlations between the traits were modest ($|r_g| \le 0.30$, mean $|r_g| = 0.19$). However, functional biological follow-up revealed that the enriched downstream gene sets heavily intersected across traits (mean rank-order $ho = 0.72$). 
+                    <br><br>
+                    <strong>Key Insight:</strong> Different personality dimensions are modulated by distinct causal DNA variants, but those variants converge on a shared network of neurodevelopmental and synaptic machinery in the prefrontal cortex!
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 3 -->
+            <!-- ================================================================= -->
+            <section id="sec-3">
+                <h2>3. Heritability &amp; The Missing Heritability Gap</h2>
+                <p>
+                    One of the central themes of Lecture 3 is the mathematical distinction between <strong>pedigree/twin heritability</strong> and <strong>SNP heritability (^2_{	ext{SNP}}$)</strong>.
+                </p>
+                <p>
+                    For over fifty years, classic twin, adoption, and family studies consistently estimated the broad-sense heritability of the Big Five at <strong>^2 pprox 40\%	ext{ to } 60\%$</strong>. In Schwaba et al. (2026), linkage disequilibrium score regression (LDSC) revealed that common SNPs (minor allele frequency $	ext{MAF} &gt; 1\%$) accounted for:
+                </p>
+                <div class="math-block">
+                    92253h^2_{	ext{SNP}} = 4.8\% 	ext{ to } 9.3\% \quad (	ext{Broad Survey Measures})92253
+                </div>
+                <p>
+                    Why does common-variant GWAS capture only a fraction of the heritability identified in twins? The authors performed an elegant psychometric decomposition:
+                </p>
+                <ol>
+                    <li><strong>Measurement Error &amp; Instrument Reliability:</strong> Unlike physical traits (such as height, where measurement error is $&lt;1\%$), psychological traits are measured via questionnaire inventories. Brief, ultra-short surveys (e.g., 2-item scales) suffer from substantial measurement noise ({xx} pprox 0.50	ext{--}0.60$), which mathematically attenuates ^2_{	ext{SNP}}$. When the authors analyzed cohorts using comprehensive, highly reliable psychometric inventories (e.g., NEO-PI-R), common SNP heritability increased to <strong>.3\%	ext{ to } 13.3\%$</strong>.</li>
+                    <li><strong>The "Missing Heritability" Reservoir:</strong> The remaining gap (\% ightarrow 50\%$) resides in genetic variation that standard common-variant GWAS chips cannot tag: rare variants ($	ext{MAF} &lt; 0.1\%$), ultra-rare de novo mutations, structural variants (CNVs), and potential non-additive (epistatic or dominance) interactions.</li>
+                </ol>
+                <div class="callout callout-clinical">
+                    <div class="callout-title">🏛️ The Estonian Biobank Natural Experiment: Informant Ratings</div>
+                    Skeptics often claim: <em>"Personality GWAS hits do not reflect real biology—they merely capture how people subjectively perceive or describe themselves on self-report questionnaires."</em>
+                    <br><br>
+                    Schwaba et al. refuted this objection using the <strong>Estonian Biobank</strong>, where  = 73,983$ participants completed self-reports and  = 20,269$ were evaluated independently by <strong>close others</strong> (spouses, partners, long-time friends).
+                    <br><br>
+                    <strong>The Result:</strong> The genetic correlation between self-report GWAS and informant-report GWAS was near-perfect: <strong>mean  = 0.84$</strong>. The genetic architecture of human personality is not an introspection artifact—it reflects stable, observable behavioral tendencies recognized by the outside world!
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 4 -->
+            <!-- ================================================================= -->
+            <section id="sec-4">
+                <h2>4. Debunking the Neurotransmitter Dogma</h2>
+                <p>
+                    Perhaps the most intellectually striking result in Schwaba et al. (2026)—and a critical focal point for our course's <em>Hype Audit</em>—concerns the neurobiology of personality.
+                </p>
+                <p>
+                    For decades, popular neurobiological models asserted neat, reductionist mappings:
+                </p>
+                <ul>
+                    <li><em>Dopamine</em> was hypothesized to drive Extraversion, reward sensitivity, and Openness.</li>
+                    <li><em>Serotonin</em> was hypothesized to govern Neuroticism, emotional stability, and Agreeableness.</li>
+                </ul>
+                <p>
+                    Schwaba et al. tested these hypotheses directly by intersecting their GWAS summary statistics with single-cell RNA sequencing (scRNA-seq) datasets from both adult human post-mortem brain tissue and mouse cerebral cortex:
+                </p>
+                <div class="callout callout-myth">
+                    <div class="callout-title">🚨 Primary Literature Finding: Zero Preferential Neurotransmitter Enrichment</div>
+                    <em>"Based on sets of genes differentially expressed in specific brain cell types, both in mouse and human post-mortem tissues, we found little support for these hypotheses across trait-stratified tests: neither the effect size nor P value placed serotonin or dopamine among the most enriched neuron types... suggesting that their prominence in the literature relative to other types of neurons is not warranted."</em> (Schwaba et al., p. 4).
+                    <br><br>
+                    <em>"Single-cell gene expression data integrated with our GWAS indicated that there is no straightforward reductive mapping from broad, multifaceted personality traits to specific neuron types or neurotransmitters."</em> (Schwaba et al., p. 9).
+                </div>
+                <p>
+                    Instead of isolated monoamine circuits, the genetic architecture of human personality implicates <strong>broad prefrontal cortex neurodevelopment, synaptic organization, and transcriptional regulation</strong>. Complex human temperaments cannot be reduced to a single chemical dial.
+                </p>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 5 -->
+            <!-- ================================================================= -->
+            <section id="sec-5">
+                <h2>5. Within-Family GWAS &amp; Familial Confounding</h2>
+                <p>
+                    In Lecture 3, we will study the most important methodological advance in social and behavioral genomics of the past five years: <strong>Within-Family (Sibling) GWAS</strong>.
+                </p>
+                <p>
+                    Standard "population-level" GWAS compares unrelated individuals across society. Consequently, population GWAS is notoriously vulnerable to three major confounders:
+                </p>
+                <ol>
+                    <li><strong>Population Stratification:</strong> Subtle ancestral allele frequency differences correlating with regional or cultural geography.</li>
+                    <li><strong>Dynastic / Environmental Confounding:</strong> Wealthy or resource-rich families providing environments that boost certain outcomes independently of genetics.</li>
+                    <li><strong>Genetic Nurture (Indirect Genetic Effects):</strong> Non-transmitted parental alleles shaping the home environment (e.g., parents with high genetic propensity for reading buying more books for their children).</li>
+                </ol>
+                <p>
+                    By studying <strong>biological siblings</strong>, researchers exploit the natural lottery of meiosis: siblings inherit different random combinations of parental chromosomes, but share the exact same parents, household, socioeconomic status, and ancestral lineage. Any genetic association that survives a within-sibling comparison reflects a <strong>direct genetic effect</strong>!
+                </p>
+
+                <table aria-label="Comparison of Population vs Within-Family Attenuation Across Behavioral Traits">
+                    <thead>
+                        <tr>
+                            <th scope="col">Trait Category</th>
+                            <th scope="col">Example Phenotype</th>
+                            <th scope="col">Within-Family / Population Ratio</th>
+                            <th scope="col">Degree of Environmental Confounding</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Socioeconomic Traits</strong></td>
+                            <td>Educational Attainment (EA), Household Income</td>
+                            <td><strong>~0.50 &ndash; 0.60</strong> (Effect drops by ~50%)</td>
+                            <td><strong>Massive Confounding</strong> (Genetic nurture, dynastic privilege, school district).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cognitive Ability</strong></td>
+                            <td>Cognitive Performance / IQ test scores</td>
+                            <td><strong>~0.65 &ndash; 0.75</strong> (Effect drops by ~30%)</td>
+                            <td><strong>Moderate-to-High</strong> (Parental stimulation, early tutoring, resource access).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Physical / Anthropometric</strong></td>
+                            <td>Adult Standing Height</td>
+                            <td><strong>~0.85 &ndash; 0.90</strong> (Effect drops by ~12%)</td>
+                            <td><strong>Low</strong> (Subtle assortative mating and regional clines).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Big Five Personality</strong><br>(<em>Schwaba et al. 2026</em>)</td>
+                            <td>Extraversion, Neuroticism, Agreeableness, etc.</td>
+                            <td><strong>~0.90 &ndash; 1.05</strong> (Virtually zero drop!)</td>
+                            <td><strong>MINIMAL CONFOUNDING</strong> (&gt;90% direct genetic effect; non-transmitted alleles have zero effect).</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="callout callout-law">
+                    <div class="callout-title">🎯 The Great Sociogenomic Divergence</div>
+                    In striking contrast to educational attainment and income, <strong>genetic associations with personality are remarkably pure direct genetic effects</strong>. Non-transmitted parental alleles showed negligible prediction, and within-family effect sizes remained almost identical to population estimates. 
+                    <br><br>
+                    While your parents' alleles heavily shape your educational opportunities through the home environment they build, your personality genetics reflects internal neurobiological variation rather than parental environmental scaffolding!
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 6 -->
+            <!-- ================================================================= -->
+            <section id="sec-6">
+                <h2>6. The Assortative Mating Reality</h2>
+                <p>
+                    Does human mate choice alter the genetic architecture of personality? In complex genetics, <strong>assortative mating</strong> (like choosing like) increases homozygosity, inflates cross-trait correlations, and boosts population-level heritability estimates.
+                </p>
+                <p>
+                    In educational attainment, humans exhibit strong positive assortative mating: spouses have an inferred genetic correlation of <strong> = 0.37$</strong>. Pop-culture psychology often assumes the same holds for temperaments ("extroverts seek extroverts" or "calm people seek calm partners").
+                </p>
+                <p>
+                    Schwaba et al. examined ,703$ spouse/relative dyads in the UK Biobank and ,358$ dyads in deCODE (Iceland):
+                </p>
+                <div class="math-block">
+                    92253r_g(	ext{Spouses, Big Five Personality}) = 0.01 	ext{ to } 0.04 \quad (	ext{Negligible Assortment})92253
+                </div>
+                <p>
+                    Over recent human generations, humans have mated almost entirely randomly with respect to personality genetics. The genetic architecture of human personality is not distorted by long-term selective spousal assortment.
+                </p>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 7 -->
+            <!-- ================================================================= -->
+            <section id="sec-7">
+                <h2>7. Predictive Limits of Polygenic Indices (PGIs)</h2>
+                <p>
+                    A <strong>Polygenic Index (PGI)</strong>, or Polygenic Risk Score (PRS), aggregates the estimated effect sizes of millions of SNPs into a single individual score:
+                </p>
+                <div class="math-block">
+                    92253	ext{PGI}_i = \sum_{j=1}^{M} \hat{eta}_j G_{ij}92253
+                </div>
+                <p>
+                    In Schwaba et al. (2026), PGIs trained on $&gt;1	ext{ million}$ European genomes were tested in independent out-of-sample cohorts (e.g., Add Health, HRS, GSOEP, NTR, TEDS). The standardized effect sizes ($eta$) were highly statistically significant ( &lt; 10^{-50}$), but in absolute terms:
+                </p>
+                <ul>
+                    <li>The out-of-sample phenotypic variance explained was <strong>^2 pprox 1\%	ext{ to } 3\%$</strong> (standardized $eta pprox 0.10	ext{--}0.19$).</li>
+                    <li>For every standard deviation increase in Extraversion PGI, measured Extraversion increased by roughly zsh.18$ standard deviations.</li>
+                </ul>
+                <div class="callout callout-myth">
+                    <div class="callout-title">🛑 The Individual Determinism Trap</div>
+                    Commercial DTC genetic testing companies and HR tech startups frequently claim that multi-million-person GWAS enables "individual personality profiling" or "behavioral genetic screening."
+                    <br><br>
+                    <strong>The Authors' Explicit Warning:</strong>
+                    <em>"These PGIs cannot predict an individual’s future behaviour... Importantly, even direct genetic effects do not determine an individual’s personality. Rather, genetic associations act probabilistically across large samples of people, and may interact with and operate through environmental experiences."</em> (Schwaba et al., pp. 6, 9).
+                    <br><br>
+                    A score explaining \%$ of variance leaves <strong>\%$ of individual variation</strong> uncaptured! Using a personality PGI to make individual hiring, clinical, or educational decisions is pseudoscience.
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 8 -->
+            <!-- ================================================================= -->
+            <section id="sec-8">
+                <h2>8. Multi-Ancestry &amp; Phenome-Wide Portability</h2>
+                <p>
+                    Finally, Schwaba et al. tested two critical translational dimensions of genomic science:
+                </p>
+                <h3>A. The Cross-Ancestry Portability Cliff</h3>
+                <p>
+                    When PGIs derived from the EUR-like discovery GWAS ( &gt; 1.1	ext{M}$) were applied to participants with African-like genomes ( \le 44,000$), predictive accuracy was substantially attenuated: standardized effect sizes dropped to $eta pprox 0.047$ (explaining $&lt;0.5\%$ of variance).
+                </p>
+                <p>
+                    This attenuation does not reflect biological differences in personality mechanisms; it reflects the profound technical crisis of modern genomics: differences in linkage disequilibrium (LD) block architecture, divergent allele frequencies, and the severe under-representation of non-European populations in reference cohorts.
+                </p>
+
+                <h3>B. Phenome-Wide Consequences &amp; Mendelian Randomization</h3>
+                <p>
+                    While PGIs cannot predict individual destiny, they are powerful epidemiological research tools. Phenome-wide scans and bi-directional Mendelian Randomization (MR) revealed:
+                </p>
+                <ul>
+                    <li><strong>Psychiatric Pleiotropy:</strong> Neuroticism loci overlap massively with major depressive disorder ( pprox 0.70$) and generalized anxiety.</li>
+                    <li><strong>Residential Mobility:</strong> High polygenic propensity for Extraversion and Openness causally predicts lifetime migration from rural communities into cosmopolitan, dense urban centers.</li>
+                    <li><strong>Health Behaviors:</strong> High Conscientiousness PGI causally protects against smoking initiation and elevated BMI, and correlates with healthy lifestyle adherence.</li>
+                </ul>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 9: QUIZ -->
+            <!-- ================================================================= -->
+            <section id="sec-quiz">
+                <h2>9. 5-Question Reading Mastery Quiz &amp; LLM Audit</h2>
+                <p>
+                    The following 5 multiple-choice questions evaluate your critical understanding of Schwaba et al. (<em>Nature</em> 2026). Each question is calibrated to test deep primary-literature comprehension.
+                </p>
+                <div class="callout callout-purple">
+                    <div class="callout-title">🤖 Mandatory LLM Skeptical Audit Challenge</div>
+                    In accordance with our course's <em>Two-Track AI Contract</em>, test these questions against your favorite AI model (ChatGPT, Claude, Gemini). Uncritical LLMs trained on pop-science tropes, outdated candidate-gene literature, or sociogenomic generalizations will fall into the traps highlighted below. Your job as a human scientist is to identify <em>why</em> the machine hallucinated and verify the truth against the primary data!
+                </div>
+
+                <!-- QUESTION 1 -->
+                <div class="quiz-card" id="q1">
+                    <div class="quiz-header">
+                        <span class="quiz-badge">Question 1 &bull; Neurobiology &amp; Gene Sets</span>
+                        <span class="llm-trap-badge">⚠️ Classic LLM Trap</span>
+                    </div>
+                    <div class="quiz-question">
+                        Historical neurobiological models of personality (e.g., Cloninger, DeYoung) hypothesized that variation in the Big Five is driven by specific monoamine neurotransmitter pathways—specifically linking Extraversion/Openness to dopaminergic circuits and Neuroticism/Agreeableness to serotonergic circuits. When Schwaba et al. (2026) integrated their meta-analytic GWAS summary statistics with single-cell RNA sequencing data from post-mortem human and mouse brain tissue, what did they discover?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option llm-trap">
+                            <span class="opt-letter">A</span>
+                            <span>The GWAS confirmed strong, specific enrichment for dopaminergic receptor gene sets in Extraversion and serotonergic transporter genes in Neuroticism, validating 1990s candidate-gene models at genome-wide significance ( &lt; 10^{-10}$).</span>
+                        </li>
+                        <li class="quiz-option">
+                            <span class="opt-letter">B</span>
+                            <span>Gene expression was exclusively concentrated in cerebellar Purkinje cells and peripheral autonomic ganglia, indicating that personality variation originates outside the cerebral cortex.</span>
+                        </li>
+                        <li class="quiz-option correct">
+                            <span class="opt-letter">C</span>
+                            <span>Neither dopamine nor serotonin neuron gene sets showed preferential enrichment relative to other brain cell types; instead, associations were broadly distributed across synaptic and neurodevelopmental pathways in the prefrontal cortex that overlap heavily across all Big Five traits (mean rank-order $ho = 0.72$).</span>
+                        </li>
+                        <li class="quiz-option">
+                            <span class="opt-letter">D</span>
+                            <span>Single-cell enrichment revealed that personality associations are driven entirely by non-neuronal microglial immune-inflammatory genes, with zero enrichment in neuronal cell types.</span>
+                        </li>
+                    </ul>
+                    <div class="quiz-explanation">
+                        <strong>Pedagogical &amp; Primary Literature Rationale:</strong> Correct answer is <strong>C</strong>. The authors explicitly state (p. 4): <em>"neither the effect size nor P value placed serotonin or dopamine among the most enriched neuron types... suggesting that their prominence in the literature relative to other types of neurons is not warranted."</em> Single-cell mapping demonstrates that broad temperamental axes converge on distributed cortical neurodevelopment rather than simple, isolated monoamine switches.
+                        <div class="llm-trap-box">
+                            <strong>🤖 The LLM Hallucination Trap:</strong> LLMs prompted naively will overwhelmingly pick <strong>A</strong>. Their pre-training corpora are saturated with decades of pop-psychology books and 1990s candidate-gene papers linking dopamine to extroversion and serotonin to neuroticism. The LLM hallucinates validation of this dogma because it predicts what textbook summaries typically say rather than reading the 2026 primary data!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QUESTION 2 -->
+                <div class="quiz-card" id="q2">
+                    <div class="quiz-header">
+                        <span class="quiz-badge">Question 2 &bull; Within-Family Sibling Controls</span>
+                        <span class="llm-trap-badge">⚠️ Sociogenomic Generalization Trap</span>
+                    </div>
+                    <div class="quiz-question">
+                        In genome-wide association studies of social and behavioral phenotypes such as Educational Attainment (EA, Okbay et al. 2022; Howe et al. 2022), within-family sibling analyses revealed that population GWAS effect sizes were inflated by ~40%–50% due to "genetic nurture" (indirect parental environmental effects), dynastic wealth, and demographic stratification. How did the within-family GWAS results for the Big Five personality traits in Schwaba et al. (2026) compare to these educational attainment benchmarks?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option llm-trap">
+                            <span class="opt-letter">A</span>
+                            <span>Like educational attainment, personality associations experienced a dramatic ~50% attenuation in within-family analyses, proving that personality GWAS signals are predominantly artifacts of parental socioeconomic environment and genetic nurture.</span>
+                        </li>
+                        <li class="quiz-option correct">
+                            <span class="opt-letter">B</span>
+                            <span>In striking contrast to educational attainment, genetic associations with personality were minimally confounded by the shared family environment; within-family polygenic index effect sizes remained near-identical to population estimates (within/population ratio ~0.90–1.05), and non-transmitted parental alleles showed negligible predictive effects.</span>
+                        </li>
+                        <li class="quiz-option">
+                            <span class="opt-letter">C</span>
+                            <span>Within-family analyses caused effect sizes to invert direction, indicating that alleles associated with high Extraversion at the population level actually cause Introversion when comparing biological siblings.</span>
+                        </li>
+                        <li class="quiz-option">
+                            <span class="opt-letter">D</span>
+                            <span>Within-family GWAS could not be performed because personality traits violate basic Mendelian transmission assumptions during meiosis.</span>
+                        </li>
+                    </ul>
+                    <div class="quiz-explanation">
+                        <strong>Pedagogical &amp; Primary Literature Rationale:</strong> Correct answer is <strong>B</strong>. Schwaba et al. found that direct genetic effects account for $&gt;90\%$ of population-level personality associations (pp. 1, 7–9). Sibling PGI prediction was nearly identical to population models, and non-transmitted parental alleles had near-zero effect. Personality represents a major exception to the heavy familial confounding observed in education and income GWAS!
+                        <div class="llm-trap-box">
+                            <strong>🤖 The LLM Hallucination Trap:</strong> LLMs familiar with recent sociogenomic literature (Howe 2022) know that within-family controls "cut behavioral GWAS effects in half." An uncritical model will blindly extrapolate this rule to personality, confidently choosing <strong>A</strong>. It fails to distinguish between socioeconomic traits (which rely heavily on external opportunity and schooling) and internal psychological dispositions.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QUESTION 3 -->
+                <div class="quiz-card" id="q3">
+                    <div class="quiz-header">
+                        <span class="quiz-badge">Question 3 &bull; Assortative Mating Reality</span>
+                        <span class="llm-trap-badge">⚠️ "Birds of a Feather" Trap</span>
+                    </div>
+                    <div class="quiz-question">
+                        Sociologists and evolutionary theorists frequently debate whether humans mate assortatively for psychological traits. When Schwaba et al. (2026) calculated the inferred genetic correlation ($) between spouses across recent generations in the UK Biobank and deCODE cohorts, what did the empirical genomic data reveal?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option llm-trap">
+                            <span class="opt-letter">A</span>
+                            <span>Spouses exhibited strong positive genetic assortment for all personality traits ( pprox 0.35	ext{--}0.40$), identical in magnitude to the spousal genetic correlation observed for educational attainment.</span>
+                        </li>
+                        <li class="quiz-option">
+                            <span class="opt-letter">B</span>
+                            <span>Spouses showed strong negative genetic assortment ( pprox -0.45$), providing molecular proof that psychological opposites attract.</span>
+                        </li>
+                        <li class="quiz-option correct">
+                            <span class="opt-letter">C</span>
+                            <span>Spousal genetic correlations across recent generations were negligible for all Big Five traits ( = 0.01	ext{ to } 0.04$), demonstrating that unlike educational attainment ( = 0.37$), humans exhibit virtually zero genetic assortative mating for personality.</span>
+                        </li>
+                        <li class="quiz-option">
+                            <span class="opt-letter">D</span>
+                            <span>Assortative mating was massive for Conscientiousness ( = 0.85$), but completely absent for the other four traits.</span>
+                        </li>
+                    </ul>
+                    <div class="quiz-explanation">
+                        <strong>Pedagogical &amp; Primary Literature Rationale:</strong> Correct answer is <strong>C</strong>. Across hundreds of thousands of spouse dyads in UK Biobank and deCODE, inferred spousal genetic correlations for personality were flat zero ( = 0.01	ext{--}0.04$, p. 6), in stark contrast to educational attainment ( = 0.37$).
+                        <div class="llm-trap-box">
+                            <strong>🤖 The LLM Hallucination Trap:</strong> LLMs prompted on spousal similarity will generate plausible essays on homophily and select <strong>A</strong>, assuming humans select mates with similar temperaments and confusing high educational assortment with personality assortment.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QUESTION 4 -->
+                <div class="quiz-card" id="q4">
+                    <div class="quiz-header">
+                        <span class="quiz-badge">Question 4 &bull; Missing Heritability &amp; Reliability</span>
+                    </div>
+                    <div class="quiz-question">
+                        Twin and adoption studies historically estimated broad-sense personality heritability at ~40%–60%. However, Schwaba et al. (2026) found that common SNPs accounted for only 4.8%–9.3% of variance in broad survey measures, rising to 9.3%–13.3% when measured with reliable psychometric inventories. Which of the following best explains this "missing heritability" gap and the observed increase in ^2_{	ext{SNP}}$ with test length?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option">
+                            <span class="opt-letter">A</span>
+                            <span>Personality has zero genetic basis; twin studies were methodologically fraudulent, and the 5% SNP heritability represents false-positive genotyping noise.</span>
+                        </li>
+                        <li class="quiz-option">
+                            <span class="opt-letter">B</span>
+                            <span>Common SNPs capture 100% of the true genetic code, and the discrepancy is caused entirely by somatic hypermutation in cortical neurons during adolescence.</span>
+                        </li>
+                        <li class="quiz-option correct">
+                            <span class="opt-letter">C</span>
+                            <span>Common-variant GWAS (^2_{	ext{SNP}}$) cannot capture the variance explained by rare alleles ($	ext{MAF} &lt; 1\%$), structural variants, or non-additive epistasis; simultaneously, brief survey scales suffer from measurement error that mathematically attenuates ^2_{	ext{SNP}}$, which partially recovers when assessed with multi-item inventories.</span>
+                        </li>
+                        <li class="quiz-option">
+                            <span class="opt-letter">D</span>
+                            <span>The missing heritability is entirely localized to the non-recombining portion of the Y-chromosome, which was excluded from the meta-analysis.</span>
+                        </li>
+                    </ul>
+                    <div class="quiz-explanation">
+                        <strong>Pedagogical &amp; Primary Literature Rationale:</strong> Correct answer is <strong>C</strong>. SNP heritability by definition only indexes common additive variation tagged on arrays ($	ext{MAF} &gt; 0.01$). Rare variants, structural variation, and gene interactions account for the rest of the pedigree heritability. Furthermore, psychometric attenuation from brief questionnaires suppresses observable heritability, which rises predictably in longer, validated inventories (pp. 2, 9).
+                    </div>
+                </div>
+
+                <!-- QUESTION 5 -->
+                <div class="quiz-card" id="q5">
+                    <div class="quiz-header">
+                        <span class="quiz-badge">Question 5 &bull; PGI Predictive Utility &amp; Ethics</span>
+                        <span class="llm-trap-badge">⚠️ Clinical Hype Trap</span>
+                    </div>
+                    <div class="quiz-question">
+                        A commercial talent-acquisition startup markets a "Genomic Workforce Screening Chip," claiming: <em>"Powered by the 2026 Nature breakthrough of 1.1 million genomes, our Polygenic Index (PGI) reliably identifies prospective employees with low Conscientiousness and high Neuroticism before they are hired."</em> Based on the empirical findings and explicit conclusions of Schwaba et al. (2026), how should a genomic medicine specialist evaluate this product?
+                    </div>
+                    <ul class="quiz-options">
+                        <li class="quiz-option llm-trap">
+                            <span class="opt-letter">A</span>
+                            <span>The product is scientifically sound: a discovery cohort exceeding 1.1 million participants provides statistical power $&gt;99\%$ to classify individual behavior and predict workplace success.</span>
+                        </li>
+                        <li class="quiz-option correct">
+                            <span class="opt-letter">B</span>
+                            <span>The product is scientifically baseless and predatory: aggregate PGIs explained only 1% to 3% of phenotypic variance (^2 pprox 0.01	ext{--}0.03$), leading the authors to explicitly warn that these scores <em>cannot predict an individual's future behavior</em>, rendering individual screening medically, mathematically, and ethically invalid.</span>
+                        </li>
+                        <li class="quiz-option">
+                            <span class="opt-letter">C</span>
+                            <span>The product is valid, but only if the job applicant is older than 65, because personality heritability only manifests post-retirement.</span>
+                        </li>
+                        <li class="quiz-option">
+                            <span class="opt-letter">D</span>
+                            <span>The product is invalid solely because personality is determined by mitochondrial DNA, which was not analyzed by the authors.</span>
+                        </li>
+                    </ul>
+                    <div class="quiz-explanation">
+                        <strong>Pedagogical &amp; Primary Literature Rationale:</strong> Correct answer is <strong>B</strong>. As emphasized in Section 4 of our syllabus (*The Hype Audit*), high statistical significance in a sample of .1	ext{ million}$ does NOT equal high individual predictive accuracy. The PGI explains \%	ext{--}3\%$ of variance, leaving \%	ext{--}99\%$ unaccounted for. The authors state verbatim: <em>"These PGIs cannot predict an individual’s future behaviour"</em> (p. 6).
+                        <div class="llm-trap-box">
+                            <strong>🤖 The LLM Hallucination Trap:</strong> LLMs trained on commercial marketing copy or prompted with leading bias will often hedge and claim that *"with 1.1 million genomes, the score has strong clinical and commercial utility for risk stratification"* (Option A). A critical student recognizes the astronomical gap between a population p-value and individual clinical utility.
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer>
+            <div>&copy; 2026 Sergei Pond &bull; Department of Biology &bull; Temple University</div>
+            <div>
+                <a href="https://doi.org/10.1038/s41586-026-10992-9" target="_blank" rel="noopener">Schwaba et al. Nature 2026 ↗</a> &bull;
+                <a href="https://templeu.instructure.com/courses/178614" target="_blank">Temple Canvas</a> &bull;
+                <a href="portal_index.html">Course Portal</a>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
