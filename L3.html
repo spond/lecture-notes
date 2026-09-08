@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 3: Thousands of Tiny Nudges — GWAS, Complex Traits & Polygenic Scores | BIOL 3111/5111</title>
+    
+    <!-- Trailing-Slash Auto-Enforcer for Remote Directories -->
+    <script>
+        (function() {
+            var p = window.location.pathname;
+            if (p.endsWith('/index.html')) return;
+            if (p.indexOf('.') === -1 && !p.endsWith('/')) {
+                window.location.replace(window.location.protocol + '//' + window.location.host + p + '/' + window.location.search + window.location.hash);
+            }
+        })();
+    </script>
+    
+    <!-- Google Fonts: Inter & Inter Tight for ultra-legible auditorium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@600;700;800;900&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- MathJax for TeX Typography -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$'], ['\[', '\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            /* High-Visibility Auditorium Palette */
+            --bg-color: #F8FAFC;
+            --slide-bg: #FFFFFF;
+            --primary-color: #0F172A;
+            --secondary-color: #334155;
+            --muted-color: #64748B;
+            --temple-cherry: #9D2235;
+            --temple-cherry-dark: #781827;
+            --accent-blue: #2563EB;
+            --accent-emerald: #059669;
+            --accent-amber: #D97706;
+            --accent-purple: #7C3AED;
+            --border-light: #E2E8F0;
+            --border-medium: #CBD5E1;
+            
+            /* Typography */
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-heading: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            --transition-speed: 0.28s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top Progress Bar */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 4px;
+            background: #E2E8F0;
+            z-index: 1000;
+        }
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--temple-cherry), var(--accent-blue));
+            transition: width var(--transition-speed) ease-out;
+        }
+
+        /* Autohide Top Bar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            padding: 0 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 999;
+            transform: translateY(calc(-100% + 5px));
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #header-trigger {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            z-index: 998;
+        }
+        header:hover, #header-trigger:hover + header, header.pinned {
+            transform: translateY(0);
+        }
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--border-medium);
+            border-radius: 999px;
+        }
+        header:hover::after { opacity: 0; }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+        .header-badge {
+            background: var(--temple-cherry);
+            color: #FFFFFF;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.86rem;
+            color: var(--muted-color);
+        }
+
+        /* Slide Stage - Widescreen & Low Density */
+        main#stage {
+            flex: 1;
+            position: relative;
+            width: 100vw;
+            height: calc(100vh - 64px);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 56px;
+        }
+
+        .slide {
+            position: absolute;
+            top: 28px;
+            bottom: 28px;
+            left: 56px;
+            right: 56px;
+            background: var(--slide-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+            padding: 48px 64px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(40px);
+            transition: opacity var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1),
+                        transform var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+            z-index: 10;
+        }
+
+        /* Large Auditorium Typography Hierarchy */
+        .slide-category {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--temple-cherry);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .slide-category::before {
+            content: "";
+            display: inline-block;
+            width: 18px;
+            height: 3px;
+            background: var(--temple-cherry);
+            border-radius: 2px;
+        }
+
+        .slide-header {
+            margin-bottom: 24px;
+        }
+
+        .slide-title {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            line-height: 1.15;
+            font-weight: 900;
+            color: var(--primary-color);
+            letter-spacing: -0.03em;
+            margin-bottom: 10px;
+        }
+
+        .slide-subtitle {
+            font-size: 1.35rem;
+            color: var(--secondary-color);
+            line-height: 1.45;
+            font-weight: 400;
+            max-width: 1100px;
+        }
+
+        /* Content Container - Low Density, Single Big Concept */
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        /* Title Slide Custom Layout */
+        .title-slide-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px 0;
+        }
+
+        .title-hero {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .title-hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.035em;
+            color: var(--primary-color);
+        }
+
+        .title-hero .deck-desc {
+            font-size: 1.6rem;
+            color: var(--secondary-color);
+            line-height: 1.5;
+            max-width: 1150px;
+            margin-top: 8px;
+        }
+
+        .title-stats-banner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            background: #F1F5F9;
+            border: 1.5px solid var(--border-medium);
+            border-radius: 16px;
+            padding: 28px 36px;
+            margin-top: 16px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .stat-num {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--muted-color);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .title-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 2px solid var(--border-light);
+            padding-top: 20px;
+            font-size: 1.05rem;
+            color: var(--muted-color);
+        }
+
+        /* Slide 2: Press Coverage Layout */
+        .press-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 8px;
+        }
+
+        .press-card {
+            background: #FFFFFF;
+            border: 1.5px solid var(--border-medium);
+            border-radius: 14px;
+            padding: 24px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+            border-left: 6px solid var(--accent-blue);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .press-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        .press-card.card-discover { border-left-color: #D97706; }
+        .press-card.card-sci      { border-left-color: #059669; }
+        .press-card.card-bristol  { border-left-color: #7C3AED; }
+        .press-card.card-alert    { border-left-color: #E11D48; }
+
+        .press-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .press-outlet-badge {
+            font-family: var(--font-mono);
+            font-size: 0.80rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+            background: #F1F5F9;
+            color: var(--primary-color);
+            border: 1px solid var(--border-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .press-date {
+            font-family: var(--font-mono);
+            font-size: 0.80rem;
+            color: var(--muted-color);
+        }
+
+        .press-headline {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            line-height: 1.25;
+            margin-bottom: 12px;
+            letter-spacing: -0.015em;
+        }
+
+        .press-lede {
+            font-size: 1.05rem;
+            line-height: 1.55;
+            color: var(--secondary-color);
+            font-style: italic;
+        }
+
+        .press-takeaway-banner {
+            background: #FEF2F2;
+            border: 1.5px solid #FECDD3;
+            border-radius: 12px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+
+        .takeaway-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #991B1B;
+            line-height: 1.4;
+        }
+
+        .takeaway-tag {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: #DC2626;
+            color: #FFFFFF;
+            padding: 4px 10px;
+            border-radius: 6px;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+
+        /* Bottom Controls & Navigation */
+        footer#controls {
+            height: 64px;
+            padding: 0 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-light);
+            background: #FFFFFF;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--muted-color);
+        }
+
+        .nav-btn-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: #F1F5F9;
+            border: 1.5px solid var(--border-medium);
+            color: var(--primary-color);
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-family: var(--font-main);
+            font-weight: 700;
+            font-size: 0.90rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s ease;
+        }
+        .nav-btn:hover {
+            background: #E2E8F0;
+            color: var(--temple-cherry);
+        }
+
+        .slide-counter {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1rem;
+            background: #F8FAFC;
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Progress Bar -->
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <!-- Header Trigger Zone -->
+    <div id="header-trigger"></div>
+
+    <!-- Autohide Top Bar -->
+    <header id="main-header">
+        <div class="header-left">
+            <span class="header-badge">Lecture 03</span>
+            <span>Thousands of Tiny Nudges: GWAS, Complex Traits &amp; Polygenic Scores</span>
+        </div>
+        <div class="header-right">
+            <span>BIOL 3111 / 5111 &bull; Fall 2026</span>
+            <span>Prof. Sergei Pond</span>
+        </div>
+    </header>
+
+    <!-- Presentation Stage -->
+    <main id="stage">
+
+        <!-- ================================================================= -->
+        <!-- SLIDE 1: TITLE SLIDE -->
+        <!-- ================================================================= -->
+        <section class="slide active" data-slide="1">
+            <div class="title-slide-container">
+                <div class="slide-category">Genomics in Medicine &bull; Fall 2026 &bull; Lecture 03</div>
+                
+                <div class="title-hero">
+                    <h1>Thousands of Tiny Nudges:<br>GWAS, Complex Traits &amp; Polygenic Scores</h1>
+                    <div class="deck-desc">
+                        Leaving monogenic certainty behind. How millions of small DNA differences shape human disease, psychology, and the fundamental limits of clinical prediction.
+                    </div>
+                </div>
+
+                <!-- 4 High-Impact Display Stats -->
+                <div class="title-stats-banner">
+                    <div class="stat-item">
+                        <div class="stat-num" style="color: var(--temple-cherry);">1,141,408</div>
+                        <div class="stat-label">Participants Analyzed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num" style="color: var(--accent-blue);">46</div>
+                        <div class="stat-label">Global Cohorts</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num" style="color: var(--accent-emerald);">1,260</div>
+                        <div class="stat-label">Lead Genetic Variants</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num" style="color: var(--accent-amber);">1% &ndash; 3%</div>
+                        <div class="stat-label">Individual Variance Explained</div>
+                    </div>
+                </div>
+
+                <div class="title-footer">
+                    <div>
+                        <strong>Prof. Sergei Pond</strong> &bull; Department of Biology &bull; Temple University
+                    </div>
+                    <div style="font-family: var(--font-mono); font-size: 0.88rem;">
+                        Primary Case: <em>Schwaba et al., Nature (September 2026)</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SLIDE 2: PRESS COVERAGE & HEADLINES (SCHWABA ET AL. 2026) -->
+        <!-- ================================================================= -->
+        <section class="slide" data-slide="2">
+            <div>
+                <div class="slide-category">Schwaba et al. (Nature 2026) &bull; The Public Reception</div>
+                <div class="slide-header">
+                    <h2 class="slide-title">When 1.1 Million Genomes Hit the Newsfeed</h2>
+                    <div class="slide-subtitle">
+                        On September 2, 2026, the largest genetic study of human personality was published. How did global science media describe it?
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-body">
+                <!-- 2x2 Grid of High-Visibility Press Coverage -->
+                <div class="press-grid">
+                    
+                    <!-- Card 1: ScienceAlert / Nature News -->
+                    <div class="press-card card-alert">
+                        <div>
+                            <div class="press-header-row">
+                                <span class="press-outlet-badge" style="color: #E11D48; background: #FFF1F2;">ScienceAlert &bull; Lead Story</span>
+                                <span class="press-date">September 2, 2026</span>
+                            </div>
+                            <h3 class="press-headline">"Massive Study of 1.1 Million People Reveals The Complex Genetics of Personality"</h3>
+                        </div>
+                        <p class="press-lede">
+                            "In the largest genetic study of its kind, researchers have mapped over 1,200 DNA variants linked to human personality traits—while finding that our genes nudge rather than define who we become."
+                        </p>
+                    </div>
+
+                    <!-- Card 2: Discover Magazine -->
+                    <div class="press-card card-discover">
+                        <div>
+                            <div class="press-header-row">
+                                <span class="press-outlet-badge" style="color: #D97706; background: #FFFBEB;">Discover Magazine</span>
+                                <span class="press-date">September 3, 2026</span>
+                            </div>
+                            <h3 class="press-headline">"Are You Born Extroverted or Anxious? Giant DNA Study Pinpoints Over 1,200 'Personality Genes'"</h3>
+                        </div>
+                        <p class="press-lede">
+                            "Can DNA explain why some of us are outgoing while others worry constantly? The largest genomic study to date uncovers 1,260 loci, revealing temperaments are shaped by hundreds of tiny nudges rather than single master genes."
+                        </p>
+                    </div>
+
+                    <!-- Card 3: International Research Consortium / MSU / Bristol -->
+                    <div class="press-card card-bristol">
+                        <div>
+                            <div class="press-header-row">
+                                <span class="press-outlet-badge" style="color: #7C3AED; background: #FAF5FF;">University Consortium Press Release</span>
+                                <span class="press-date">September 2, 2026</span>
+                            </div>
+                            <h3 class="press-headline">"Landmark Study Unravels Genetic Architecture of the 'Big Five' Personality Traits"</h3>
+                        </div>
+                        <p class="press-lede">
+                            "Analyzing data across 46 international cohorts, researchers linked 1,260 genetic variants to how we think, feel, and act—connecting heritable temperament to physical health, career mobility, and mental well-being."
+                        </p>
+                    </div>
+
+                    <!-- Card 4: News-Medical / Clinical Science -->
+                    <div class="press-card card-sci">
+                        <div>
+                            <div class="press-header-row">
+                                <span class="press-outlet-badge" style="color: #059669; background: #ECFDF5;">News-Medical &bull; Genetics</span>
+                                <span class="press-date">September 4, 2026</span>
+                            </div>
+                            <h3 class="press-headline">"Massive Genetic Study Links DNA Variants to Personality Traits and Hospital Admissions"</h3>
+                        </div>
+                        <p class="press-lede">
+                            "A monumental meta-analysis proves personality is intensely polygenic, debunking old theories of simple dopamine or serotonin switches while demonstrating that common variants explain under 10% of who we are."
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Bottom Skeptical Framing Banner -->
+                <div class="press-takeaway-banner">
+                    <div class="takeaway-text">
+                        🔍 <strong>The Science Communication Paradox:</strong> The media celebrates "1,200 genes discovered," while the paper's authors explicitly warn that these variants <em>cannot predict an individual's future behavior</em>.
+                    </div>
+                    <span class="takeaway-tag">The Hype Audit</span>
+                </div>
+            </div>
+
+            <!-- Empty footer space to preserve alignment -->
+            <div style="height: 4px;"></div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Controls & Navigation -->
+    <footer id="controls">
+        <div class="nav-btn-group">
+            <button class="nav-btn" id="prev-btn" aria-label="Previous slide">&larr; Previous</button>
+            <button class="nav-btn" id="next-btn" aria-label="Next slide">Next &rarr;</button>
+        </div>
+
+        <div class="slide-counter">
+            Slide <span id="current-slide">1</span> of <span id="total-slides">2</span>
+        </div>
+
+        <div>
+            <span>Press <strong>&larr; / &rarr;</strong> or <strong>Space</strong> to navigate</span>
+        </div>
+    </footer>
+
+    <!-- Presentation Navigation Script -->
+    <script>
+        (function() {
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            let currentIdx = 0;
+
+            const progressBar = document.getElementById('progress-bar');
+            const currentSlideEl = document.getElementById('current-slide');
+            const totalSlidesEl = document.getElementById('total-slides');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            totalSlidesEl.textContent = totalSlides;
+
+            function showSlide(index) {
+                if (index < 0) index = 0;
+                if (index >= totalSlides) index = totalSlides - 1;
+                currentIdx = index;
+
+                slides.forEach((s, idx) => {
+                    if (idx === currentIdx) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+
+                currentSlideEl.textContent = currentIdx + 1;
+                const progress = ((currentIdx + 1) / totalSlides) * 100;
+                progressBar.style.width = progress + '%';
+                window.location.hash = (currentIdx + 1).toString();
+            }
+
+            // Keyboard Navigation
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                    e.preventDefault();
+                    showSlide(currentIdx + 1);
+                } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    showSlide(currentIdx - 1);
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    showSlide(0);
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    showSlide(totalSlides - 1);
+                }
+            });
+
+            prevBtn.addEventListener('click', () => showSlide(currentIdx - 1));
+            nextBtn.addEventListener('click', () => showSlide(currentIdx + 1));
+
+            // Check URL hash on load
+            const initialHash = parseInt(window.location.hash.replace('#', ''), 10);
+            if (!isNaN(initialHash) && initialHash >= 1 && initialHash <= totalSlides) {
+                showSlide(initialHash - 1);
+            } else {
+                showSlide(0);
+            }
+        })();
+    </script>
+</body>
+</html>
