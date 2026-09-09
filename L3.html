@@ -3548,19 +3548,19 @@
                         <div id="sc1-options" style="display: flex; flex-direction: column; gap: 6px;">
                             <div class="sc-option" data-opt="A">
                                 <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">A</span>
-                                <span>&asymp; 4 false discoveries; standard medical threshold $p < 0.01$ is sufficient.</span>
+                                <span><strong>&asymp; 400 false discoveries</strong>; lab must apply custom Bonferroni for array probes: &alpha; = 0.05 / 800,000 = 6.25 &times; 10⁻⁸.</span>
                             </div>
                             <div class="sc-option sc-correct" data-opt="B">
                                 <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">B</span>
-                                <span><strong>&asymp; 400 false discoveries</strong> ($800,000 \times 0.0005$); must require genome-wide threshold <strong>$p < 5 \times 10^{-8}$</strong>.</span>
+                                <span><strong>&asymp; 400 false discoveries</strong> ($800,000 \times 0.0005$); genome-wide significance requires <strong>$p < 5 \times 10^{-8}$</strong>, derived from $\sim 10^6$ independent LD blocks ($0.05 / 10^6$).</span>
                             </div>
                             <div class="sc-option" data-opt="C">
                                 <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">C</span>
-                                <span>Zero false discoveries; a $p$-value of 0.0005 guarantees $>99.95\%$ clinical certainty.</span>
+                                <span><strong>Zero false discoveries</strong>; because $p = 0.0005 \ll 0.05$, the false discovery rate is bounded at &lt; 0.05% by Bayes' rule, confirming clinical pathogenicity.</span>
                             </div>
                             <div class="sc-option" data-opt="D">
                                 <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">D</span>
-                                <span>800,000 false discoveries; genotyping arrays cannot detect genuine physiological variation.</span>
+                                <span><strong>&asymp; 40 false discoveries</strong>; high LD among common SNPs allows quality-control software to filter out 90% of null noise.</span>
                             </div>
                         </div>
 
@@ -4196,19 +4196,19 @@
                         <div id="sc2-options" style="display: flex; flex-direction: column; gap: 6px;">
                             <div class="sc-option" data-opt="A">
                                 <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">A</span>
-                                <span>The FTO enzyme was degraded by hepatic first-pass metabolism before reaching adipocytes.</span>
+                                <span>FTO is an m⁶A RNA demethylase; small-molecule targeting failed due to compensatory upregulation of the demethylase paralog <em>ALKBH5</em>.</span>
                             </div>
                             <div class="sc-option sc-correct" data-opt="B">
                                 <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">B</span>
-                                <span><strong>The SNP sits in a long-range enhancer looping 1.2 Mb to regulate <em>IRX3/IRX5</em></strong>, governing thermogenesis; FTO is an innocent bystander.</span>
+                                <span><strong>The SNP disrupts an ARID5B motif in an enhancer looping 1.2 Mb to regulate <em>IRX3/IRX5</em></strong>, governing thermogenesis; FTO is an innocent bystander.</span>
                             </div>
                             <div class="sc-option" data-opt="C">
                                 <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">C</span>
-                                <span>The association was an artifact of DNA contamination during high-throughput microarray hybridization.</span>
+                                <span>The intronic variant creates an aberrant cryptic splice acceptor in <em>FTO</em>, producing a dominant-negative truncated isoform resistant to activation.</span>
                             </div>
                             <div class="sc-option" data-opt="D">
                                 <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">D</span>
-                                <span>Adipocytes do not transcribe genomic DNA; obesity is determined entirely by mitochondrial variants.</span>
+                                <span><em>FTO</em> is a maternally imprinted locus silenced by promoter CpG hypermethylation in adult adipocytes, preventing drug binding.</span>
                             </div>
                         </div>
 
@@ -5309,19 +5309,19 @@
                         <div id="sc3-options" style="display: flex; flex-direction: column; gap: 6px;">
                             <div class="sc-option" data-opt="A">
                                 <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">A</span>
-                                <span>African-American patients will receive excessive CT scans and suffer unneeded radiation exposure.</span>
+                                <span>Because African genomes have higher nucleotide diversity, raw PRS distributions shift rightward, causing systematic over-diagnosis and unnecessary CT scans.</span>
                             </div>
                             <div class="sc-option" data-opt="B">
                                 <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">B</span>
-                                <span>The score functions identically because cardiovascular LDL physiology is conserved across human populations.</span>
+                                <span>CAD in African-ancestry populations is driven by distinct lipid pathways and private mutations uncoupled from European cardiovascular physiology.</span>
                             </div>
                             <div class="sc-option sc-correct" data-opt="C">
                                 <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">C</span>
-                                <span><strong>High-risk African-American patients will be systematically under-identified</strong>, misclassified as low risk, and denied life-saving preventative therapies.</span>
+                                <span><strong>Due to shorter LD blocks, European tag SNPs decouple from causal variants</strong>; high-risk African-American patients are misclassified as low risk and denied care.</span>
                             </div>
                             <div class="sc-option" data-opt="D">
                                 <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">D</span>
-                                <span>The hospital will eliminate ethnic disparities because polygenic risk calculations use pure DNA mathematics.</span>
+                                <span>The AUC drop is an artifact of social determinants of health (SDOH); polygenic risk scores have zero biological validity in non-European environments.</span>
                             </div>
                         </div>
 
