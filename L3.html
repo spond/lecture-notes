@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lecture 3: Thousands of Tiny Nudges — GWAS, Complex Traits & Polygenic Scores (Student Edition) | BIOL 3111/5111</title>
+    <title>Lecture 3: Thousands of Tiny Nudges — GWAS, Complex Traits & Polygenic Scores | BIOL 3111/5111</title>
     
     <!-- Trailing-Slash Auto-Enforcer for Remote Directories -->
     <script>
@@ -1351,14 +1351,6 @@
             color: #FFFFFF;
             font-weight: 700;
             box-shadow: 0 2px 6px rgba(124, 58, 237, 0.25);
-        }
-
-
-        .sc-option.selected-choice {
-            border-color: #2563EB !important;
-            background: #EFF6FF !important;
-            color: #1E40AF !important;
-            font-weight: 600;
         }
 
     </style>
@@ -3494,102 +3486,33 @@
         <!-- ================================================================= -->
         <!-- SPOT CHECK 1: THE MULTIPLE TESTING TRAP                           -->
         <!-- ================================================================= -->
-        <section class="slide" data-slide="13" style="padding: 16px 44px;">
-            <div class="slide-header" style="margin-bottom: 6px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-                    <div class="slide-category" style="margin-bottom: 0; font-size: 0.86rem;">Active Learning &bull; Checkpoint 1: Statistical Significance</div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <a href="https://templeu.instructure.com/courses/178614/quizzes" target="_blank" style="color: #2563EB; background: #EFF6FF; border: 1.5px solid #BFDBFE; border-radius: 8px; padding: 3px 10px; text-decoration: none; font-size: 0.74rem; font-weight: 700; white-space: nowrap;">
-                            🔗 Open Canvas Quizzes &rarr;
-                        </a>
-                        <span class="quiz-passcode-badge">🔑 <span style="font-size: 0.72rem; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.06em; color: #7E22CE; font-weight: 700;">Passcode:</span> <strong style="color: #581C87;">B5X-BONF</strong></span>
-                        <div class="timer-widget" data-timer="sc1">
-                            <span>⏱️</span>
-                            <span class="timer-display" id="sc1-timer-disp">01:30</span>
-                            <button class="timer-btn" id="sc1-timer-btn">Start</button>
-                            <button class="timer-reset-btn" id="sc1-timer-reset">↺</button>
-                        </div>
-                    </div>
-                </div>
-                <h2 class="slide-title" style="font-size: 2.15rem; margin-bottom: 2px;">Spot Check 1: The Multiple Testing &amp; False Discovery Trap</h2>
-                <div class="slide-subtitle" style="font-size: 1.05rem; line-height: 1.30;">
-                    Why standard medical significance ($p < 0.05$) collapses into chaos across 800,000 genomic tests.
+                                <section class="slide" data-slide="13" style="padding: 20px 48px;">
+            <div class="slide-header" style="margin-bottom: 8px;">
+                <div class="slide-category" style="margin-bottom: 2px; font-size: 0.86rem;">Active Learning &bull; In-Class Assessment</div>
+                <h2 class="slide-title" style="font-size: 2.2rem; margin-bottom: 2px;">Spot Check 1: Multiple Testing & False Discovery</h2>
+                <div class="slide-subtitle" style="font-size: 1.10rem; line-height: 1.35;">
+                    Assessing significance thresholds and independent Linkage Disequilibrium blocks.
                 </div>
             </div>
 
-            <div class="slide-body" style="gap: 8px; justify-content: flex-start;">
-                <div style="display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 14px; align-items: stretch; flex: 1;">
-                    
-                    <!-- Left: Clinical Case Vignette -->
-                    <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--temple-cherry); border-radius: 12px; padding: 12px 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
-                        <div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                                <span style="font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; color: var(--temple-cherry); text-transform: uppercase; letter-spacing: 0.05em;">Clinical Diagnostic Dilemma</span>
-                                <span style="background: #FFF1F2; color: #9F1239; border: 1px solid #FECDD3; border-radius: 6px; padding: 2px 8px; font-size: 0.70rem; font-weight: 700;">Direct-To-Consumer Lab</span>
-                            </div>
-
-                            <div style="background: #FFF1F2; border: 1.2px solid #FECDD3; border-radius: 8px; padding: 8px 12px; margin-bottom: 8px; font-size: 0.82rem; line-height: 1.42; color: #881337;">
-                                <strong>Patient Vignette:</strong> A commercial lab scans <strong>800,000 common SNPs</strong> for a healthy 30-year-old. The report flags a variant as "statistically significant" for sudden cardiac arrest at nominal <strong>$p = 0.0005$</strong>. The patient panics and demands prophylactic surgery.<br><br>
-                                <strong>The Statistical Reality:</strong> If all 800,000 variants are truly neutral (Null Hypothesis is 100% true), how many false-positive hits will cross $p < 0.0005$ by pure random noise?
-                            </div>
-
-                            <p style="font-size: 0.82rem; line-height: 1.40; color: var(--secondary-color); margin: 0;">
-                                <strong>Question:</strong> How many false discoveries are expected under the null, and what threshold ($\alpha_{\text{GWAS}}$) eliminates this statistical mirage?
-                            </p>
-                        </div>
-
-                        <div style="margin-top: 8px;">
-                            <div style="width: 100%; padding: 7px 12px; font-size: 0.80rem; background: #F8FAFC; color: #475569; border: 1.2px solid #CBD5E1; border-radius: 6px; font-weight: 600; text-align: center;">💬 Peer Instruction &bull; Discuss with neighbor &amp; submit on Canvas</div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Interactive Multiple-Choice Options & Debrief -->
-                    <div style="display: flex; flex-direction: column; gap: 6px; justify-content: space-between;">
-                        <div id="sc1-options" style="display: flex; flex-direction: column; gap: 6px;">
-                            <div class="sc-option" data-opt="A">
-                                <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">A</span>
-                                <span><strong>&asymp; 400 false discoveries</strong>; lab must apply custom Bonferroni for array probes: &alpha; = 0.05 / 800,000 = 6.25 &times; 10⁻⁸.</span>
-                            </div>
-                            <div class="sc-option sc-correct" data-opt="B">
-                                <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">B</span>
-                                <span><strong>&asymp; 400 false discoveries</strong> ($800,000 \times 0.0005$); genome-wide significance requires <strong>$p < 5 \times 10^{-8}$</strong>, derived from $\sim 10^6$ independent LD blocks ($0.05 / 10^6$).</span>
-                            </div>
-                            <div class="sc-option" data-opt="C">
-                                <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">C</span>
-                                <span><strong>Zero false discoveries</strong>; because $p = 0.0005 \ll 0.05$, the false discovery rate is bounded at &lt; 0.05% by Bayes' rule, confirming clinical pathogenicity.</span>
-                            </div>
-                            <div class="sc-option" data-opt="D">
-                                <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">D</span>
-                                <span><strong>&asymp; 40 false discoveries</strong>; high LD among common SNPs allows quality-control software to filter out 90% of null noise.</span>
-                            </div>
-                        </div>
-
-                        <!-- Debrief Box -->
-                        
-                    </div>
-
-                </div>
-
-                <!-- Bottom Takeaway Strip -->
-                <div style="background: #F8FAFC; border: 1.2px solid var(--border-medium); border-left: 5px solid var(--temple-cherry); border-radius: 8px; padding: 6px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 1.15rem;">🎯</span>
-                        <span style="font-size: 0.88rem; color: var(--primary-color); line-height: 1.32;">
-                            <strong>Statistical Mandate:</strong> In high-dimensional genomics, testing hundreds of thousands of hypotheses guarantees false positives unless penalizing the nominal significance by $10^{-8}$.
-                        </span>
-                    </div>
-                    <div style="font-family: var(--font-mono); font-size: 0.80rem; font-weight: 800; background: var(--temple-cherry); color: #FFFFFF; padding: 3px 8px; border-radius: 4px; white-space: nowrap;">
-                        CHECKPOINT 1
+            <div class="slide-body" style="justify-content: center; align-items: center; min-height: 480px;">
+                <div style="background: linear-gradient(135deg, #FFF5F7 0%, #FFFFFF 100%); border: 2px solid #E2E8F0; border-left: 6px solid #9D2235; border-radius: 12px; padding: 36px 44px; max-width: 820px; width: 100%; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.04);">
+                    <div style="font-size: 3.2rem; margin-bottom: 12px;">📝</div>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.55rem; color: #1E293B; margin-bottom: 10px;">Spot Check 1 &bull; Canvas In-Class Portal</h3>
+                    <p style="font-size: 1.10rem; color: #475569; line-height: 1.6; margin-bottom: 22px;">
+                        This assessment is administered live via Temple Canvas.<br>
+                        Please navigate to <strong>Canvas &gt; BIOL 3111 &gt; Quizzes</strong> and await the live passcode from the instructor.
+                    </p>
+                    <div style="display: inline-flex; align-items: center; gap: 12px; background: #F1F5F9; border-radius: 8px; padding: 10px 24px; font-size: 0.95rem; color: #334155; font-weight: 600;">
+                        <span>⏱ Time: 2 Minutes</span>
+                        <span>&bull;</span>
+                        <span>📊 Focus: Bonferroni & LD Blocks</span>
                     </div>
                 </div>
             </div>
         </section>
 
-
-        <!-- ================================================================= -->
-        <!-- SLIDE 13: SNP ARRAYS VS. WHOLE GENOME SEQUENCING -->
-        <!-- ================================================================= -->
-        <section class="slide" data-slide="14" style="padding: 16px 48px;">
+<section class="slide" data-slide="14" style="padding: 16px 48px;">
             <div>
                 <div class="slide-category" style="margin-bottom: 4px; font-size: 0.90rem;">GWAS First Principles &bull; Genomic Technology</div>
                 <div class="slide-header" style="margin-bottom: 8px;">
@@ -4141,104 +4064,33 @@
         <!-- ================================================================= -->
         <!-- SPOT CHECK 2: THE LD HITCHHIKER PARADOX                           -->
         <!-- ================================================================= -->
-        <section class="slide" data-slide="17" style="padding: 16px 44px;">
-            <div class="slide-header" style="margin-bottom: 6px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-                    <div class="slide-category" style="margin-bottom: 0; font-size: 0.86rem;">Active Learning &bull; Checkpoint 2: Linkage Architecture</div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <a href="https://templeu.instructure.com/courses/178614/quizzes" target="_blank" style="color: #2563EB; background: #EFF6FF; border: 1.5px solid #BFDBFE; border-radius: 8px; padding: 3px 10px; text-decoration: none; font-size: 0.74rem; font-weight: 700; white-space: nowrap;">
-                            🔗 Open Canvas Quizzes &rarr;
-                        </a>
-                        <span class="quiz-passcode-badge">🔑 <span style="font-size: 0.72rem; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.06em; color: #7E22CE; font-weight: 700;">Passcode:</span> <strong style="color: #581C87;">L7D-HITCH</strong></span>
-                        <div class="timer-widget" data-timer="sc2">
-                            <span>⏱️</span>
-                            <span class="timer-display" id="sc2-timer-disp">01:30</span>
-                            <button class="timer-btn" id="sc2-timer-btn">Start</button>
-                            <button class="timer-reset-btn" id="sc2-timer-reset">↺</button>
-                        </div>
-                    </div>
-                </div>
-                <h2 class="slide-title" style="font-size: 2.15rem; margin-bottom: 2px;">Spot Check 2: The Linkage Disequilibrium Hitchhiker Paradox</h2>
-                <div class="slide-subtitle" style="font-size: 1.05rem; line-height: 1.30;">
-                    A \$120M drug discovery failure demonstrating why lead tag SNPs rarely encode the causal biology.
+                                <section class="slide" data-slide="17" style="padding: 20px 48px;">
+            <div class="slide-header" style="margin-bottom: 8px;">
+                <div class="slide-category" style="margin-bottom: 2px; font-size: 0.86rem;">Active Learning &bull; In-Class Assessment</div>
+                <h2 class="slide-title" style="font-size: 2.2rem; margin-bottom: 2px;">Spot Check 2: Linkage Disequilibrium & Causal Variants</h2>
+                <div class="slide-subtitle" style="font-size: 1.10rem; line-height: 1.35;">
+                    Distinguishing true causal regulatory variants from hitchhiking tagging SNPs.
                 </div>
             </div>
 
-            <div class="slide-body" style="gap: 8px; justify-content: flex-start;">
-                <div style="display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 14px; align-items: stretch; flex: 1;">
-                    
-                    <!-- Left: Clinical Case Vignette -->
-                    <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--accent-blue); border-radius: 12px; padding: 12px 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
-                        <div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                                <span style="font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 0.05em;">Biotech Target Validation Failure</span>
-                                <span style="background: #EFF6FF; color: #1E40AF; border: 1px solid #BFDBFE; border-radius: 6px; padding: 2px 8px; font-size: 0.70rem; font-weight: 700;">The FTO Case Study</span>
-                            </div>
-
-                            <div style="background: #EFF6FF; border: 1.2px solid #BFDBFE; border-radius: 8px; padding: 8px 12px; margin-bottom: 8px; font-size: 0.82rem; line-height: 1.42; color: #1E40AF;">
-                                <strong>The Discovery:</strong> GWAS identifies a lead SNP in <strong>Intron 1 of the <em>FTO</em> gene</strong> with massive significance ($p = 2 \times 10^{-120}$) for severe obesity.<br><br>
-                                <strong>The \$120M Trap:</strong> Pharma developed potent small-molecule activators targeting FTO demethylase. In clinical trials, the drug had <strong>zero effect on obesity</strong>.<br><br>
-                                <strong>Functional Mapping:</strong> Hi-C chromatin conformation and CRISPR later resolved the true mechanism.
-                            </div>
-
-                            <p style="font-size: 0.82rem; line-height: 1.40; color: var(--secondary-color); margin: 0;">
-                                <strong>Question:</strong> What was the true molecular mechanism, and why did targeting FTO fail?
-                            </p>
-                        </div>
-
-                        <div style="margin-top: 8px;">
-                            <div style="width: 100%; padding: 7px 12px; font-size: 0.80rem; background: #F8FAFC; color: #475569; border: 1.2px solid #CBD5E1; border-radius: 6px; font-weight: 600; text-align: center;">💬 Peer Instruction &bull; Discuss with neighbor &amp; submit on Canvas</div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Interactive Multiple-Choice Options & Debrief -->
-                    <div style="display: flex; flex-direction: column; gap: 6px; justify-content: space-between;">
-                        <div id="sc2-options" style="display: flex; flex-direction: column; gap: 6px;">
-                            <div class="sc-option" data-opt="A">
-                                <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">A</span>
-                                <span>FTO is an m⁶A RNA demethylase; small-molecule targeting failed due to compensatory upregulation of the demethylase paralog <em>ALKBH5</em>.</span>
-                            </div>
-                            <div class="sc-option sc-correct" data-opt="B">
-                                <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">B</span>
-                                <span><strong>The SNP disrupts an ARID5B motif in an enhancer looping 1.2 Mb to regulate <em>IRX3/IRX5</em></strong>, governing thermogenesis; FTO is an innocent bystander.</span>
-                            </div>
-                            <div class="sc-option" data-opt="C">
-                                <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">C</span>
-                                <span>The intronic variant creates an aberrant cryptic splice acceptor in <em>FTO</em>, producing a dominant-negative truncated isoform resistant to activation.</span>
-                            </div>
-                            <div class="sc-option" data-opt="D">
-                                <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">D</span>
-                                <span><em>FTO</em> is a maternally imprinted locus silenced by promoter CpG hypermethylation in adult adipocytes, preventing drug binding.</span>
-                            </div>
-                        </div>
-
-                        <!-- Debrief Box -->
-                        
-                    </div>
-
-                </div>
-
-                <!-- Bottom Takeaway Strip -->
-                <div style="background: #F8FAFC; border: 1.2px solid var(--border-medium); border-left: 5px solid var(--accent-blue); border-radius: 8px; padding: 6px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 1.15rem;">💡</span>
-                        <span style="font-size: 0.88rem; color: var(--primary-color); line-height: 1.32;">
-                            <strong>Genomic Reality:</strong> Linkage Disequilibrium tags a chromosomal neighborhood ($r^2 > 0.8$), not a causal gene. Never assume the nearest transcript is the biological drug target.
-                        </span>
-                    </div>
-                    <div style="font-family: var(--font-mono); font-size: 0.80rem; font-weight: 800; background: var(--accent-blue); color: #FFFFFF; padding: 3px 8px; border-radius: 4px; white-space: nowrap;">
-                        CHECKPOINT 2
+            <div class="slide-body" style="justify-content: center; align-items: center; min-height: 480px;">
+                <div style="background: linear-gradient(135deg, #FFF5F7 0%, #FFFFFF 100%); border: 2px solid #E2E8F0; border-left: 6px solid #9D2235; border-radius: 12px; padding: 36px 44px; max-width: 820px; width: 100%; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.04);">
+                    <div style="font-size: 3.2rem; margin-bottom: 12px;">📝</div>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.55rem; color: #1E293B; margin-bottom: 10px;">Spot Check 2 &bull; Canvas In-Class Portal</h3>
+                    <p style="font-size: 1.10rem; color: #475569; line-height: 1.6; margin-bottom: 22px;">
+                        This assessment is administered live via Temple Canvas.<br>
+                        Please navigate to <strong>Canvas &gt; BIOL 3111 &gt; Quizzes</strong> and await the live passcode from the instructor.
+                    </p>
+                    <div style="display: inline-flex; align-items: center; gap: 12px; background: #F1F5F9; border-radius: 8px; padding: 10px 24px; font-size: 0.95rem; color: #334155; font-weight: 600;">
+                        <span>⏱ Time: 2 Minutes</span>
+                        <span>&bull;</span>
+                        <span>📊 Focus: Enhancer Loops & FTO vs IRX3</span>
                     </div>
                 </div>
             </div>
         </section>
 
-
-
-        <!-- ================================================================= -->
-        <!-- SLIDE 16: SAMPLE SIZE & STATISTICAL POWER -->
-        <!-- ================================================================= -->
-        <section class="slide" data-slide="18" style="padding: 16px 48px;">
+<section class="slide" data-slide="18" style="padding: 16px 48px;">
             <div>
                 <div class="slide-category" style="margin-bottom: 4px; font-size: 0.90rem;">GWAS First Principles &bull; Statistical Power</div>
                 <div class="slide-header" style="margin-bottom: 8px;">
@@ -5255,102 +5107,33 @@
         <!-- ================================================================= -->
         <!-- SPOT CHECK 3: THE PRS PORTABILITY CLIFF                           -->
         <!-- ================================================================= -->
-        <section class="slide" data-slide="24" style="padding: 16px 44px;">
-            <div class="slide-header" style="margin-bottom: 6px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-                    <div class="slide-category" style="margin-bottom: 0; font-size: 0.86rem;">Active Learning &bull; Checkpoint 3: Clinical PRS &amp; Equity</div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <a href="https://templeu.instructure.com/courses/178614/quizzes" target="_blank" style="color: #2563EB; background: #EFF6FF; border: 1.5px solid #BFDBFE; border-radius: 8px; padding: 3px 10px; text-decoration: none; font-size: 0.74rem; font-weight: 700; white-space: nowrap;">
-                            🔗 Open Canvas Quizzes &rarr;
-                        </a>
-                        <span class="quiz-passcode-badge">🔑 <span style="font-size: 0.72rem; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.06em; color: #7E22CE; font-weight: 700;">Passcode:</span> <strong style="color: #581C87;">A9R-EQUITY</strong></span>
-                        <div class="timer-widget" data-timer="sc3">
-                            <span>⏱️</span>
-                            <span class="timer-display" id="sc3-timer-disp">01:30</span>
-                            <button class="timer-btn" id="sc3-timer-btn">Start</button>
-                            <button class="timer-reset-btn" id="sc3-timer-reset">↺</button>
-                        </div>
-                    </div>
-                </div>
-                <h2 class="slide-title" style="font-size: 2.15rem; margin-bottom: 2px;">Spot Check 3: The Polygenic Risk Score Portability Cliff</h2>
-                <div class="slide-subtitle" style="font-size: 1.05rem; line-height: 1.30;">
-                    How deploying European-trained PRS models in diverse clinical populations creates systemic health disparities.
+                                <section class="slide" data-slide="24" style="padding: 20px 48px;">
+            <div class="slide-header" style="margin-bottom: 8px;">
+                <div class="slide-category" style="margin-bottom: 2px; font-size: 0.86rem;">Active Learning &bull; In-Class Assessment</div>
+                <h2 class="slide-title" style="font-size: 2.2rem; margin-bottom: 2px;">Spot Check 3: Polygenic Risk Scores & Cross-Ancestry Portability</h2>
+                <div class="slide-subtitle" style="font-size: 1.10rem; line-height: 1.35;">
+                    Understanding the evolutionary population genetics behind PRS portability.
                 </div>
             </div>
 
-            <div class="slide-body" style="gap: 8px; justify-content: flex-start;">
-                <div style="display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 14px; align-items: stretch; flex: 1;">
-                    
-                    <!-- Left: Clinical Case Vignette -->
-                    <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--accent-emerald); border-radius: 12px; padding: 12px 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
-                        <div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                                <span style="font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; color: var(--accent-emerald); text-transform: uppercase; letter-spacing: 0.05em;">Hospital Health Disparity Audit</span>
-                                <span style="background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; border-radius: 6px; padding: 2px 8px; font-size: 0.70rem; font-weight: 700;">Coronary Prevention Policy</span>
-                            </div>
-
-                            <div style="background: #ECFDF5; border: 1.2px solid #A7F3D0; border-radius: 8px; padding: 8px 12px; margin-bottom: 8px; font-size: 0.82rem; line-height: 1.42; color: #065F46;">
-                                <strong>Clinical Policy:</strong> A health system adopts a CAD-PRS (trained on UK Biobank Europeans). Patients scoring in the <strong>top 5%</strong> receive free coronary CT scans and early preventative statins.<br><br>
-                                <strong>Performance Metric:</strong> In European-ancestry patients, the score explains 10% of risk variance (AUC = 0.82). In African-American patients, the score explains only 2.5% of variance (AUC = 0.59).
-                            </div>
-
-                            <p style="font-size: 0.82rem; line-height: 1.40; color: var(--secondary-color); margin: 0;">
-                                <strong>Question:</strong> What clinical consequence occurs if the hospital applies the exact same raw percentile cutoff across all patient populations?
-                            </p>
-                        </div>
-
-                        <div style="margin-top: 8px;">
-                            <div style="width: 100%; padding: 7px 12px; font-size: 0.80rem; background: #F8FAFC; color: #475569; border: 1.2px solid #CBD5E1; border-radius: 6px; font-weight: 600; text-align: center;">💬 Peer Instruction &bull; Discuss with neighbor &amp; submit on Canvas</div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Interactive Multiple-Choice Options & Debrief -->
-                    <div style="display: flex; flex-direction: column; gap: 6px; justify-content: space-between;">
-                        <div id="sc3-options" style="display: flex; flex-direction: column; gap: 6px;">
-                            <div class="sc-option" data-opt="A">
-                                <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">A</span>
-                                <span>Because African genomes have higher nucleotide diversity, raw PRS distributions shift rightward, causing systematic over-diagnosis and unnecessary CT scans.</span>
-                            </div>
-                            <div class="sc-option" data-opt="B">
-                                <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">B</span>
-                                <span>CAD in African-ancestry populations is driven by distinct lipid pathways and private mutations uncoupled from European cardiovascular physiology.</span>
-                            </div>
-                            <div class="sc-option sc-correct" data-opt="C">
-                                <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">C</span>
-                                <span><strong>Due to shorter LD blocks, European tag SNPs decouple from causal variants</strong>; high-risk African-American patients are misclassified as low risk and denied care.</span>
-                            </div>
-                            <div class="sc-option" data-opt="D">
-                                <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">D</span>
-                                <span>The AUC drop is an artifact of social determinants of health (SDOH); polygenic risk scores have zero biological validity in non-European environments.</span>
-                            </div>
-                        </div>
-
-                        <!-- Debrief Box -->
-                        
-                    </div>
-
-                </div>
-
-                <!-- Bottom Takeaway Strip -->
-                <div style="background: #F8FAFC; border: 1.2px solid var(--border-medium); border-left: 5px solid var(--accent-emerald); border-radius: 8px; padding: 6px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 1.15rem;">⚖️</span>
-                        <span style="font-size: 0.88rem; color: var(--primary-color); line-height: 1.32;">
-                            <strong>Health Equity Imperative:</strong> Polygenic scores cannot be deployed into clinical practice without rigorous ancestry calibration and aggressive investment in diverse global biobanks.
-                        </span>
-                    </div>
-                    <div style="font-family: var(--font-mono); font-size: 0.80rem; font-weight: 800; background: var(--accent-emerald); color: #FFFFFF; padding: 3px 8px; border-radius: 4px; white-space: nowrap;">
-                        CHECKPOINT 3
+            <div class="slide-body" style="justify-content: center; align-items: center; min-height: 480px;">
+                <div style="background: linear-gradient(135deg, #FFF5F7 0%, #FFFFFF 100%); border: 2px solid #E2E8F0; border-left: 6px solid #9D2235; border-radius: 12px; padding: 36px 44px; max-width: 820px; width: 100%; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.04);">
+                    <div style="font-size: 3.2rem; margin-bottom: 12px;">📝</div>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.55rem; color: #1E293B; margin-bottom: 10px;">Spot Check 3 &bull; Canvas In-Class Portal</h3>
+                    <p style="font-size: 1.10rem; color: #475569; line-height: 1.6; margin-bottom: 22px;">
+                        This assessment is administered live via Temple Canvas.<br>
+                        Please navigate to <strong>Canvas &gt; BIOL 3111 &gt; Quizzes</strong> and await the live passcode from the instructor.
+                    </p>
+                    <div style="display: inline-flex; align-items: center; gap: 12px; background: #F1F5F9; border-radius: 8px; padding: 10px 24px; font-size: 0.95rem; color: #334155; font-weight: 600;">
+                        <span>⏱ Time: 2 Minutes</span>
+                        <span>&bull;</span>
+                        <span>📊 Focus: Ancestral LD Block Dimensions</span>
                     </div>
                 </div>
             </div>
         </section>
 
-
-        <!-- ================================================================= -->
-        <!-- SLIDE 22: WHAT DO THE GENES DO? BIOLOGICAL MECHANISMS & scRNA-seq -->
-        <!-- ================================================================= -->
-        <section class="slide" data-slide="25" style="padding: 14px 44px;">
+<section class="slide" data-slide="25" style="padding: 14px 44px;">
             <div>
                 <div class="slide-category" style="margin-bottom: 2px; font-size: 0.86rem;">GWAS &amp; Biological Mechanisms &bull; Schwaba et al. (Nature 2026)</div>
                 <div class="slide-header" style="margin-bottom: 5px;">
@@ -6424,253 +6207,57 @@
         <!-- ================================================================= -->
         <!-- SLIDE 32: IN-CLASS SPRINT — THE PRECISION GWAS & PRS AUDIT         -->
         <!-- ================================================================= -->
-        <section class="slide" data-slide="35" style="padding: 16px 44px;">
-            <div class="slide-header" style="margin-bottom: 6px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-                    <div class="slide-category" style="margin-bottom: 0; font-size: 0.86rem;">Active Learning &bull; Hands-On Sprint &bull; Live Database Exploration</div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <a href="https://templeu.instructure.com/courses/178614/assignments" target="_blank" style="color: #2563EB; background: #EFF6FF; border: 1.5px solid #BFDBFE; border-radius: 8px; padding: 3px 10px; text-decoration: none; font-size: 0.74rem; font-weight: 700; white-space: nowrap;">
-                            🔗 Open Canvas Submission &rarr;
-                        </a>
-                        <span class="quiz-passcode-badge">🔑 <span style="font-size: 0.72rem; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.06em; color: #7E22CE; font-weight: 700;">Passcode:</span> <strong style="color: #581C87;">G9W-SPRINT</strong></span>
-                        <div class="timer-widget" data-timer="sprint">
-                            <span>⏱️</span>
-                            <span class="timer-display" id="sprint-timer-disp">08:00</span>
-                            <button class="timer-btn" id="sprint-timer-btn">Start</button>
-                            <button class="timer-reset-btn" id="sprint-timer-reset">↺</button>
-                        </div>
-                    </div>
-                </div>
-                <h2 class="slide-title" style="font-size: 2.15rem; margin-bottom: 2px;">In-Class Sprint: The Precision GWAS &amp; Polygenic Score Audit</h2>
-                <div class="slide-subtitle" style="font-size: 1.05rem; line-height: 1.30;">
-                    Turn to your neighbors. Open your section's assigned database on your laptop or phone, audit the primary genetic statistics, and submit on Canvas.
+                                <section class="slide" data-slide="35" style="padding: 20px 48px;">
+            <div class="slide-header" style="margin-bottom: 8px;">
+                <div class="slide-category" style="margin-bottom: 2px; font-size: 0.86rem;">Active Learning &bull; In-Class Assessment</div>
+                <h2 class="slide-title" style="font-size: 2.2rem; margin-bottom: 2px;">In-Class Sprint: Precision GWAS & Multi-Locus Audit</h2>
+                <div class="slide-subtitle" style="font-size: 1.10rem; line-height: 1.35;">
+                    Hands-on multi-locus investigation across classroom seating tracks.
                 </div>
             </div>
 
-            <div class="slide-body" style="gap: 8px; justify-content: flex-start;">
-                <!-- Auditorium Seating Zone Assignment Tabs -->
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 100%;" id="sprint-tabs">
-                    <button class="sprint-tab-btn active" data-track="pcsk9">
-                        <span style="display: block; font-size: 0.65rem; color: #EA580C; font-weight: 700; text-transform: uppercase;">🏛️ Left Aisle</span>
-                        🎯 Track 1: <em>PCSK9</em> &amp; Lipids
-                    </button>
-                    <button class="sprint-tab-btn" data-track="cfh">
-                        <span style="display: block; font-size: 0.65rem; color: #2563EB; font-weight: 700; text-transform: uppercase;">🏛️ Center-Left</span>
-                        👁️ Track 2: <em>CFH</em> Y402H &amp; AMD
-                    </button>
-                    <button class="sprint-tab-btn" data-track="ancestry">
-                        <span style="display: block; font-size: 0.65rem; color: #7C3AED; font-weight: 700; text-transform: uppercase;">🏛️ Center-Right</span>
-                        🌍 Track 3: PRS Ancestry Crisis
-                    </button>
-                    <button class="sprint-tab-btn" data-track="bigfive">
-                        <span style="display: block; font-size: 0.65rem; color: #059669; font-weight: 700; text-transform: uppercase;">🏛️ Right Aisle</span>
-                        🧠 Track 4: 1.14M Personality Audit
-                    </button>
-                </div>
-
-                <!-- 2-Column Main Workspace -->
-                <div style="display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 12px; align-items: stretch; flex: 1;">
-                    
-                    <!-- Left Column: Live Open Databases Launchpad -->
-                    <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--accent-blue); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
-                        <div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                                <span style="font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 0.05em;">1. Open Clinical &amp; Genomic Databases</span>
-                                <span style="background: #EFF6FF; color: #1E40AF; border: 1px solid #BFDBFE; border-radius: 6px; padding: 2px 8px; font-size: 0.70rem; font-weight: 700;">Live Web Tools</span>
-                            </div>
-                            <p style="font-size: 0.76rem; color: var(--secondary-color); margin-bottom: 6px;">
-                                Click to open these live NIH, EBI, and academic tools on your device:
-                            </p>
-
-                            <div style="display: flex; flex-direction: column; gap: 5px;">
-                                <a href="https://www.ebi.ac.uk/gwas/" target="_blank" class="sprint-db-link" style="background: #EFF6FF; border: 1px solid #BFDBFE; color: #1E40AF;">
-                                    <div>
-                                        <strong style="display: block; font-size: 0.78rem;">🌐 GWAS Catalog (NHGRI-EBI)</strong>
-                                        <span style="font-size: 0.68rem; color: #3B82F6;">Curated genome-wide associations, lead SNPs, p-values &amp; odds ratios.</span>
-                                    </div>
-                                    <span style="font-weight: 700; font-size: 0.78rem;">&rarr;</span>
-                                </a>
-
-                                <a href="https://www.pgscatalog.org/" target="_blank" class="sprint-db-link" style="background: #FAF5FF; border: 1px solid #E9D5FF; color: #6B21A8;">
-                                    <div>
-                                        <strong style="display: block; font-size: 0.78rem;">🧬 PGS Catalog (EMBL-EBI)</strong>
-                                        <span style="font-size: 0.68rem; color: #9333EA;">Polygenic scores, effect weights, percentiles &amp; ancestry transferability.</span>
-                                    </div>
-                                    <span style="font-weight: 700; font-size: 0.78rem;">&rarr;</span>
-                                </a>
-
-                                <a href="https://genetics.opentargets.org/" target="_blank" class="sprint-db-link" style="background: #F0FDF4; border: 1px solid #BBF7D0; color: #166534;">
-                                    <div>
-                                        <strong style="display: block; font-size: 0.78rem;">🎯 Open Targets Genetics</strong>
-                                        <span style="font-size: 0.68rem; color: #15803D;">Variant-to-gene (V2G) mapping, credible sets &amp; drug targets.</span>
-                                    </div>
-                                    <span style="font-weight: 700; font-size: 0.78rem;">&rarr;</span>
-                                </a>
-
-                                <a href="https://ldlink.nih.gov/" target="_blank" class="sprint-db-link" style="background: #FFF7ED; border: 1px solid #FED7AA; color: #9A3412;">
-                                    <div>
-                                        <strong style="display: block; font-size: 0.78rem;">🔗 LDlink (NCI / NIH)</strong>
-                                        <span style="font-size: 0.68rem; color: #EA580C;">Population-specific linkage disequilibrium (r², D') across 1000 Genomes.</span>
-                                    </div>
-                                    <span style="font-weight: 700; font-size: 0.78rem;">&rarr;</span>
-                                </a>
-
-                                <a href="https://gtexportal.org/" target="_blank" class="sprint-db-link" style="background: #FDF2F8; border: 1px solid #FBCFE8; color: #9D174D;">
-                                    <div>
-                                        <strong style="display: block; font-size: 0.78rem;">📊 GTEx Portal (v8/v9)</strong>
-                                        <span style="font-size: 0.68rem; color: #DB2777;">Tissue-specific eQTLs linking non-coding tag SNPs to gene expression.</span>
-                                    </div>
-                                    <span style="font-weight: 700; font-size: 0.78rem;">&rarr;</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Column: Interactive Track Guide & Instructor Reveal -->
-                    <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--accent-purple); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
-                        <div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                                <span style="font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; color: var(--accent-purple); text-transform: uppercase; letter-spacing: 0.05em;" id="sprint-track-title">2. Track 1: PCSK9 &amp; Lipids</span>
-                                <span style="background: #FAF5FF; color: #6B21A8; border: 1px solid #E9D5FF; border-radius: 6px; padding: 2px 8px; font-size: 0.70rem; font-weight: 700;" id="sprint-track-pill">Drug Target Discovery</span>
-                            </div>
-
-                            <!-- Search Cheat Codes Box -->
-                            <div style="background: #FEF3C7; border: 1px solid #FCD34D; border-radius: 6px; padding: 5px 8px; margin-bottom: 5px; font-size: 0.72rem;">
-                                <strong style="color: #92400E; display: flex; align-items: center; gap: 4px;">
-                                    <span>🎯</span> Step-by-Step Search Cheat Codes (Copy &amp; Paste):
-                                </strong>
-                                <div id="sprint-search-terms" style="font-family: var(--font-mono); font-size: 0.68rem; color: #78350F; margin-top: 2px; line-height: 1.36;">
-                                    &bull; <strong>GWAS Catalog:</strong> Search <code>PCSK9</code> or <code>Coronary artery disease</code> &rarr; locate lead tag SNP <code>rs2479409</code><br>
-                                    &bull; <strong>Open Targets:</strong> Search <code>PCSK9</code> &rarr; view Variant-to-Gene (V2G) score = 1.0 &amp; drugs<br>
-                                    &bull; <strong>ClinVar:</strong> Search <code>rs11591147</code> (p.Arg46Leu) &rarr; see natural protective loss-of-function
-                                </div>
-                            </div>
-
-                            <!-- 3 Deliverables Checklist -->
-                            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 5px 8px; margin-bottom: 5px; font-size: 0.72rem;">
-                                <strong style="color: #0F172A; display: block; margin-bottom: 2px;">📋 Your Group's 3 Deliverables:</strong>
-                                <ul id="sprint-deliverables-list" style="margin: 0; padding-left: 16px; line-height: 1.34; color: #334155;">
-                                    <li><strong>1. Statistical vs. Biological Effect:</strong> Contrast the GWAS tag SNP effect (OR &asymp; 1.06) with the loss-of-function mutation (OR &asymp; 0.12).</li>
-                                    <li><strong>2. Molecular Mechanism:</strong> How does PCSK9 degradation of the LDLR receptor govern circulating LDL levels?</li>
-                                    <li><strong>3. Therapeutic Translation:</strong> Name two FDA-approved drug classes (mAbs, siRNA) engineered from this genetic target.</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Dynamic Dossier & Reveal Section -->
-                        <div style="background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 6px; padding: 5px 8px; font-size: 0.72rem; line-height: 1.38;">
-                            <div style="width: 100%; padding: 7px 12px; font-size: 0.80rem; background: #F8FAFC; color: #475569; border: 1.2px solid #CBD5E1; border-radius: 6px; font-weight: 600; text-align: center;">💬 Collaborative Audit &bull; Work with your seating zone &amp; record discoveries</div>
-                            <div id="sprint-reveal-content" style="display: none; margin-top: 5px; background: #FFFFFF; border: 1px solid #DDD6FE; border-radius: 5px; padding: 5px 8px; font-size: 0.70rem; color: #4C1D95;">
-                                <div id="sprint-debrief-text">
-                                    <strong>Lead Tag SNP:</strong> <code>rs2479409 (Chr 1p32.3, OR ≈ 1.06)</code> vs. <strong>Loss-of-Function:</strong> <code>rs11591147 (p.Arg46Leu, OR ≈ 0.12)</code><br>
-                                    <strong>Mechanism:</strong> PCSK9 directs LDLR to lysosomal destruction. Loss-of-function preserves recycling, clearing plasma LDL.<br>
-                                    <strong>Approved Drugs:</strong> Monoclonal antibodies (<em>evolocumab</em>, <em>alirocumab</em>) and siRNA (<em>inclisiran</em>) lower LDL by 50–60%!
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Bottom Takeaway Strip -->
-                <div style="background: #F8FAFC; border: 1.2px solid var(--border-medium); border-left: 5px solid var(--accent-purple); border-radius: 8px; padding: 6px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 1.15rem;">💡</span>
-                        <span style="font-size: 0.88rem; color: var(--primary-color); line-height: 1.32;">
-                            <strong>The Polygenic Takeaway:</strong> Statistical power in GWAS requires millions of genomes, but clinical translation demands functional validation, biophysical target discovery, and multi-ancestral equity.
-                        </span>
-                    </div>
-                    <div style="font-family: var(--font-mono); font-size: 0.80rem; font-weight: 800; background: var(--accent-purple); color: #FFFFFF; padding: 3px 8px; border-radius: 4px; white-space: nowrap;">
-                        ACTIVE SPRINT
+            <div class="slide-body" style="justify-content: center; align-items: center; min-height: 480px;">
+                <div style="background: linear-gradient(135deg, #FFF5F7 0%, #FFFFFF 100%); border: 2px solid #E2E8F0; border-left: 6px solid #9D2235; border-radius: 12px; padding: 36px 44px; max-width: 820px; width: 100%; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.04);">
+                    <div style="font-size: 3.2rem; margin-bottom: 12px;">📝</div>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.55rem; color: #1E293B; margin-bottom: 10px;">In-Class Sprint &bull; Canvas In-Class Portal</h3>
+                    <p style="font-size: 1.10rem; color: #475569; line-height: 1.6; margin-bottom: 22px;">
+                        This assessment is administered live via Temple Canvas.<br>
+                        Please navigate to <strong>Canvas &gt; BIOL 3111 &gt; Quizzes</strong> and await the live passcode from the instructor.
+                    </p>
+                    <div style="display: inline-flex; align-items: center; gap: 12px; background: #F1F5F9; border-radius: 8px; padding: 10px 24px; font-size: 0.95rem; color: #334155; font-weight: 600;">
+                        <span>⏱ Time: 15 Minutes</span>
+                        <span>&bull;</span>
+                        <span>📊 Focus: APOE, PCSK9, NOD2, TCF7L2</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ================================================================= -->
-        <!-- SUMMATIVE FINAL QUIZ: CONCEPT MASTERY                             -->
-        <!-- ================================================================= -->
-        <section class="slide" data-slide="36" style="padding: 16px 44px;">
-            <div class="slide-header" style="margin-bottom: 6px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-                    <div class="slide-category" style="margin-bottom: 0; font-size: 0.86rem;">End-of-Lecture Summative Quiz &bull; Concept Mastery</div>
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <a href="https://templeu.instructure.com/courses/178614/quizzes" target="_blank" style="color: #2563EB; background: #EFF6FF; border: 1.5px solid #BFDBFE; border-radius: 8px; padding: 3px 10px; text-decoration: none; font-size: 0.74rem; font-weight: 700; white-space: nowrap;">
-                            🔗 Open Canvas Quizzes &rarr;
-                        </a>
-                        <span class="quiz-passcode-badge">🔑 <span style="font-size: 0.72rem; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.06em; color: #7E22CE; font-weight: 700;">Passcode:</span> <strong style="color: #581C87;">K8W-GWAS</strong></span>
-                        <div class="timer-widget" data-timer="quiz">
-                            <span>⏱️</span>
-                            <span class="timer-display" id="quiz-timer-disp">01:30</span>
-                            <button class="timer-btn" id="quiz-timer-btn">Start</button>
-                            <button class="timer-reset-btn" id="quiz-timer-reset">↺</button>
-                        </div>
-                    </div>
-                </div>
-                <h2 class="slide-title" style="font-size: 2.15rem; margin-bottom: 2px;">Lecture 3 Summative Quiz: Test Your Understanding</h2>
-                <div class="slide-subtitle" style="font-size: 1.05rem; line-height: 1.30;">
-                    Select a question tab to evaluate your mastery of polygenic architecture, multiple testing, LD, and clinical risk scores.
+        <section class="slide" data-slide="36" style="padding: 20px 48px;">
+            <div class="slide-header" style="margin-bottom: 8px;">
+                <div class="slide-category" style="margin-bottom: 2px; font-size: 0.86rem;">Active Learning &bull; In-Class Assessment</div>
+                <h2 class="slide-title" style="font-size: 2.2rem; margin-bottom: 2px;">Summative Quiz: Complex Traits & GWAS Mastery</h2>
+                <div class="slide-subtitle" style="font-size: 1.10rem; line-height: 1.35;">
+                    End-of-lecture concept mastery checkpoint.
                 </div>
             </div>
 
-            <div class="slide-body" style="gap: 8px; justify-content: flex-start;">
-                <!-- Quiz Tabs -->
-                <div class="quiz-tab-bar" id="quiz-tabs">
-                    <button class="quiz-tab-btn active" data-q="0">Q1: Additive Model</button>
-                    <button class="quiz-tab-btn" data-q="1">Q2: 5 &times; 10⁻⁸ Threshold</button>
-                    <button class="quiz-tab-btn" data-q="2">Q3: Non-Coding Architecture</button>
-                    <button class="quiz-tab-btn" data-q="3">Q4: PRS Predictive Limits</button>
-                    <button class="quiz-tab-btn" data-q="4">Q5: Multi-Ancestry Equity</button>
-                </div>
-
-                <!-- 2-Column Quiz Layout -->
-                <div style="display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 14px; align-items: stretch; flex: 1;">
-                    
-                    <!-- Left: Question & Instructor Reveal Button -->
-                    <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--accent-purple); border-radius: 12px; padding: 12px 16px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
-                        <div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                                <span style="font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; color: var(--accent-purple); text-transform: uppercase; letter-spacing: 0.05em;" id="quiz-q-badge">Question 1 of 5</span>
-                                <span style="background: #FAF5FF; color: #6B21A8; border: 1px solid #E9D5FF; border-radius: 6px; padding: 2px 8px; font-size: 0.70rem; font-weight: 700;">Concept Mastery</span>
-                            </div>
-
-                            <div style="font-size: 0.88rem; line-height: 1.45; color: var(--primary-color); margin-bottom: 8px;" id="quiz-question-text">
-                                Loading question...
-                            </div>
-                        </div>
-
-                        <div style="margin-top: 8px;">
-                            <div style="width: 100%; padding: 7px 12px; font-size: 0.80rem; background: #F8FAFC; color: #475569; border: 1.2px solid #CBD5E1; border-radius: 6px; font-weight: 600; text-align: center;">💬 Concept Mastery &bull; Self-Assessment &amp; Canvas Quiz Submission</div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Interactive Options & Debrief Box -->
-                    <div style="display: flex; flex-direction: column; gap: 6px; justify-content: space-between;">
-                        <div id="quiz-options-container" style="display: flex; flex-direction: column; gap: 6px;">
-                            <!-- Populated dynamically by JS -->
-                        </div>
-
-                        <!-- Debrief Box -->
-                        
-                    </div>
-
-                </div>
-
-                <!-- Bottom Takeaway Strip -->
-                <div style="background: #F8FAFC; border: 1.2px solid var(--border-medium); border-left: 5px solid var(--accent-purple); border-radius: 8px; padding: 6px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 1.15rem;">🎓</span>
-                        <span style="font-size: 0.88rem; color: var(--primary-color); line-height: 1.32;">
-                            <strong>Lecture 3 Synthesis:</strong> Complex diseases are governed by thousands of tiny nudges across the regulatory genome. Statistical genetics provides the map; functional biology discovers the cures.
-                        </span>
-                    </div>
-                    <div style="font-family: var(--font-mono); font-size: 0.80rem; font-weight: 800; background: var(--accent-purple); color: #FFFFFF; padding: 3px 8px; border-radius: 4px; white-space: nowrap;">
-                        FINAL QUIZ
+            <div class="slide-body" style="justify-content: center; align-items: center; min-height: 480px;">
+                <div style="background: linear-gradient(135deg, #FFF5F7 0%, #FFFFFF 100%); border: 2px solid #E2E8F0; border-left: 6px solid #9D2235; border-radius: 12px; padding: 36px 44px; max-width: 820px; width: 100%; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.04);">
+                    <div style="font-size: 3.2rem; margin-bottom: 12px;">📝</div>
+                    <h3 style="font-family: var(--font-heading); font-size: 1.55rem; color: #1E293B; margin-bottom: 10px;">Summative Quiz &bull; Canvas In-Class Portal</h3>
+                    <p style="font-size: 1.10rem; color: #475569; line-height: 1.6; margin-bottom: 22px;">
+                        This assessment is administered live via Temple Canvas.<br>
+                        Please navigate to <strong>Canvas &gt; BIOL 3111 &gt; Quizzes</strong> and await the live passcode from the instructor.
+                    </p>
+                    <div style="display: inline-flex; align-items: center; gap: 12px; background: #F1F5F9; border-radius: 8px; padding: 10px 24px; font-size: 0.95rem; color: #334155; font-weight: 600;">
+                        <span>⏱ Time: 5 Minutes</span>
+                        <span>&bull;</span>
+                        <span>📊 Focus: Quantitative Genetics & Epigenomics</span>
                     </div>
                 </div>
             </div>
         </section>
-
 
 <section class="slide" data-slide="37" style="padding: 16px 44px;">
             <div>
@@ -10449,346 +10036,11 @@
         })();
 
             // =================================================================
-            // IN-CLASS SPRINT DATA & CONTROLS (SLIDE 32)
-            // =================================================================
-            const sprintTrackData = {
-                pcsk9: {
-                    title: '2. Track 1: PCSK9 & Lipids',
-                    pill: 'Drug Target Discovery',
-                    searchTerms: '&bull; <strong>GWAS Catalog:</strong> Search <code>PCSK9</code> or <code>Coronary artery disease</code> &rarr; locate lead tag SNP <code>rs2479409</code><br>&bull; <strong>Open Targets:</strong> Search <code>PCSK9</code> &rarr; view Variant-to-Gene (V2G) score = 1.0 &amp; drugs<br>&bull; <strong>ClinVar:</strong> Search <code>rs11591147</code> (p.Arg46Leu) &rarr; see natural protective loss-of-function',
-                    deliverables: '<li><strong>1. Statistical vs. Biological Effect:</strong> Contrast the GWAS tag SNP effect (OR &asymp; 1.06) with the loss-of-function mutation (OR &asymp; 0.12).</li><li><strong>2. Molecular Mechanism:</strong> How does PCSK9 degradation of the LDLR receptor govern circulating LDL levels?</li><li><strong>3. Therapeutic Translation:</strong> Name two FDA-approved drug classes (mAbs, siRNA) engineered from this genetic target.</li>',
-                    debrief: '<strong>Lead Tag SNP:</strong> <code>rs2479409 (Chr 1p32.3, OR ≈ 1.06)</code> vs. <strong>Loss-of-Function:</strong> <code>rs11591147 (p.Arg46Leu, OR ≈ 0.12)</code><br><strong>Mechanism:</strong> PCSK9 directs LDLR to lysosomal destruction. Loss-of-function preserves recycling, clearing plasma LDL.<br><strong>Approved Drugs:</strong> Monoclonal antibodies (<em>evolocumab</em>, <em>alirocumab</em>) and siRNA (<em>inclisiran</em>) lower LDL by 50–60%!'
-                },
-                cfh: {
-                    title: '2. Track 2: CFH Y402H & AMD',
-                    pill: 'High-Impact Outlier',
-                    searchTerms: '&bull; <strong>GWAS Catalog:</strong> Search <code>Age-related macular degeneration</code> &rarr; find <em>CFH</em> locus (Chr 1q31.3)<br>&bull; <strong>dbSNP:</strong> Search <code>rs1061170</code> &rarr; note European risk allele frequency (~35%) &amp; massive OR<br>&bull; <strong>Clinical Literature:</strong> Search <em>CFH</em> alternative complement pathway activation in retinal RPE',
-                    deliverables: '<li><strong>1. Statistical Anomaly:</strong> Why is CFH Y402H (OR &asymp; 2.5–4.6) an extreme statistical anomaly among complex trait GWAS hits?</li><li><strong>2. Biophysical Pathology:</strong> How does changing Tyrosine to Histidine at codon 402 impair complement factor H regulation?</li><li><strong>3. Clinical Impact:</strong> What two complement-targeting therapies were FDA-approved in 2023 for geographic atrophy?</li>',
-                    debrief: '<strong>Locus & Lead SNP:</strong> <code>CFH Chr 1q31.3 (rs1061170, p.Tyr402His, OR ≈ 2.7–4.6)</code><br><strong>Biophysical Defect:</strong> Codon 402 sits in SCR domain 7; Histidine weakens binding to glycosaminoglycans and sulfated polysaccharides on Bruch\'s membrane, triggering alternative complement attack.<br><strong>Approved Therapies:</strong> Pegcetacoplan (<em>Syfovre</em>, C3 inhibitor) and Avacincaptad pegol (<em>Izervay</em>, C5 inhibitor) approved in 2023!'
-                },
-                ancestry: {
-                    title: '2. Track 3: PRS Ancestry Portability Crisis',
-                    pill: 'Equity & Portability',
-                    searchTerms: '&bull; <strong>PGS Catalog:</strong> Search <code>PGS000018</code> or <code>PGS000334</code> (Coronary Artery Disease PRS)<br>&bull; <strong>Performance Tab:</strong> Compare AUC and Hazard Ratio across European vs. African cohorts<br>&bull; <strong>LDlink (LDpair):</strong> Enter <code>rs2479409</code> &amp; neighboring SNP &rarr; compare r² in EUR vs. YRI (African)',
-                    deliverables: '<li><strong>1. Accuracy Decay:</strong> By what percentage does PRS predictive accuracy drop when applied to non-European ancestry cohorts?</li><li><strong>2. Genetic Root Cause:</strong> Explain why Linkage Disequilibrium (LD) decay and differing allele frequencies break European-derived models.</li><li><strong>3. Clinical Injustice:</strong> If a health system uses a PRS cutoff to allocate preventative screening, what harm results?</li>',
-                    debrief: '<strong>Portability Drop:</strong> PRS relative accuracy drops by <strong>50%–75%</strong> in African ancestry individuals (AUC drops from ~0.81 to ~0.60).<br><strong>Root Cause:</strong> African genomes have greater genetic diversity, shorter LD blocks, and different causal tag correlations.<br><strong>Clinical Injustice:</strong> Under-identifies high-risk minority patients, concentrating preventive therapeutics and early screenings in European ancestry groups!'
-                },
-                bigfive: {
-                    title: '2. Track 4: 1.14M Personality GWAS Audit',
-                    pill: 'Psychiatric & Behavioral',
-                    searchTerms: '&bull; <strong>Assigned Reading:</strong> Schwaba et al. (Nature 2026, DOI: 10.1038/s41586-026-10992-9)<br>&bull; <strong>Figure 1 &amp; Table 1:</strong> Check total sample size (1,141,408) and lead SNPs (1,260 total, 824 novel)<br>&bull; <strong>Figure 4 &amp; Discussion:</strong> Compare within-sibling betas vs. population betas &amp; out-of-sample R²',
-                    deliverables: '<li><strong>1. Effect Size Reality:</strong> What is the typical effect size (β) of a lead personality SNP, and how much variance does it explain?</li><li><strong>2. Sibling Control Audit:</strong> Why did personality associations retain >90% of effect in siblings while educational attainment dropped 50%?</li><li><strong>3. Commercial Hype Trap:</strong> Direct-to-consumer startups sell "embryo personality screening". Provide 2 mathematical arguments why this is fraudulent.</li>',
-                    debrief: '<strong>Sample & Architecture:</strong> <code>N = 1,141,408; 1,260 lead SNPs</code>. Typical effect size is <strong>β ≈ 0.008–0.015</strong> (explaining &lt; 0.03% variance each).<br><strong>Sibling Audit:</strong> Unlike educational attainment (confounded by parental wealth and "genetic nurture"), personality shows minimal dynastic confounding (&gt;90% direct effect).<br><strong>Commercial Hype Trap:</strong> Aggregate PRS explains only <strong>1%–3% of variance</strong> ($R^2$), and non-shared environment accounts for &gt;85%. Embryo selection has near-zero predictive power!'
-                }
-            };
-
-            const sprintTabBtns = document.querySelectorAll('.sprint-tab-btn');
-            const sprintTrackTitle = document.getElementById('sprint-track-title');
-            const sprintTrackPill = document.getElementById('sprint-track-pill');
-            const sprintSearchTerms = document.getElementById('sprint-search-terms');
-            const sprintDeliverablesList = document.getElementById('sprint-deliverables-list');
-            const sprintDebriefText = document.getElementById('sprint-debrief-text');
-            const sprintRevealBtn = document.getElementById('sprint-reveal-btn');
-            const sprintRevealContent = document.getElementById('sprint-reveal-content');
-
-            sprintTabBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    sprintTabBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const trackKey = btn.dataset.track;
-                    const d = sprintTrackData[trackKey];
-                    if (d) {
-                        if (sprintTrackTitle) sprintTrackTitle.textContent = d.title;
-                        if (sprintTrackPill) sprintTrackPill.textContent = d.pill;
-                        if (sprintSearchTerms) sprintSearchTerms.innerHTML = d.searchTerms;
-                        if (sprintDeliverablesList) sprintDeliverablesList.innerHTML = d.deliverables;
-                        if (sprintDebriefText) sprintDebriefText.innerHTML = d.debrief;
-                        if (sprintRevealContent) sprintRevealContent.style.display = 'none';
-                        if (sprintRevealBtn) sprintRevealBtn.textContent = '👁️ Reveal Verified Data (Instructor Debrief)';
-                    }
-                });
-            });
-
-            if (sprintRevealBtn && sprintRevealContent) {
-                sprintRevealBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (sprintRevealContent.style.display === 'none') {
-                        sprintRevealContent.style.display = 'block';
-                        sprintRevealBtn.textContent = '🙈 Hide Verified Data';
-                    } else {
-                        sprintRevealContent.style.display = 'none';
-                        sprintRevealBtn.textContent = '👁️ Reveal Verified Data (Instructor Debrief)';
-                    }
-                });
-            }
-
-            // In-Class Sprint Timer (Slide 32)
-            const sprintTimerDisp = document.getElementById('sprint-timer-disp');
-            const sprintTimerBtn = document.getElementById('sprint-timer-btn');
-            const sprintTimerReset = document.getElementById('sprint-timer-reset');
-            let sprintInterval = null;
-            let sprintTimeLeft = 8 * 60; // 8 minutes
-
-            function updateSprintTimerDisplay() {
-                if (!sprintTimerDisp) return;
-                const m = Math.floor(sprintTimeLeft / 60);
-                const s = sprintTimeLeft % 60;
-                sprintTimerDisp.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-            }
-
-            if (sprintTimerBtn && sprintTimerReset) {
-                sprintTimerBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (sprintInterval) {
-                        clearInterval(sprintInterval);
-                        sprintInterval = null;
-                        sprintTimerBtn.textContent = 'Start';
-                    } else {
-                        sprintTimerBtn.textContent = 'Pause';
-                        sprintInterval = setInterval(() => {
-                            if (sprintTimeLeft > 0) {
-                                sprintTimeLeft--;
-                                updateSprintTimerDisplay();
-                            } else {
-                                clearInterval(sprintInterval);
-                                sprintInterval = null;
-                                sprintTimerBtn.textContent = 'Done!';
-                            }
-                        }, 1000);
-                    }
-                });
-
-                sprintTimerReset.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (sprintInterval) {
-                        clearInterval(sprintInterval);
-                        sprintInterval = null;
-                    }
-                    sprintTimeLeft = 8 * 60;
-                    sprintTimerBtn.textContent = 'Start';
-                    updateSprintTimerDisplay();
-                });
-            }
-
-
-            // =================================================================
-            // SPOT CHECKS 1, 2, 3 STUDENT HANDLERS & TIMERS
-            // =================================================================
-            function setupSpotCheckStudent(scId, timerDispId, timerBtnId, timerResetId) {
-                const options = document.querySelectorAll(`#${scId}-options .sc-option`);
-                options.forEach(opt => {
-                    opt.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        options.forEach(o => o.classList.remove('selected-choice'));
-                        opt.classList.add('selected-choice');
-                    });
-                });
-
-                // Timer
-                const timerDisp = document.getElementById(timerDispId);
-                const timerBtn = document.getElementById(timerBtnId);
-                const timerReset = document.getElementById(timerResetId);
-                let interval = null;
-                let timeLeft = 90;
-
-                function updateDisp() {
-                    if (!timerDisp) return;
-                    const m = Math.floor(timeLeft / 60);
-                    const s = timeLeft % 60;
-                    timerDisp.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-                }
-
-                if (timerBtn && timerReset) {
-                    timerBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        if (interval) {
-                            clearInterval(interval);
-                            interval = null;
-                            timerBtn.textContent = 'Start';
-                        } else {
-                            timerBtn.textContent = 'Pause';
-                            interval = setInterval(() => {
-                                if (timeLeft > 0) {
-                                    timeLeft--;
-                                    updateDisp();
-                                } else {
-                                    clearInterval(interval);
-                                    interval = null;
-                                    timerBtn.textContent = 'Done!';
-                                }
-                            }, 1000);
-                        }
-                    });
-
-                    timerReset.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        if (interval) {
-                            clearInterval(interval);
-                            interval = null;
-                        }
-                        timeLeft = 90;
-                        timerBtn.textContent = 'Start';
-                        updateDisp();
-                    });
-                }
-            }
-
-            setupSpotCheckStudent('sc1', 'sc1-timer-disp', 'sc1-timer-btn', 'sc1-timer-reset');
-            setupSpotCheckStudent('sc2', 'sc2-timer-disp', 'sc2-timer-btn', 'sc2-timer-reset');
-            setupSpotCheckStudent('sc3', 'sc3-timer-disp', 'sc3-timer-btn', 'sc3-timer-reset');
-
-            // =================================================================
-            // SUMMATIVE FINAL QUIZ (STUDENT VERSION - NO LEAKED KEYS)
-            // =================================================================
-            const summativeQuestions = [
-                {
-                    badge: 'Question 1: Additive Architecture',
-                    q: 'How does Fisher\'s infinitesimal model of complex polygenic traits differ fundamentally from classical Mendelian disease inheritance?',
-                    opts: [
-                        { letter: 'A', text: 'Complex traits are caused by a single dominant mutation with 100% penetrance.' },
-                        { letter: 'B', text: 'Complex traits are driven by thousands of infinitesimal additive effect sizes (β ≈ 0.005, OR ≈ 1.02–1.05) distributed across the entire genome, rather than single high-impact mutations.' },
-                        { letter: 'C', text: 'Complex traits are determined exclusively by epigenetic DNA methylation with zero sequence variation.' },
-                        { letter: 'D', text: 'Complex traits violate the laws of segregation and assortment during meiosis.' }
-                    ]
-                },
-                {
-                    badge: 'Question 2: Genome-Wide Significance',
-                    q: 'Why is the standard scientific significance threshold (p < 0.05) rejected in GWAS in favor of p < 5 × 10⁻⁸?',
-                    opts: [
-                        { letter: 'A', text: 'Because DNA polymerases make copying errors at a rate of 5 × 10⁻⁸ per cell division.' },
-                        { letter: 'B', text: 'To account for testing approximately 1,000,000 independent Linkage Disequilibrium blocks across the human genome (0.05 / 10⁶ = 5 × 10⁻⁸), eliminating hundreds of false discoveries.' },
-                        { letter: 'C', text: 'Because microarrays only achieve physical signal detection above 5 × 10⁻⁸ fluorescence units.' },
-                        { letter: 'D', text: 'Because European biobanks have a fixed sample size limit of exactly 20 million participants.' }
-                    ]
-                },
-                {
-                    badge: 'Question 3: Non-Coding Architecture',
-                    q: 'Over 93% of GWAS lead SNPs fall in non-coding introns and intergenic deserts. What is required to connect a non-coding tag SNP to its true causal mechanism?',
-                    opts: [
-                        { letter: 'A', text: 'Assuming the physically nearest protein-coding gene is always the true causal target.' },
-                        { letter: 'B', text: 'Translating the non-coding sequence using the mitochondrial codon table.' },
-                        { letter: 'C', text: 'Integrating functional genomics: mapping eQTLs, chromatin accessibility (ATAC-seq), and 3D chromatin loops (Hi-C) to identify distal target promoters.' },
-                        { letter: 'D', text: 'Deleting the entire chromosome in mouse models to observe embryonic viability.' }
-                    ]
-                },
-                {
-                    badge: 'Question 4: PRS Predictive Limits',
-                    q: 'A Polygenic Risk Score for a behavioral trait explains R² = 2.5% of variance in an out-of-sample population. What does this mathematical reality imply for individual prediction?',
-                    opts: [
-                        { letter: 'A', text: 'The score is 97.5% accurate for predicting any specific individual\'s future life outcome.' },
-                        { letter: 'B', text: 'The score is useful for population-level stratification, but leaves 97.5% of variance unexplained, making individual behavioral prediction scientifically and ethically invalid.' },
-                        { letter: 'C', text: 'The score can reliably be used by fertility clinics for embryo personality selection.' },
-                        { letter: 'D', text: 'The score confirms that 97.5% of the human genome is non-functional junk DNA.' }
-                    ]
-                },
-                {
-                    badge: 'Question 5: Multi-Ancestry Equity',
-                    q: 'What is the primary genetic reason that Polygenic Risk Scores derived from European discovery GWAS suffer a dramatic 50%–75% drop in predictive accuracy when applied to individuals of African ancestry?',
-                    opts: [
-                        { letter: 'A', text: 'African genomes mutate 50 times faster than European genomes.' },
-                        { letter: 'B', text: 'Due to older human evolutionary history in Africa, African genomes have shorter Linkage Disequilibrium blocks and different haplotype structures, decoupling European tag SNPs from causal alleles.' },
-                        { letter: 'C', text: 'African populations carry entirely different amino acids that invalidate the standard genetic code.' },
-                        { letter: 'D', text: 'Microarrays are chemically incompatible with non-European DNA samples.' }
-                    ]
-                }
-            ];
-
-            let currentQuizIndex = 0;
-            const quizTabs = document.querySelectorAll('.quiz-tab-btn');
-            const quizQBadge = document.getElementById('quiz-q-badge');
-            const quizQuestionText = document.getElementById('quiz-question-text');
-            const quizOptionsContainer = document.getElementById('quiz-options-container');
-
-            function renderSummativeQuestion(idx) {
-                currentQuizIndex = idx;
-                const qData = summativeQuestions[idx];
-                if (!qData) return;
-
-                if (quizQBadge) quizQBadge.textContent = qData.badge;
-                if (quizQuestionText) quizQuestionText.innerHTML = qData.q;
-
-                if (quizOptionsContainer) {
-                    quizOptionsContainer.innerHTML = '';
-                    qData.opts.forEach(opt => {
-                        const optDiv = document.createElement('div');
-                        optDiv.className = 'sc-option';
-                        optDiv.innerHTML = `
-                            <span style="background: #F1F5F9; color: #475569; font-weight: 800; border-radius: 4px; padding: 2px 7px; font-size: 0.78rem;">${opt.letter}</span>
-                            <span>${opt.text}</span>
-                        `;
-                        optDiv.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            const allOpts = quizOptionsContainer.querySelectorAll('.sc-option');
-                            allOpts.forEach(o => o.classList.remove('selected-choice'));
-                            optDiv.classList.add('selected-choice');
-                        });
-                        quizOptionsContainer.appendChild(optDiv);
-                    });
-                }
-            }
-
-            quizTabs.forEach((tab, idx) => {
-                tab.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    quizTabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    renderSummativeQuestion(idx);
-                });
-            });
-
-            // Summative Quiz Timer
-            const quizTimerDisp = document.getElementById('quiz-timer-disp');
-            const quizTimerBtn = document.getElementById('quiz-timer-btn');
-            const quizTimerReset = document.getElementById('quiz-timer-reset');
-            let qInterval = null;
-            let qTimeLeft = 90;
-
-            function updateQuizDisp() {
-                if (!quizTimerDisp) return;
-                const m = Math.floor(qTimeLeft / 60);
-                const s = qTimeLeft % 60;
-                quizTimerDisp.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-            }
-
-            if (quizTimerBtn && quizTimerReset) {
-                quizTimerBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (qInterval) {
-                        clearInterval(qInterval);
-                        qInterval = null;
-                        quizTimerBtn.textContent = 'Start';
-                    } else {
-                        quizTimerBtn.textContent = 'Pause';
-                        qInterval = setInterval(() => {
-                            if (qTimeLeft > 0) {
-                                qTimeLeft--;
-                                updateQuizDisp();
-                            } else {
-                                clearInterval(qInterval);
-                                qInterval = null;
-                                quizTimerBtn.textContent = 'Done!';
-                            }
-                        }, 1000);
-                    }
-                });
-
-                quizTimerReset.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (qInterval) {
-                        clearInterval(qInterval);
-                        qInterval = null;
-                    }
-                    qTimeLeft = 90;
-                    quizTimerBtn.textContent = 'Start';
-                    updateQuizDisp();
-                });
-            }
-
-            // Initial render of Q1
-            renderSummativeQuestion(0);
-
+            // Active learning checkpoints are administered live on Temple Canvas.
 </script>
+
+
+    
 
 </body>
 </html>
