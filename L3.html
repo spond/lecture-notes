@@ -6207,28 +6207,151 @@
         <!-- ================================================================= -->
         <!-- SLIDE 32: IN-CLASS SPRINT — THE PRECISION GWAS & PRS AUDIT         -->
         <!-- ================================================================= -->
-                                <section class="slide" data-slide="35" style="padding: 20px 48px;">
-            <div class="slide-header" style="margin-bottom: 8px;">
-                <div class="slide-category" style="margin-bottom: 2px; font-size: 0.86rem;">Active Learning &bull; In-Class Assessment</div>
-                <h2 class="slide-title" style="font-size: 2.2rem; margin-bottom: 2px;">In-Class Sprint: Precision GWAS & Multi-Locus Audit</h2>
-                <div class="slide-subtitle" style="font-size: 1.10rem; line-height: 1.35;">
-                    Hands-on multi-locus investigation across classroom seating tracks.
+                                        <!-- ================================================================= -->
+        <!-- SLIDE 35: IN-CLASS SPRINT — THE MULTI-LOCUS PRECISION GWAS AUDIT  -->
+        <!-- ================================================================= -->
+        <section class="slide" data-slide="35" style="padding: 16px 44px;">
+            <div class="slide-header" style="margin-bottom: 6px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                    <div class="slide-category" style="margin-bottom: 0; font-size: 0.86rem;">Active Learning &bull; Hands-On Sprint &bull; Live Database Exploration</div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <a href="https://templeu.instructure.com/courses/178614/quizzes" target="_blank" style="color: #2563EB; background: #EFF6FF; border: 1.5px solid #BFDBFE; border-radius: 8px; padding: 3px 10px; text-decoration: none; font-size: 0.74rem; font-weight: 700; white-space: nowrap;">
+                            🔗 Open Canvas Quizzes &rarr;
+                        </a>
+                        <span class="quiz-passcode-badge">🔑 <span style="font-size: 0.72rem; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.06em; color: #7E22CE; font-weight: 700;">Passcode:</span> <strong style="color: #581C87;">W5R-SPRINT</strong></span>
+                        <div class="timer-widget" data-timer="sprint">
+                            <span>⏱️</span>
+                            <span class="timer-display" id="sprint-timer-disp">15:00</span>
+                            <button class="timer-btn" id="sprint-timer-btn">Start</button>
+                            <button class="timer-reset-btn" id="sprint-timer-reset">↺</button>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="slide-title" style="font-size: 2.15rem; margin-bottom: 2px;">In-Class Sprint: Multi-Locus Precision GWAS Audit</h2>
+                <div class="slide-subtitle" style="font-size: 1.05rem; line-height: 1.30;">
+                    Turn to your neighbors. Open your section's database on your laptop or phone, investigate the real locus data, and submit on Canvas.
                 </div>
             </div>
 
-            <div class="slide-body" style="justify-content: center; align-items: center; min-height: 480px;">
-                <div style="background: linear-gradient(135deg, #FFF5F7 0%, #FFFFFF 100%); border: 2px solid #E2E8F0; border-left: 6px solid #9D2235; border-radius: 12px; padding: 36px 44px; max-width: 820px; width: 100%; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.04);">
-                    <div style="font-size: 3.2rem; margin-bottom: 12px;">📝</div>
-                    <h3 style="font-family: var(--font-heading); font-size: 1.55rem; color: #1E293B; margin-bottom: 10px;">In-Class Sprint &bull; Canvas In-Class Portal</h3>
-                    <p style="font-size: 1.10rem; color: #475569; line-height: 1.6; margin-bottom: 22px;">
-                        This assessment is administered live via Temple Canvas.<br>
-                        Please navigate to <strong>Canvas &gt; BIOL 3111 &gt; Quizzes</strong> and await the live passcode from the instructor.
-                    </p>
-                    <div style="display: inline-flex; align-items: center; gap: 12px; background: #F1F5F9; border-radius: 8px; padding: 10px 24px; font-size: 0.95rem; color: #334155; font-weight: 600;">
-                        <span>⏱ Time: 15 Minutes</span>
-                        <span>&bull;</span>
-                        <span>📊 Focus: APOE, PCSK9, NOD2, TCF7L2</span>
+            <!-- Auditorium Seating Zone Assignment Tabs -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 8px;" id="sprint-tabs">
+                <button class="sprint-tab-btn active" data-track="apoe">
+                    <span style="display: block; font-size: 0.65rem; color: #EA580C; font-weight: 700; text-transform: uppercase;">🏛️ Front Rows / Zone 1</span>
+                    🧠 Track 1: <em>APOE</em> (Alzheimer's)
+                </button>
+                <button class="sprint-tab-btn" data-track="pcsk9">
+                    <span style="display: block; font-size: 0.65rem; color: #2563EB; font-weight: 700; text-transform: uppercase;">🏛️ Center Rows / Zone 2</span>
+                    🫀 Track 2: <em>PCSK9</em> (Cardiology)
+                </button>
+                <button class="sprint-tab-btn" data-track="nod2">
+                    <span style="display: block; font-size: 0.65rem; color: #7C3AED; font-weight: 700; text-transform: uppercase;">🏛️ Left Rows / Zone 3</span>
+                    🔬 Track 3: <em>NOD2</em> (Crohn's)
+                </button>
+                <button class="sprint-tab-btn" data-track="tcf7l2">
+                    <span style="display: block; font-size: 0.65rem; color: #059669; font-weight: 700; text-transform: uppercase;">🏛️ Right Rows / Zone 4</span>
+                    🧬 Track 4: <em>TCF7L2</em> (Diabetes)
+                </button>
+            </div>
+
+            <!-- Main Content 2-Column Grid -->
+            <div style="display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 12px; align-items: stretch; flex: 1;">
+                <!-- Left Column: Open Databases Launchpad -->
+                <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--accent-blue); border-radius: 12px; padding: 10px 14px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                            <span style="font-weight: 800; font-size: 0.88rem; color: #1E293B;">1. Open Clinical &amp; Genomic Databases</span>
+                            <span class="card-pill" style="font-size: 0.68rem;">Live NIH / EBI Tools</span>
+                        </div>
+                        <p style="font-size: 0.74rem; color: #475569; margin-bottom: 6px;">
+                            Click below to open verified primary databases on your laptop or mobile device:
+                        </p>
+
+                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                            <a href="https://www.ebi.ac.uk/gwas/" target="_blank" class="sprint-db-link" style="background: #EFF6FF; border: 1px solid #BFDBFE; color: #1E40AF;">
+                                <div>
+                                    <strong style="display: block; font-size: 0.78rem;">🌐 NHGRI-EBI GWAS Catalog</strong>
+                                    <span style="font-size: 0.68rem; color: #3B82F6;">Curated traits, Manhattan plots, lead variant P-values &amp; effect sizes (&beta; / OR).</span>
+                                </div>
+                                <span style="font-weight: 700; font-size: 0.78rem;">&rarr;</span>
+                            </a>
+
+                            <a href="https://www.ncbi.nlm.nih.gov/clinvar/" target="_blank" class="sprint-db-link" style="background: #F0FDF4; border: 1px solid #BBF7D0; color: #166534;">
+                                <div>
+                                    <strong style="display: block; font-size: 0.78rem;">🏛️ NCBI ClinVar &amp; dbSNP</strong>
+                                    <span style="font-size: 0.68rem; color: #15803D;">Clinical interpretations, pathogenic vs. benign coding classifications, and allele frequencies.</span>
+                                </div>
+                                <span style="font-weight: 700; font-size: 0.78rem;">&rarr;</span>
+                            </a>
+
+                            <a href="https://genetics.opentargets.org/" target="_blank" class="sprint-db-link" style="background: #FFF7ED; border: 1px solid #FED7AA; color: #9A3412;">
+                                <div>
+                                    <strong style="display: block; font-size: 0.78rem;">🎯 Open Targets Genetics</strong>
+                                    <span style="font-size: 0.68rem; color: #EA580C;">Variant-to-Gene (V2G) scores, colocalization, and target druggability pipelines.</span>
+                                </div>
+                                <span style="font-weight: 700; font-size: 0.78rem;">&rarr;</span>
+                            </a>
+
+                            <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38" target="_blank" class="sprint-db-link" style="background: #FAF5FF; border: 1px solid #E9D5FF; color: #6B21A8;">
+                                <div>
+                                    <strong style="display: block; font-size: 0.78rem;">🗺️ UCSC Genome Browser (hg38)</strong>
+                                    <span style="font-size: 0.68rem; color: #9333EA;">Epigenomics, ENCODE regulatory marks, ATAC-seq, and transcription factor ChIP-seq.</span>
+                                </div>
+                                <span style="font-weight: 700; font-size: 0.78rem;">&rarr;</span>
+                            </a>
+
+                            <a href="https://www.pgscatalog.org/" target="_blank" class="sprint-db-link" style="background: #FDF2F8; border: 1px solid #FBCFE8; color: #9D174D;">
+                                <div>
+                                    <strong style="display: block; font-size: 0.78rem;">📊 Polygenic Score (PGS) Catalog</strong>
+                                    <span style="font-size: 0.68rem; color: #DB2777;">Standardized PRS scores, hazard ratios, and cross-ancestry performance decay metrics.</span>
+                                </div>
+                                <span style="font-weight: 700; font-size: 0.78rem;">&rarr;</span>
+                            </a>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Right Column: Interactive Track Guide & Deliverables -->
+                <div style="background: #FFFFFF; border: 1.5px solid var(--border-light); border-top: 4px solid var(--accent-purple); border-radius: 12px; padding: 10px 14px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                            <span class="card-title" id="sprint-track-title" style="font-size: 0.90rem; margin-bottom: 0; font-weight: 800; color: #1E293B;">Track 1: APOE &amp; Alzheimer's Disease (LOAD)</span>
+                            <span class="card-pill" id="sprint-track-pill" style="font-size: 0.68rem;">High-Impact Outlier (OR ~12)</span>
+                        </div>
+
+                        <!-- Search Cheat Codes Box -->
+                        <div style="background: #FEF3C7; border: 1px solid #FCD34D; border-radius: 6px; padding: 6px 10px; margin-bottom: 6px; font-size: 0.72rem;">
+                            <strong style="color: #92400E; display: flex; align-items: center; gap: 4px; font-size: 0.74rem;">
+                                <span>🎯</span> Step-by-Step Search Cheat Codes (Copy &amp; Paste):
+                            </strong>
+                            <div id="sprint-search-terms" style="font-family: var(--font-mono); font-size: 0.69rem; color: #78350F; margin-top: 3px; line-height: 1.38;">
+                                &bull; <strong>GWAS Catalog:</strong> Search <code>Alzheimer disease</code> &rarr; check Chr 19q13.32 locus &amp; lead SNPs <code>rs429358</code>, <code>rs7412</code><br>
+                                &bull; <strong>NCBI ClinVar:</strong> Search <code>rs429358</code> &rarr; inspect p.Cys112Arg (&epsilon;4 allele) pathogenic risk factor status<br>
+                                &bull; <strong>dbSNP / Open Targets:</strong> Note global &epsilon;4 allele frequency (~14%) and target tractability score
+                            </div>
+                        </div>
+
+                        <!-- Deliverables Checklist -->
+                        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 10px; font-size: 0.72rem;">
+                            <strong style="color: #0F172A; display: block; margin-bottom: 2px; font-size: 0.74rem;">📋 Your Group's 3 Audit Deliverables:</strong>
+                            <ul id="sprint-deliverables-list" style="margin: 0; padding-left: 16px; line-height: 1.36; color: #334155;">
+                                <li><strong>1. Effect Size Anomaly:</strong> Why is an Odds Ratio of ~12 from common missense alleles an extreme anomaly in polygenic GWAS architecture?</li>
+                                <li><strong>2. Molecular Mechanism:</strong> How do the Cys/Arg substitutions at codons 112 and 158 alter ApoE protein domain interaction, lipid clearance, and A&beta; aggregation?</li>
+                                <li><strong>3. Complex Trait Reality:</strong> If homozygous &epsilon;4/&epsilon;4 is carried, why is penetrance not 100%, and how do polygenic risk scores (PRS) modulate onset age?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Student Canvas Submission Callout -->
+                    <div style="background: #F8FAFC; border: 1.5px dashed #CBD5E1; border-radius: 6px; padding: 6px 10px; font-size: 0.73rem; color: #475569; display: flex; align-items: center; justify-content: space-between;">
+                        <span>💡 <strong>Canvas Submission:</strong> Complete your 1-question audit on Canvas (<strong>Passcode: W5R-SPRINT</strong>). Be ready to share your findings during debrief!</span>
+                        <a href="https://templeu.instructure.com/courses/178614/quizzes" target="_blank" style="color: #2563EB; font-weight: 700; text-decoration: none; white-space: nowrap; margin-left: 8px;">Open Quiz &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout-strip" style="margin-top: 6px; padding: 4px 14px;">
+                <div class="callout-strip-text" style="font-size: 0.80rem;">
+                    <strong>💡 Precision Takeaway:</strong> Post-GWAS discovery requires converging statistical association, cell-type chromatin regulation, and human knockout pharmacology to validate true therapeutic targets.
                 </div>
             </div>
         </section>
@@ -10035,7 +10158,109 @@
             render();
         })();
 
+                        // =================================================================
+            // IN-CLASS SPRINT DATA & CONTROLS (SLIDE 35) - STUDENT BUILD
             // =================================================================
+            (function() {
+                const sprintTrackData = {
+                    apoe: {
+                        title: 'Track 1: APOE & Alzheimer\'s Disease (LOAD)',
+                        pill: 'High-Impact Outlier (OR ~12)',
+                        searchTerms: '&bull; <strong>GWAS Catalog:</strong> Search <code>Alzheimer disease</code> &rarr; check Chr 19q13.32 locus &amp; lead SNPs <code>rs429358</code>, <code>rs7412</code><br>&bull; <strong>NCBI ClinVar:</strong> Search <code>rs429358</code> &rarr; inspect p.Cys112Arg (&epsilon;4 allele) pathogenic risk factor status<br>&bull; <strong>dbSNP / Open Targets:</strong> Note global &epsilon;4 allele frequency (~14%) and target tractability score',
+                        deliverables: '<li><strong>1. Effect Size Anomaly:</strong> Why is an Odds Ratio of ~12 from common missense alleles an extreme anomaly in polygenic GWAS architecture?</li><li><strong>2. Molecular Mechanism:</strong> How do the Cys/Arg substitutions at codons 112 and 158 alter ApoE protein domain interaction, lipid clearance, and A&beta; aggregation?</li><li><strong>3. Complex Trait Reality:</strong> If homozygous &epsilon;4/&epsilon;4 is carried, why is penetrance not 100%, and how do polygenic risk scores (PRS) modulate onset age?</li>'
+                    },
+                    pcsk9: {
+                        title: 'Track 2: PCSK9 & Coronary Artery Disease (CAD)',
+                        pill: 'Human Knockout Validation',
+                        searchTerms: '&bull; <strong>GWAS Catalog:</strong> Search <code>Coronary artery disease</code> &rarr; identify <em>PCSK9</em> locus (Chr 1p32.3) and lead tag SNP <code>rs2479409</code><br>&bull; <strong>Open Targets:</strong> Search <code>PCSK9</code> &rarr; examine Variant-to-Gene (V2G = 1.0) and FDA-approved therapeutics<br>&bull; <strong>ClinVar:</strong> Search <code>rs11591147</code> (p.Arg46Leu) or <code>rs67608943</code> (Y142X) &rarr; observe natural protective loss-of-function variants',
+                        deliverables: '<li><strong>1. Statistical vs. Biological Effect:</strong> Contrast the modest GWAS tag SNP effect (OR &asymp; 1.06) with the dramatic human knockout nonsense mutation effect (OR &asymp; 0.12).</li><li><strong>2. Molecular Mechanism:</strong> How does PCSK9 binding route the LDL receptor (LDLR) to lysosomal destruction instead of recycling back to the hepatocyte surface?</li><li><strong>3. Therapeutic Translation:</strong> Name the FDA-approved monoclonal antibodies (<em>evolocumab</em>, <em>alirocumab</em>) and siRNA (<em>inclisiran</em>) engineered directly from this genetic target.</li>'
+                    },
+                    nod2: {
+                        title: 'Track 3: NOD2 / CARD15 & Crohn\'s Disease',
+                        pill: 'Innate Immunity Barrier Defect',
+                        searchTerms: '&bull; <strong>GWAS Catalog:</strong> Search <code>Crohn\'s disease</code> &rarr; locate Chr 16q12.1 locus and historic 2001 fine-mapping associations<br>&bull; <strong>NCBI ClinVar:</strong> Search <code>rs2066847</code> (c.3020insC / p.Leu1007fs) &rarr; classify pathogenic frameshift in IBD<br>&bull; <strong>OMIM:</strong> Search <code>CARD15</code> (OMIM #266600) &rarr; inspect Leucine-Rich Repeat (LRR) bacterial sensing domain',
+                        deliverables: '<li><strong>1. Paradigm Shift:</strong> How did discovering a bacterial-sensing intracellular receptor overthrow the dogma that Crohn\'s disease is an autoimmune attack on self-antigens?</li><li><strong>2. Molecular Mechanism:</strong> How does the frameshift mutation <code>3020insC</code> in the LRR domain abolish cytosolic detection of bacterial muramyl dipeptide (MDP)?</li><li><strong>3. Pathological Paradox:</strong> Why does a loss-of-function barrier defect in ileal Paneth cells cause severe inflammatory bowel hyper-reactivity instead of immune deficiency?</li>'
+                    },
+                    tcf7l2: {
+                        title: 'Track 4: TCF7L2 & Type 2 Diabetes (T2D)',
+                        pill: 'Non-Coding Regulatory Enhancer',
+                        searchTerms: '&bull; <strong>GWAS Catalog:</strong> Search <code>TCF7L2</code> or <code>Type 2 diabetes</code> &rarr; identify top common locus <code>rs7903146</code> (OR &asymp; 1.37)<br>&bull; <strong>Open Targets:</strong> Search <code>rs7903146</code> &rarr; explore islet chromatin accessibility, eQTL data, and variant effects<br>&bull; <strong>UCSC Browser (hg38):</strong> Navigate to <code>chr10:112998590</code> &rarr; examine islet-specific ATAC-seq peak and H3K27ac marks',
+                        deliverables: '<li><strong>1. Non-Coding Architecture:</strong> Why does the lead causal variant <code>rs7903146</code> lie in deep intron 3/4 rather than coding sequence, and how does this represent &gt;90% of GWAS discoveries?</li><li><strong>2. Molecular Mechanism:</strong> How does the risk T allele alter local chromatin accessibility and enhancer activity specifically in pancreatic islet &beta;-cells?</li><li><strong>3. Endocrine Impact:</strong> How does altered TCF7L2 transcription factor expression impair incretin (GLP-1)-stimulated insulin secretion from &beta;-cells?</li>'
+                    }
+                };
+
+                const sprintTabBtns = document.querySelectorAll('.sprint-tab-btn');
+                const sprintTrackTitle = document.getElementById('sprint-track-title');
+                const sprintTrackPill = document.getElementById('sprint-track-pill');
+                const sprintSearchTerms = document.getElementById('sprint-search-terms');
+                const sprintDeliverablesList = document.getElementById('sprint-deliverables-list');
+
+                sprintTabBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        sprintTabBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        const trackKey = btn.dataset.track;
+                        const d = sprintTrackData[trackKey];
+                        if (d) {
+                            if (sprintTrackTitle) sprintTrackTitle.textContent = d.title;
+                            if (sprintTrackPill) sprintTrackPill.textContent = d.pill;
+                            if (sprintSearchTerms) sprintSearchTerms.innerHTML = d.searchTerms;
+                            if (sprintDeliverablesList) sprintDeliverablesList.innerHTML = d.deliverables;
+                        }
+                    });
+                });
+
+                // In-Class Sprint Timer (15:00)
+                const sprintTimerDisp = document.getElementById('sprint-timer-disp');
+                const sprintTimerBtn = document.getElementById('sprint-timer-btn');
+                const sprintTimerReset = document.getElementById('sprint-timer-reset');
+                let sprintInterval = null;
+                let sprintTimeLeft = 15 * 60; // 15 minutes
+
+                function updateSprintTimerDisplay() {
+                    if (!sprintTimerDisp) return;
+                    const m = Math.floor(sprintTimeLeft / 60);
+                    const s = sprintTimeLeft % 60;
+                    sprintTimerDisp.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                }
+
+                if (sprintTimerBtn && sprintTimerReset) {
+                    sprintTimerBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (sprintInterval) {
+                            clearInterval(sprintInterval);
+                            sprintInterval = null;
+                            sprintTimerBtn.textContent = 'Start';
+                        } else {
+                            sprintTimerBtn.textContent = 'Pause';
+                            sprintInterval = setInterval(() => {
+                                if (sprintTimeLeft > 0) {
+                                    sprintTimeLeft--;
+                                    updateSprintTimerDisplay();
+                                } else {
+                                    clearInterval(sprintInterval);
+                                    sprintInterval = null;
+                                    sprintTimerBtn.textContent = 'Done!';
+                                }
+                            }, 1000);
+                        }
+                    });
+
+                    sprintTimerReset.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (sprintInterval) {
+                            clearInterval(sprintInterval);
+                            sprintInterval = null;
+                        }
+                        sprintTimeLeft = 15 * 60;
+                        sprintTimerBtn.textContent = 'Start';
+                        updateSprintTimerDisplay();
+                    });
+                }
+            })();
+
+// =================================================================
             // Active learning checkpoints are administered live on Temple Canvas.
 </script>
 
