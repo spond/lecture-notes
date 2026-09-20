@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 5 Study Monograph: The Regulatory Genome, GTEx &amp; Epigenetic Clocks | BIOL 3111/5111</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- MathJax for Accessible Mathematical Rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                enableMenu: true,
+                menuOptions: {
+                    settings: {
+                        assistiveMml: true,
+                        collapsible: false
+                    }
+                }
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --temple-cherry: #9D2235;
+            --temple-cherry-dark: #781827;
+            --slate-900: #0F172A;
+            --slate-800: #1E293B;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-300: #CBD5E1;
+            --slate-200: #E2E8F0;
+            --slate-100: #F1F5F9;
+            --slate-50: #F8FAFC;
+            --text-main: #1E293B;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Merriweather', Georgia, serif;
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--temple-cherry);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            z-index: 1000;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 0 0 6px 0;
+            transition: top 0.2s ease;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            background-color: var(--slate-50);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .monograph-container {
+            max-width: 880px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 48px 56px;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+            border-left: 1px solid var(--slate-200);
+            border-right: 1px solid var(--slate-200);
+            min-height: 100vh;
+        }
+
+        header {
+            border-bottom: 2px solid var(--slate-200);
+            padding-bottom: 24px;
+            margin-bottom: 36px;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--temple-cherry);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 2.15rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .monograph-subtitle {
+            font-size: 1.05rem;
+            color: var(--slate-600);
+            font-weight: 400;
+            margin-bottom: 18px;
+            line-height: 1.55;
+        }
+
+        .author-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 28px;
+            font-size: 0.86rem;
+            color: var(--slate-600);
+            background: var(--slate-50);
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: 1px solid var(--slate-200);
+            margin-bottom: 16px;
+        }
+
+        .paper-pill-banner {
+            margin-top: 10px;
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.86rem;
+            line-height: 1.5;
+            color: #1E40AF;
+        }
+
+        .paper-pill-banner a {
+            color: #1D4ED8;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .toc-box {
+            background: #FAF5FF;
+            border: 1.5px solid #E9D5FF;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 40px;
+        }
+
+        .toc-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #6B21A8;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 24px;
+            font-size: 0.88rem;
+        }
+
+        .toc-list a {
+            color: #581C87;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+            color: var(--temple-cherry);
+        }
+
+        h2 {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-top: 48px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--slate-100);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            page-break-after: avoid;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 22px;
+            background: var(--temple-cherry);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--slate-800);
+            margin-top: 24px;
+            margin-bottom: 10px;
+            page-break-after: avoid;
+        }
+
+        p {
+            font-family: var(--font-serif);
+            font-size: 0.98rem;
+            line-height: 1.75;
+            color: var(--slate-800);
+            margin-bottom: 18px;
+        }
+
+        strong {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            color: var(--slate-900);
+        }
+
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.88em;
+            background: var(--slate-100);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #0F172A;
+            border: 1px solid var(--slate-200);
+        }
+
+        .callout {
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 24px 0;
+            font-family: var(--font-sans);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            page-break-inside: avoid;
+        }
+
+        .callout-myth {
+            background: #FEF2F2;
+            border-left: 4px solid #DC2626;
+            color: #991B1B;
+        }
+
+        .callout-law {
+            background: #F0FDF4;
+            border-left: 4px solid #16A34A;
+            color: #166534;
+        }
+
+        .callout-clinical {
+            background: #EFF6FF;
+            border-left: 4px solid #2563EB;
+            color: #1E40AF;
+        }
+
+        .callout-purple {
+            background: #FAF5FF;
+            border-left: 4px solid #7C3AED;
+            color: #581C87;
+        }
+
+        .callout-title {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .math-block {
+            margin: 20px 0;
+            padding: 14px 20px;
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.95rem;
+        }
+
+        table.concept-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.88rem;
+        }
+
+        table.concept-table th {
+            background: var(--slate-100);
+            text-align: left;
+            padding: 10px 14px;
+            border: 1px solid var(--slate-200);
+            font-weight: 700;
+            color: var(--slate-900);
+        }
+
+        table.concept-table td {
+            padding: 10px 14px;
+            border: 1px solid var(--slate-200);
+            color: var(--slate-700);
+        }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 2px solid var(--slate-200);
+            font-size: 0.84rem;
+            color: var(--slate-500);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        footer a {
+            color: var(--temple-cherry);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .monograph-container {
+                padding: 24px 20px;
+            }
+            .toc-list {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="monograph-container">
+        <header>
+            <div class="course-meta">
+                <span>Temple University &bull; Department of Biology</span>
+                <span>BIOL 3111 / 5111 &bull; Fall 2026</span>
+            </div>
+            <h1>The Regulatory Genome: Epigenetics, Chromatin Architecture, and Transcriptomics</h1>
+            <div class="monograph-subtitle">
+                How non-coding variants, chromatin folding, and chemical tags on DNA control cell identity, disease risk, and the rate of biological aging.
+            </div>
+
+            <div class="author-card">
+                <div>👨‍🏫 <strong>Instructor:</strong> Prof. Sergei Pond</div>
+                <div>📅 <strong>Lecture Date:</strong> Thursday, September 24, 2026</div>
+                <div>📍 <strong>Session:</strong> Lecture 05 &bull; Week 5</div>
+            </div>
+
+            <div class="paper-pill-banner">
+                <strong>📄 Required Primary Literature:</strong><br>
+                1. <strong>The GTEx Consortium</strong> (2020). <em>"The GTEx Consortium atlas of genetic regulatory effects across human tissues."</em> <strong>Science</strong>, 369(6511), eaaz1776. DOI: <a href="https://doi.org/10.1126/science.aaz1776" target="_blank" rel="noopener">10.1126/science.aaz1776</a>.<br>
+                2. <strong>Steve Horvath</strong> (2013). <em>"DNA methylation age of human tissues and cell types."</em> <strong>Genome Biology</strong>, 14(10), R115. DOI: <a href="https://doi.org/10.1186/gb-2013-14-10-r115" target="_blank" rel="noopener">10.1186/gb-2013-14-10-r115</a>.
+            </div>
+        </header>
+
+        <nav class="toc-box" aria-label="Table of contents">
+            <div class="toc-title">Monograph Contents</div>
+            <ul class="toc-list">
+                <li><a href="#sec-1">1. Beyond the Coding Sequence</a></li>
+                <li><a href="#sec-2">2. Epigenetic Modifications (5mC &amp; Histones)</a></li>
+                <li><a href="#sec-3">3. Chromatin Accessibility &amp; 3D TADs</a></li>
+                <li><a href="#sec-4">4. The GTEx Multi-Tissue Atlas</a></li>
+                <li><a href="#sec-5">5. Expression Quantitative Trait Loci (eQTLs)</a></li>
+                <li><a href="#sec-6">6. Splicing Quantitative Trait Loci (sQTLs)</a></li>
+                <li><a href="#sec-7">7. Cellular Heterogeneity &amp; Deconvolution</a></li>
+                <li><a href="#sec-8">8. The Epigenetic Clock (Horvath 2013)</a></li>
+                <li><a href="#sec-quiz">9. Pre-Class Reading Mastery Quiz (Canvas)</a></li>
+            </ul>
+        </nav>
+
+        <main id="main-content">
+
+            <!-- ================================================================= -->
+            <!-- SECTION 1 -->
+            <!-- ================================================================= -->
+            <section id="sec-1">
+                <h2>1. Beyond the Coding Sequence</h2>
+                <p>
+                    Every nucleated cell in your body contains the exact same digital genome. Your neurons, hepatocytes, and cardiomyocytes share 3.05 billion base pairs. Yet a neuron transmits electrochemical action potentials, a hepatocyte detoxifies pharmaceuticals, and a cardiomyocyte contracts rhythmically for eighty years. 
+                </p>
+                <p>
+                    Cellular identity does not stem from distinct gene sequences. Rather, it emerges from differential **gene expression**, the process where cells transcribe specific subsets of genomic DNA into functional RNA transcripts. Only 1.5% of the human genome encodes amino acid polypeptide chains. The remaining 98.5% contains regulatory sequences that determine when, where, and at what volume genes turn on.
+                </p>
+
+                <div class="callout callout-clinical">
+                    <div class="callout-title">💡 The Non-Coding GWAS Reality</div>
+                    Over 90% of disease-associated variants identified in Genome-Wide Association Studies (GWAS) fall within non-coding DNA. They do not alter protein structures. Instead, they alter transcription factor binding affinities and disrupt chromatin accessibility, changing target gene expression by tiny quantitative increments.
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 2 -->
+            <!-- ================================================================= -->
+            <section id="sec-2">
+                <h2>2. Epigenetic Modifications: DNA Methylation and Histone Marks</h2>
+                <p>
+                    Cells regulate transcription through chemical modifications on DNA and packaging proteins without altering the primary nucleotide sequence. These persistent marks constitute the **epigenome**, the collection of chemical tags that direct cellular machinery to open or condense chromatin.
+                </p>
+                <p>
+                    The most stable chemical tag is **DNA methylation**, the covalent addition of a methyl group to the fifth carbon of a cytosine ring ($5\text{mC}$). In mammalian genomes, methylation occurs almost exclusively at **CpG dinucleotides**, paired cytosine and guanine bases linked by a phosphate bond along a single strand. 
+                </p>
+                <p>
+                    Clusters of CpG dinucleotides near gene promoters, termed **CpG islands**, remain unmethylated in transcriptionally active states. When DNA methyltransferases methylate these promoter islands, methyl-binding proteins recruit repressive complexes, physically blocking transcription factors and silencing gene expression.
+                </p>
+
+                <div class="callout callout-law">
+                    <div class="callout-title">🧬 Histone Modifications &amp; Transcriptional States</div>
+                    Genomic DNA wraps around octamers of histone proteins to form nucleosomes. Chemical modifications on histone tails dictate chromatin compaction:
+                    <ul style="margin: 8px 0 0 20px; line-height: 1.6; font-size: 0.92rem;">
+                        <li><strong>H3K4me3</strong> (trimethylation of histone H3 lysine 4): Marks active promoters at transcription start sites.</li>
+                        <li><strong>H3K27ac</strong> (acetylation of histone H3 lysine 27): Distinguishes active enhancers from poised regulatory elements.</li>
+                        <li><strong>H3K27me3</strong> (trimethylation of histone H3 lysine 27): Mediates Polycomb-driven facultative repression and heterochromatin silencing.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 3 -->
+            <!-- ================================================================= -->
+            <section id="sec-3">
+                <h2>3. Chromatin Accessibility and 3D Nuclear Architecture</h2>
+                <p>
+                    To activate a gene, transcription factors must physically contact accessible DNA. Scientists measure physical accessibility using **ATAC-seq** (Assay for Transposase-Accessible Chromatin with sequencing), an assay where a hyperactive Tn5 transposase inserts sequencing adapters exclusively into open, nucleosome-free regulatory DNA.
+                </p>
+                <p>
+                    However, linear genomic proximity does not restrict regulatory control. Distant enhancers located hundreds of kilobases away communicate with target promoters through 3D chromatin loops. The structural organization of the genome relies on **topologically associating domains (TADs)**, three-dimensional chromosomal loops that isolate internal regulatory contacts from external genomic regions.
+                </p>
+                <p>
+                    TAD boundaries depend on **CTCF**, a sequence-specific zinc-finger insulator protein that halts cohesin ring extrusion. CTCF acts as a physical barrier. When chromosomal rearrangements or microdeletions eliminate a CTCF boundary, enhancers gain access to illegitimate target promoters.
+                </p>
+
+                <div class="callout callout-myth">
+                    <div class="callout-title">⚠️ Clinical Mechanism: Enhancer Hijacking</div>
+                    In limb malformations and hematologic malignancies, deleting a single CTCF insulator boundary causes <strong>enhancer hijacking</strong>, an aberrant state where a powerful tissue-specific enhancer activates a neighboring proto-oncogene or developmental regulator outside its native domain.
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 4 -->
+            <!-- ================================================================= -->
+            <section id="sec-4">
+                <h2>4. The GTEx Multi-Tissue Atlas</h2>
+                <p>
+                    For decades, human geneticists studied gene expression using peripheral blood cells because clinical blood draws are convenient. However, blood cannot reflect the specialized regulatory architecture of human cardiac tissue, cortical neurons, or pancreatic beta cells.
+                </p>
+                <p>
+                    To overcome this biological blind spot, the **GTEx Consortium** (Genotype-Tissue Expression) assembled a comprehensive multi-tissue atlas. As reported in their landmark 2020 <em>Science</em> manuscript, GTEx analyzed **15,201 RNA sequencing libraries across 49 distinct tissues** harvested from 838 post-mortem donors.
+                </p>
+                <p>
+                    By coupling whole-genome DNA sequencing with deep RNA profiling across dozens of solid tissues from identical individuals, GTEx built an unprecedented reference map linking human genetic variation to tissue-specific regulatory control.
+                </p>
+
+                <table class="concept-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>GTEx Project Scope (v8 Release)</th>
+                            <th>Biological Significance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Donors ($N$)</strong></td>
+                            <td>838 post-mortem human donors</td>
+                            <td>Provides statistical power for low-frequency variants</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RNA-seq Samples</strong></td>
+                            <td>15,201 individual tissue libraries</td>
+                            <td>Profiles intra-individual multi-organ variation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tissues Profiled</strong></td>
+                            <td>49 human tissues across 30 organ systems</td>
+                            <td>Encompasses brain subregions, metabolic organs, &amp; arteries</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cis-eGenes</strong></td>
+                            <td>&gt;20,000 genes with at least one cis-eQTL</td>
+                            <td>Proves nearly all protein-coding genes have local genetic control</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 5 -->
+            <!-- ================================================================= -->
+            <section id="sec-5">
+                <h2>5. Expression Quantitative Trait Loci (eQTLs)</h2>
+                <p>
+                    The primary analytical deliverable of GTEx is the discovery of **expression quantitative trait loci (eQTLs)**, single nucleotide polymorphisms that correlate with statistically significant differences in mRNA abundance.
+                </p>
+                <p>
+                    Geneticists categorize regulatory variants into two fundamental spatial classes:
+                </p>
+                <ul style="margin: 0 0 18px 24px; line-height: 1.6; font-family: var(--font-serif); color: var(--slate-800);">
+                    <li><strong><em>Cis</em>-eQTLs:</strong> Regulatory variants located physically proximate to their target gene, traditionally defined within a 1-megabase ($\pm 1\text{ Mb}$) window of the transcription start site.</li>
+                    <li><strong><em>Trans</em>-eQTLs:</strong> Regulatory variants located far from the target gene, either on distant chromosomal arms or on entirely different chromosomes, acting through intermediate diffusable factors.</li>
+                </ul>
+
+                <div class="math-block">
+                    $$\text{Linear eQTL Model: } Y_{ij} = \alpha_i + \beta_i G_{ij} + \sum_{k} \gamma_{ik} C_{kj} + \epsilon_{ij}$$
+                    <div style="font-size: 0.82rem; color: #64748B; margin-top: 6px;">
+                        Where $Y_{ij}$ is normalized expression of gene $i$ in individual $j$, $G_{ij}$ is allele count ($0, 1, 2$), and $C_{kj}$ represents technical covariates (genomic ancestry principal components, sequencing depth, donor ischemic time).
+                    </div>
+                </div>
+
+                <p>
+                    GTEx discovered that *cis*-eQTLs display an extreme spatial concentration. Lead regulatory variants cluster tightly within 100 kilobases of the **transcription start site (TSS)**, the precise nucleotide coordinate where RNA polymerase initiates transcription. Effect sizes decay exponentially as physical genomic distance from the promoter increases.
+                </p>
+
+                <div class="callout callout-purple">
+                    <div class="callout-title">🔍 Tissue Sharing vs. Tissue Specificity</div>
+                    Most <em>cis</em>-eQTLs are shared across multiple tissues. A variant regulating an essential ribosomal subunit operates ubiquitously. However, disease-relevant variants often show sharp tissue specificity. A diabetes risk allele may alter insulin transcript abundance in pancreatic islets while showing zero effect in skeletal muscle or brain tissue.
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 6 -->
+            <!-- ================================================================= -->
+            <section id="sec-6">
+                <h2>6. Splicing Quantitative Trait Loci (sQTLs)</h2>
+                <p>
+                    Gene expression regulation does not terminate with transcriptional initiation. Eukaryotic pre-mRNAs undergo extensive post-transcriptional processing, excising non-coding introns to stitch together mature coding exons.
+                </p>
+                <p>
+                    Beyond measuring total RNA abundance, the GTEx Consortium quantified **splicing quantitative trait loci (sQTLs)**, genetic variants that alter the proportional excision of specific introns, altering the balance of spliced transcript isoforms without changing overall gene expression.
+                </p>
+                <p>
+                    By applying LeafCutter, an annotation-free intron excision quantification algorithm, GTEx discovered that sQTLs frequently act independently of eQTLs. A single nucleotide substitution near an alternative splice acceptor site can force an exon skip, producing a truncated dominant-negative protein while total mRNA transcript counts remain completely unchanged.
+                </p>
+
+                <div class="callout callout-clinical">
+                    <div class="callout-title">💊 Pathogenic Enrichment of sQTLs</div>
+                    When GTEx evaluated complex disease associations from GWAS catalogs, sQTLs demonstrated equal or greater colocalization enrichment than total expression eQTLs. Altering alternative splicing ratios represents a major driver of human phenotypic variation and inherited clinical disease.
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 7 -->
+            <!-- ================================================================= -->
+            <section id="sec-7">
+                <h2>7. Resolving Cellular Heterogeneity: Bulk Deconvolution vs. Single-Cell RNA-seq</h2>
+                <p>
+                    While GTEx represents an astonishing technical achievement, bulk tissue RNA sequencing possesses an inherent limitation: **cellular heterogeneity**, the mixture of multiple distinct cell types within a single solid organ biopsy.
+                </p>
+                <p>
+                    A single lung homogenate contains alveolar epithelial cells, endothelial cells, resident fibroblasts, and alveolar macrophages. When bulk sequencing measures a two-fold increase in a cytokine transcript, two competing biological mechanisms can explain the observation:
+                </p>
+                <ol style="margin: 0 0 18px 24px; line-height: 1.6; font-family: var(--font-serif); color: var(--slate-800);">
+                    <li><strong>True Intracellular Upregulation:</strong> Each macrophage doubled its rate of transcriptional synthesis.</li>
+                    <li><strong>Cell-Type Composition Shift:</strong> A localized inflammatory stimulus recruited twice as many macrophages into the tissue biopsy, while individual cellular transcription rates remained unchanged.</li>
+                </ol>
+                <p>
+                    To disentangle cell composition shifts from true transcriptional modulation, computational geneticists apply **cell-type deconvolution algorithms**, computational tools that leverage reference single-cell expression profiles to infer individual cell-type proportions from bulk tissue mixtures.
+                </p>
+                <p>
+                    Simultaneously, **single-cell RNA sequencing (scRNA-seq)** isolates individual cells in microfluidic droplets, capturing single-cell transcriptomes directly. This resolution proves essential for identifying cell-type-restricted eQTLs that remain masked in bulk tissue homogenates.
+                </p>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 8 -->
+            <!-- ================================================================= -->
+            <section id="sec-8">
+                <h2>8. The Epigenetic Clock: DNA Methylation Age (Horvath 2013)</h2>
+                <p>
+                    While genetic variants remain constant from zygote formation to death, epigenetic marks change predictably over the human lifespan. In 2013, biostatistician Steve Horvath published a breakthrough in <em>Genome Biology</em>: the multi-tissue **epigenetic clock**.
+                </p>
+                <p>
+                    Horvath analyzed DNA methylation microarrays across 8,000 samples spanning 51 healthy tissues and cell types. Using an **elastic net**, a penalized regression algorithm that performs variable selection while managing correlated predictors, Horvath identified a signature of **353 CpG dinucleotides** that predicts chronological age with an astonishing Pearson correlation of $r = 0.96$ and a median error of only 3.6 years.
+                </p>
+
+                <div class="math-block">
+                    $$\text{Horvath Methylation Age: } \text{DNAmAge} = F\left( b_0 + \sum_{m=1}^{353} b_m \cdot \beta_m \right)$$
+                    <div style="font-size: 0.82rem; color: #64748B; margin-top: 6px;">
+                        Where $\beta_m$ represents fractional methylation at CpG locus $m$, $b_m$ is the elastic net regression coefficient, and $F(x)$ is a nonlinear transformation function that models rapid developmental changes in childhood and linear progression in adulthood.
+                    </div>
+                </div>
+
+                <p>
+                    The profound clinical utility of the clock lies in the residual variance. When an individual's predicted epigenetic age exceeds their chronological calendar age, this discrepancy is termed **epigenetic age acceleration (EAA)**.
+                </p>
+                <p>
+                    Accelerated epigenetic aging reflects cumulative physiological and environmental stress. Patients with elevated epigenetic age exhibit significantly higher all-cause mortality, accelerated cognitive decline, elevated cardiovascular disease risk, and metabolic dysfunction. The clock provides an objective molecular readout of biological vitality.
+                </p>
+
+                <div class="callout callout-law">
+                    <div class="callout-title">⌛ Multi-Tissue Universality</div>
+                    Unlike telomere attrition, which varies dramatically between rapidly dividing lymphocytes and post-mitotic neurons, the Horvath epigenetic clock calibrates biological aging across nearly all solid organs and cell types, from cerebral cortex to heart muscle.
+                </div>
+            </section>
+
+            <!-- ================================================================= -->
+            <!-- SECTION 9: QUIZ -->
+            <!-- ================================================================= -->
+            <section id="sec-quiz">
+                <h2>9. Pre-Class Reading Mastery Quiz (Canvas)</h2>
+                <p>
+                    The 5-question pre-class reading quiz is administered <strong>exclusively via Canvas</strong> prior to Thursday's lecture to test your critical understanding of the GTEx Consortium (<em>Science</em> 2020) and Horvath (<em>Genome Biology</em> 2013) primary literature.
+                </p>
+                <div class="callout callout-purple" style="margin-bottom: 24px;">
+                    <div class="callout-title">📝 Assessment Logistics &amp; Guidelines</div>
+                    <ul style="margin: 8px 0 0 20px; line-height: 1.6; font-size: 0.95rem;">
+                        <li><strong>Format:</strong> 5 Multiple-Choice Questions (15-minute time limit, 2 attempts allowed, highest score kept).</li>
+                        <li><strong>Availability Window:</strong> Opens <strong>Thursday, September 24, 2026, at 00:00 (Midnight)</strong> and closes at <strong>20:00 (8:00 PM EDT)</strong>.</li>
+                        <li><strong>Location:</strong> Complete directly on Temple Canvas under <em>Assignments &rarr; Quizzes</em>.</li>
+                    </ul>
+                </div>
+
+                <div class="callout callout-clinical">
+                    <div class="callout-title">🎯 Core Conceptual Domains Tested</div>
+                    <ol style="margin: 8px 0 0 20px; line-height: 1.6; font-size: 0.95rem;">
+                        <li><strong>Cis-eQTL Physical Clustering:</strong> Why regulatory variants cluster within 100 kb of the transcription start site (TSS) with steep exponential decay.</li>
+                        <li><strong>Splicing QTL (sQTL) Pathogenicity:</strong> How altering intron excision and transcript isoform ratios drives disease risk independently of total mRNA quantity.</li>
+                        <li><strong>3D Chromatin &amp; TAD Insulators:</strong> How CTCF anchors loop boundaries and how boundary deletions trigger enhancer hijacking.</li>
+                        <li><strong>The Horvath Epigenetic Aging Clock:</strong> How elastic net penalized regression across 353 CpG dinucleotides reveals epigenetic age acceleration and mortality risk.</li>
+                        <li><strong>Cellular Heterogeneity in Bulk RNA-seq:</strong> How cell-type composition shifts confound bulk transcriptomics and how single-cell methods resolve them.</li>
+                    </ol>
+                </div>
+            </section>
+
+        </main>
+
+        <footer>
+            <div>&copy; 2026 Sergei Pond &bull; Department of Biology &bull; Temple University</div>
+            <div>
+                <a href="https://doi.org/10.1126/science.aaz1776" target="_blank" rel="noopener">GTEx Science 2020 ↗</a> &bull;
+                <a href="https://doi.org/10.1186/gb-2013-14-10-r115" target="_blank" rel="noopener">Horvath 2013 ↗</a> &bull;
+                <a href="https://templeu.instructure.com/courses/178614" target="_blank">Temple Canvas</a> &bull;
+                <a href="portal_index.html">Course Portal</a>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
