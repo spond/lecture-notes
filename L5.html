@@ -328,7 +328,7 @@
         .status-lbl { font-size: 0.62rem; color: var(--ink-muted); text-transform: uppercase; font-weight: 700; }
         .status-val { font-weight: 800; font-size: 0.76rem; }
 
-        /* Disease eQTL Tabs & Interactive Panels (Slide 14) */
+        /* Disease eQTL Tabs & Interactive Panels (Slide 15) */
         .disease-tabs {
             display: flex; gap: 6px; margin-top: 2px; margin-bottom: 5px; flex-wrap: wrap;
         }
@@ -369,7 +369,7 @@
         </div>
         <div class="header-right">
             <span>BIOL 3111 &bull; Lecture 5</span>
-            <span id="slide-indicator" style="font-family: var(--font-mono); font-weight: 700;">1 / 26</span>
+            <span id="slide-indicator" style="font-family: var(--font-mono); font-weight: 700;">1 / 27</span>
         </div>
     </header>
 
@@ -539,12 +539,124 @@
                     <strong>The Central Premise:</strong> Sequence variation creates biological consequence by modulating the rate, timing, and splicing of transcription.
                 </div>
                 <span style="font-family: var(--font-mono); font-size: 0.88rem; font-weight: 800; color: var(--temple-cherry);">
-                    MOVEMENT 1: REGULATORY VARIATION &rarr;
+                    UNSCHEDULED DETOUR &rarr;
                 </span>
             </div>
 
         </section>
 <section class="slide" data-slide="2">
+            <div class="slide-header">
+                <div class="slide-category">🚨 Unscheduled Detour &bull; Institutional Metrics &bull; Hot Off The Press</div>
+                <h2 class="slide-title">The U.S. News Ranking: What Is Actually Being Ranked?</h2>
+                <div class="slide-subtitle">Why formula weights make universities bounce around—and what Temple's ground-truth numbers show.</div>
+            </div>
+
+            <div class="grid-2col" style="align-items: stretch;">
+                <!-- Left: The Methodology Anatomy -->
+                <div class="card card-cherry" style="display: flex; flex-direction: column; justify-content: space-between; padding: 10px 14px;">
+                    <div>
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="font-family: var(--font-heading); font-weight: 800; font-size: 1.02rem; color: var(--temple-cherry);">
+                                The U.S. News Formula: An Arbitrary Composite Index
+                            </span>
+                            <span style="font-family: var(--font-mono); font-size: 0.70rem; background: #FEE2E2; color: #991B1B; padding: 2px 6px; border: 1px solid #991B1B; border-radius: 2px; font-weight: 700;">
+                                SPREADSHEET ALCHEMY
+                            </span>
+                        </div>
+
+                        <!-- Visual Weight Allocation Bar -->
+                        <div style="background: #FAF8F2; border: 1.5px solid var(--rule-ink); border-radius: 2px; padding: 5px 8px; margin: 4px 0 6px 0; box-shadow: 1px 1px 0px var(--rule-ink);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px;">
+                                <span style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 800; text-transform: uppercase; color: #1E293B;">Weight Allocation (2026/2027)</span>
+                                <span style="font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; color: #991B1B;">100% TOTAL</span>
+                            </div>
+                            <div style="display: flex; height: 12px; border: 1.5px solid var(--rule-ink); border-radius: 2px; overflow: hidden; margin-bottom: 4px;">
+                                <div style="width: 20%; background: #EF4444;" title="Peer Reputation: 20%"></div>
+                                <div style="width: 21%; background: #3B82F6;" title="Graduation Rates: 21%"></div>
+                                <div style="width: 16%; background: #F59E0B;" title="Spending / Resources: 16%"></div>
+                                <div style="width: 10%; background: #10B981;" title="Predicted Model: 10%"></div>
+                                <div style="width: 5%; background: #8B5CF6;" title="Earnings Churn: 5%"></div>
+                                <div style="width: 28%; background: #CBD5E1;" title="Other Factors: 28%"></div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; font-family: var(--font-mono); font-size: 0.64rem;">
+                                <div style="display: flex; align-items: center; gap: 3px;"><span style="width: 7px; height: 7px; background: #EF4444; border: 1px solid var(--rule-ink); border-radius: 1px; display: inline-block;"></span><strong>20%</strong> Peer Opinion</div>
+                                <div style="display: flex; align-items: center; gap: 3px;"><span style="width: 7px; height: 7px; background: #3B82F6; border: 1px solid var(--rule-ink); border-radius: 1px; display: inline-block;"></span><strong>21%</strong> Grad Rates</div>
+                                <div style="display: flex; align-items: center; gap: 3px;"><span style="width: 7px; height: 7px; background: #F59E0B; border: 1px solid var(--rule-ink); border-radius: 1px; display: inline-block;"></span><strong>16%</strong> Wealth/Spend</div>
+                                <div style="display: flex; align-items: center; gap: 3px;"><span style="width: 7px; height: 7px; background: #10B981; border: 1px solid var(--rule-ink); border-radius: 1px; display: inline-block;"></span><strong>10%</strong> Model Bias</div>
+                                <div style="display: flex; align-items: center; gap: 3px;"><span style="width: 7px; height: 7px; background: #8B5CF6; border: 1px solid var(--rule-ink); border-radius: 1px; display: inline-block;"></span><strong>5%</strong> Metric Churn</div>
+                                <div style="display: flex; align-items: center; gap: 3px;"><span style="width: 7px; height: 7px; background: #CBD5E1; border: 1px solid var(--rule-ink); border-radius: 1px; display: inline-block;"></span><strong>28%</strong> Other Metrics</div>
+                            </div>
+                        </div>
+
+                        <ul class="bullet-list" style="font-size: 0.86rem; gap: 4px;">
+                            <li><strong>Peer Assessment Echo Chamber (20%):</strong> Subjective reputation surveys ask university leaders to evaluate schools they rarely visit. This metric reflects historical pedigree and marketing rather than classroom instruction.</li>
+                            <li><strong>Endowment Wealth &amp; Spending (16%):</strong> Counts instructional expenditures and faculty compensation. Private universities with multibillion-dollar endowments deploy passive income to outspend public peers per student.</li>
+                            <li><strong>Graduation Rate Benchmarks (31% combined):</strong> Six-year completion rates compared against predicted statistical models. Working-class and commuter students frequently take longer while balancing outside jobs.</li>
+                            <li><strong>Annual Formula Churn:</strong> For 2026/2027, U.S. News eliminated student debt metrics and added median earnings by field. Shifting arbitrary weights swings institutional ranks overnight without altering classroom instruction.</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-anchor" style="margin-top: 5px; padding: 4px 8px; font-size: 0.80rem;">
+                        <strong>Goodhart's Law:</strong> <em>"When a measure becomes a target, it ceases to be a good measure."</em> Gaming arbitrary composite formulas distorts academic priorities.
+                    </div>
+                </div>
+
+                <!-- Right: What Temple's Ground-Truth Metrics Show -->
+                <div class="card card-emerald" style="display: flex; flex-direction: column; justify-content: space-between; padding: 10px 14px;">
+                    <div>
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="font-family: var(--font-heading); font-weight: 800; font-size: 1.02rem; color: var(--bauhaus-emerald);">
+                                What Temple's Metrics Actually Show
+                            </span>
+                            <span style="font-family: var(--font-mono); font-size: 0.70rem; background: #CCFBF1; color: #115E59; padding: 2px 6px; border: 1px solid #115E59; border-radius: 2px; font-weight: 700;">
+                                NORTH BROAD REALITY
+                            </span>
+                        </div>
+
+                        <!-- Key Stat Badges Grid -->
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 4px 0 6px 0;">
+                            <div style="background: #F8FAFC; border: 1.5px solid var(--rule-ink); padding: 5px 4px; text-align: center; border-radius: 2px; box-shadow: 1.5px 1.5px 0px var(--rule-ink);">
+                                <div style="font-family: var(--font-mono); font-size: 1.12rem; font-weight: 900; color: #1E293B; line-height: 1;">#109</div>
+                                <div style="font-size: 0.64rem; font-weight: 800; text-transform: uppercase; color: #64748B; margin-top: 2px;">National</div>
+                            </div>
+                            <div style="background: #ECFDF5; border: 1.5px solid #065F46; padding: 5px 4px; text-align: center; border-radius: 2px; box-shadow: 1.5px 1.5px 0px #065F46;">
+                                <div style="font-family: var(--font-mono); font-size: 1.12rem; font-weight: 900; color: #065F46; line-height: 1;">#50</div>
+                                <div style="font-size: 0.64rem; font-weight: 800; text-transform: uppercase; color: #047857; margin-top: 2px;">Top Public</div>
+                            </div>
+                            <div style="background: #EFF6FF; border: 1.5px solid #1D4ED8; padding: 5px 4px; text-align: center; border-radius: 2px; box-shadow: 1.5px 1.5px 0px #1D4ED8;">
+                                <div style="font-family: var(--font-mono); font-size: 1.12rem; font-weight: 900; color: #1D4ED8; line-height: 1;">#71</div>
+                                <div style="font-size: 0.64rem; font-weight: 800; text-transform: uppercase; color: #2563EB; margin-top: 2px;">Best Value</div>
+                            </div>
+                            <div style="background: #FAF5FF; border: 1.5px solid #7E22CE; padding: 5px 4px; text-align: center; border-radius: 2px; box-shadow: 1.5px 1.5px 0px #7E22CE;">
+                                <div style="font-family: var(--font-mono); font-size: 1.12rem; font-weight: 900; color: #7E22CE; line-height: 1;">R1</div>
+                                <div style="font-size: 0.64rem; font-weight: 800; text-transform: uppercase; color: #9333EA; margin-top: 2px;">Top Research</div>
+                            </div>
+                        </div>
+
+                        <ul class="bullet-list" style="font-size: 0.88rem; gap: 7px; line-height: 1.34;">
+                            <li><strong>The Social Mobility Engine:</strong> Temple educates more <strong>Pell Grant</strong> recipients, undergraduates demonstrating exceptional financial need, than the entire Ivy League combined, driving urban economic mobility.</li>
+                            <li><strong>$300M+ Research Output:</strong> Carnegie R1 status places Temple in the top tier of American doctoral research, supporting clinical trials, viral therapies, and computational genomics on North Broad.</li>
+                            <li><strong>The State Appropriation Gap:</strong> Modest state subsidies and modest endowments depress spending metrics. Temple achieves elite educational outcomes at a fraction of private university costs.</li>
+                        </ul>
+                    </div>
+
+                    <div class="clinical-anchor" style="margin-top: 5px; padding: 4px 8px; font-size: 0.80rem; border-left-color: var(--bauhaus-emerald);">
+                        <strong>The Genomic Analogy:</strong> A <strong>Polygenic Risk Score (PRS)</strong> is an algorithm that estimates disease risk by summing weighted genetic variants. Shifting the formula's weights reclassifies a patient's risk overnight without altering a single DNA base in their genome. Never trust composite metrics without inspecting primary data distributions.
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout-strip">
+                <div class="callout-strip-text">
+                    <strong>💡 The Critical Takeaway:</strong> The university did not mutate; the formula's weights shifted. In clinical genomics, we must distinguish physical biological mechanisms from arbitrary composite scores.
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 0.88rem; font-weight: 800; color: var(--temple-cherry);">
+                    MOVEMENT 1: REGULATORY VARIATION &rarr;
+                </div>
+            </div>
+        </section>
+
+<section class="slide" data-slide="3">
             <div class="slide-header">
                 <div class="slide-category">Movement 1 &bull; Regulatory Variation &bull; Part 1</div>
                 <h2 class="slide-title">Two Ways DNA Causes Disease: The Protein vs. The Switch</h2>
@@ -658,7 +770,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="3">
+<section class="slide" data-slide="4">
             <div class="slide-header">
                 <div class="slide-category">Movement 1 &bull; Regulatory Variation &bull; Part 2</div>
                 <h2 class="slide-title">The Anatomy of a Gene Switch: Promoters vs. Enhancers</h2>
@@ -773,7 +885,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="4">
+<section class="slide" data-slide="5">
             <div class="slide-header">
                 <div class="slide-category">Movement 1 &bull; Regulatory Variation &bull; Part 3</div>
                 <h2 class="slide-title">The 93% Non-Coding Paradox of Human Disease</h2>
@@ -934,7 +1046,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="5">
+<section class="slide" data-slide="6">
             <div class="slide-header">
                 <div class="slide-category">Case Study • Part 1: The Seductive Promise</div>
                 <h1 class="slide-title">Personalized Chemotherapy From Expression Signatures</h1>
@@ -1015,7 +1127,7 @@
                 </span>
             </div>
         </section>
-<section class="slide" data-slide="6">
+<section class="slide" data-slide="7">
             <div class="slide-header">
                 <div class="slide-category">Case Study • Part 2: Forensic Bioinformatics</div>
                 <h1 class="slide-title">The Forensic Audit: Baggerly &amp; Coombes</h1>
@@ -1092,7 +1204,7 @@
                 </span>
             </div>
         </section>
-<section class="slide" data-slide="7">
+<section class="slide" data-slide="8">
             <div class="slide-header">
                 <div class="slide-category">Case Study • Part 3: The Row Shift Error</div>
                 <h1 class="slide-title">The Off-By-One Shift &amp; Scrambled Biology</h1>
@@ -1198,7 +1310,7 @@
                 </span>
             </div>
         </section>
-<section class="slide" data-slide="8">
+<section class="slide" data-slide="9">
             <div class="slide-header">
                 <div class="slide-category">Lecture 5 Intro • Part 4: Institutional Failure &amp; Patient Harm</div>
                 <h1 class="slide-title">Institutional Denial and the Clinical Cost</h1>
@@ -1289,7 +1401,7 @@
                 </span>
             </div>
         </section>
-<section class="slide" data-slide="9">
+<section class="slide" data-slide="10">
             <div class="slide-header">
                 <div class="slide-category">Lecture 5 Intro &bull; Part 5: Institutional Intransigence</div>
                 <h1 class="slide-title">Systemic Intransigence: Active Faculty &amp; The Accountability Void</h1>
@@ -1675,7 +1787,7 @@
                 </span>
             </div>
         </section>
-<section class="slide" data-slide="10">
+<section class="slide" data-slide="11">
             <div class="slide-header">
                 <div class="slide-category">Case Study &bull; Part 6: The Forensic Antidote</div>
                 <h2 class="slide-title">The "More Genes Than Patients" Trap &amp; The 5 Regulatory Mechanisms</h2>
@@ -1793,7 +1905,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="11">
+<section class="slide" data-slide="12">
             <div class="slide-header">
                 <div class="slide-category">Movement 2 &bull; Functional Genomics &bull; Part 1</div>
                 <h2 class="slide-title">Gene Volume Knobs: Expression Quantitative Trait Loci (eQTLs)</h2>
@@ -1965,7 +2077,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="12">
+<section class="slide" data-slide="13">
             <div class="slide-header">
                 <div class="slide-category">Movement 2 &bull; Functional Genomics &bull; Part 2</div>
                 <h2 class="slide-title">The GTEx Organ Atlas: Why Blood Hides Solid-Organ Switches</h2>
@@ -2154,7 +2266,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="13">
+<section class="slide" data-slide="14">
             <div class="slide-header">
                 <div class="slide-category">Movement 2 &bull; Functional Genomics &bull; Part 3</div>
                 <h2 class="slide-title">Cracking Heart Disease: The 1p13 Liver Switch Detective Story</h2>
@@ -2370,7 +2482,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="14">
+<section class="slide" data-slide="15">
             <div class="slide-header">
                 <div class="slide-category">Movement 2 &bull; Functional Genomics &bull; Part 4</div>
                 <h2 class="slide-title">Clinical Switch Atlas: How Non-Coding Switches Drive Human Disease</h2>
@@ -3077,7 +3189,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="15">
+<section class="slide" data-slide="16">
             <div class="slide-header">
                 <div class="slide-category">Movement 2 &bull; Functional Genomics &bull; Part 5</div>
                 <h2 class="slide-title">RNA Splicing Switches: Splicing Quantitative Trait Loci (sQTLs)</h2>
@@ -3291,7 +3403,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="16">
+<section class="slide" data-slide="17">
             <div class="slide-header">
                 <div class="slide-category">Movement 2 &bull; Functional Genomics &bull; Part 6</div>
                 <h2 class="slide-title">The Backup Gene Trap: Spinal Muscular Atrophy &amp; Exon 7 Skipping</h2>
@@ -3478,7 +3590,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="17">
+<section class="slide" data-slide="18">
             <div class="slide-header">
                 <div class="slide-category">Movement 2 &bull; Functional Genomics &bull; Part 7</div>
                 <h2 class="slide-title">Redirecting the RNA Editor: Synthetic Molecular Tape (ASO Drugs)</h2>
@@ -3675,7 +3787,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="18">
+<section class="slide" data-slide="19">
             <div class="slide-header">
                 <div class="slide-category">Movement 3 &bull; Epigenetics &amp; Imprinting &bull; Part 1</div>
                 <h2 class="slide-title">Chemical Padlocks on DNA: Methylation at CpG Islands</h2>
@@ -3863,7 +3975,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="19">
+<section class="slide" data-slide="20">
             <div class="slide-header">
                 <div class="slide-category">Movement 3 &bull; Epigenetics &amp; Imprinting &bull; Part 2</div>
                 <h2 class="slide-title">Parent-of-Origin Gene Silencing: Prader-Willi vs. Angelman Syndrome</h2>
@@ -4029,7 +4141,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="20">
+<section class="slide" data-slide="21">
             <div class="slide-header">
                 <div class="slide-category">Movement 4 &bull; 3D Genome Architecture &bull; Part 1</div>
                 <h2 class="slide-title">Insulated Chromosome Neighborhoods: Topologically Associating Domains (TADs)</h2>
@@ -4178,7 +4290,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="21">
+<section class="slide" data-slide="22">
             <div class="slide-header">
                 <div class="slide-category">Movement 4 &bull; 3D Genome Architecture &bull; Part 2</div>
                 <h2 class="slide-title">Broken Fences &amp; Rogue Switches: Enhancer Hijacking in Disease and Cancer</h2>
@@ -4336,7 +4448,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="22">
+<section class="slide" data-slide="23">
             <div class="slide-header">
                 <div class="slide-category">Movement 5 &bull; Epigenetic Clocks &bull; Part 1</div>
                 <h2 class="slide-title">The Epigenetic Aging Clock: Biological Age vs. Calendar Age</h2>
@@ -4516,7 +4628,7 @@
                 </div>
             </div>
         </section>
-<section class="slide" data-slide="23">
+<section class="slide" data-slide="24">
             <div class="slide-header">
                 <div class="slide-category">Movement 5 &bull; Epigenetic Clocks &bull; Part 2</div>
                 <h2 class="slide-title">Accelerated Biological Aging &amp; Cellular Rejuvenation</h2>
@@ -4677,7 +4789,7 @@
             </div>
         </section>
         <!-- SLIDE: IN-CLASS SPRINT WITH TWIST & REQUIRED SCREENSHOTS -->
-        <section class="slide" data-slide="24">
+        <section class="slide" data-slide="25">
             <div class="slide-header" style="margin-bottom: 4px; padding-bottom: 4px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
                     <div class="slide-category">Active Learning &bull; In-Class Sprint &bull; Clinical Switch Audit</div>
@@ -4811,7 +4923,7 @@
         </section>
 
         <!-- SLIDE: SUMMATIVE CONCEPT MASTERY QUIZ (STUDENT VIEW) -->
-        <section class="slide" data-slide="25">
+        <section class="slide" data-slide="26">
             <div class="slide-header" style="margin-bottom: 4px; padding-bottom: 4px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
                     <div class="slide-category">End-of-Lecture Summative Quiz &bull; Concept Mastery</div>
@@ -4921,7 +5033,7 @@
             </div>
         </section>
 
-<section class="slide" data-slide="26">
+<section class="slide" data-slide="27">
             <div class="slide-header">
                 <div class="slide-category">Movement 6 &bull; Synthesis &amp; Takeaways &bull; Wrap-Up</div>
                 <h2 class="slide-title">Summary: The Rules of Gene Switches in Medicine</h2>
@@ -5080,78 +5192,81 @@
                         headerBadge.textContent = 'Lecture 5 • Architecture & Roadmap';
                         headerTitle.textContent = 'The Regulatory Genome, Epigenetics & Transcriptomics';
                     } else if (currentIdx === 1) {
+                        headerBadge.textContent = 'Unscheduled Detour • Institutional Metrics';
+                        headerTitle.textContent = 'The U.S. News Ranking Formula & The Reality of Temple\'s Numbers';
+                    } else if (currentIdx === 2) {
                         headerBadge.textContent = 'Movement 1 • Part 1';
                         headerTitle.textContent = 'Two Ways DNA Causes Disease: The Protein vs. The Switch';
-                    } else if (currentIdx === 2) {
+                    } else if (currentIdx === 3) {
                         headerBadge.textContent = 'Movement 1 • Part 2';
                         headerTitle.textContent = 'The Anatomy of a Gene Switch: Promoters vs. Enhancers';
-                    } else if (currentIdx === 3) {
+                    } else if (currentIdx === 4) {
                         headerBadge.textContent = 'Movement 1 • Part 3';
                         headerTitle.textContent = 'The 93% Non-Coding Paradox of Human Disease';
-                    } else if (currentIdx === 4) {
+                    } else if (currentIdx === 5) {
                         headerBadge.textContent = 'Case Study • Part 1';
                         headerTitle.textContent = 'Personalized Chemotherapy From Expression Signatures';
-                    } else if (currentIdx === 5) {
+                    } else if (currentIdx === 6) {
                         headerBadge.textContent = 'Case Study • Part 2';
                         headerTitle.textContent = 'Baggerly & Coombes: The Birth of Forensic Bioinformatics';
-                    } else if (currentIdx === 6) {
+                    } else if (currentIdx === 7) {
                         headerBadge.textContent = 'Case Study • Part 3';
                         headerTitle.textContent = 'The Off-By-One Spreadsheet Disaster & Inverted Sensitivities';
-                    } else if (currentIdx === 7) {
+                    } else if (currentIdx === 8) {
                         headerBadge.textContent = 'Case Study • Part 4';
                         headerTitle.textContent = 'Institutional Denial, Four Years of Resistance & Patient Harm';
-                    } else if (currentIdx === 8) {
+                    } else if (currentIdx === 9) {
                         headerBadge.textContent = 'Case Study • Part 5';
                         headerTitle.textContent = 'Systemic Intransigence: Active Faculty & The Accountability Void';
-                    } else if (currentIdx === 9) {
+                    } else if (currentIdx === 20) {
                         headerBadge.textContent = 'Case Study • Part 6';
                         headerTitle.textContent = 'The "More Genes Than Patients" Trap & The 5 Regulatory Mechanisms';
-                    } else if (currentIdx === 10) {
+                    } else if (currentIdx === 21) {
                         headerBadge.textContent = 'Movement 2 • Part 1';
                         headerTitle.textContent = 'Gene Volume Knobs: Expression Quantitative Trait Loci (eQTLs)';
-                    } else if (currentIdx === 11) {
+                    } else if (currentIdx === 22) {
                         headerBadge.textContent = 'Movement 2 • Part 2';
                         headerTitle.textContent = 'The GTEx Organ Atlas: Why Blood Hides Solid-Organ Switches';
-                    } else if (currentIdx === 12) {
+                    } else if (currentIdx === 23) {
                         headerBadge.textContent = 'Movement 2 • Part 3';
                         headerTitle.textContent = 'Cracking Heart Disease: The 1p13 Liver Switch Detective Story';
-                    } else if (currentIdx === 13) {
+                    } else if (currentIdx === 24) {
                         headerBadge.textContent = 'Movement 2 • Part 4';
                         headerTitle.textContent = 'Clinical Switch Atlas: How Non-Coding Switches Drive Human Disease';
-                    } else if (currentIdx === 14) {
+                    } else if (currentIdx === 25) {
                         headerBadge.textContent = 'Movement 2 • Part 5';
                         headerTitle.textContent = 'RNA Splicing Switches: Splicing Quantitative Trait Loci (sQTLs)';
-                    } else if (currentIdx === 15) {
+                    } else if (currentIdx === 26) {
                         headerBadge.textContent = 'Movement 2 • Part 6';
                         headerTitle.textContent = 'The Backup Gene Trap: Spinal Muscular Atrophy & Exon 7 Skipping';
-                    } else if (currentIdx === 16) {
+                    } else if (currentIdx === 27) {
                         headerBadge.textContent = 'Movement 2 • Part 7';
                         headerTitle.textContent = 'Redirecting the RNA Editor: Synthetic Molecular Tape (ASO Drugs)';
-                    } else if (currentIdx === 17) {
+                    } else if (currentIdx === 28) {
                         headerBadge.textContent = 'Movement 3 • Part 1';
                         headerTitle.textContent = 'Chemical Padlocks on DNA: Methylation at CpG Islands';
-                    } else if (currentIdx === 18) {
+                    } else if (currentIdx === 29) {
                         headerBadge.textContent = 'Movement 3 • Part 2';
                         headerTitle.textContent = 'Genomic Imprinting & Parent-of-Origin Deletion Syndromes';
-                    } else if (currentIdx === 19) {
+                    } else if (currentIdx === 30) {
                         headerBadge.textContent = 'Movement 4 • Part 1';
                         headerTitle.textContent = 'Insulated Chromosome Neighborhoods: Topologically Associating Domains (TADs)';
-                    } else if (currentIdx === 20) {
+                    } else if (currentIdx === 31) {
                         headerBadge.textContent = 'Movement 4 • Part 2';
                         headerTitle.textContent = 'Broken Fences & Rogue Switches: Enhancer Hijacking in Disease and Cancer';
-                    } else if (currentIdx === 21) {
+                    } else if (currentIdx === 32) {
                         headerBadge.textContent = 'Movement 5 • Part 1';
                         headerTitle.textContent = 'The Epigenetic Aging Clock: Biological Age vs. Calendar Age';
-                    } else if (currentIdx === 22) {
+                    } else if (currentIdx === 33) {
                         headerBadge.textContent = 'Movement 5 • Part 2';
                         headerTitle.textContent = 'Accelerated Biological Aging & Cellular Rejuvenation';
-                    } else if (currentIdx === 23) {
+                    } else if (currentIdx === 34) {
                         headerBadge.textContent = 'Movement 6 • Part 1';
                         headerTitle.textContent = 'In-Class Clinical Sprint: The 1p13 Non-Coding Twist & Screenshot Audit';
-                    } else if (currentIdx === 24) {
+                    } else if (currentIdx === 35) {
                         headerBadge.textContent = 'Movement 6 • Part 2';
                         headerTitle.textContent = 'Lecture 5 Summative Quiz: Regulatory Genome & Epigenetics Mastery';
-                    } else if (currentIdx === 25) {
+                    } else if (currentIdx === 36) {
                         headerBadge.textContent = 'Movement 6 • Part 3';
                         headerTitle.textContent = 'Summary: The Rules of Gene Switches in Medicine';
                     }
@@ -5184,7 +5299,7 @@
             document.addEventListener('keydown', (e) => {
                 if (['input', 'textarea'].includes(document.activeElement.tagName.toLowerCase())) return;
 
-                                if (currentIdx === 13 && ['1', '2', '3', '4', '5'].includes(e.key)) {
+                                if (currentIdx === 14 && ['1', '2', '3', '4', '5'].includes(e.key)) {
                     const tabMap = {
                         '1': 'tab-autoimmune',
                         '2': 'tab-neuro',
@@ -5194,7 +5309,7 @@
                     };
                     if (window.switchDiseaseTab) window.switchDiseaseTab(tabMap[e.key]);
                 }
-                if (currentIdx === 8 && ['1', '2', '3', '4', '5', '6'].includes(e.key)) {
+                if (currentIdx === 9 && ['1', '2', '3', '4', '5', '6'].includes(e.key)) {
                     const tabMap = {
                         '1': 'tab-wilson',
                         '2': 'tab-croce',
