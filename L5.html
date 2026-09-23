@@ -358,13 +358,87 @@
             padding: 1px 5px; border-radius: 2px; border: 1px solid var(--rule-ink);
         }
 
+    
+        /* Title Slide Styles (Retro-Bauhaus Hero Title Layout) */
+        .title-slide-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .title-hero {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .title-hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.4rem;
+            font-weight: 900;
+            line-height: 1.12;
+            letter-spacing: -0.035em;
+            color: var(--ink-black);
+        }
+        .title-hero .deck-desc {
+            font-size: 1.35rem;
+            color: var(--ink-slate);
+            line-height: 1.45;
+            max-width: 1200px;
+            font-weight: 500;
+        }
+        .title-stats-banner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            background: #FFFFFF;
+            border: 2px solid var(--rule-ink);
+            border-radius: 3px;
+            padding: 22px 26px;
+            box-shadow: 3px 3px 0px var(--rule-ink);
+        }
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .stat-num {
+            font-family: var(--font-heading);
+            font-size: 2.9rem;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.90rem;
+            font-weight: 800;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 2px;
+        }
+        .stat-desc {
+            font-size: 0.94rem;
+            color: var(--ink-slate);
+            line-height: 1.35;
+            margin-top: 4px;
+        }
+        .title-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1.5px solid var(--rule-subtle);
+            padding-top: 14px;
+        }
+
     </style>
 </head>
 <body>
     <div id="progress-container"><div id="progress-bar"></div></div>
     <header>
         <div class="header-left">
-            <span class="header-badge" id="header-badge">Lecture 5 &bull; Architecture &amp; Roadmap</span>
+            <span class="header-badge" id="header-badge">Lecture 5 &bull; Overview</span>
             <span id="header-movement-title">The Regulatory Genome, Epigenetics &amp; Transcriptomics</span>
         </div>
         <div class="header-right">
@@ -374,175 +448,62 @@
     </header>
 
     <main id="stage">
-<section class="slide active" data-slide="1">
-            <div class="slide-header">
-                <div class="slide-category">Lecture 5 &bull; The Regulatory Genome, Epigenetics &amp; Transcriptomics</div>
-                <h1 class="slide-title" style="font-size: 2.15rem;">
-                    The Regulatory Genome, Epigenetics &amp; Transcriptomics
-                </h1>
-                <div class="slide-subtitle" style="font-size: 1.05rem;">
-                    How DNA switches (non-coding variation), 3D chromosome folding (chromatin architecture), and chemical tags (DNA methylation) control gene output and disease.
-                </div>
-            </div>
-
-            <div class="grid-2col" style="align-items: stretch;">
-                <div class="card card-cherry" style="display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                        <h3 style="font-size: 1.12rem; font-weight: 800; color: #1E293B; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1.5px solid var(--rule-subtle);">
-                            The Non-Coding Regulatory Paradigm
-                        </h3>
-                        <p style="font-size: 0.94rem; line-height: 1.38; color: #2D3139; margin-bottom: 8px;">
-                            Over 90% of disease-associated variants identified in Genome-Wide Association Studies fall in non-coding DNA. They do not alter protein amino acid recipes.
-                        </p>
-                        <p style="font-size: 0.94rem; line-height: 1.38; color: #2D3139; margin-bottom: 8px;">
-                            Instead, they alter <strong>gene expression</strong>—modulating when, where, and how much messenger RNA a cell transcribes. Decoding disease mechanisms requires mapping the regulatory layers that govern the genome:
-                        </p>
-                        <div style="display: flex; flex-direction: column; gap: 5px;">
-                            <div style="background: #F8FAFC; border: 1px solid var(--rule-subtle); border-left: 4px solid #0F766E; border-radius: 2px; padding: 4px 8px; font-size: 0.82rem; color: #334155; line-height: 1.25;">
-                                <strong style="color: #065F46;">1. Expression Volume (eQTLs):</strong> DNA switches dial transcription volume up or down in specific target tissues.
-                            </div>
-                            <div style="background: #F8FAFC; border: 1px solid var(--rule-subtle); border-left: 4px solid #1D4ED8; border-radius: 2px; padding: 4px 8px; font-size: 0.82rem; color: #334155; line-height: 1.25;">
-                                <strong style="color: #1E40AF;">2. RNA Splicing (sQTLs):</strong> Sequence variants alter exon inclusion/skipping without altering coding letters.
-                            </div>
-                            <div style="background: #F8FAFC; border: 1px solid var(--rule-subtle); border-left: 4px solid #6D28D9; border-radius: 2px; padding: 4px 8px; font-size: 0.82rem; color: #334155; line-height: 1.25;">
-                                <strong style="color: #5B21B6;">3. Epigenetics &amp; 3D Folding:</strong> DNA methylation (5mC) and TAD boundaries control physical switch-to-gene access.
-                            </div>
-                        </div>
+<section class="slide active" data-slide="1" style="justify-content: space-between; padding: 26px 36px;">
+            <div class="title-slide-container">
+                <div>
+                    <div class="slide-category" style="margin-bottom: 8px;">
+                        Genomics in Medicine &bull; Fall 2026 &bull; Lecture 05
                     </div>
 
-                    <div class="clinical-anchor" style="margin-top: 6px;">
-                        <strong>Clinical Diagnostic Context:</strong> Common disease risk operates primarily through subtle, tissue-specific regulatory modulation rather than catastrophic protein-truncating coding mutations.
+                    <div class="title-hero" style="margin-top: 12px;">
+                        <h1>
+                            The Regulatory Genome,<br>Epigenetics &amp; Transcriptomics
+                        </h1>
+                        <div class="deck-desc">
+                            How non-coding switches, 3D chromosome architecture, and chemical methylation tags control gene output and clinical disease.
+                        </div>
                     </div>
                 </div>
 
-                <div class="card card-blue" style="display: flex; flex-direction: column; justify-content: space-between;">
-                    <div>
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1.5px solid var(--rule-subtle);">
-                            <h3 style="font-size: 1.10rem; font-weight: 800; color: #1E293B;">
-                                Lecture Architecture &bull; 6 Movements &amp; Case Study
-                            </h3>
-                            <span style="font-family: var(--font-mono); font-size: 0.74rem; font-weight: 800; color: #9D2235; background: #FFF1F2; padding: 2px 6px; border-radius: 2px; border: 1.5px solid var(--rule-ink); box-shadow: 1px 1px 0px var(--rule-ink);">
-                                FULL ROADMAP
-                            </span>
-                        </div>
-
-                        <div style="display: flex; flex-direction: column; gap: 4px;">
-                            <div style="background: #FFFFFF; border: 1.5px solid var(--rule-ink); border-left: 5px solid #0F766E; border-radius: 2px; padding: 3px 8px; box-shadow: 1.5px 1.5px 0px rgba(26,28,32,0.06); display: flex; align-items: center; justify-content: space-between; gap: 6px;">
-                                <div>
-                                    <div style="font-family: var(--font-heading); font-weight: 800; font-size: 0.86rem; color: #065F46; line-height: 1.15;">
-                                        Movement 1: Regulatory Foundations
-                                    </div>
-                                    <div style="font-size: 0.76rem; color: #475569; margin-top: 1px; line-height: 1.18;">
-                                        Promoters, enhancers, and the 93% non-coding disease paradox.
-                                    </div>
-                                </div>
-                                <span style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; color: #065F46; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 2px; padding: 1px 4px; white-space: nowrap;">
-                                    SWITCH ANATOMY
-                                </span>
-                            </div>
-
-                            <div style="background: #FFFFFF; border: 1.5px solid var(--rule-ink); border-left: 5px solid #9D2235; border-radius: 2px; padding: 3px 8px; box-shadow: 1.5px 1.5px 0px rgba(26,28,32,0.06); display: flex; align-items: center; justify-content: space-between; gap: 6px;">
-                                <div>
-                                    <div style="font-family: var(--font-heading); font-weight: 800; font-size: 0.86rem; color: #9D2235; line-height: 1.15;">
-                                        Case Study: Forensic Bioinformatics
-                                    </div>
-                                    <div style="font-size: 0.76rem; color: #475569; margin-top: 1px; line-height: 1.18;">
-                                        The Duke microarray scandal, the row-shift error, and the <em>p &gt;&gt; n</em> trap.
-                                    </div>
-                                </div>
-                                <span style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; color: #991B1B; background: #FEF2F2; border: 1px solid #FECACA; border-radius: 2px; padding: 1px 4px; white-space: nowrap;">
-                                    CLINICAL AUDIT
-                                </span>
-                            </div>
-
-                            <div style="background: #FFFFFF; border: 1.5px solid var(--rule-ink); border-left: 5px solid #1D4ED8; border-radius: 2px; padding: 3px 8px; box-shadow: 1.5px 1.5px 0px rgba(26,28,32,0.06); display: flex; align-items: center; justify-content: space-between; gap: 6px;">
-                                <div>
-                                    <div style="font-family: var(--font-heading); font-weight: 800; font-size: 0.86rem; color: #1E40AF; line-height: 1.15;">
-                                        Movement 2: Functional Genomics &amp; Splicing
-                                    </div>
-                                    <div style="font-size: 0.76rem; color: #475569; margin-top: 1px; line-height: 1.18;">
-                                        Gene volume knobs (eQTLs), GTEx atlas, 1p13 switch, sQTLs, and Nusinersen ASO.
-                                    </div>
-                                </div>
-                                <span style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; color: #1D4ED8; background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 2px; padding: 1px 4px; white-space: nowrap;">
-                                    eQTLs &amp; ASOs
-                                </span>
-                            </div>
-
-                            <div style="background: #FFFFFF; border: 1.5px solid var(--rule-ink); border-left: 5px solid #D97706; border-radius: 2px; padding: 3px 8px; box-shadow: 1.5px 1.5px 0px rgba(26,28,32,0.06); display: flex; align-items: center; justify-content: space-between; gap: 6px;">
-                                <div>
-                                    <div style="font-family: var(--font-heading); font-weight: 800; font-size: 0.86rem; color: #B45309; line-height: 1.15;">
-                                        Movement 3: Epigenetics &amp; Imprinting
-                                    </div>
-                                    <div style="font-size: 0.76rem; color: #475569; margin-top: 1px; line-height: 1.18;">
-                                        Chemical padlocks (DNA methylation), CpG islands, and 15q11-q13 parent-of-origin.
-                                    </div>
-                                </div>
-                                <span style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; color: #B45309; background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 2px; padding: 1px 4px; white-space: nowrap;">
-                                    5mC &amp; IMPRINTING
-                                </span>
-                            </div>
-
-                            <div style="background: #FFFFFF; border: 1.5px solid var(--rule-ink); border-left: 5px solid #6D28D9; border-radius: 2px; padding: 3px 8px; box-shadow: 1.5px 1.5px 0px rgba(26,28,32,0.06); display: flex; align-items: center; justify-content: space-between; gap: 6px;">
-                                <div>
-                                    <div style="font-family: var(--font-heading); font-weight: 800; font-size: 0.86rem; color: #5B21B6; line-height: 1.15;">
-                                        Movement 4: 3D Genome Architecture
-                                    </div>
-                                    <div style="font-size: 0.76rem; color: #475569; margin-top: 1px; line-height: 1.18;">
-                                        Insulated neighborhoods (TADs), CTCF boundaries, and enhancer hijacking.
-                                    </div>
-                                </div>
-                                <span style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; color: #6D28D9; background: #FAF5FF; border: 1px solid #E9D5FF; border-radius: 2px; padding: 1px 4px; white-space: nowrap;">
-                                    TADs &amp; FOLDING
-                                </span>
-                            </div>
-
-                            <div style="background: #FFFFFF; border: 1.5px solid var(--rule-ink); border-left: 5px solid #0891B2; border-radius: 2px; padding: 3px 8px; box-shadow: 1.5px 1.5px 0px rgba(26,28,32,0.06); display: flex; align-items: center; justify-content: space-between; gap: 6px;">
-                                <div>
-                                    <div style="font-family: var(--font-heading); font-weight: 800; font-size: 0.86rem; color: #0E7490; line-height: 1.15;">
-                                        Movement 5: Epigenetic Clocks
-                                    </div>
-                                    <div style="font-size: 0.76rem; color: #475569; margin-top: 1px; line-height: 1.18;">
-                                        Horvath multi-tissue 353-CpG clock, elastic net, and biological age acceleration.
-                                    </div>
-                                </div>
-                                <span style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; color: #0891B2; background: #ECFEFF; border: 1px solid #A5F3FC; border-radius: 2px; padding: 1px 4px; white-space: nowrap;">
-                                    BIOLOGICAL AGE
-                                </span>
-                            </div>
-
-                            <div style="background: #FFFFFF; border: 1.5px solid var(--rule-ink); border-left: 5px solid #334155; border-radius: 2px; padding: 3px 8px; box-shadow: 1.5px 1.5px 0px rgba(26,28,32,0.06); display: flex; align-items: center; justify-content: space-between; gap: 6px;">
-                                <div>
-                                    <div style="font-family: var(--font-heading); font-weight: 800; font-size: 0.86rem; color: #1E293B; line-height: 1.15;">
-                                        Movement 6: Active Learning &amp; Clinical Synthesis
-                                    </div>
-                                    <div style="font-size: 0.76rem; color: #475569; margin-top: 1px; line-height: 1.18;">
-                                        Live GTEx 1p13 twist sprint, summative quiz, and clinical takeaway rules.
-                                    </div>
-                                </div>
-                                <span style="font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; color: #334155; background: #F1F5F9; border: 1px solid #CBD5E1; border-radius: 2px; padding: 1px 4px; white-space: nowrap;">
-                                    SPRINT &amp; QUIZ
-                                </span>
-                            </div>
-                        </div>
+                <!-- 4 High-Impact Display Stats Banner -->
+                <div class="title-stats-banner">
+                    <div class="stat-item" style="border-left: 4px solid var(--temple-cherry); padding-left: 14px;">
+                        <div class="stat-num" style="color: var(--temple-cherry);">98.5%</div>
+                        <div class="stat-label">Non-Coding Sequence</div>
+                        <div class="stat-desc">Protein-coding exons span only ~1.5% of the genome; regulatory switches control the rest.</div>
                     </div>
+                    <div class="stat-item" style="border-left: 4px solid var(--bauhaus-blue); padding-left: 14px;">
+                        <div class="stat-num" style="color: var(--bauhaus-blue);">&gt;90%</div>
+                        <div class="stat-label">Disease GWAS Hits</div>
+                        <div class="stat-desc">Complex trait risk variants map to non-coding promoters, enhancers, and splicing motifs.</div>
+                    </div>
+                    <div class="stat-item" style="border-left: 4px solid var(--bauhaus-emerald); padding-left: 14px;">
+                        <div class="stat-num" style="color: var(--bauhaus-emerald);">54</div>
+                        <div class="stat-label">GTEx Human Tissues</div>
+                        <div class="stat-desc">Comprehensive postmortem atlas mapping tissue-specific expression volume knobs (eQTLs).</div>
+                    </div>
+                    <div class="stat-item" style="border-left: 4px solid var(--bauhaus-amber); padding-left: 14px;">
+                        <div class="stat-num" style="color: var(--bauhaus-amber);">353</div>
+                        <div class="stat-label">Horvath Clock CpGs</div>
+                        <div class="stat-desc">Multi-tissue epigenetic DNA methylation algorithm predicting biological age within &plusmn;3.6 years.</div>
+                    </div>
+                </div>
 
-                    <div style="background: #FAF8F2; border: 1.5px solid var(--rule-ink); padding: 4px 10px; font-size: 0.82rem; color: #475569; display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
-                        <span><strong>Assigned Reading:</strong> <a href="L5_reading.html" target="_blank" style="color: #6D28D9; text-decoration: underline; font-weight: 700;">GTEx (Science 2020) &bull; Horvath (Genome Bio 2013)</a></span>
-                        <span style="font-family: var(--font-mono); font-weight: 800; color: #9D2235;">BIOL 3111 &check;</span>
+                <!-- Title Footer -->
+                <div class="title-footer">
+                    <div style="font-size: 1.02rem; font-weight: 600; color: var(--ink-slate);">
+                        <strong>Prof. Sergei Pond</strong> &bull; Department of Biology &bull; Temple University
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; color: var(--temple-cherry); background: #FEE2E2; border: 1.5px solid var(--temple-cherry); padding: 3px 8px; border-radius: 2px; box-shadow: 1.5px 1.5px 0px var(--rule-ink);">
+                            UNSCHEDULED DETOUR AHEAD &rarr;
+                        </span>
+                        <span style="font-family: var(--font-mono); font-size: 0.88rem; font-weight: 700; color: var(--ink-slate);">
+                            Slide 2: Temple U.S. News Ranking
+                        </span>
                     </div>
                 </div>
             </div>
-
-            <div class="callout-strip">
-                <div class="callout-strip-text">
-                    <strong>The Central Premise:</strong> Sequence variation creates biological consequence by modulating the rate, timing, and splicing of transcription.
-                </div>
-                <span style="font-family: var(--font-mono); font-size: 0.88rem; font-weight: 800; color: var(--temple-cherry);">
-                    UNSCHEDULED DETOUR &rarr;
-                </span>
-            </div>
-
         </section>
 <section class="slide" data-slide="2">
             <div class="slide-header">
@@ -5189,7 +5150,7 @@
                 const headerTitle = document.getElementById('header-movement-title');
                 if (headerBadge && headerTitle) {
                     if (currentIdx === 0) {
-                        headerBadge.textContent = 'Lecture 5 • Architecture & Roadmap';
+                        headerBadge.textContent = 'Lecture 5 • Overview';
                         headerTitle.textContent = 'The Regulatory Genome, Epigenetics & Transcriptomics';
                     } else if (currentIdx === 1) {
                         headerBadge.textContent = 'Unscheduled Detour • Institutional Metrics';
