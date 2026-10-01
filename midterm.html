@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        // Automatic Trailing-Slash Enforcer for Directory-style URLs
+        (function() {
+            var path = window.location.pathname;
+            if (path && !path.endsWith('/') && !path.split('/').pop().includes('.')) {
+                window.location.replace(path + '/' + window.location.search + window.location.hash);
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midterm Research Project: Multi-Omic Dissection of Human Disease | BIOL 3111 / 5111</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Tight:wght@600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --temple-cherry: #9D2235;
+            --temple-cherry-dark: #781827;
+            --temple-cherry-light: #FDF2F4;
+            --slate-900: #0F172A;
+            --slate-800: #1E293B;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-400: #94A3B8;
+            --slate-200: #E2E8F0;
+            --slate-100: #F1F5F9;
+            --slate-50: #F8FAFC;
+            --text-main: #1E293B;
+            --bauhaus-blue: #1D4ED8;
+            --bauhaus-emerald: #0F766E;
+            --bauhaus-amber: #B45309;
+            --bauhaus-purple: #6D28D9;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Inter Tight', var(--font-sans);
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--temple-cherry);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            z-index: 1000;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 0 0 6px 0;
+            transition: top 0.2s ease;
+        }
+        .skip-link:focus { top: 0; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            background-color: var(--slate-50);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 48px 56px;
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+            border-left: 1px solid var(--slate-200);
+            border-right: 1px solid var(--slate-200);
+            min-height: 100vh;
+        }
+
+        /* Top Nav Bar */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--slate-200);
+            font-size: 0.85rem;
+        }
+        .top-nav a {
+            color: var(--slate-600);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.15s;
+        }
+        .top-nav a:hover { color: var(--temple-cherry); }
+        .top-nav-links { display: flex; gap: 16px; align-items: center; }
+
+        header {
+            border-bottom: 3px solid var(--temple-cherry);
+            padding-bottom: 28px;
+            margin-bottom: 36px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--temple-cherry-light);
+            border: 1px solid #FECDD3;
+            color: var(--temple-cherry);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .lead-quote {
+            background: #F8FAFC;
+            border-left: 4px solid var(--slate-400);
+            padding: 12px 18px;
+            font-style: italic;
+            color: var(--slate-600);
+            font-size: 0.92rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 24px;
+        }
+
+        .logistics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 12px;
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-radius: 10px;
+            padding: 18px 20px;
+            font-size: 0.86rem;
+            color: var(--slate-700);
+            margin-bottom: 24px;
+        }
+
+        .logistics-grid div strong {
+            color: var(--slate-900);
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: -0.01em;
+            margin: 36px 0 16px 0;
+            padding-bottom: 8px;
+            border-bottom: 1.5px solid var(--slate-200);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--slate-800);
+            margin: 22px 0 10px 0;
+        }
+
+        p { margin-bottom: 14px; font-size: 0.96rem; color: var(--slate-700); }
+
+        ul, ol { margin: 0 0 16px 24px; font-size: 0.95rem; color: var(--slate-700); }
+        li { margin-bottom: 6px; }
+
+        strong { color: var(--slate-900); }
+
+        /* Callout Boxes */
+        .callout {
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 0.92rem;
+            border-left: 4px solid;
+        }
+        .callout-title {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 0.98rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .callout-blue { background: #EFF6FF; border-left-color: var(--bauhaus-blue); border: 1px solid #BFDBFE; border-left-width: 4px; color: #1E3A8A; }
+        .callout-blue .callout-title { color: #1E40AF; }
+
+        .callout-cherry { background: var(--temple-cherry-light); border-left-color: var(--temple-cherry); border: 1px solid #FECDD3; border-left-width: 4px; color: #881337; }
+        .callout-cherry .callout-title { color: var(--temple-cherry); }
+
+        .callout-green { background: #ECFDF5; border-left-color: var(--bauhaus-emerald); border: 1px solid #A7F3D0; border-left-width: 4px; color: #064E3B; }
+        .callout-green .callout-title { color: #065F46; }
+
+        .callout-amber { background: #FFFBEB; border-left-color: var(--bauhaus-amber); border: 1px solid #FDE68A; border-left-width: 4px; color: #78350F; }
+        .callout-amber .callout-title { color: #92400E; }
+
+        .callout-purple { background: #FAF5FF; border-left-color: var(--bauhaus-purple); border: 1px solid #E9D5FF; border-left-width: 4px; color: #4C1D95; }
+        .callout-purple .callout-title { color: #6D28D9; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0 24px 0;
+            font-size: 0.88rem;
+            border: 1px solid var(--slate-200);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 10px 14px;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--slate-200);
+        }
+        th {
+            background-color: var(--slate-800);
+            color: #FFFFFF;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.84rem;
+            letter-spacing: 0.02em;
+        }
+        tr:nth-child(even) { background-color: var(--slate-50); }
+        tr:hover { background-color: #F1F5F9; }
+
+        /* Code & Monospace */
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.86rem;
+            background: #F1F5F9;
+            color: #0F172A;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--slate-200);
+        }
+
+        pre {
+            background: #0F172A;
+            color: #F8FAFC;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            overflow-x: auto;
+            margin: 14px 0 20px 0;
+            line-height: 1.45;
+        }
+
+        /* Interactive Track Switcher */
+        .track-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .track-card {
+            border: 2px solid var(--slate-200);
+            border-radius: 10px;
+            padding: 20px;
+            background: #FFFFFF;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .track-card.active-a {
+            border-color: var(--bauhaus-purple);
+            background: #FCFAFF;
+        }
+        .track-card.active-b {
+            border-color: var(--bauhaus-emerald);
+            background: #FAFEFC;
+        }
+        .track-badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        /* Tier Steps Visual Cards */
+        .tier-card {
+            background: #FFFFFF;
+            border: 1px solid var(--slate-200);
+            border-left: 5px solid var(--slate-400);
+            border-radius: 6px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .tier-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .tier-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .tier-title {
+            font-family: var(--font-heading);
+            font-size: 1.02rem;
+            font-weight: 800;
+            color: var(--slate-900);
+        }
+        .tier-tag {
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: var(--slate-100);
+            color: var(--slate-700);
+            font-weight: 600;
+        }
+
+        /* Database Quick Launch Buttons */
+        .db-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin: 16px 0 24px 0;
+        }
+        .db-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid var(--slate-200);
+            border-radius: 8px;
+            background: var(--slate-50);
+            text-decoration: none;
+            color: var(--slate-800);
+            font-size: 0.82rem;
+            font-weight: 600;
+            transition: all 0.15s;
+        }
+        .db-btn:hover {
+            background: #FFFFFF;
+            border-color: var(--temple-cherry);
+            color: var(--temple-cherry);
+            box-shadow: 0 3px 10px rgba(157, 34, 53, 0.12);
+            transform: translateY(-2px);
+        }
+        .db-icon { font-size: 1.25rem; margin-bottom: 4px; }
+
+        /* Interactive Filter Bar */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .filter-btn {
+            background: #FFFFFF;
+            border: 1px solid var(--slate-200);
+            color: var(--slate-700);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.80rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--temple-cherry);
+            color: #FFFFFF;
+            border-color: var(--temple-cherry);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--slate-200);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.92rem;
+            margin-bottom: 16px;
+            outline: none;
+        }
+        .search-box:focus { border-color: var(--temple-cherry); }
+
+        .disease-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            max-height: 480px;
+            overflow-y: auto;
+            padding-right: 6px;
+            margin-bottom: 24px;
+        }
+        .disease-card {
+            background: #FFFFFF;
+            border: 1px solid var(--slate-200);
+            border-radius: 8px;
+            padding: 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .disease-card-title {
+            font-family: var(--font-heading);
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 4px;
+        }
+        .disease-genes {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--bauhaus-blue);
+            margin-bottom: 6px;
+        }
+        .disease-desc {
+            font-size: 0.82rem;
+            color: var(--slate-600);
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+        .disease-category-tag {
+            align-self: flex-start;
+            font-family: var(--font-mono);
+            font-size: 0.70rem;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            background: var(--slate-100);
+            border-radius: 3px;
+            color: var(--slate-600);
+            font-weight: 600;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            background: var(--slate-800);
+            color: #FFFFFF;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.15s;
+        }
+        .copy-btn:hover { background: var(--temple-cherry); }
+
+        /* Early Bird Calculator */
+        .calc-box {
+            background: #FFFFFF;
+            border: 2px solid var(--bauhaus-emerald);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .calc-slider {
+            width: 100%;
+            margin: 12px 0;
+        }
+        .calc-result {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ECFDF5;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: 1px solid #A7F3D0;
+            margin-top: 10px;
+        }
+        .calc-score {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #065F46;
+        }
+
+        /* Print Styles */
+        @media print {
+            body { background: #FFFFFF; }
+            .container { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+            .top-nav, .filter-bar, .search-box, .copy-btn, .calc-box, .db-grid { display: none !important; }
+            h2 { page-break-after: avoid; }
+            table, .tier-card { page-break-inside: avoid; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 24px 20px; }
+            .track-cards-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="container" id="main-content">
+        <!-- Top Navigation -->
+        <div class="top-nav">
+            <div>
+                <a href="index.html">&larr; Course Portal Home</a>
+            </div>
+            <div class="top-nav-links">
+                <a href="syllabus.html">Course Syllabus</a>
+                <a href="MIDTERM_ASSIGNMENT.md" download>Download Markdown Guide</a>
+                <a href="https://templeu.instructure.com" target="_blank" rel="noopener noreferrer">Canvas &nearr;</a>
+            </div>
+        </div>
+
+        <header>
+            <div class="badge">BIOL 3111 / 5111 &bull; Fall 2026 Midterm Research Project</div>
+            <h1>Multi-Omic Dissection of Human Disease</h1>
+            <div class="lead-quote">
+                "For every complex disease there is an explanation that is simple, neat, and wrong. Pathological phenotypes do not arise from isolated genetic typos; they are the emergent output of an interconnected informational network."
+            </div>
+
+            <div class="logistics-grid">
+                <div>
+                    <strong>Official Due Date</strong>
+                    Thursday, Oct 29, 2026 (23:59 EST)
+                </div>
+                <div>
+                    <strong>Weight / Contribution</strong>
+                    20% of Final Course Grade
+                </div>
+                <div>
+                    <strong>Target Length</strong>
+                    ~4–5 pages narrative + figs &amp; refs
+                </div>
+                <div>
+                    <strong>Early-Bird Bonus</strong>
+                    Up to +84 Course Points (Submit Oct 22–28)
+                </div>
+            </div>
+        </header>
+
+        <!-- 1. Executive Summary -->
+        <section>
+            <h2>1. Executive Summary &amp; Scientific Mission</h2>
+            <p>
+                In the first six weeks of <strong>Genomics in Medicine</strong>, we explored the primary layers of genomic information: single-nucleotide variants, cytogenetic copy number alterations, polygenic risk scores, 3D chromatin conformation, tissue-specific eQTLs, and host-microbiome interactions.
+            </p>
+            <p>
+                <strong>Your Mission:</strong> Select <strong>one human disease or syndrome</strong> that resonates with you personally, intellectually, or clinically. You will author a publication-grade <strong>Multi-Omic Diagnostic &amp; Mechanistic Profile</strong> characterizing how these distinct informational tiers converge to cause human pathology, influence penetrance, and guide targeted therapeutics.
+            </p>
+            <p>
+                This project is structured to cultivate genuine scientific competency. To ensure your synthesis is rooted in authentic data rather than superficial generalities, you will directly retrieve, analyze, and embed figures from primary public databases (<strong>UCSC Genome Browser</strong>, <strong>GTEx Portal</strong>, <strong>ClinVar</strong>, and the <strong>GWAS / PGS Catalog</strong>).
+            </p>
+        </section>
+
+        <!-- 2. The Two-Track Contract -->
+        <section>
+            <h2>2. The Two-Track Generative AI Contract</h2>
+            
+            <div class="callout callout-blue">
+                <div class="callout-title">🤖 Notice of Algorithmic Pre-Screening</div>
+                Transparency and verification are fundamental to science. <strong>All midterm submissions will be screened through an automated computational pipeline prior to human faculty review.</strong> This pipeline performs three automated audits:
+                <ol style="margin-top: 6px; margin-bottom: 4px;">
+                    <li><strong>Live PubMed ID (PMID) Verification:</strong> Automated querying of the NCBI E-utilities API to confirm that every single cited PMID exists and discusses the claimed biology.</li>
+                    <li><strong>Genomic Coordinate Validation:</strong> Automated checks confirming reported chromosome coordinates, transcript IDs, and dbSNP rsIDs correspond to genuine entries in the <strong>GRCh38/hg38</strong> build.</li>
+                    <li><strong>Synthetic Text Profiling:</strong> Detection of zero-shot commercial LLM syntactic boilerplate and ungrounded prose.</li>
+                </ol>
+            </div>
+
+            <p>On your title page, you must explicitly declare your track:</p>
+
+            <div class="track-cards-grid">
+                <!-- Track A Card -->
+                <div class="track-card active-a">
+                    <div>
+                        <span class="track-badge" style="background: #F3E8FF; color: #6D28D9; border: 1px solid #D8B4FE;">Track A</span>
+                        <h3 style="margin-top: 0; color: #581C87;">AI-Assisted Research &amp; Synthesis</h3>
+                        <p style="font-size: 0.88rem; color: #4C1D95; margin-bottom: 10px;">
+                            <strong>Standard:</strong> Graded against <strong>Expert Peer Reviewer Standards</strong> (*Nature Genetics* / *Lancet* rigor).
+                        </p>
+                        <ul style="font-size: 0.84rem; color: #334155; margin-left: 16px;">
+                            <li><strong>Permitted Tools:</strong> Claude, ChatGPT, Gemini, Copilot, NotebookLM for outlining, literature search, and drafting.</li>
+                            <li><strong>Ruthless Fluff Penalty:</strong> Superficial AI introductions or vague hand-waving explanations will be penalized aggressively.</li>
+                            <li><strong>Mandatory AI Audit Table (1 Page):</strong> Must document &ge;2 specific instances where the AI produced an error, coordinate hallucination, or oversimplification, detailing your literature-backed correction.</li>
+                            <li><strong>Zero-Tolerance Citation Policy:</strong> Every claim requires an authentic PMID/DOI. A single fake citation results in an automatic zero on the bibliography and a 1-letter grade deduction.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Track B Card -->
+                <div class="track-card active-b">
+                    <div>
+                        <span class="track-badge" style="background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0;">Track B</span>
+                        <h3 style="margin-top: 0; color: #065F46;">100% Human-Authored</h3>
+                        <p style="font-size: 0.88rem; color: #047857; margin-bottom: 10px;">
+                            <strong>Standard:</strong> Graded on standard upper-division undergraduate criteria.
+                        </p>
+                        <ul style="font-size: 0.84rem; color: #334155; margin-left: 16px;">
+                            <li><strong>Permitted Tools:</strong> Traditional literature searches (PubMed, Google Scholar), reference managers (Zotero, Mendeley), and spellcheck.</li>
+                            <li><strong>Evaluative Focus:</strong> Conceptual clarity, original scientific voice, accurate biological reasoning, and data integration.</li>
+                            <li><strong>Integrity Guardrail:</strong> If an unacknowledged Track B submission is flagged by the screening pipeline for synthetic AI text or fabricated citations, it is treated as an intentional academic integrity violation (automatic zero on assignment).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Choosing Your Disease Focus -->
+        <section>
+            <h2>3. Disease Selection &amp; Interactive Explorer</h2>
+            <p>
+                Select a disease that resonates with your clinical interests or personal background. Use the interactive filter below to explore approved diseases and their primary multi-omic angles:
+            </p>
+
+            <!-- Filter Buttons -->
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterDiseases('all', this)">All Categories</button>
+                <button class="filter-btn" onclick="filterDiseases('metabolic', this)">Metabolic &amp; Cardio</button>
+                <button class="filter-btn" onclick="filterDiseases('autoimmune', this)">Autoimmune &amp; IBD</button>
+                <button class="filter-btn" onclick="filterDiseases('neuro', this)">Neurological</button>
+                <button class="filter-btn" onclick="filterDiseases('monogenic', this)">Monogenic / Modifiers</button>
+                <button class="filter-btn" onclick="filterDiseases('structural', this)">Structural / CNVs</button>
+                <button class="filter-btn" onclick="filterDiseases('infectious', this)">Infectious Host Susceptibility</button>
+            </div>
+
+            <input type="text" id="diseaseSearch" class="search-box" placeholder="Search disease, gene symbol (e.g., CFTR, NOD2, SMN1), or mechanism..." onkeyup="searchDiseases()">
+
+            <!-- Interactive Disease List -->
+            <div class="disease-list" id="diseaseList">
+                <!-- Card 1 -->
+                <div class="disease-card" data-category="autoimmune">
+                    <div>
+                        <div class="disease-card-title">Crohn's Disease (IBD)</div>
+                        <div class="disease-genes">Genes: NOD2, ATG16L1, IL23R</div>
+                        <div class="disease-desc">Pattern recognition receptor mutations; mucosal barrier breakdown; gut microbiome dysbiosis; ileal tissue eQTLs.</div>
+                    </div>
+                    <span class="disease-category-tag">Autoimmune &bull; Microbiome</span>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="disease-card" data-category="monogenic">
+                    <div>
+                        <div class="disease-card-title">Cystic Fibrosis</div>
+                        <div class="disease-genes">Genes: CFTR, SLC26A9, TGFB1</div>
+                        <div class="disease-desc">Chloride channel folding (p.Phe508del); modifier GWAS loci explaining lung disease expressivity; Trikafta small-molecule correctors.</div>
+                    </div>
+                    <span class="disease-category-tag">Monogenic &bull; Modifiers</span>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="disease-card" data-category="monogenic">
+                    <div>
+                        <div class="disease-card-title">Sickle Cell Disease &amp; β-Thal</div>
+                        <div class="disease-genes">Genes: HBB, BCL11A, HBS1L-MYB</div>
+                        <div class="disease-desc">Hemoglobin beta E6V point mutation; balanced malaria selection; BCL11A erythroid enhancer targeted by Casgevy CRISPR editing.</div>
+                    </div>
+                    <span class="disease-category-tag">Monogenic &bull; CRISPR Rx</span>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="disease-card" data-category="structural">
+                    <div>
+                        <div class="disease-card-title">Charcot-Marie-Tooth 1A / HNPP</div>
+                        <div class="disease-genes">Locus: 17p12 (PMP22)</div>
+                        <div class="disease-desc">1.4 Mb duplication/deletion mediated by NAHR between flanking CMT1A-REPs; gene dosage sensitivity in Schwann cells; CMA detection.</div>
+                    </div>
+                    <span class="disease-category-tag">Structural &bull; CNVs</span>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="disease-card" data-category="monogenic">
+                    <div>
+                        <div class="disease-card-title">Spinal Muscular Atrophy</div>
+                        <div class="disease-genes">Genes: SMN1, SMN2</div>
+                        <div class="disease-desc">SMN1 deletion with SMN2 copy number compensation; c.840C>T exon 7 alternative splicing; Spinraza ASO and Zolgensma AAV therapies.</div>
+                    </div>
+                    <span class="disease-category-tag">Monogenic &bull; Splicing</span>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="disease-card" data-category="neuro">
+                    <div>
+                        <div class="disease-card-title">Amyotrophic Lateral Sclerosis (ALS)</div>
+                        <div class="disease-genes">Genes: C9orf72, SOD1, TARDBP</div>
+                        <div class="disease-desc">Hexanucleotide GGGGCC repeat expansion; RNA foci &amp; dipeptide repeat toxicity; motor neuron single-cell transcriptomics; Qalsody ASO.</div>
+                    </div>
+                    <span class="disease-category-tag">Neurological &bull; Repeats</span>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="disease-card" data-category="metabolic">
+                    <div>
+                        <div class="disease-card-title">Familial Hypercholesterolemia</div>
+                        <div class="disease-genes">Genes: LDLR, APOB, PCSK9</div>
+                        <div class="disease-desc">Receptor clearance defects; high-penetrance SNVs vs. background polygenic LDL score; PCSK9 monoclonal antibodies and siRNA.</div>
+                    </div>
+                    <span class="disease-category-tag">Metabolic &bull; PRS</span>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="disease-card" data-category="metabolic">
+                    <div>
+                        <div class="disease-card-title">Type 2 Diabetes</div>
+                        <div class="disease-genes">Genes: TCF7L2, KCNJ11, PPARG</div>
+                        <div class="disease-desc">Extensive GWAS architecture (>300 loci); islet-specific chromatin accessibility (ATAC-seq); multi-ancestry PRS disparities.</div>
+                    </div>
+                    <span class="disease-category-tag">Metabolic &bull; GWAS</span>
+                </div>
+
+                <!-- Card 9 -->
+                <div class="disease-card" data-category="neuro">
+                    <div>
+                        <div class="disease-card-title">Parkinson's Disease</div>
+                        <div class="disease-genes">Genes: SNCA, LRRK2, GBA1, PRKN</div>
+                        <div class="disease-desc">Alpha-synuclein triplication (CNV) and point mutations; lysosomal pathway defects; substantia nigra single-cell signatures.</div>
+                    </div>
+                    <span class="disease-category-tag">Neurological &bull; CNV/SNV</span>
+                </div>
+
+                <!-- Card 10 -->
+                <div class="disease-card" data-category="autoimmune">
+                    <div>
+                        <div class="disease-card-title">Type 1 Diabetes</div>
+                        <div class="disease-genes">Loci: HLA-DQB1, HLA-DRB1, INS, PTPN22</div>
+                        <div class="disease-desc">Major Histocompatibility Complex (MHC) antigen presentation; breaking immune tolerance; viral triggers (enterovirus); beta-cell loss.</div>
+                    </div>
+                    <span class="disease-category-tag">Autoimmune &bull; HLA</span>
+                </div>
+
+                <!-- Card 11 -->
+                <div class="disease-card" data-category="structural">
+                    <div>
+                        <div class="disease-card-title">22q11.2 Deletion (DiGeorge)</div>
+                        <div class="disease-genes">Locus: 22q11.2 (TBX1, COMT)</div>
+                        <div class="disease-desc">3 Mb microdeletion mediated by LCR22 segmental duplications; variable expressivity (congenital heart defects, immunodeficiency).</div>
+                    </div>
+                    <span class="disease-category-tag">Structural &bull; NAHR</span>
+                </div>
+
+                <!-- Card 12 -->
+                <div class="disease-card" data-category="infectious">
+                    <div>
+                        <div class="disease-card-title">Severe COVID-19 / Host Susceptibility</div>
+                        <div class="disease-genes">Genes: OAS1, TYK2, LZTFL1 (3p21.31)</div>
+                        <div class="disease-desc">Neanderthal-derived 3p21.31 risk haplotype; interferon signaling deficiencies; lung epithelial single-cell transcriptomics.</div>
+                    </div>
+                    <span class="disease-category-tag">Infectious &bull; Host Gen</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. The 8 Multi-Omic Tiers -->
+        <section>
+            <h2>4. The 8 Multi-Omic Tiers of Characterization</h2>
+            <p>Your paper must address each of the following 8 tiers in distinct, clearly titled narrative sections:</p>
+
+            <div class="tier-card" style="border-left-color: #9D2235;">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 1: Clinical Phenotype &amp; Diagnostic Scaffolding</span>
+                    <span class="tier-tag">Macro Perspective</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Define the condition clearly in adult, non-infantilizing language. Describe affected physiological systems, primary diagnostic criteria in current clinics, prevalence, inheritance mode, and the primary unmet clinical need.
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: var(--bauhaus-blue);">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 2: Monogenic Architecture &amp; DNA Sequence Alterations</span>
+                    <span class="tier-tag">Genomics (SNVs/Indels)</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Identify primary causal or susceptibility genes (HGNC symbol, Ensembl ID). Detail specific molecular variant classes. Report at least one authentic clinical variant from <strong>ClinVar</strong> with exact HGVS coordinates (<code>c.</code> and <code>p.</code>), Variation ID (<code>VCV...</code>), and <strong>GRCh38</strong> coordinates. Explain its biochemical effect on the protein.
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: var(--bauhaus-emerald);">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 3: Cytogenetic &amp; Structural Genomic Variants</span>
+                    <span class="tier-tag">Structural / CNVs</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Examine chromosomal rearrangements, copy number variants (CNVs), or segmental duplications (e.g. NAHR mechanisms). Compare clinical detection modalities (Karyotype vs. FISH vs. CMA vs. NGS discordant read mapping). <em>(If purely monogenic SNV, explain structural modifier loci or why structural assays return negative results).</em>
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: var(--bauhaus-amber);">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 4: Statistical Genomics, GWAS &amp; Polygenic Architecture</span>
+                    <span class="tier-tag">GWAS &bull; PRS &bull; Equity</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Identify top genome-wide significant associations ($p < 5 \times 10^{-8}$) from the <strong>GWAS Catalog</strong> (rsID, risk allele, Odds Ratio/Beta, $p$-value). Look up PRS metrics in the <strong>PGS Catalog</strong>. Conduct a mandatory <strong>Multi-Ancestry Equity Audit</strong>: evaluate the ancestry breakdown of the discovery cohort and explain the <em>multi-ancestry portability trap</em> when applied to diverse cohorts like Temple Health.
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: var(--bauhaus-purple);">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 5: The Regulatory Genome: Epigenomics &amp; 3D Chromatin</span>
+                    <span class="tier-tag">Epigenome &bull; TADs</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Describe chromatin conformation at the locus. Identify ENCODE histone marks (H3K27ac active enhancers, H3K4me3 promoters) harboring non-coding risk variants. Discuss Topologically Associating Domains (TADs), CTCF insulation boundaries, or DNA methylation (5mC/imprinting/epigenetic clocks).
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: #0284C7;">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 6: Functional Transcriptomics &amp; Tissue Regulation (GTEx)</span>
+                    <span class="tier-tag">GTEx &bull; eQTLs &bull; scRNA</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Report tissue-specific expression from the <strong>GTEx Portal</strong> in Transcripts Per Million (TPM). Evaluate whether the disease-associated variant acts as a <em>cis</em>-eQTL in the relevant target tissue (report exact Normalized Effect Size [NES] and $p$-value). Summarize single-cell RNA-seq (scRNA-seq) findings regarding cell-type specificity.
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: #059669;">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 7: Metagenomics &amp; Microbial / Environmental Influences</span>
+                    <span class="tier-tag">Microbiome &bull; Environment</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Detail host-microbiome interactions, gut dysbiosis, bacterial metabolites (short-chain fatty acids [SCFAs], TMAO, bile acids), or viral/environmental triggers that modulate disease penetrance. <em>(If non-microbiome, analyze host gene-by-environment risk interactions).</em>
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: #DC2626;">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 8: Precision Therapeutic Countermeasures &amp; Translation</span>
+                    <span class="tier-tag">Targeted Rx &bull; Clinical Trials</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Contrast conventional therapies with modern molecular countermeasures: targeted small molecules, splice-switching antisense oligonucleotides (ASOs), gene replacement, or CRISPR-Cas9 genome editing (*Casgevy* model). Benchmark an active clinical trial from <strong>ClinicalTrials.gov</strong> (NCT number, phase, endpoint).
+                </p>
+            </div>
+        </section>
+
+        <!-- 5. Anti-Hallucination Mandatory Figures -->
+        <section>
+            <h2>5. Anti-Hallucination Guardrails: Mandatory Database Figures</h2>
+            <p>
+                To eliminate zero-shot prompt-and-dump submissions, your document <strong>must embed exactly three (3) custom-captured figures</strong> directly from live public genomic databases with student annotations:
+            </p>
+
+            <div class="db-grid">
+                <a href="https://genome.ucsc.edu/cgi-bin/hgGateway" target="_blank" rel="noopener noreferrer" class="db-btn">
+                    <span class="db-icon">🧬</span>
+                    UCSC Genome Browser
+                </a>
+                <a href="https://gtexportal.org/" target="_blank" rel="noopener noreferrer" class="db-btn">
+                    <span class="db-icon">📊</span>
+                    GTEx Portal
+                </a>
+                <a href="https://www.ebi.ac.uk/gwas/" target="_blank" rel="noopener noreferrer" class="db-btn">
+                    <span class="db-icon">📈</span>
+                    GWAS Catalog
+                </a>
+                <a href="https://www.pgscatalog.org/" target="_blank" rel="noopener noreferrer" class="db-btn">
+                    <span class="db-icon">🎯</span>
+                    PGS Catalog
+                </a>
+                <a href="https://www.ncbi.nlm.nih.gov/clinvar/" target="_blank" rel="noopener noreferrer" class="db-btn">
+                    <span class="db-icon">🩺</span>
+                    NCBI ClinVar
+                </a>
+                <a href="https://clinicaltrials.gov/" target="_blank" rel="noopener noreferrer" class="db-btn">
+                    <span class="db-icon">🏥</span>
+                    ClinicalTrials.gov
+                </a>
+            </div>
+
+            <div class="callout callout-amber">
+                <div class="callout-title">📸 Mandatory Figure Specifications</div>
+                <ul style="margin-left: 18px; margin-bottom: 0;">
+                    <li><strong>Figure 1 (UCSC/Ensembl):</strong> Chromosome band, RefSeq/GENCODE gene model (exons/introns), and &ge;1 ENCODE regulatory track (H3K27ac / DNase / CTCF). <strong>Must include student callout arrow</strong> pointing to the pathogenic exon or promoter.</li>
+                    <li><strong>Figure 2 (GTEx):</strong> Multi-tissue TPM expression violin plot OR <em>cis</em>-eQTL plot in affected tissue. Caption must state exact median TPM, NES, $p$-value, and sample size $N$.</li>
+                    <li><strong>Figure 3 (GWAS Catalog / PGS Catalog):</strong> Association plot/table for lead SNP + <strong>Ancestry Diversity Breakdown</strong>. Must annotate the non-European representation percentage and critique multi-ancestry portability.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 6. Required Data Tables -->
+        <section>
+            <h2>6. Required Data Synthesis Tables</h2>
+
+            <h3>Table 1: Multi-Omic Synthesis &amp; Genomic Coordinates Matrix</h3>
+            <p>Mandatory for all submissions. Place immediately after the narrative text:</p>
+            <button class="copy-btn" onclick="copyTable1()">📋 Copy Table 1 Markdown Template</button>
+
+            <pre id="table1Code">| Multi-Omic Tier | Focal Element / Molecule | Database Identifier / Accession | Exact Genomic Coordinates (GRCh38) | Quantitative Parameter / Clinical Metric | Primary Reference (PMID / DOI) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Tier 1: Clinical Anchor** | Hallmark Diagnostic Biomarker | e.g. ICD-10 / OMIM # | N/A | Prevalence: e.g. 1 in 3,500 live births | PMID: 12345678 |
+| **Tier 2: Monogenic DNA** | Primary Pathogenic Variant | ClinVar VCV000012345.1; dbSNP rs1234567 | chrN:start-end | HGVS: c.1521_1523delCTT (p.Phe508del) | PMID: 2475911 |
+| **Tier 3: Structural SV** | Microdeletion / CNV / NAHR | Decipher / ClinVar CNV ID | chrN:start-end | 1.4 Mb Duplication; Copy Number = 3 | PMID: 1845112 |
+| **Tier 4: Polygenic GWAS** | Top Lead Susceptibility SNP | GWAS Catalog GCST001234; rs7654321 | chrN:start-end | OR = 1.28; p = 2.4 x 10^-14; Risk: [A] | PMID: 2836928 |
+| **Tier 5: Epigenome** | Active Enhancer / Histone Mark | ENCODE Candidate cis-RE: EH38E... | chrN:start-end | Strong H3K27ac signal; CTCF bound | PMID: 3272824 |
+| **Tier 6: Transcriptome** | Tissue Expression & cis-eQTL | GTEx v8 / ENSG00000001234 | Tissue Name | Median TPM = 42.6; eQTL NES = -0.34 | PMID: 3291309 |
+| **Tier 7: Metagenome** | Microbial Taxon / Metabolite | NCBI Taxonomy / Metagenome study | N/A (Microbial genome) | 3.2-fold depletion of F. prausnitzii | PMID: 2456789 |
+| **Tier 8: Targeted Rx** | Precision Therapeutic Agent | DrugBank / ClinicalTrials.gov NCT... | Target: e.g. CFTR / BCL11A | Phase 3 RCT: 14% improvement in FEV1 | PMID: 3166412 |</pre>
+
+            <h3>Table 2 (Track A Only): The Mandatory AI Audit &amp; Fact-Check Table</h3>
+            <p>Mandatory for Track A submissions. Place immediately after Table 1:</p>
+            <button class="copy-btn" onclick="copyTable2()">📋 Copy Table 2 Markdown Template</button>
+
+            <pre id="table2Code">| # | Exact Prompt Submitted to AI | Raw AI-Generated Text Snippet | The Biological Error / Hallucination | Primary Database / Paper Disproving AI | Student's Verified Correction |
+| :-: | :--- | :--- | :--- | :--- | :--- |
+| **1** | *"What are the exact GRCh38 coordinates for CFTR deltaF508?"* | *"DeltaF508 is at chr7:117,120,016 on build GRCh38."* | **Coordinate Hallucination:** Conflated hg19 with GRCh38 (>400 kb error). | ClinVar VCV000007105.16 confirms: **chr7:117,559,590-117,559,593**. | Corrected all narrative coordinates and Table 1 entries to GRCh38. |
+| **2** | *"Cite a 2023 GTEx eQTL paper for NOD2 in Crohn's disease."* | *"Smith et al. (2023) Nature Genetics 55:412-424 showed rs2066844 reduces NOD2 in ileum."* | **Citation Fabrication:** Fabricated paper & volume. rs2066844 is coding missense, not a GTEx eQTL. | GTEx Portal v8 shows rs2066844 non-significant (p=0.42). Authentic: Khor et al. (PMID: 21677750). | Replaced fabricated reference with authentic non-coding eQTL rs17221417. |</pre>
+        </section>
+
+        <!-- 7. Early-Bird Bonus Calculator -->
+        <section>
+            <h2>7. The Early-Bird Bonus Calculator</h2>
+            <p>
+                To encourage deliberate planning, deep literature verification, and healthy sleep schedules, you can earn <strong>+12 bonus points per day early</strong> by submitting prior to the October 29 deadline:
+            </p>
+
+            <div class="calc-box">
+                <label for="earlyDays" style="font-weight: 700; font-size: 0.95rem; color: var(--slate-900);">
+                    Select Planned Submission Date:
+                </label>
+                <input type="range" id="earlyDays" class="calc-slider" min="0" max="7" value="7" oninput="updateBonus()">
+                
+                <div class="calc-result">
+                    <div>
+                        <div style="font-weight: 800; font-size: 1.05rem; color: #064E3B;" id="dateLabel">
+                            Thursday, Oct 22 (7 Days Early)
+                        </div>
+                        <div style="font-size: 0.84rem; color: #047857;" id="bonusDesc">
+                            Maximum Early-Bird Advantage
+                        </div>
+                    </div>
+                    <div class="calc-score" id="pointsLabel">+84 Points</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Evaluation Rubrics -->
+        <section>
+            <h2>8. Comprehensive Evaluation Rubric (100 Points)</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th style="width: 75px; text-align: center;">Pts</th>
+                        <th>Track A Standard (Expert Peer Reviewer)</th>
+                        <th>Track B Standard (Traditional Undergrad)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Multi-Omic Integration (Tiers 1–8)</strong></td>
+                        <td style="text-align: center; font-weight: 800;">30</td>
+                        <td>All 8 tiers covered with rigorous mechanistic depth. Causal connections between tiers (e.g. eQTL explaining GWAS hit) explicitly modeled. Zero superficial filler.</td>
+                        <td>All 8 tiers clearly addressed with solid biological understanding. Accurate descriptions of molecular mechanisms.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Database Figures (Figs 1–3)</strong></td>
+                        <td style="text-align: center; font-weight: 800;">25</td>
+                        <td>Figures impeccably captured from UCSC, GTEx, and GWAS Catalog. Exact coordinates, TPM, NES, and $p$-values reported. Insightful Multi-Ancestry Equity analysis.</td>
+                        <td>Figures correctly captured and embedded with clear student labels. Captions accurately explain essential biological findings.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Table 1: Multi-Omic Matrix</strong></td>
+                        <td style="text-align: center; font-weight: 800;">15</td>
+                        <td>100% complete and audit-ready. Coordinates verified on GRCh38; ClinVar, dbSNP, Ensembl, and PGS identifiers completely accurate.</td>
+                        <td>Table 1 fully completed with accurate identifiers, coordinates, and metrics for all tiers.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. AI Audit (Track A) OR Human Depth (Track B)</strong></td>
+                        <td style="text-align: center; font-weight: 800;">15</td>
+                        <td><strong>Track A:</strong> Outstanding 1-page AI Audit Table documenting &ge;2 authentic AI errors/hallucinations with primary literature proof.<br><strong>Track B:</strong> Evaluated on originality of voice, personal synthesis, and nuanced clinical reasoning.</td>
+                        <td>Applied according to selected track declaration.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Scientific Rigor &amp; Citation Integrity</strong></td>
+                        <td style="text-align: center; font-weight: 800;">15</td>
+                        <td>100% of references verified in PubMed with authentic PMIDs/DOIs. High-level academic tone, active voice, and define-in-stride appositives.</td>
+                        <td>All citations authentic and verified in PubMed. Well-organized, clearly written, and grammatically sound.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Footer -->
+        <footer style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--slate-200); font-size: 0.85rem; color: var(--slate-600); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+            <div>
+                BIOL 3111 / 5111 &bull; Fall 2026 &bull; Temple University Department of Biology
+            </div>
+            <div>
+                Instructor: Sergei Pond &bull; TA: Violet Lange
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function filterDiseases(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const cards = document.querySelectorAll('.disease-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function searchDiseases() {
+            const query = document.getElementById('diseaseSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.disease-card');
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function copyTable1() {
+            const code = document.getElementById('table1Code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Table 1 Markdown Template copied to clipboard!');
+            });
+        }
+
+        function copyTable2() {
+            const code = document.getElementById('table2Code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Table 2 (AI Audit Table) Markdown Template copied to clipboard!');
+            });
+        }
+
+        const bonusSchedule = [
+            { date: "Thursday, Oct 29 (Official Due Date)", desc: "Standard submission deadline", pts: "+0 Points" },
+            { date: "Wednesday, Oct 28 (1 Day Early)", desc: "+12 Course Bonus Points", pts: "+12 Points" },
+            { date: "Tuesday, Oct 27 (2 Days Early)", desc: "+24 Course Bonus Points", pts: "+24 Points" },
+            { date: "Monday, Oct 26 (3 Days Early)", desc: "+36 Course Bonus Points", pts: "+36 Points" },
+            { date: "Sunday, Oct 25 (4 Days Early)", desc: "+48 Course Bonus Points", pts: "+48 Points" },
+            { date: "Saturday, Oct 24 (5 Days Early)", desc: "+60 Course Bonus Points", pts: "+60 Points" },
+            { date: "Friday, Oct 23 (6 Days Early)", desc: "+72 Course Bonus Points", pts: "+72 Points" },
+            { date: "Thursday, Oct 22 (7 Days Early)", desc: "Maximum Early-Bird Advantage (+84 Points)", pts: "+84 Points" }
+        ];
+
+        function updateBonus() {
+            const slider = document.getElementById('earlyDays');
+            const val = parseInt(slider.value);
+            const item = bonusSchedule[val];
+            document.getElementById('dateLabel').innerText = item.date;
+            document.getElementById('bonusDesc').innerText = item.desc;
+            document.getElementById('pointsLabel').innerText = item.pts;
+        }
+    </script>
+</body>
+</html>
