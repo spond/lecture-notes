@@ -1,9 +1,9 @@
 # BIOL 3111 / 5111: Genomics in Medicine & Disease (Fall 2026)
 ## Midterm Research Project: Multi-Omic Dissection of Human Disease
 
-* **Assignment Weight:** 20% of Final Course Grade
+* **Assignment Weight:** 200 Points (20% of 1,000 Total Course Points)
 * **Official Due Date:** Thursday, October 29, 2026 at 23:59 EST (Canvas Submission)
-* **Early-Bird Bonus Period:** Submit between October 22 and October 28 for **+12 bonus points per day early** (up to +84 points scaled into course engagement).
+* **Early-Bird Bonus Period:** Submit between October 22 and October 28 for up to **+40 bonus points** (maximum 20% bonus on the assignment, equivalent to two full letter grades).
 * **Target Length:**
   * **Undergraduate (BIOL 3111):** ~4–5 pages of core narrative text (approx. 1,800–2,500 words), plus Title Page, Figures, Table 1 (Multi-Omic Matrix), AI Audit Table (Track A only), and Primary Bibliography. Total document length is typically 7–9 pages.
   * **Honors / Graduate (BIOL 5111):** ~5–6 pages of core narrative text (approx. 2,500–3,000 words), incorporating deeper mechanistic modeling and a dedicated clinical trial / translation section.
@@ -27,7 +27,7 @@
    - [Table 2 (Track A Only): The Mandatory AI Audit & Fact-Check Table](#table-2-track-a-only-the-mandatory-ai-audit--fact-check-table)
 7. [Citation Protocol & Zero-Tolerance Hallucination Rule](#7-citation-protocol--zero-tolerance-hallucination-rule)
 8. [Document Organization & Page Budget](#8-document-organization--page-budget)
-9. [Comprehensive Evaluation Rubrics (100 Points)](#9-comprehensive-evaluation-rubrics-100-points)
+9. [Comprehensive Evaluation Rubrics (200 Points)](#9-comprehensive-evaluation-rubrics-200-points)
 
 ---
 
@@ -144,8 +144,8 @@ Your paper must address the following **8 Multi-Omic Tiers**. Organize your narr
 
 #### Tier 4: Statistical Genomics, GWAS & Polygenic Architecture
 * **Polygenic Component:** Is this disease purely Mendelian, or does it possess a complex, polygenic architecture driven by thousands of small-effect variants?
-* **GWAS Loci:** Identify at least one robust, genome-wide significant association ($p < 5 \times 10^{-8}$) from the **GWAS Catalog** or **Open Targets Genetics**. Report the lead SNP rsID, risk allele, effect size (Odds Ratio [OR] or Beta coefficient), and $p$-value.
-* **Polygenic Risk Scores (PRS):** Look up whether a PRS exists for this trait in the **PGS Catalog** (report the PGS ID, e.g., `PGS000012`). What percentage of phenotypic variance ($R^2$) or discrimination accuracy (AUC/C-index) does the score achieve?
+* **GWAS Loci:** Identify at least one robust, genome-wide significant association (*p* &lt; 5 × 10⁻⁸) from the **GWAS Catalog** or **Open Targets Genetics**. Report the lead SNP rsID, risk allele, effect size (Odds Ratio [OR] or Beta coefficient), and *p*-value.
+* **Polygenic Risk Scores (PRS):** Look up whether a PRS exists for this trait in the **PGS Catalog** (report the PGS ID, e.g., `PGS000012`). What percentage of phenotypic variance (*R*²) or discrimination accuracy (AUC/C-index) does the score achieve?
 * **Multi-Ancestry Equity Audit:** Examine the ancestry composition of the discovery GWAS cohort (e.g., % European vs. % African, Hispanic, or Asian). Critically evaluate the **multi-ancestry portability trap**: why does this PRS decay in predictive accuracy when applied to diverse cohorts (such as our urban patient population at Temple Health)?
 
 #### Tier 5: The Regulatory Genome: Epigenomics & 3D Chromatin
@@ -156,7 +156,7 @@ Your paper must address the following **8 Multi-Omic Tiers**. Organize your narr
 
 #### Tier 6: Functional Transcriptomics & Tissue-Specific Regulation (GTEx)
 * **Tissue Expression Profile:** Using data from the **GTEx Portal**, report the tissue-specific expression of the focal gene in Transcripts Per Million (TPM). Which organ systems show peak expression, and how does this correlate with patient symptoms?
-* **Expression Quantitative Trait Loci (cis-eQTLs):** Does the top GWAS risk SNP (or a variant in high linkage disequilibrium) function as a *cis*-eQTL in disease-relevant tissue? Report the exact GTEx Normalized Effect Size (NES), $p$-value, and tissue type.
+* **Expression Quantitative Trait Loci (cis-eQTLs):** Does the top GWAS risk SNP (or a variant in high linkage disequilibrium) function as a *cis*-eQTL in disease-relevant tissue? Report the exact GTEx Normalized Effect Size (NES), *p*-value, and tissue type.
 * **Single-Cell / Spatial Insights:** Briefly describe findings from single-cell RNA sequencing (scRNA-seq) or spatial transcriptomics in this disease. Which specific cell types (e.g., microglia, podocytes, cardiomyocytes, or endothelial subsets) drive the transcriptomic signature?
 
 #### Tier 7: Metagenomics & Microbial / Environmental Influences
@@ -215,7 +215,7 @@ Each figure must be embedded in your document with a clear title, high visual re
 * **Option A (Tissue Expression):** Search your focal gene. Capture the multi-tissue RNA-seq expression violin plot showing median Transcripts Per Million (TPM) across all surveyed human tissues.
 * **Option B (cis-eQTL Association):** Search your focal gene or top GWAS SNP. Capture the *cis*-eQTL violin plot demonstrating how the disease-associated genotype influences gene expression in the clinically affected tissue.
 * **Student Annotation:** Highlight the clinically relevant target tissue (e.g., Brain Cortex, Liver, Whole Blood, or Terminal Ileum).
-* **Caption Requirement:** Report the exact median TPM (or Normalized Effect Size [NES]), nominal $p$-value, sample size ($N$), and explain why this tissue-specific pattern matches or fails to match patient pathology.
+* **Caption Requirement:** Report the exact median TPM (or Normalized Effect Size [NES]), nominal *p*-value, sample size (*N*), and explain why this tissue-specific pattern matches or fails to match patient pathology.
 
 ---
 
@@ -223,10 +223,10 @@ Each figure must be embedded in your document with a clear title, high visual re
 * **Source:** [GWAS Catalog](https://www.ebi.ac.uk/gwas/) or [PGS Catalog](https://www.pgscatalog.org/) or [Open Targets Genetics](https://genetics.opentargets.org/).
 * **Content:** Look up your selected disease or trait.
 * **Required Elements:**
-  1. Top association view: table or regional plot showing the lead associated variant (`rsID`), risk allele, and $p$-value.
+  1. Top association view: table or regional plot showing the lead associated variant (`rsID`), risk allele, and *p*-value.
   2. **The Ancestry Diversity Breakdown:** Capture the study details panel showing the sample size and ancestral composition of the discovery and replication cohorts (e.g., European, East Asian, African, Hispanic/Latino).
 * **Student Annotation:** Add a callout box highlighting the percentage of non-European individuals included in the discovery study.
-* **Caption Requirement:** State the total cohort size ($N_{cases}$ and $N_{controls}$), identify the lead variant, and explicitly interpret the multi-ancestry representation gap, explaining the potential risks of algorithmic bias if this genetic architecture is applied to diverse clinical populations.
+* **Caption Requirement:** State the total cohort size (*N*<sub>cases</sub> and *N*<sub>controls</sub>), identify the lead variant, and explicitly interpret the multi-ancestry representation gap, explaining the potential risks of algorithmic bias if this genetic architecture is applied to diverse clinical populations.
 
 ---
 
@@ -258,7 +258,7 @@ Document at least **two (2) specific instances** where your generative AI tool (
 | # | Exact Prompt Submitted to AI | Raw AI-Generated Text Snippet | The Biological Error / Hallucination | Primary Database / Paper Disproving AI | Student's Verified Correction |
 | :-: | :--- | :--- | :--- | :--- | :--- |
 | **1** | *"What are the exact GRCh38 coordinates for the CFTR deltaF508 mutation?"* | *"The DeltaF508 mutation is located at chr7:117,120,016 on human genome build GRCh38."* | **Coordinate Hallucination:** The AI gave incorrect coordinates by >400 kilobases. It conflated older hg19 coordinates with GRCh38. | ClinVar Variation ID 7105 (VCV000007105.16) and Ensembl GRCh38.p14 confirm coordinate: **chr7:117,559,590-117,559,593**. | Corrected all genomic coordinate references in Section 2 and Table 1 to `chr7:117,559,590-117,559,593`. |
-| **2** | *"Cite a 2023 paper on GTEx eQTLs for NOD2 in Crohn's disease."* | *"Smith et al. (2023) Nature Genetics 55:412-424 showed rs2066844 reduces NOD2 expression in ileum."* | **Citation Fabrication:** Neither Smith et al. (2023) nor that volume/page exists in Nature Genetics. rs2066844 is a coding missense SNP (R702W), not an established ileal eQTL in GTEx. | GTEx Portal v8 search for rs2066844 in Small Intestine (Terminal Ileum) shows no significant *cis*-eQTL ($p = 0.42$). Authentic paper: Khor et al. (Nature 2011, PMID: 21677750). | Removed fake citation; re-anchored Section 6 around authentic non-coding eQTL rs17221417 in ileal mucosal tissue. |
+| **2** | *"Cite a 2023 paper on GTEx eQTLs for NOD2 in Crohn's disease."* | *"Smith et al. (2023) Nature Genetics 55:412-424 showed rs2066844 reduces NOD2 expression in ileum."* | **Citation Fabrication:** Neither Smith et al. (2023) nor that volume/page exists in Nature Genetics. rs2066844 is a coding missense SNP (R702W), not an established ileal eQTL in GTEx. | GTEx Portal v8 search for rs2066844 in Small Intestine (Terminal Ileum) shows no significant *cis*-eQTL (*p* = 0.42). Authentic paper: Khor et al. (Nature 2011, PMID: 21677750). | Removed fake citation; re-anchored Section 6 around authentic non-coding eQTL rs17221417 in ileal mucosal tissue. |
 
 ---
 
@@ -295,34 +295,34 @@ Format your submission as a single PDF document complying with the following sta
 
 ---
 
-## 9. Comprehensive Evaluation Rubrics (100 Points)
+## 9. Comprehensive Evaluation Rubrics (200 Points)
 
-Your submission will be evaluated using a detailed 100-point rubric. Note the distinct evaluative emphasis between Track A and Track B:
+Your submission will be evaluated using a detailed 200-point rubric. Note the distinct evaluative emphasis between Track A and Track B:
 
 | Category | Points | Track A Criteria (Expert Reviewer Standard) | Track B Criteria (Traditional Undergrad Standard) |
 | :--- | :---: | :--- | :--- |
-| **1. Multi-Omic Breadth & Integration (Tiers 1–8)** | **30 pts** | All 8 tiers evaluated with extraordinary mechanistic depth. Biological connections between tiers (e.g., how an eQTL in Tier 6 mechanistically explains a GWAS hit in Tier 4) are explicitly traced. Zero superficial filler. | All 8 tiers addressed clearly with solid conceptual understanding. Accurate descriptions of molecular mechanisms without major gaps. |
-| **2. Data Artifacts & Database Figures (Figs 1–3)** | **25 pts** | Figures 1, 2, and 3 are impeccably captured from UCSC, GTEx, and GWAS Catalog. Student annotations are precise. Captions report exact coordinates, TPM, NES, $p$-values, and an insightful Multi-Ancestry Equity critique. | Figures 1, 2, and 3 are correctly captured from required databases and embedded with clear labels. Captions explain the essential biological findings accurately. |
-| **3. Table 1: Multi-Omic Synthesis Matrix** | **15 pts** | 100% complete and verified. Coordinates match GRCh38; ClinVar, dbSNP, Ensembl, and PGS identifiers are completely accurate and audit-ready. | Table 1 is fully completed with accurate identifiers, coordinates, and metrics for all tiers. |
-| **4. AI Audit Table (Track A) OR Human Depth (Track B)** | **15 pts** | **Track A:** Includes an exceptional 1-page AI Audit Table detailing $\ge 2$ authentic AI errors/hallucinations with primary literature refutations and student corrections.<br>**Track B:** Evaluated on originality of voice, personal synthesis, and nuanced interpretation of complex clinical trade-offs. | Same standard applied to the respective track declaration. |
-| **5. Scientific Rigor, Clarity & Citation Integrity** | **15 pts** | Zero-tolerance citation audit: 100% of references verified in PubMed with authentic PMIDs/DOIs. High-level academic tone, active voice, right-branching syntax, and define-in-stride appositives. | All citations are authentic and verified in PubMed with PMIDs/DOIs. Well-written, clearly organized, and grammatically sound. |
-| **Total** | **100 pts** | | |
+| **1. Multi-Omic Breadth & Integration (Tiers 1–8)** | **60 pts** | All 8 tiers evaluated with extraordinary mechanistic depth. Biological connections between tiers (e.g., how an eQTL in Tier 6 mechanistically explains a GWAS hit in Tier 4) are explicitly traced. Zero superficial filler. | All 8 tiers addressed clearly with solid conceptual understanding. Accurate descriptions of molecular mechanisms without major gaps. |
+| **2. Data Artifacts & Database Figures (Figs 1–3)** | **50 pts** | Figures 1, 2, and 3 are impeccably captured from UCSC, GTEx, and GWAS Catalog. Student annotations are precise. Captions report exact coordinates, TPM, NES, *p*-values, and an insightful Multi-Ancestry Equity critique. | Figures 1, 2, and 3 are correctly captured from required databases and embedded with clear labels. Captions explain the essential biological findings accurately. |
+| **3. Table 1: Multi-Omic Synthesis Matrix** | **30 pts** | 100% complete and verified. Coordinates match GRCh38; ClinVar, dbSNP, Ensembl, and PGS identifiers are completely accurate and audit-ready. | Table 1 is fully completed with accurate identifiers, coordinates, and metrics for all tiers. |
+| **4. AI Audit Table (Track A) OR Human Depth (Track B)** | **30 pts** | **Track A:** Includes an exceptional 1-page AI Audit Table detailing ≥ 2 authentic AI errors/hallucinations with primary literature refutations and student corrections.<br>**Track B:** Evaluated on originality of voice, personal synthesis, and nuanced interpretation of complex clinical trade-offs. | Same standard applied to the respective track declaration. |
+| **5. Scientific Rigor, Clarity & Citation Integrity** | **30 pts** | Zero-tolerance citation audit: 100% of references verified in PubMed with authentic PMIDs/DOIs. High-level academic tone, active voice, right-branching syntax, and define-in-stride appositives. | All citations are authentic and verified in PubMed with PMIDs/DOIs. Well-written, clearly organized, and grammatically sound. |
+| **Total** | **200 pts** | | |
 
 ---
 
 ### Critical Deadlines & Early-Bird Bonus Schedule
 
 * **Official Deadline:** **Thursday, October 29, 2026 at 23:59 EST** via Canvas.
-* **Early-Bird Bonus Schedule:**
-  * Submit on or before **Oct 22 (+7 days):** **+84 Course Points**
-  * Submit on **Oct 23 (+6 days):** **+72 Course Points**
-  * Submit on **Oct 24 (+5 days):** **+60 Course Points**
-  * Submit on **Oct 25 (+4 days):** **+48 Course Points**
-  * Submit on **Oct 26 (+3 days):** **+36 Course Points**
-  * Submit on **Oct 27 (+2 days):** **+24 Course Points**
-  * Submit on **Oct 28 (+1 day):** **+12 Course Points**
+* **Early-Bird Bonus Schedule (Capped at 20% / 2 Letter Grades):**
+  * Submit on or before **Oct 22 (+7 days):** **+40 Course Points** (Maximum 20% bonus / 2 full letter grades)
+  * Submit on **Oct 23 (+6 days):** **+34 Course Points**
+  * Submit on **Oct 24 (+5 days):** **+28 Course Points**
+  * Submit on **Oct 25 (+4 days):** **+22 Course Points**
+  * Submit on **Oct 26 (+3 days):** **+16 Course Points**
+  * Submit on **Oct 27 (+2 days):** **+10 Course Points**
+  * Submit on **Oct 28 (+1 day):** **+5 Course Points**
   * Submit on **Oct 29 (Due Date):** Standard grading.
-* **Late Penalty:** Submissions after October 29 lose **10 points per day late**. No assignments accepted after November 3 without prior documented university medical excuse.
+* **Late Penalty:** Submissions after October 29 lose **10 points per day late** (5% deduction per day). No assignments accepted after November 3 without prior documented university medical excuse.
 
 ---
 
