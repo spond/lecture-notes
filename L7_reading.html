@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 7 Study Monograph: Viral Genomics, Evolutionary Forecasting &amp; Influenza Vaccine Selection | BIOL 3111/5111</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- MathJax for Accessible Mathematical Rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --temple-cherry: #9D2235;
+            --temple-cherry-dark: #781827;
+            --slate-900: #0F172A;
+            --slate-800: #1E293B;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-300: #CBD5E1;
+            --slate-200: #E2E8F0;
+            --slate-100: #F1F5F9;
+            --slate-50: #F8FAFC;
+            --text-main: #1E293B;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Merriweather', Georgia, serif;
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            background-color: var(--slate-50);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .monograph-container {
+            max-width: 880px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 48px 56px;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+            border-left: 1px solid var(--slate-200);
+            border-right: 1px solid var(--slate-200);
+            min-height: 100vh;
+        }
+
+        header {
+            border-bottom: 2px solid var(--slate-200);
+            padding-bottom: 24px;
+            margin-bottom: 36px;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--temple-cherry);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 2.15rem;
+            font-weight: 900;
+            color: var(--slate-900);
+            line-height: 1.25;
+            letter-spacing: -0.025em;
+            margin-bottom: 12px;
+        }
+
+        .monograph-subtitle {
+            font-size: 1.08rem;
+            color: var(--slate-600);
+            font-weight: 400;
+            margin-bottom: 18px;
+            line-height: 1.55;
+        }
+
+        .author-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 28px;
+            font-size: 0.88rem;
+            color: var(--slate-600);
+            background: var(--slate-50);
+            padding: 12px 18px;
+            border-radius: 6px;
+            border: 1px solid var(--slate-200);
+            margin-bottom: 16px;
+        }
+
+        .citation-box {
+            background: #FFF5F5;
+            border: 1.5px solid #FED7D7;
+            border-left: 5px solid var(--temple-cherry);
+            border-radius: 4px;
+            padding: 16px 20px;
+            font-size: 0.90rem;
+            line-height: 1.55;
+            color: #742A2A;
+            margin: 20px 0 32px 0;
+        }
+        .citation-box a {
+            color: var(--temple-cherry);
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        h2 {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-top: 42px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1.5px solid var(--slate-200);
+            letter-spacing: -0.015em;
+        }
+
+        h3 {
+            font-size: 1.16rem;
+            font-weight: 700;
+            color: var(--slate-800);
+            margin-top: 26px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 1.01rem;
+            color: var(--slate-700);
+            margin-bottom: 16px;
+            line-height: 1.68;
+        }
+
+        strong {
+            color: var(--slate-900);
+        }
+
+        .key-concept-box {
+            background: #F8FAFC;
+            border: 1.5px solid #CBD5E1;
+            border-left: 5px solid #0284C7;
+            border-radius: 4px;
+            padding: 18px 22px;
+            margin: 24px 0;
+        }
+        .key-concept-box h4 {
+            font-size: 1.02rem;
+            font-weight: 800;
+            color: #0369A1;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-family: var(--font-mono);
+        }
+
+        .math-card {
+            background: #F8FAFC;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+        .math-card .formula {
+            font-size: 1.25rem;
+            margin: 12px 0;
+            color: var(--slate-900);
+        }
+
+        .figure-card {
+            background: #FFFFFF;
+            border: 1.5px solid var(--slate-300);
+            border-radius: 6px;
+            padding: 20px;
+            margin: 28px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            text-align: center;
+        }
+        .figure-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid var(--slate-200);
+            margin-bottom: 14px;
+        }
+        .figure-caption {
+            font-size: 0.88rem;
+            color: var(--slate-600);
+            text-align: left;
+            line-height: 1.55;
+            border-top: 1px solid var(--slate-200);
+            padding-top: 10px;
+        }
+        .figure-caption strong {
+            color: var(--slate-900);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            margin: 20px 0;
+        }
+        .data-table th, .data-table td {
+            padding: 10px 14px;
+            border: 1px solid var(--slate-200);
+            text-align: left;
+        }
+        .data-table th {
+            background: #F1F5F9;
+            color: var(--slate-800);
+            font-weight: 700;
+        }
+        .data-table tr:nth-child(even) {
+            background: #F8FAFC;
+        }
+
+        .quiz-callout-card {
+            background: #FFFBEB;
+            border: 2px solid #FCD34D;
+            border-left: 6px solid #D97706;
+            border-radius: 6px;
+            padding: 24px 28px;
+            margin: 36px 0;
+        }
+        .quiz-callout-card h3 {
+            color: #92400E;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--temple-cherry);
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.15s ease;
+            margin-top: 12px;
+        }
+        .btn-download:hover {
+            background: var(--temple-cherry-dark);
+        }
+
+        footer {
+            margin-top: 56px;
+            padding-top: 24px;
+            border-top: 1.5px solid var(--slate-200);
+            font-size: 0.85rem;
+            color: var(--slate-600);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="monograph-container">
+        <header>
+            <div class="course-meta">
+                <span>BIOL 3111 / 5111: Genomics in Medicine</span>
+                <span>Fall 2026 &bull; Week 7 Reading Guide</span>
+            </div>
+            <h1>Viral Genomics, Evolutionary Forecasting &amp; Influenza Vaccine Selection</h1>
+            <div class="monograph-subtitle">
+                Deconstructing how population genetics, hemagglutinin fitness landscapes, and epitope mutation metrics solve the World Health Organization's nine-month vaccine manufacturing dilemma.
+            </div>
+            <div class="author-card">
+                <div><strong>Instructor:</strong> Prof. Sergei Pond</div>
+                <div><strong>Department:</strong> Biology, Temple University</div>
+                <div><strong>Pre-Class Canvas Quiz:</strong> Thursday, Oct 8, 2026 (00:00 &ndash; 20:00 EDT)</div>
+            </div>
+        </header>
+
+        <section class="citation-box">
+            <strong>Required Primary Literature for this Reading Assignment:</strong>
+            <div style="margin-top: 8px;">
+                <strong>Łuksza, M., &amp; Lässig, M. (2014):</strong> <em>"A predictive fitness model for influenza."</em> <strong>Nature</strong>, 507(7490), 57&ndash;61. DOI: <a href="https://doi.org/10.1038/nature13087" target="_blank" rel="noopener noreferrer">10.1038/nature13087</a> | PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/24572367/" target="_blank" rel="noopener noreferrer">24572367</a>.
+            </div>
+        </section>
+
+        <!-- 1. Executive Summary -->
+        <section>
+            <h2>1. Executive Summary: The Nine-Month Vaccine Lag &amp; The Selection Dilemma</h2>
+            <p>
+                Every February, an expert advisory panel convenes at the <strong>World Health Organization (WHO)</strong> headquarters in Geneva, Switzerland. Their assignment is urgent and high-stakes: select the specific viral strains to include in the upcoming Northern Hemisphere seasonal influenza vaccine.
+            </p>
+            <p>
+                This meeting occurs nine months before the winter flu season begins in November. Why does public health operate under such an extreme time lag? Traditional influenza vaccines are manufactured inside <strong>embryonated chicken eggs</strong> or bioreactor culture systems. Growing hundreds of millions of vaccine doses, purifying viral antigens, conducting sterility assays, packaging vials, and distributing shipments to pharmacies across North America takes between six and nine months.
+            </p>
+            <p>
+                <strong>The Evolutionary Dilemma:</strong> Influenza A (H3N2) is an RNA virus with a high mutation rate. During those nine manufacturing months, circulating viral populations do not stand still. They accumulate mutations, explore genetic space, and undergo relentless immune selection from host antibodies.
+            </p>
+
+            <div class="key-concept-box">
+                <h4>The Fundamental Epidemiological Trap: Frequency vs. Fitness</h4>
+                <p style="margin-bottom: 8px;">
+                    Historically, vaccine committees relied primarily on <strong>observed viral frequency</strong>—selecting whichever clade was most common in global surveillance samples during January and February.
+                </p>
+                <p style="margin-bottom: 0;">
+                    This strategy repeatedly failed. A viral strain that is abundant in February is often near the end of its evolutionary lifespan. Because human herd immunity has already adapted to it, its reproductive number drops. Meanwhile, a rare, newly emerging variant carrying novel escape mutations can expand from 2% frequency in February to 90% dominance by November. When the vaccine strain mismatches the circulating virus, vaccine effectiveness drops from ~60% to near zero, causing tens of thousands of excess hospitalizations.
+                </p>
+            </div>
+
+            <p>
+                In 2014, computational biophysicists <strong>Marta Łuksza and Michael Lässig</strong> published a breakthrough framework in <em>Nature</em> demonstrating that public health does not have to guess blindly. By modeling the <strong>opposing evolutionary forces of adaptive immune escape and biophysical protein stability</strong>, they built a mathematical fitness model that forecasts which influenza clade will dominate up to one full year into the future.
+            </p>
+        </section>
+
+        <!-- 2. Hemagglutinin Biology -->
+        <section>
+            <h2>2. Hemagglutinin Architecture: Antigenic Epitopes vs. The Structural Core</h2>
+            <p>
+                To understand why viruses evolve in predictable ways, we must examine the biophysical anatomy of the primary viral surface protein: <strong>Hemagglutinin (HA)</strong>.
+            </p>
+            <p>
+                Hemagglutinin is a trimeric glycoprotein embedded in the viral lipid membrane. It serves two biological functions:
+            </p>
+            <ol style="margin-left: 24px; margin-bottom: 16px; line-height: 1.65;">
+                <li><strong>Receptor Binding:</strong> The globular head of HA binds to terminal <strong>sialic acid</strong> sugars on human respiratory epithelial cells, triggering receptor-mediated endocytosis.</li>
+                <li><strong>Membrane Fusion:</strong> Once inside the acidic endosome, HA undergoes an irreversible, spring-loaded conformational refolding that fuses the viral and endosomal membranes, releasing viral RNA into the host cytoplasm.</li>
+            </ol>
+            <p>
+                Because hemagglutinin is prominently displayed on the exterior of the virion, it is the primary target of <strong>neutralizing antibodies</strong> produced by the human immune system.
+            </p>
+
+            <h3>The Structural Partition: Epitope Loops vs. The Functional Core</h3>
+            <p>
+                Łuksza and Lässig partitioned the 329 amino acids of the HA1 subunit into two distinct functional categories:
+            </p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Structural Domain</th>
+                        <th style="width: 35%;">Anatomical Location</th>
+                        <th style="width: 40%;">Evolutionary Selection Regime</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Epitope Sites ($N_b$)</strong><br><em>~130 Residues</em></td>
+                        <td>Surface-exposed loops on the globular head domain (designated epitopes <strong>A, B, C, D, and E</strong>) surrounding the receptor-binding cleft.</td>
+                        <td><strong>Positive Darwinian Selection:</strong> Amino acid substitutions here alter surface charge and topography, preventing previously formed host antibodies from binding. Each epitope mutation provides an <em>antigenic novelty bonus</em>.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Non-Epitope Sites ($N_d$)</strong><br><em>~199 Residues</em></td>
+                        <td>The internal structural core of the head domain and the entire stem (HA2) fusion machinery.</td>
+                        <td><strong>Purifying (Negative) Selection:</strong> Mutations in these conserved structural positions destabilize the trimer, disrupt the fusion mechanism, or impair folding. Most mutations here incur a <em>deleterious fitness penalty</em>.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 3. The Predictive Fitness Model -->
+        <section>
+            <h2>3. The Łuksza-Lässig Predictive Fitness Equation</h2>
+            <p>
+                Łuksza and Lässig formalized this biological trade-off into a quantitative fitness function. They modeled the <strong>Wrightian fitness</strong> $f(c)$ of any circulating viral clade $c$ as an additive combination of positive and negative selective forces:
+            </p>
+
+            <div class="math-card">
+                <div style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--slate-600); text-transform: uppercase; letter-spacing: 0.05em;">
+                    The Łuksza-Lässig Fitness Function
+                </div>
+                <div class="formula">
+                    $$f(c) = f_0 + c_b \cdot \Delta N_b(c) - c_d \cdot \Delta N_d(c)$$
+                </div>
+                <div style="font-size: 0.90rem; color: var(--slate-600); max-width: 680px; margin: 0 auto; text-align: left; line-height: 1.55;">
+                    Where:
+                    <ul style="margin-left: 20px; margin-top: 6px;">
+                        <li><strong>$f(c)$:</strong> The net reproductive fitness of clade $c$ relative to the mean population.</li>
+                        <li><strong>$\Delta N_b(c)$:</strong> The number of novel amino acid substitutions in <strong>epitope sites</strong> accumulated along the ancestral branch leading to clade $c$.</li>
+                        <li><strong>$\Delta N_d(c)$:</strong> The number of amino acid substitutions in <strong>non-epitope sites</strong> accumulated by clade $c$.</li>
+                        <li><strong>$c_b > 0$:</strong> The selective benefit coefficient per epitope mutation (rewarding antigenic escape).</li>
+                        <li><strong>$c_d > 0$:</strong> The selective cost coefficient per non-epitope mutation (penalizing biophysical instability).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>From Clade Fitness to Population Frequency Projection</h3>
+            <p>
+                In population genetics, a strain's frequency in the next generation depends on its current abundance and its reproductive growth rate. Using standard Fisher-Wright selection dynamics, the predicted frequency $\hat{X}_c(t + \Delta t)$ of clade $c$ one year into the future ($\Delta t = 1 \text{ year}$) is given by:
+            </p>
+
+            <div class="math-card">
+                <div class="formula">
+                    $$\hat{X}_c(t + \Delta t) = \frac{X_c(t) \cdot \exp\big[f(c) \cdot \Delta t\big]}{\sum_{c'} X_{c'}(t) \cdot \exp\big[f(c') \cdot \Delta t\big]}$$
+                </div>
+                <div style="font-size: 0.90rem; color: var(--slate-600);">
+                    $X_c(t)$ is the observed frequency of clade $c$ in the current season, and the denominator normalizes total frequencies across all circulating clades to 1.0.
+                </div>
+            </div>
+
+            <p>
+                <strong>The Decisive Insight:</strong> A lineage with low initial frequency ($X_c(t) = 0.05$) but high net fitness ($f(c) \gg 0$, driven by multiple epitope mutations and zero deleterious mutations) will out-reproduce competitors and surge in frequency. Conversely, a clade that currently dominates ($X_c(t) = 0.60$) but carries an unfavorable mutational load ($f(c) < 0$) is destined to collapse.
+            </p>
+        </section>
+
+        <!-- 4. Deconstructing Figure 1 -->
+        <section>
+            <h2>4. Deconstructing Figure 1: The Anatomy of a Clade Sweep</h2>
+            <p>
+                To illustrate how positive and purifying selection sculpt the influenza phylogenetic tree over a single 12-month period, Łuksza and Lässig tracked the global evolution of H3N2 between <strong>Winter 2001&ndash;02 and Winter 2002&ndash;03</strong>:
+            </p>
+
+            <div class="figure-card">
+                <img src="images/luksza_fig1_clade_evolution.jpg" alt="Figure 1: Evolution of influenza clades from Luksza and Lassig 2014" style="max-height: 520px;">
+                <div class="figure-caption">
+                    <strong>Figure 1 (Łuksza &amp; Lässig, Nature 2014): Evolution of Influenza Clades Across One Calendar Year.</strong> 
+                    Phylogenetic genealogy of influenza A (H3N2) haemagglutinin sequences sampled from Winter 2001&ndash;02 (dark blue circles), Summer 2002 (open circles), and Winter 2002&ndash;03 (red circles). The black diamond denotes the last common ancestor. The cyan diamond highlights the ancestral node of a newly emerging marked clade. Branch annotations list specific amino acid substitutions: non-epitope mutations are enclosed in parentheses (e.g., 402G, 66G, 241D, 546A); epitope mutations are listed plainly (99K, 202G, 218I, 238R).
+                </div>
+            </div>
+
+            <h3>Key Observations from Figure 1:</h3>
+            <ol style="margin-left: 24px; line-height: 1.65; margin-bottom: 16px;">
+                <li><strong>The Doomed Majority (Upper Clade):</strong> In Winter 2001&ndash;02, the vast majority of circulating viral isolates clustered in the upper branch (dense dark blue circles). However, these viruses possessed no novel epitope adaptations relative to existing herd immunity. By Winter 2002&ndash;03, this entire lineage hit an evolutionary dead end and went completely extinct (minimal red circles).</li>
+                <li><strong>The Marked Clade Sweep (Lower Clade):</strong> In Winter 2001&ndash;02, the marked clade (cyan diamond) was an obscure, low-frequency lineage represented by just a few isolates (cyan dots).</li>
+                <li><strong>The Driver Mutations:</strong> Along the trunk leading to this marked clade, the virus acquired <strong>four critical epitope substitutions: 99K, 202G, 218I, and 238R</strong>. These four surface changes enabled the virus to escape neutralization by antibodies circulating in the human population.</li>
+                <li><strong>The Evolutionary Outcome:</strong> By Winter 2002&ndash;03, the marked clade had expanded dramatically, accounting for virtually 100% of all sampled viruses globally (dense light-red circles). The predictive fitness model correctly assigned this clade the highest growth rate, anticipating its global takeover months before it occurred.</li>
+            </ol>
+        </section>
+
+        <!-- 5. Deconstructing Figure 3: Focal Figure -->
+        <section id="focal-figure-3">
+            <h2>5. Deconstructing Figure 3: Model Predictions vs. Real-World Vaccine Mismatches</h2>
+            <p>
+                The master validation of the Łuksza-Lässig framework is presented in <strong>Figure 3</strong>. The authors conducted a retrospective backtesting audit across <strong>17 consecutive flu seasons (1994 to 2012)</strong>, benchmarking their computational model against both empirical reality and the actual vaccine choices made by the WHO panel:
+            </p>
+
+            <div class="figure-card">
+                <img src="images/luksza_fig3_vaccine_selection.jpg" alt="Figure 3: Vaccine selection benchmarks from Luksza and Lassig 2014" style="max-height: 580px; border: 2px solid var(--slate-800);">
+                <div class="figure-caption">
+                    <strong>Figure 3 (Łuksza &amp; Lässig, Nature 2014): Vaccine Selection and Retrospective Forecasting Across 17 Seasons.</strong> 
+                    Main panel: Influenza A (H3N2) haemagglutinin genealogical tree with the persistent trunk highlighted as a bold black line. For each season from 1994 to 2012, three strains are mapped to their phylogenetic positions: (1) <strong>Posterior (Truth, colored circles):</strong> The strain closest to the actual future population mean; (2) <strong>Model (Prediction, colored diamonds):</strong> The optimal strain predicted by the fitness model using only data available at decision time $t$; and (3) <strong>Actual Vaccine (WHO choice, colored squares):</strong> The strain officially selected by the WHO committee. 
+                    <br><strong>Bottom-Left Inset:</strong> Epitope distance to the actual future population for the Model-selected strain (solid black diamonds) versus the Actual WHO vaccine strain (open and gray squares) across seasons.
+                </div>
+            </div>
+
+            <h3>Three Crucial Discoveries Revealed by Figure 3:</h3>
+            
+            <div style="background: #F1F5F9; border-radius: 6px; padding: 18px 22px; margin: 20px 0;">
+                <p style="margin-bottom: 10px;">
+                    <strong>1. The Model Faithfully Tracks the Evolutionary Trunk:</strong><br>
+                    In the main tree, the solid black line marks the <strong>evolutionary trunk</strong>—the single uninterrupted lineage that survives year after year, giving rise to all future influenza epidemics. Notice that the <strong>Model diamonds match the Posterior circles almost perfectly along the trunk</strong>. In contrast, the <strong>Actual Vaccine squares frequently sit out on short-lived side branches</strong> that branched off years earlier.
+                </p>
+                <p style="margin-bottom: 10px;">
+                    <strong>2. The Disastrous Mismatch Spikes (The Inset Graph):</strong><br>
+                    The bottom-left inset quantifies the <strong>Epitope Distance</strong>—the number of amino acid differences in antigenic sites between the selected vaccine and the actual virus population circulating one year later:
+                    <ul style="margin-left: 20px; margin-top: 6px;">
+                        <li><strong>Model Performance (Black Line / Diamonds):</strong> Consistently maintains an epitope distance near <strong>0 to 4 mutations</strong>, reliably anticipating the antigenic trajectory of the virus.</li>
+                        <li><strong>The 1997 Mismatch:</strong> The WHO committee selected an outdated strain that lagged <strong>15 epitope mutations</strong> behind the circulating Sydney/1997-like epidemic, while the model was within 5 mutations.</li>
+                        <li><strong>The Catastrophic 2003–2004 Fujian Drift:</strong> The WHO panel retained the Panama/1999 vaccine strain. Meanwhile, the virus underwent rapid antigenic drift to the Fujian/2002 lineage, spiking the epitope distance to <strong>18 mutations</strong>! The vaccine offered virtually zero clinical protection. In contrast, the Łuksza-Lässig model detected the emerging Fujian clade at low frequency in February and selected a candidate within <strong>4 epitope mutations</strong> of the epidemic.</li>
+                    </ul>
+                </p>
+                <p style="margin-bottom: 0;">
+                    <strong>3. The Overall Scorecard: 11 Out of 17 Seasons:</strong><br>
+                    In <strong>11 of the 17 surveyed flu seasons</strong>, the strain picked by the computational fitness algorithm was antigenically closer to the future population than the actual vaccine selected by the international panel of human experts. In the remaining 6 seasons, both the model and the committee performed comparably.
+                </p>
+            </div>
+        </section>
+
+        <!-- 6. Drift vs Shift & Nextstrain -->
+        <section>
+            <h2>6. Public Health Translation: Antigenic Drift vs. Shift &amp; The Nextstrain Revolution</h2>
+            <p>
+                To place the Łuksza-Lässig model in modern clinical context, we must distinguish between the two primary modes of influenza genome evolution:
+            </p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Feature</th>
+                        <th style="width: 37%;">Antigenic Drift (Continuous Evolution)</th>
+                        <th style="width: 38%;">Antigenic Shift (Catastrophic Emergence)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Mechanism</strong></td>
+                        <td>Gradual accumulation of point mutations in HA and NA during RNA replication due to error-prone RdRp activity.</td>
+                        <td>Sudden genetic <strong>reassortment</strong>: exchange of entire RNA segments when two distinct viral subtypes coinfect an animal host (e.g., swine or avian species).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Population Impact</strong></td>
+                        <td>Drives annual seasonal epidemics; requires periodic updates to the seasonal flu vaccine.</td>
+                        <td>Introduces a completely novel HA subtype into a non-immune human population, triggering global <strong>pandemics</strong> (e.g., 1918 H1N1, 1957 H2N2, 1968 H3N2, 2009 H1N1).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Model Applicability</strong></td>
+                        <td><strong>Directly modeled by Łuksza &amp; Lässig</strong>: forecasts gradual frequency shifts among circulating clades within a subtype.</td>
+                        <td><strong>Cannot be predicted by continuous fitness models</strong>: shifts represent discrete, non-linear spillover events requiring syndromic one-health surveillance.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>From Equations to Live Surveillance: The Birth of Nextstrain</h3>
+            <p>
+                The principles established by Łuksza and Lässig directly inspired the modern architecture of real-time viral surveillance. In 2015, computational biologists <strong>Trevor Bedford and Richard Neher</strong> extended this framework to create <strong>Nextstrain</strong> (originally launched as <em>nextflu</em>).
+            </p>
+            <p>
+                Today, Nextstrain continuously ingests thousands of viral genomes deposited into the GISAID public repository. It automatically reconstructs phylogenetic trees, estimates molecular clock rates, computes clade growth trajectories, and visualizes epitope mutations on interactive 3D protein structures. This computational infrastructure now directly informs the WHO vaccine selection committee twice each year, proving how abstract evolutionary equations translate into lifesaving clinical countermeasures.
+            </p>
+        </section>
+
+        <!-- 7. CANVAS QUIZ & FIGURE ANNOTATION GUIDE -->
+        <section class="quiz-callout-card">
+            <h3>📝 Pre-Class Reading Mastery Quiz &amp; Figure Annotation Guide</h3>
+            <p>
+                The <strong>Lecture 7 Pre-Class Reading Quiz</strong> opens on Canvas on <strong>Thursday, October 8, 2026, at 00:00 (Midnight) and closes at 20:00 (8:00 PM EDT)</strong>.
+            </p>
+            <p>
+                Similar to Lecture 6, <strong>Question 1 (2.0 Points &mdash; Mandatory Proof-of-Work Upload)</strong> requires you to download the master vaccine selection diagram from Łuksza &amp; Lässig (Figure 3), perform a guided visual analysis, and upload your personalized annotated diagram with your verified student watermark. Submissions without the handwritten or digitally typed watermark will receive zero credit.
+            </p>
+
+            <div style="background: #FFFFFF; border: 1.5px solid #CBD5E1; border-radius: 6px; padding: 18px 20px; margin: 16px 0;">
+                <h4 style="color: #9D2235; font-size: 1.02rem; margin-bottom: 8px; font-weight: 800;">Step-by-Step Instructions for Question 1 (Mandatory Proof-of-Work):</h4>
+                <ol style="margin-left: 20px; line-height: 1.65; color: var(--slate-700);">
+                    <li><strong>Download the Image:</strong> Download <a href="images/luksza_fig3_vaccine_selection.jpg" target="_blank" style="color: #9D2235; font-weight: 700;">luksza_fig3_vaccine_selection.jpg</a> to your computer, tablet, or phone.</li>
+                    <li><strong>Highlight the Trunk:</strong> Use a colored pen or digital highlighter (yellow or green) to trace the <strong>bold black genealogical trunk line</strong> that runs continuously from top-left (1994) to bottom-right (2012). Next to it, write: <code>"The Persistent Trunk Line"</code>.</li>
+                    <li><strong>Differentiate the Selection Tiers:</strong> In the upper-left region of the tree, point an arrow to the three tiers of markers and label what each represents:
+                        <ul style="margin-left: 18px; margin-top: 4px; margin-bottom: 4px;">
+                            <li><strong>Circles:</strong> <em>Posterior (Ground Truth)</em></li>
+                            <li><strong>Diamonds:</strong> <em>Model Prediction (Łuksza-Lässig)</em></li>
+                            <li><strong>Squares:</strong> <em>Actual Vaccine (WHO Selection)</em></li>
+                        </ul>
+                    </li>
+                    <li><strong>Annotate the Two Disastrous Mismatch Spikes:</strong> Look at the bottom-left <strong>Epitope Distance inset plot</strong>. Draw an arrow or circle around:
+                        <ul style="margin-left: 18px; margin-top: 4px; margin-bottom: 4px;">
+                            <li>The <strong>1997 spike (~15 epitope mutations)</strong> and label it: <em>"1997 Sydney Drift Mismatch"</em>.</li>
+                            <li>The <strong>2003–2004 spike (~16–18 epitope mutations)</strong> and label it: <em>"2003–04 Fujian Drift Mismatch"</em>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>State the Fitness Mechanism:</strong> At the bottom of the canvas, neatly write the core fitness equation: <code>f(c) = c_b • ΔN_b - c_d • ΔN_d</code> and write 1 sentence explaining why the model penalizes non-epitope mutations ($\Delta N_d$) (destabilizes trimer folding / biophysical fitness penalty).</li>
+                    <li><strong>Add Your Watermark:</strong> In the upper-right or lower-left corner of the canvas, handwrite or digitally type: <code>[Your Name] • [AccessNet ID] • [Date]</code>.</li>
+                    <li><strong>Upload to Canvas:</strong> Save as PNG, JPG, or PDF and submit under Question 1.</li>
+                </ol>
+                <div style="margin-top: 14px;">
+                    <a href="images/luksza_fig3_vaccine_selection.jpg" download class="btn-download">
+                        📥 Download Łuksza Figure 3 Template (.jpg)
+                    </a>
+                </div>
+            </div>
+
+            <p style="font-size: 0.90rem; color: #92400E; margin-bottom: 0;">
+                <strong>Questions 2–5 (1.0 Point each):</strong> Cover the 9-month WHO manufacturing lag time, epitope versus non-epitope selection coefficients ($c_b$ vs. $c_d$), why frequency does not equal fitness, and the evolutionary distinction between antigenic drift and antigenic shift.
+            </p>
+        </section>
+
+        <footer>
+            <div>BIOL 3111/5111: Genomics in Medicine &bull; Department of Biology &bull; Temple University</div>
+            <div><a href="L7_Reading_Quiz.zip" style="color: var(--temple-cherry); font-weight: 700;">Canvas Quiz Archive (.zip)</a></div>
+        </footer>
+    </div>
+</body>
+</html>
