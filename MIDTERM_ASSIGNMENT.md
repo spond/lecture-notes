@@ -4,29 +4,38 @@
 * **Assignment Weight:** 200 Points (20% of 1,000 Total Course Points)
 * **Official Due Date:** Thursday, October 29, 2026 at 23:59 EST (Canvas Submission)
 * **Early-Bird Bonus Period:** Submit between October 22 and October 28 for up to **+40 bonus points** (maximum 20% bonus on the assignment, equivalent to two full letter grades).
-* **Target Length:**
-  * **Undergraduate (BIOL 3111):** ~4–5 pages of core narrative text (approx. 1,800–2,500 words), plus Title Page, Figures, Table 1 (Multi-Omic Matrix), AI Audit Table (Track A only), and Primary Bibliography. Total document length is typically 7–9 pages.
-  * **Honors / Graduate (BIOL 5111):** ~5–6 pages of core narrative text (approx. 2,500–3,000 words), incorporating deeper mechanistic modeling and a dedicated clinical trial / translation section.
+* **Collaboration Policy:**
+  * **Solo or Pairs:** Students may complete the project individually or in **teams of exactly two (2)**.
+  * **Single Joint Submission:** Teams submit a **single unified paper** on Canvas. The title page must clearly state both authors' full names, Temple AccessNet IDs, email addresses, and enrollment status. Both co-authors share identical credit and early-bird bonus points.
+  * **Author Contribution Statement:** Every team submission must include a brief statement detailing the division of labor (e.g., database queries, figure generation, narrative drafting, editing).
+* **Target Length & Scope:**
+  * **Standard Undergraduate Track (BIOL 3111):** ~4–5 pages of core narrative text (approx. 1,800–2,500 words), 3 mandatory database figures, Table 1 (8 Multi-Omic Tiers), AI Audit Table (Track A only), and 8–12 primary references. Total document length is typically 7–9 pages.
+  * **Honors / Graduate Track (BIOL 3111 Honors / BIOL 5111) — ~40% Expanded Scope:** ~6–7 pages of core narrative text (approx. 2,800–3,500 words), **4 mandatory database figures** (adding Figure 4: 3D Protein Structure or Single-Cell/Spatial Atlas), **Table 1 expanded to 9 tiers** (adding Tier 9: Secondary Modifier / Epistatic Interactor Locus), deeper clinical trial / translational audit, and **14–18 primary references**. Total document length is typically 10–12 pages.
+  * *Note on Mixed Teams:* If an Honors or Graduate student pairs with a Standard student, the team paper must fulfill the **Honors Track specification**.
 
 ---
 
 ### Table of Contents
 1. [Executive Summary & Scientific Mission](#1-executive-summary--scientific-mission)
+   - [Collaboration Policy: Solo or Teams of Two](#collaboration-policy-solo-or-teams-of-two)
+   - [The Honors & Graduate Track Addendum (+40% Scope Expansion)](#the-honors--graduate-track-addendum-40-scope-expansion)
 2. [The Two-Track Generative AI Contract](#2-the-two-track-generative-ai-contract)
    - [Notice of Algorithmic Pre-Screening](#notice-of-algorithmic-pre-screening)
    - [Track A: AI-Assisted (Expert Reviewer Standard)](#track-a-ai-assisted-expert-reviewer-standard)
    - [Track B: 100% Human-Authored (Standard Undergrad Standard)](#track-b-100-human-authored-standard-undergrad-standard)
 3. [Choosing Your Disease Focus](#3-choosing-your-disease-focus)
-4. [The 8 Multi-Omic Tiers of Characterization](#4-the-8-multi-omic-tiers-of-characterization)
+4. [The Multi-Omic Tiers of Characterization (Tiers 1–8 + Tier 9 for Honors)](#4-the-multi-omic-tiers-of-characterization)
+   - [Tier 9 (Honors Requirement): Epistatic & Modifier Architecture](#tier-9-honors-requirement-epistatic--modifier-architecture)
 5. [Anti-Hallucination Guardrails: Mandatory Figures & Data Artifacts](#5-anti-hallucination-guardrails-mandatory-figures--data-artifacts)
    - [Figure 1: UCSC / Ensembl Genomic Locus Architecture](#figure-1-ucsc--ensembl-genomic-locus-architecture)
    - [Figure 2: GTEx Tissue Expression & cis-eQTL Regulation](#figure-2-gtex-tissue-expression--cis-eqtl-regulation)
    - [Figure 3: GWAS Catalog Association & Multi-Ancestry Equity Audit](#figure-3-gwas-catalog-association--multi-ancestry-equity-audit)
+   - [Figure 4 (Honors Requirement): 3D Structural Biology OR Single-Cell / Spatial Atlas](#figure-4-honors-requirement-3d-structural-biology-or-single-cell--spatial-atlas)
 6. [Required Data Synthesis Tables](#6-required-data-synthesis-tables)
-   - [Table 1: Multi-Omic Synthesis & Genomic Coordinates Matrix](#table-1-multi-omic-synthesis--genomic-coordinates-matrix)
+   - [Table 1: Multi-Omic Synthesis & Genomic Coordinates Matrix (Tiers 1–8 / 9)](#table-1-multi-omic-synthesis--genomic-coordinates-matrix)
    - [Table 2 (Track A Only): The Mandatory AI Audit & Fact-Check Table](#table-2-track-a-only-the-mandatory-ai-audit--fact-check-table)
 7. [Citation Protocol & Zero-Tolerance Hallucination Rule](#7-citation-protocol--zero-tolerance-hallucination-rule)
-8. [Document Organization & Page Budget](#8-document-organization--page-budget)
+8. [Document Organization & Page Budget (Standard vs. Honors)](#8-document-organization--page-budget)
 9. [Comprehensive Evaluation Rubrics (200 Points)](#9-comprehensive-evaluation-rubrics-200-points)
 
 ---
@@ -39,6 +48,41 @@ In the first half of this course, we dismantled the reductionist myth that human
 Select **one human disease or clinical syndrome** that resonates with you personally, intellectually, or professionally. Your mission is to write a comprehensive, rigorous **Multi-Omic Diagnostic & Mechanistic Profile** dissecting how multiple layers of genomic and molecular information converge to drive the condition, determine patient risk, and shape precision therapeutics.
 
 This project is explicitly structured to cultivate professional scientific discernment. Rather than producing generic, descriptive summaries, you will extract, analyze, and synthesize authentic data directly from public genomic databases (**ClinVar**, **gnomAD**, **UCSC Genome Browser**, **GTEx Portal**, and the **GWAS / PGS Catalog**).
+
+---
+
+### Collaboration Policy: Solo or Teams of Two
+
+To mirror the interdisciplinary team science of modern clinical genomics, students may choose between two authoring models:
+
+1. **Individual Submission:** Complete and submit the research project independently.
+2. **Teams of Exactly Two (2):** Partner with one classmate to author a collaborative paper.
+   - **Single Joint Submission:** The team submits **one unified manuscript** on Canvas. Either team member may upload the submission.
+   - **Title Page Byline:** The title page must prominently display both authors' full names, official Temple AccessNet IDs, student ID numbers, email addresses, and course enrollment status (BIOL 3111 Standard, BIOL 3111 Honors, or BIOL 5111 Graduate).
+   - **Shared Accountability & Grade:** Both co-authors receive the identical baseline project score and the identical early-bird bonus points based on the Canvas submission timestamp.
+   - **Author Contribution Statement (CRediT Model):** Every team paper must include a brief section (1 paragraph or bulleted list placed on the title page or immediately before the bibliography) specifying the division of labor across five core scientific competencies:
+     - *Literature Synthesis & Background:* Searching primary literature and establishing clinical relevance.
+     - *Genomic Database Extraction:* Curating GRCh38 coordinates, dbSNP rsIDs, and ClinVar VCV accessions.
+     - *Figure Generation & Annotation:* Retrieving, exporting, and annotating Figures 1–3 (and Figure 4 for Honors).
+     - *Narrative Drafting:* Specific tiers authored or co-drafted by each partner.
+     - *Forensic Quality Control:* Verifying PubMed PMIDs, auditing AI discrepancies (Track A), and line editing.
+   - **Mixed Teams (Standard + Honors):** If a team combines a Standard undergraduate with an Honors or Graduate student, the submission must fulfill the **Honors Track specification** in full.
+
+---
+
+### The Honors & Graduate Track Addendum (+40% Scope Expansion)
+
+Students enrolled in **BIOL 3111 Honors** or **BIOL 5111 (Graduate)** are held to an expanded standard reflecting advanced research rigor. This track requires approximately **40% more analytical work**, structured across four specific dimensions:
+
+| Dimension | Standard Track (BIOL 3111) | Honors / Graduate Track (BIOL 3111H / BIOL 5111) | Scope Expansion |
+| :--- | :--- | :--- | :---: |
+| **Core Narrative Length** | ~4–5 pages (~1,800–2,500 words) | **~6–7 pages (~2,800–3,500 words)** | **+40% text length** |
+| **Gene / Locus Architecture** | 1 primary causal or major risk locus | **Primary causal locus + 1 Secondary Modifier / Epistatic Interactor Gene** (e.g., *HBB* + *BCL11A*; *APOE* + *TREM2*; *LDLR* + *PCSK9*; *CFTR* + *SLC26A9*; *NOD2* + *ATG16L1*) | **Multi-gene systems depth** |
+| **Mandatory Primary Figures** | **3 Figures:**<br>1. UCSC/Ensembl Locus<br>2. GTEx Tissue / eQTL<br>3. GWAS / Ancestry Audit | **4 Figures (Mandatory Figure 4 added):**<br>1. UCSC/Ensembl Locus<br>2. GTEx Tissue / eQTL<br>3. GWAS / Ancestry Audit<br>**4. 3D Macromolecular Structural Biology OR Single-Cell / Spatial Atlas** | **+33% figure requirement** |
+| **Synthesis Matrix (Table 1)** | 8 Multi-Omic Tiers (Tiers 1–8) | **9 Multi-Omic Tiers:** Tiers 1–8 **PLUS Tier 9: Epistatic Modifier / Regulatory Network Matrix** | **+1 full matrix row & analysis** |
+| **Translational & Clinical Scope** | Standard clinical trial overview (1 NCT trial) | **Deep-Dive Clinical & Health Disparity Audit:** In-depth evaluation of primary trial endpoints, pharmacogenomic dosing guidelines (CPIC / PharmGKB), biomarker companion diagnostics, and healthcare access barriers | **Expanded Tier 8 translation** |
+| **Primary Literature Bibliography** | **8–12 peer-reviewed articles** (with verified PMIDs/DOIs) | **14–18 peer-reviewed articles** (with verified PMIDs/DOIs) | **+50% citation depth** |
+| **Total Document Length** | Typically 7–9 pages | **Typically 10–12 pages** | **~40% overall expansion** |
 
 ---
 
@@ -110,7 +154,7 @@ Your paper must address the following **8 Multi-Omic Tiers**. Organize your narr
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    THE 8 MULTI-OMIC CHARACTERIZATION TIERS                  │
+│                    THE MULTI-OMIC CHARACTERIZATION TIERS                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ Tier 1: Clinical Phenotype & Epidemiological Scaffolding                    │
 │ Tier 2: Monogenic Architecture & DNA Sequence Alterations                   │
@@ -120,6 +164,9 @@ Your paper must address the following **8 Multi-Omic Tiers**. Organize your narr
 │ Tier 6: Functional Transcriptomics & Tissue-Specific Regulation (GTEx)      │
 │ Tier 7: Metagenomics & Microbial / Environmental Influences                 │
 │ Tier 8: Precision Therapeutic Countermeasures & Translation                 │
+│                                                                             │
+│ [HONORS TRACK REQUIREMENT]                                                  │
+│ Tier 9: Epistatic & Modifier Architecture: Multi-Gene Systems Network       │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -174,6 +221,14 @@ Your paper must address the following **8 Multi-Omic Tiers**. Organize your narr
   * Targeted CRISPR-Cas9 genome editing (e.g., *Casgevy* BCL11A enhancer excision).
   * Microbiome therapeutics (e.g., FMT, defined consortium biotherapeutics).
 * **Clinical Trial Benchmark:** Identify one active or recently completed clinical trial from **ClinicalTrials.gov** testing a precision therapeutic for this condition. Report the NCT number, phase, molecular mechanism, and primary clinical endpoint.
+* **Honors / Graduate Deep Dive:** For Honors students, expand this section to critically appraise trial endpoint design (surrogate vs. overall survival/morbidity), companion biomarker diagnostics, pharmacogenomic dosing guidelines (CPIC / PharmGKB), and socio-economic or geographic barriers to therapeutic access.
+
+#### Tier 9 (Honors Requirement): Epistatic & Modifier Architecture
+*Required for BIOL 3111 Honors and BIOL 5111 Graduate submissions; optional for standard track.*
+* **Secondary Genetic Modifier:** Identify a well-documented genetic modifier or epistatic interactor gene that modulates the phenotypic expression, clinical severity, or penetrance of the primary disease locus (e.g., *BCL11A* erythroid enhancer modifying *HBB* in Sickle Cell Disease; *TREM2* or *CD33* microglial signaling modifying *APOE* in Alzheimer's; *PCSK9* or *APOB* modifying *LDLR* in hypercholesterolemia; *SLC26A9* chloride-bicarbonate exchanger modifying *CFTR* in Cystic Fibrosis; *ATG16L1* autophagy machinery interacting with *NOD2* in Crohn's disease).
+* **Genomic Coordinates & Accession:** Provide the official HGNC symbol, Ensembl Gene ID (`ENSG...`), and exact GRCh38 coordinates for the secondary modifier locus.
+* **Biochemical / Regulatory Mechanism:** Explicitly model the physical or regulatory interaction between the primary causal gene and the modifier. Does the modifier alter transcriptional silencing, compensatory ion transport, clearance of misfolded aggregates, or competitive ligand binding?
+* **Clinical Consequence:** Explain how genotype at this secondary locus alters clinical outcomes (e.g., delaying onset by a decade, reducing hospitalization frequency, or causing therapeutic resistance).
 
 ---
 
@@ -193,6 +248,10 @@ Each figure must be embedded in your document with a clear title, high visual re
 │     * Exact TPM or Normalized Effect Size (NES), p-value, and sample size N │
 │ [ ] Figure 3: GWAS Catalog / PGS Catalog Association & Multi-Ancestry Audit │
 │     * Lead SNP association plot/table + Ancestry Diversity Pie Chart        │
+│                                                                             │
+│ [HONORS TRACK REQUIREMENT]                                                  │
+│ [ ] Figure 4: 3D Protein Structure OR Single-Cell / Spatial Atlas           │
+│     * AlphaFold / PDB 3D structure OR scRNA-seq UMAP / Spatial feature plot │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -230,6 +289,21 @@ Each figure must be embedded in your document with a clear title, high visual re
 
 ---
 
+### Figure 4 (Honors Requirement): 3D Structural Biology OR Single-Cell / Spatial Atlas
+*Required for BIOL 3111 Honors and BIOL 5111 Graduate submissions; optional for standard track.*
+* **Option A: 3D Macromolecular Structural Biology (AlphaFold / RCSB PDB / PyMOL):**
+  * **Source:** [AlphaFold Protein Structure Database](https://alphafold.ebi.ac.uk/) or [RCSB Protein Data Bank](https://www.rcsb.org/).
+  * **Content:** Capture a 3D structural model of the disease-associated protein or protein-ligand complex.
+  * **Student Annotation:** Highlight the exact amino acid residue altered by the pathogenic mutation, showing its spatial relationship to catalytic clefts, ligand binding pockets, transmembrane domains, or multimeric interfaces.
+  * **Caption Requirement:** State the PDB ID or AlphaFold accession, resolution (if experimental), the structural domain harboring the alteration, and explain the biophysical mechanism of dysfunction (e.g., loss of salt bridge, steric clash, hydrophobic destabilization, or disruption of disulfide bond).
+* **Option B: Single-Cell or Spatial Transcriptomics Deconvolution:**
+  * **Source:** [Human Cell Atlas](https://data.humancellatlas.org/), [Broad Single Cell Portal](https://singlecell.broadinstitute.org/), or a landmark primary paper.
+  * **Content:** Capture an authentic single-cell RNA-seq UMAP/t-SNE clustering plot or spatial transcriptomic tissue section showing cell-type-specific expression of the primary disease gene or downstream inflammatory/pathological program.
+  * **Student Annotation:** Add callout labels identifying the exact cell subset(s) (e.g., disease-associated microglia [DAM], alveolar type II cells, podocytes) driving the disease signature.
+  * **Caption Requirement:** Detail the single-cell technology used, sample background, cell-type annotation, and explain how resolving cellular heterogeneity clarifies the pathophysiological mechanism.
+
+---
+
 ## 6. Required Data Synthesis Tables
 
 Your paper must include the following standardized tables to ensure rigorous data organization and forensic accountability.
@@ -247,6 +321,7 @@ Your paper must include the following standardized tables to ensure rigorous dat
 | **Tier 6: Transcriptome** | Tissue Expression & cis-eQTL | GTEx v8 / ENSG00000001234 | e.g., Lung / Pancreas | Median TPM = 42.6; eQTL NES = -0.34 | PMID: 3291309 |
 | **Tier 7: Metagenome** | Microbial Taxon / Metabolite | NCBI Taxonomy / Metagenome study | N/A (Microbial genome) | 3.2-fold depletion of F. prausnitzii | PMID: 2456789 |
 | **Tier 8: Targeted Rx** | Precision Therapeutic Agent | DrugBank / ClinicalTrials.gov NCT... | Target: e.g., CFTR / BCL11A | Phase 3 RCT: 14% improvement in FEV1 | PMID: 3166412 |
+| **Tier 9: Modifier (Honors)** | Epistatic Interactor / Modifier Gene | HGNC Symbol; Ensembl ENSG... | chrN:start-end (GRCh38) | e.g., 2.4-fold increased penetrance / HR = 1.85 | PMID: 3456789 |
 
 ---
 
@@ -267,7 +342,10 @@ Document at least **two (2) specific instances** where your generative AI tool (
 Academic credibility in biomedical science depends on the reproducibility of citations. Generative AI tools frequently synthesize plausible-sounding citations that merge real authors with imaginary journals, fake volume numbers, or non-existent PMIDs.
 
 ### Citation Rules
-1. **Primary Literature Expectation:** Cite a minimum of **8–12 peer-reviewed primary literature articles** (from journals indexed in PubMed/MEDLINE). Textbooks, Wikipedia, Mayo Clinic consumer pages, and news articles may be consulted for initial orientation but do not count toward your primary literature requirement.
+1. **Primary Literature Expectation:**
+   * **Standard Track (BIOL 3111):** Cite a minimum of **8–12 peer-reviewed primary literature articles** (from journals indexed in PubMed/MEDLINE).
+   * **Honors / Graduate Track (BIOL 3111H / BIOL 5111):** Cite a minimum of **14–18 peer-reviewed primary literature articles** (+50% citation depth, reflecting deeper mechanistic, structural, and translational coverage).
+   * Textbooks, Wikipedia, Mayo Clinic consumer pages, and news articles may be consulted for initial orientation but do not count toward your primary literature requirement.
 2. **Mandatory Persistent Identifiers:** Every single bibliographic entry must include an authentic, live **PubMed ID (PMID)** or **Digital Object Identifier (DOI)**:
    * *Example:* Snitkin, E. S., et al. (2012). Tracking a hospital outbreak of carbapenem-resistant *Klebsiella pneumoniae* with whole-genome sequencing. *Science Translational Medicine*, 4(148), 148ra116. **PMID: 22914622. DOI: 10.1126/scitranslmed.3004129**
 3. **Automated Verification:** All submitted bibliographies will be evaluated by an automated script querying the NCBI Entrez API.
@@ -283,15 +361,16 @@ Format your submission as a single PDF document complying with the following sta
 * **Line Spacing:** 1.15 to 1.5 line spacing (do NOT double space; avoid excessive vertical padding).
 * **Headings:** Clear, numbered section headers corresponding to the Multi-Omic Tiers.
 
-### Recommended Page Budget
+### Recommended Page Budget: Standard vs. Honors Track
 
-| Section | Title / Content | Recommended Page Count |
-| :--- | :--- | :---: |
-| **Page 1** | **Title Page & Track Declaration**<br>• Project Title & Selected Disease<br>• Student Name, Temple ID, Course Code (BIOL 3111 or 5111)<br>• Explicit Track Declaration Box (Track A or Track B)<br>• Executive Abstract (~150 words) | 1 Page |
-| **Pages 2–6** | **Core Multi-Omic Narrative (Approx. 4–5 Pages)**<br>• Tier 1: Clinical Phenotype & Diagnostic Standard (~0.5 page)<br>• Tier 2: Monogenic Architecture & DNA Sequence Alterations (~0.75 page)<br>• Tier 3: Cytogenetic & Structural Genomic Variants (~0.5 page)<br>• Tier 4: Statistical Genomics, GWAS & Polygenic Architecture (~0.75 page)<br>• Tier 5: The Regulatory Genome: Epigenomics & 3D Chromatin (~0.75 page)<br>• Tier 6: Functional Transcriptomics & Tissue-Specific Regulation (~0.75 page)<br>• Tier 7: Metagenomics & Microbial / Environmental Influences (~0.5 page)<br>• Tier 8: Precision Therapeutic Countermeasures & Translation (~0.5 page)<br>*(All 3 figures embedded within or adjacent to relevant text)* | ~4.5–5 Pages |
-| **Page 7** | **Table 1: Multi-Omic Synthesis & Genomic Coordinates Matrix** | 1 Page |
-| **Page 8** | **Table 2: AI Audit & Fact-Check Table** *(Track A Submissions Only)* | 1 Page *(Track A)* |
-| **Page 8 or 9** | **Primary Literature Bibliography**<br>• All references formatted with authentic PMIDs and DOIs | ~1–1.5 Pages |
+| Section | Content & Focus | Standard Track (BIOL 3111) | Honors / Graduate (BIOL 3111H / 5111) |
+| :--- | :--- | :---: | :---: |
+| **Page 1** | **Title Page & Author Metadata**<br>• Project Title & Disease Focus<br>• Author Name(s), Temple IDs, Emails<br>• Course Code & Honors Declaration<br>• Track A or Track B Declaration Box<br>• Author Contribution Statement (Teams of 2)<br>• Executive Abstract (~150 words) | 1 Page | 1 Page |
+| **Narrative Body** | **Core Multi-Omic Narrative Text**<br>• Tiers 1–3: Clinical, Monogenic & Structural<br>• Tiers 4–6: GWAS, Epigenomics & Transcriptomics<br>• Tiers 7–8: Metagenomics & Precision Therapeutics<br>• **Tier 9 (Honors):** Epistatic Modifier Architecture<br>• **Tier 8 Deep Dive (Honors):** Clinical Trial Audit<br>*(Figures 1–3 for Standard; Figures 1–4 for Honors)* | **~4.5–5 Pages**<br>(~1,800–2,500 words) | **~6.5–7 Pages**<br>(~2,800–3,500 words;<br>~40% expansion) |
+| **Synthesis Matrix** | **Table 1: Multi-Omic Synthesis Matrix** | 1 Page (Tiers 1–8) | 1 Page (Tiers 1–9) |
+| **AI Audit Table** | **Table 2: AI Fact-Check Table** *(Track A Only)* | 1 Page *(Track A)* | 1 Page *(Track A)* |
+| **Bibliography** | **Primary Literature References (PMIDs/DOIs)** | ~1–1.5 Pages<br>(8–12 papers) | ~1.5–2 Pages<br>(14–18 papers) |
+| **Total Length** | **Complete Audit-Ready Manuscript** | **Typically 7–9 Pages** | **Typically 10–12 Pages** |
 
 ---
 
@@ -299,14 +378,14 @@ Format your submission as a single PDF document complying with the following sta
 
 Your submission will be evaluated using a detailed 200-point rubric. Note the distinct evaluative emphasis between Track A and Track B:
 
-| Category | Points | Track A Criteria (Expert Reviewer Standard) | Track B Criteria (Traditional Undergrad Standard) |
-| :--- | :---: | :--- | :--- |
-| **1. Multi-Omic Breadth & Integration (Tiers 1–8)** | **60 pts** | All 8 tiers evaluated with extraordinary mechanistic depth. Biological connections between tiers (e.g., how an eQTL in Tier 6 mechanistically explains a GWAS hit in Tier 4) are explicitly traced. Zero superficial filler. | All 8 tiers addressed clearly with solid conceptual understanding. Accurate descriptions of molecular mechanisms without major gaps. |
-| **2. Data Artifacts & Database Figures (Figs 1–3)** | **50 pts** | Figures 1, 2, and 3 are impeccably captured from UCSC, GTEx, and GWAS Catalog. Student annotations are precise. Captions report exact coordinates, TPM, NES, *p*-values, and an insightful Multi-Ancestry Equity critique. | Figures 1, 2, and 3 are correctly captured from required databases and embedded with clear labels. Captions explain the essential biological findings accurately. |
-| **3. Table 1: Multi-Omic Synthesis Matrix** | **30 pts** | 100% complete and verified. Coordinates match GRCh38; ClinVar, dbSNP, Ensembl, and PGS identifiers are completely accurate and audit-ready. | Table 1 is fully completed with accurate identifiers, coordinates, and metrics for all tiers. |
-| **4. AI Audit Table (Track A) OR Human Depth (Track B)** | **30 pts** | **Track A:** Includes an exceptional 1-page AI Audit Table detailing ≥ 2 authentic AI errors/hallucinations with primary literature refutations and student corrections.<br>**Track B:** Evaluated on originality of voice, personal synthesis, and nuanced interpretation of complex clinical trade-offs. | Same standard applied to the respective track declaration. |
-| **5. Scientific Rigor, Clarity & Citation Integrity** | **30 pts** | Zero-tolerance citation audit: 100% of references verified in PubMed with authentic PMIDs/DOIs. High-level academic tone, active voice, right-branching syntax, and define-in-stride appositives. | All citations are authentic and verified in PubMed with PMIDs/DOIs. Well-written, clearly organized, and grammatically sound. |
-| **Total** | **200 pts** | | |
+| Category | Points | Track A Criteria (Expert Reviewer Standard) | Track B Criteria (Traditional Undergrad Standard) | Honors / Graduate Addition (BIOL 3111H / 5111) |
+| :--- | :---: | :--- | :--- | :--- |
+| **1. Multi-Omic Breadth & Integration** | **60 pts** | All tiers evaluated with extraordinary mechanistic depth. Causal connections between tiers (e.g., how an eQTL in Tier 6 explains a GWAS hit in Tier 4) are explicitly traced. Zero superficial filler. | All tiers addressed clearly with solid conceptual understanding. Accurate descriptions of molecular mechanisms without major gaps. | **Honors Expectation:** Tier 9 (Modifier/Epistasis) and Tier 8 translational deep dive are seamlessly integrated into the narrative with multi-gene systems modeling. |
+| **2. Data Artifacts & Database Figures** | **50 pts** | Figures 1, 2, and 3 are impeccably captured from UCSC, GTEx, and GWAS Catalog. Exact coordinates, TPM, NES, and *p*-values reported with precise annotations and equity analysis. | Figures 1, 2, and 3 are correctly captured from required databases and embedded with clear labels and accurate captions. | **Honors Expectation:** Includes **Figure 4** (3D structural protein model or single-cell/spatial atlas) with publication-grade annotations and biochemical/cellular interpretation. |
+| **3. Table 1: Multi-Omic Synthesis Matrix** | **30 pts** | 100% complete and verified on GRCh38. ClinVar, dbSNP, Ensembl, and PGS identifiers completely accurate and audit-ready. | Table 1 is fully completed with accurate identifiers, coordinates, and metrics for all tiers. | **Honors Expectation:** Includes complete, verified row for **Tier 9 (Secondary Modifier Gene)** with exact coordinates and interaction metrics. |
+| **4. AI Audit Table (Track A) OR Human Depth (Track B)** | **30 pts** | **Track A:** Exceptional 1-page AI Audit Table detailing ≥ 2 authentic AI errors/hallucinations with primary literature refutations.<br>**Track B:** Evaluated on originality of voice, personal synthesis, and nuanced clinical reasoning. | Evaluated according to selected track declaration. | **Honors Expectation:** Demonstrates advanced forensic critique of multi-gene literature or independent evaluation of complex clinical trial data. |
+| **5. Scientific Rigor & Citation Integrity** | **30 pts** | Zero-tolerance citation audit: 100% of references verified in PubMed with authentic PMIDs/DOIs. High-level academic tone and active voice. | All citations are authentic and verified in PubMed with PMIDs/DOIs. Well-written, clearly organized, and grammatically sound. | **Honors Expectation:** Minimum **14–18 verified primary literature citations** (vs. 8–12 for standard) reflecting broad systems and structural coverage. |
+| **Total** | **200 pts** | | | |
 
 ---
 
