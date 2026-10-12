@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 8 Study Monograph: Immune Repertoire Sequencing, HLA Diversity &amp; Autoimmune Disease | BIOL 3111/5111</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- MathJax for Accessible Mathematical Rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --temple-cherry: #9D2235;
+            --temple-cherry-dark: #781827;
+            --slate-900: #0F172A;
+            --slate-800: #1E293B;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-300: #CBD5E1;
+            --slate-200: #E2E8F0;
+            --slate-100: #F1F5F9;
+            --slate-50: #F8FAFC;
+            --text-main: #1E293B;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Merriweather', Georgia, serif;
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            background-color: var(--slate-50);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .monograph-container {
+            max-width: 880px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 48px 56px;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+            border-left: 1px solid var(--slate-200);
+            border-right: 1px solid var(--slate-200);
+            min-height: 100vh;
+        }
+
+        header {
+            border-bottom: 2px solid var(--slate-200);
+            padding-bottom: 24px;
+            margin-bottom: 36px;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--temple-cherry);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 2.15rem;
+            font-weight: 900;
+            color: var(--slate-900);
+            line-height: 1.25;
+            letter-spacing: -0.025em;
+            margin-bottom: 12px;
+        }
+
+        .monograph-subtitle {
+            font-size: 1.08rem;
+            color: var(--slate-600);
+            font-weight: 400;
+            margin-bottom: 18px;
+            line-height: 1.55;
+        }
+
+        .author-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 28px;
+            font-size: 0.88rem;
+            color: var(--slate-600);
+            background: var(--slate-50);
+            padding: 12px 18px;
+            border-radius: 6px;
+            border: 1px solid var(--slate-200);
+            margin-bottom: 16px;
+        }
+
+        .citation-box {
+            background: #FFF5F5;
+            border: 1.5px solid #FED7D7;
+            border-left: 5px solid var(--temple-cherry);
+            border-radius: 4px;
+            padding: 16px 20px;
+            font-size: 0.90rem;
+            line-height: 1.55;
+            color: #742A2A;
+            margin: 20px 0 32px 0;
+        }
+        .citation-box a {
+            color: var(--temple-cherry);
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        h2 {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-top: 42px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1.5px solid var(--slate-200);
+            letter-spacing: -0.015em;
+        }
+
+        h3 {
+            font-size: 1.16rem;
+            font-weight: 700;
+            color: var(--slate-800);
+            margin-top: 26px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 1.01rem;
+            color: var(--slate-700);
+            margin-bottom: 16px;
+            line-height: 1.68;
+        }
+
+        strong {
+            color: var(--slate-900);
+        }
+
+        .key-concept-box {
+            background: #F8FAFC;
+            border: 1.5px solid #CBD5E1;
+            border-left: 5px solid #0284C7;
+            border-radius: 4px;
+            padding: 18px 22px;
+            margin: 24px 0;
+        }
+        .key-concept-box h4 {
+            font-size: 1.02rem;
+            font-weight: 800;
+            color: #0369A1;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-family: var(--font-mono);
+        }
+
+        .math-card {
+            background: #F8FAFC;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+        .math-card .formula {
+            font-size: 1.25rem;
+            margin: 12px 0;
+            color: var(--slate-900);
+        }
+
+        .figure-card {
+            background: #FFFFFF;
+            border: 1.5px solid var(--slate-300);
+            border-radius: 6px;
+            padding: 20px;
+            margin: 28px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            text-align: center;
+        }
+        .figure-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid var(--slate-200);
+            margin-bottom: 14px;
+        }
+        .figure-caption {
+            font-size: 0.88rem;
+            color: var(--slate-600);
+            text-align: left;
+            line-height: 1.55;
+            border-top: 1px solid var(--slate-200);
+            padding-top: 10px;
+        }
+        .figure-caption strong {
+            color: var(--slate-900);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            margin: 20px 0;
+        }
+        .data-table th, .data-table td {
+            padding: 10px 14px;
+            border: 1px solid var(--slate-200);
+            text-align: left;
+        }
+        .data-table th {
+            background: #F1F5F9;
+            color: var(--slate-800);
+            font-weight: 700;
+        }
+        .data-table tr:nth-child(even) {
+            background: #F8FAFC;
+        }
+
+        .quiz-callout-card {
+            background: #FFFBEB;
+            border: 2px solid #FCD34D;
+            border-left: 6px solid #D97706;
+            border-radius: 6px;
+            padding: 24px 28px;
+            margin: 36px 0;
+        }
+        .quiz-callout-card h3 {
+            color: #92400E;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--temple-cherry);
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.15s ease;
+            margin-top: 12px;
+        }
+        .btn-download:hover {
+            background: var(--temple-cherry-dark);
+        }
+
+        footer {
+            margin-top: 56px;
+            padding-top: 24px;
+            border-top: 1.5px solid var(--slate-200);
+            font-size: 0.85rem;
+            color: var(--slate-600);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .monograph-container {
+                padding: 24px 18px;
+            }
+            h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="monograph-container">
+        <header>
+            <div class="course-meta">
+                <span>BIOL 3111 / 5111: Genomics in Medicine</span>
+                <span>Fall 2026 &bull; Week 8 Reading Guide</span>
+            </div>
+            <h1>Immune Repertoire Sequencing, HLA Diversity &amp; Autoimmune Disease</h1>
+            <div class="monograph-subtitle">
+                Deconstructing how somatic V(D)J recombination, high-throughput immunosequencing (AIRR-seq), and machine learning decode lifetime pathogen exposure history and host HLA restriction.
+            </div>
+            <div class="author-card">
+                <div><strong>Instructor:</strong> Prof. Sergei Pond</div>
+                <div><strong>Department:</strong> Biology, Temple University</div>
+                <div><strong>Pre-Class Canvas Quiz:</strong> Thursday, Oct 15, 2026 (00:00 &ndash; 20:00 EDT)</div>
+            </div>
+        </header>
+
+        <section class="citation-box">
+            <strong>Required Primary Literature for this Reading Assignment:</strong>
+            <div style="margin-top: 8px;">
+                <strong>Emerson, R. O., DeWitt, W. S., Vignali, M., Gravley, J., Hu, J. K., Osborne, E. J., Desmarais, C., Klinger, M., Carlson, C. S., Hansen, J. A., Rieder, M., &amp; Robins, H. S. (2017):</strong> 
+                <em>"Immunosequencing identifies signatures of cytomegalovirus exposure history and HLA-mediated effects on the T cell repertoire."</em> 
+                <strong>Nature Genetics</strong>, 49(5), 659&ndash;665. DOI: <a href="https://doi.org/10.1038/ng.3822" target="_blank" rel="noopener noreferrer">10.1038/ng.3822</a> | PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/28369038/" target="_blank" rel="noopener noreferrer">28369038</a>.
+            </div>
+        </section>
+
+        <!-- 1. Executive Summary -->
+        <section>
+            <h2>1. Executive Summary: The Adaptive Immune System as a Living Diagnostic Record</h2>
+            <p>
+                Every human genome contains approximately 20,000 protein-coding genes. Yet our bodies encounter an effectively infinite universe of pathogenic bacteria, viruses, fungi, and mutated neoplastic peptides. How does a finite genome protect an organism against an unbounded array of molecular threats?
+            </p>
+            <p>
+                The answer lies in <strong>somatic V(D)J recombination</strong>, the permanent genetic cut-and-paste mechanism carried out during lymphocyte development in the bone marrow and thymus. Rather than inheriting pre-built receptors in the germline, developing T cells stitch together discontinuous gene segments to synthesize unique <strong>T-cell receptors (TCRs)</strong>. This enzymatic process generates astronomical molecular diversity, estimated to exceed $10^{15}$ theoretical sequence combinations.
+            </p>
+            <p>
+                When a pathogen invades, T cells whose receptors recognize foreign microbial fragments undergo explosive <strong>clonal expansion</strong>. Following pathogen clearance, a dedicated fraction of these expanded clones persists for decades as <strong>memory T cells</strong>. Consequently, an individual's circulating T-cell repertoire serves as a personalized, chronological ledger documenting every infectious encounter experienced across a lifetime.
+            </p>
+
+            <div class="key-concept-box">
+                <h4>The Fundamental Immunogenetic Conundrum: Public vs. Private Repertoires</h4>
+                <p style="margin-bottom: 8px;">
+                    Because theoretical TCR diversity ($>10^{15}$) vastly exceeds the total number of T cells in the human body ($\sim 10^{12}$ total cells, comprising $\sim 10^7$ unique clones per person), immunologists long assumed that two unrelated individuals would virtually never share identical T-cell receptors. Under pure random generation, any single TCR sequence should be strictly <strong>private</strong>, meaning unique to one individual.
+                </p>
+                <p style="margin-bottom: 0;">
+                    Yet empirical clinical sequencing revealed a surprising phenomenon: thousands of identical TCR sequences are shared across unrelated individuals. These shared sequences, termed <strong>public TCRs</strong>, emerge through <strong>convergent recombination</strong>, where specific gene arrangements and junctions require fewer enzymatic insertions and occur with high probability ($P_{\text{gen}}$). When a widespread pathogen like Cytomegalovirus (CMV) infects unrelated people sharing common Human Leukocyte Antigen (HLA) alleles, these public TCRs expand in parallel.
+                </p>
+            </div>
+
+            <p>
+                In 2017, computational immunologist <strong>Ryan Emerson, Harlan Robins, and colleagues</strong> at Adaptive Biotechnologies and the Fred Hutchinson Cancer Research Center published a landmark study in <em>Nature Genetics</em>. By immunosequencing rearranged T-cell receptor beta ($\text{TCR}\beta$) chains from a large cohort of 666 human donors, they proved that a machine-learning algorithm can read this public immune ledger to accurately diagnose chronic viral infection and simultaneously infer host germline HLA alleles from a standard tube of blood.
+            </p>
+        </section>
+
+        <!-- 2. V(D)J Recombination Mechanics -->
+        <section>
+            <h2>2. The Molecular Machinery of V(D)J Somatic Recombination</h2>
+            <p>
+                To understand how immunosequencing works, we must trace the molecular enzymatic steps that construct each functional T-cell receptor.
+            </p>
+            <p>
+                The standard human T-cell receptor is a heterodimer composed of two protein chains, termed <strong>alpha ($\alpha$)</strong> and <strong>beta ($\beta$)</strong>. Most antigen-binding diversity is concentrated in the $\beta$ chain, which is encoded on chromosome 7q34 across three clusters of discontinuous gene segments:
+            </p>
+            <ul style="margin-left: 24px; margin-bottom: 16px; line-height: 1.65;">
+                <li><strong>Variable ($V_\beta$) Segments:</strong> ~52 functional segments encoding the framework regions and the first two hypervariable loops (CDR1 and CDR2).</li>
+                <li><strong>Diversity ($D_\beta$) Segments:</strong> 2 segments ($D_\beta 1$ and $D_\beta 2$) providing central amino acid sequence.</li>
+                <li><strong>Joining ($J_\beta$) Segments:</strong> 13 functional segments connecting the diversity segment to the constant region.</li>
+            </ul>
+
+            <h3>The CDR3 Hypervariable Loop: The Master Contact Site</h3>
+            <p>
+                Antigen specificity is governed by the <strong>Complementarity-Determining Region 3 (CDR3)</strong> loop. The CDR3 loop physically spans the junction where $V_\beta$, $D_\beta$, and $J_\beta$ segments fuse. In three-dimensional protein space, CDR3 sits directly over the center of the <strong>peptide-binding groove</strong> of the presenting MHC molecule, forming direct atomic contacts with foreign peptide residues.
+            </p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Enzyme / Factor</th>
+                        <th style="width: 35%;">Molecular Activity</th>
+                        <th style="width: 40%;">Contribution to Repertoire Diversity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>RAG1 / RAG2 Complex</strong></td>
+                        <td>Recombination-Activating Gene endonucleases that recognize <strong>Recombination Signal Sequences (RSS)</strong> flanking V, D, and J segments, making double-strand DNA cuts and creating sealed hairpin coding ends.</td>
+                        <td><strong>Combinatorial Diversity:</strong> Randomly selects one $V_\beta$, one $D_\beta$, and one $J_\beta$ segment ($52 \times 2 \times 13 \approx 1{,}352$ raw combinations).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Artemis Endonuclease</strong></td>
+                        <td>A DNA hairpin-opening endonuclease activated by DNA-dependent protein kinase (DNA-PKcs). Artemis cuts closed hairpin coding ends asymmetrically.</td>
+                        <td><strong>Junctional P-Nucleotides:</strong> Asymmetric hairpin cleavage leaves single-stranded overhangs that fill in as short palindromic (P) sequence additions.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Terminal Deoxynucleotidyl Transferase (TdT)</strong></td>
+                        <td>A template-independent DNA polymerase uniquely expressed in immature lymphocytes that randomly adds deoxynucleotides to free 3'-OH DNA ends prior to ligation.</td>
+                        <td><strong>Junctional N-Nucleotides:</strong> Adds random non-templated (N) nucleotides at $V_\beta\text{--}D_\beta$ and $D_\beta\text{--}J_\beta$ junctions, expanding theoretical sequence space by $>10^{11}$-fold.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Non-Homologous End Joining (NHEJ)</strong></td>
+                        <td>Ubiquitous DNA repair complex (Ku70/80, XRCC4, DNA Ligase IV) that trims loose nucleotides and ligates broken chromosome ends.</td>
+                        <td><strong>Exonucleolytic Deletion:</strong> Random nucleotide trimming at segment boundaries introduces frame-shift variability and length diversity.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 3. Public vs Private Repertoires -->
+        <section>
+            <h2>3. The Public vs. Private Repertoire Paradox &amp; Convergent Recombination</h2>
+            <p>
+                The enzymatic action of TdT, Artemis, and NHEJ makes somatic recombination an intrinsically noisy process. Because TdT adds nucleotides randomly, most TCR sequences are generated with very low mathematical probabilities ($P_{\text{gen}} < 10^{-10}$). These rare clonotypes constitute the <strong>private repertoire</strong>, sequences present in only a single individual across an entire population.
+            </p>
+            <p>
+                However, biophysical modeling revealed that somatic recombination is structurally biased. Certain V-D-J recombination pathways require zero or very few N-nucleotide additions to form an in-frame, functional receptor. These "near-germline" rearrangements have generation probabilities that are several orders of magnitude higher ($P_{\text{gen}} \approx 10^{-5} \text{ to } 10^{-7}$).
+            </p>
+
+            <div class="math-card">
+                <div style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--slate-600); text-transform: uppercase; letter-spacing: 0.05em;">
+                    The Generation Probability Principle
+                </div>
+                <div class="formula">
+                    $$P_{\text{sharing}}(c) \propto 1 - \exp\big[-2 \cdot M \cdot P_{\text{gen}}(c)\big]$$
+                </div>
+                <div style="font-size: 0.90rem; color: var(--slate-600); max-width: 680px; margin: 0 auto; text-align: left; line-height: 1.55;">
+                    The probability that two unrelated individuals share identical TCR clonotype $c$ scales directly with its somatic generation probability $P_{\text{gen}}(c)$ and the depth of the surveyed naïve T-cell pool $M$. Clonotypes with high $P_{\text{gen}}$ appear consistently across multiple human beings prior to any antigen exposure.
+                </div>
+            </div>
+
+            <p>
+                <strong>The Pathogen Multiplier:</strong> In a naïve host, public TCR clonotypes exist at very low cellular frequencies (perhaps 1 cell in 1,000,000). But when a common pathogen like Cytomegalovirus establishes lifelong chronic infection, it continuously stimulates antigen-specific T cells. The high-affinity public clones undergo thousands of rounds of cell division, expanding until a single public clonotype accounts for 1 in every 1,000 or even 1 in 100 circulating T cells!
+            </p>
+        </section>
+
+        <!-- 4. Deconstructing Figure 1 -->
+        <section>
+            <h2>4. Deconstructing Figure 1: The Immunosequencing &amp; Machine Learning Workflow</h2>
+            <p>
+                To translate these biological principles into a clinical diagnostic test, Emerson and colleagues designed an end-to-end experimental and computational pipeline, outlined in <strong>Figure 1</strong>:
+            </p>
+
+            <div class="figure-card">
+                <img src="images/emerson_fig1_workflow.jpg" alt="Figure 1: Experimental and analytical workflow from Emerson et al. 2017" style="max-height: 500px;">
+                <div class="figure-caption">
+                    <strong>Figure 1 (Emerson et al., Nature Genetics 2017): Experimental and Analytical Workflow for T-Cell Repertoire Diagnostics.</strong> 
+                    <strong>(a) Discovery Cohort:</strong> Peripheral blood mononuclear cells (PBMCs) were collected from 640 healthy human bone marrow donors with known Cytomegalovirus serostatus (287 CMV-positive and 353 CMV-negative). Genomic DNA was extracted and subjected to high-throughput multiplex PCR profiling of the rearranged TCR$\beta$ locus.
+                    <br><strong>(b) Feature Selection &amp; Dimensionality Reduction:</strong> From ~85 million total unique sequences, public clonotypes were statistically screened for significant enrichment in CMV-positive versus CMV-negative subjects using one-tailed Fisher's exact tests. False discovery rate (FDR) was controlled by permuting CMV labels. An aggregate metric, the <em>Pathogen Memory Burden</em>, was computed to compress high-dimensional TCR data into a single clinical score.
+                    <br><strong>(c) Leave-One-Out Cross-Validation (LOOCV):</strong> The full classification pipeline—including feature selection and logistic regression—was validated through 640 iterative leave-one-out cycles to ensure zero data leakage and unbiased diagnostic evaluation.
+                </div>
+            </div>
+
+            <h3>Key Methodological Breakthroughs in Figure 1:</h3>
+            <ol style="margin-left: 24px; line-height: 1.65; margin-bottom: 16px;">
+                <li><strong>Unbiased Multiplex Amplification:</strong> Amplifying dozens of distinct $V_\beta$ and $J_\beta$ segments with PCR typically introduces severe primer amplification bias. The authors employed an optimized pool of 60 forward $V_\beta$ and 13 reverse $J_\beta$ primers balanced against synthetic internal standard templates (Carlson et al. 2013), ensuring strictly quantitative read counts.</li>
+                <li><strong>Taming the Dimensionality Curse:</strong> High-throughput sequencing of 640 donors generated over 85 million unique TCR$\beta$ sequences. Attempting to fit a standard regression model with 85 million variables on 640 subjects would cause immediate catastrophic overfitting. Emerson et al. solved this by introducing a <strong>two-stage feature selection filter</strong> based on public sharing and non-parametric label permutation.</li>
+                <li><strong>Exhaustive Cross-Validation:</strong> To prove their model did not memorize noise, they held out one patient at a time, completely re-ran the statistical association on the remaining 639 donors, and predicted the hold-out patient's infection status blind.</li>
+            </ol>
+        </section>
+
+        <!-- 5. Deconstructing Figure 2: Focal Figure -->
+        <section id="focal-figure-2">
+            <h2>5. Deconstructing Figure 2: The Diagnostic Classifier &amp; Overfitting Dynamics</h2>
+            <p>
+                The core scientific and mathematical triumph of the Emerson paper is presented in <strong>Figure 2</strong>. Here, the authors demonstrate how calibrating statistical thresholds enables high diagnostic accuracy while avoiding the trap of data overfitting:
+            </p>
+
+            <div class="figure-card">
+                <img src="images/emerson_fig2_classifier.jpg" alt="Figure 2: Machine learning classification results from Emerson et al. 2017" style="max-height: 560px; border: 2px solid var(--slate-800);">
+                <div class="figure-caption">
+                    <strong>Figure 2 (Emerson et al., Nature Genetics 2017): Diagnostic Performance, Overfitting Dynamics, and Clinical Classification of CMV Serostatus.</strong> 
+                    <strong>(a) Area Under the ROC Curve (AUROC) Across Significance Thresholds:</strong> Classification performance evaluated on the full training cohort (green circles) versus the leave-one-out cross-validation (CV) cohort (orange circles) as the Fisher's exact test $P$-value threshold varies from $10^{-6}$ to $10^{-2}$. The numbers above indicate the count of public TCR$\beta$ sequences selected at each cutoff. The optimal threshold ($P \le 1.0 \times 10^{-4}$, 142 features) is boxed.
+                    <br><strong>(b) Empirical False Discovery Rate (FDR):</strong> FDR estimated across significance cutoffs using 100 random permutations of donor CMV serostatus labels.
+                    <br><strong>(c) Pathogen Memory Burden Distribution:</strong> The percentage of an individual's total TCR$\beta$ repertoire composed of the 142 diagnostic CMV-associated sequences for CMV-positive (blue bars) versus CMV-negative (orange bars) donors.
+                    <br><strong>(d) Receiver Operating Characteristic (ROC) Curves &amp; Confusion Matrix:</strong> ROC curves for full training ($\text{AUROC} = 0.98$) and cross-validation ($\text{AUROC} = 0.93$). Inset displays the cross-validation confusion matrix at the optimal diagnostic threshold.
+                </div>
+            </div>
+
+            <h3>Four Fundamental Immunogenomic Insights Revealed by Figure 2:</h3>
+            
+            <div style="background: #F1F5F9; border-radius: 6px; padding: 18px 22px; margin: 20px 0;">
+                <p style="margin-bottom: 12px;">
+                    <strong>1. The Divergence of Training vs. Cross-Validation Performance (Panel A):</strong><br>
+                    Notice the dramatic divergence between the green (full training) and orange (cross-validation) curves as the $P$-value threshold loosens. 
+                    <ul style="margin-left: 20px; margin-top: 6px; margin-bottom: 6px;">
+                        <li>At stringent thresholds ($P \le 10^{-6}$ to $10^{-4}$), both training and cross-validation performance climb together, peaking at $\text{AUROC} = 0.93$ with <strong>142 public TCR$\beta$ features</strong>.</li>
+                        <li>However, when the threshold is relaxed to $P \le 10^{-2}$, the algorithm admits <strong>78,566 candidate TCR sequences</strong>. On the training set, performance appears perfect ($\text{AUROC} = 1.00$), but on the cross-validation set, performance crashes down to $0.70$! This is a textbook demonstration of <strong>overfitting in high-dimensional biological data</strong>: the model begins memorizing private noise rather than true public immunological signal.</li>
+                    </ul>
+                </p>
+                <p style="margin-bottom: 12px;">
+                    <strong>2. Empirical False Discovery Calibration (Panel B):</strong><br>
+                    By permuting donor labels (scrambling who was CMV+ and CMV-), the authors calculated how many sequences would pass the significance threshold by sheer random chance. At the chosen threshold ($P \le 10^{-4}$), the False Discovery Rate is well controlled at <strong>~20%</strong>. Beyond this threshold, FDR spikes vertically toward 100%.
+                </p>
+                <p style="margin-bottom: 12px;">
+                    <strong>3. Pathogen Memory Burden Compression (Panel C):</strong><br>
+                    The authors condensed the presence of all 142 diagnostic TCRs into a single scalar value: the <strong>Pathogen Memory Burden</strong> ($M_i$), representing the percentage of a donor's total TCR repertoire matching the CMV catalog:
+                    $$M_i = \frac{\sum_{k \in \text{CMV Catalog}} \text{Reads}(k)}{\text{Total TCR Reads}_i} \times 100\%$$
+                    In CMV-seronegative individuals (orange), $M_i$ clusters tightly at zero (median $< 0.001\%$). In CMV-seropositive donors (blue), $M_i$ forms a long, elevated distribution extending up to $0.04\%$ of the entire repertoire. A simple logistic regression boundary cleanly bifurcates the two clinical populations.
+                </p>
+                <p style="margin-bottom: 0;">
+                    <strong>4. High Clinical Accuracy and Odds Ratio (Panel D):</strong><br>
+                    At the optimal decision threshold, the blind cross-validation confusion matrix achieves exceptional diagnostic performance:
+                    <ul style="margin-left: 20px; margin-top: 6px;">
+                        <li><strong>Sensitivity:</strong> $\frac{248}{248 + 39} = \frac{248}{287} = \mathbf{86.4\%}$ (True Positive Rate)</li>
+                        <li><strong>Specificity:</strong> $\frac{322}{322 + 31} = \frac{322}{353} = \mathbf{91.2\%}$ (True Negative Rate)</li>
+                        <li><strong>Overall Diagnostic Accuracy:</strong> $\frac{248 + 322}{640} = \frac{570}{640} = \mathbf{89.1\%}$</li>
+                        <li><strong>Diagnostic Odds Ratio (DOR):</strong> $\text{DOR} = \frac{\text{TP} \times \text{TN}}{\text{FP} \times \text{FN}} = \frac{248 \times 322}{31 \times 39} = \frac{79{,}856}{1{,}209} = \mathbf{66.1}$</li>
+                    </ul>
+                </p>
+            </div>
+        </section>
+
+        <!-- 6. Deconstructing Figure 3: HLA Restriction -->
+        <section>
+            <h2>6. Deconstructing Figure 3: HLA Class I Restriction &amp; Host Immunogenetics</h2>
+            <p>
+                Why did the 142 diagnostic TCR sequences achieve 86% sensitivity rather than 100%? The biological explanation is grounded in the central mechanism of cellular immunology: <strong>MHC Restriction</strong>.
+            </p>
+            <p>
+                A T-cell receptor does not recognize free, floating viral particles. Instead, the TCR recognizes an 8–10 amino acid viral peptide cradled within the peptide-binding cleft of a <strong>Major Histocompatibility Complex (MHC) Class I</strong> protein on the surface of an infected host cell. In humans, MHC Class I proteins are encoded by the hyper-polymorphic <strong>HLA-A, HLA-B, and HLA-C</strong> genes.
+            </p>
+
+            <div class="figure-card">
+                <img src="images/emerson_fig3_hla_restriction.jpg" alt="Figure 3: HLA restriction of CMV-associated TCR beta sequences from Emerson et al. 2017" style="max-height: 600px;">
+                <div class="figure-caption">
+                    <strong>Figure 3 (Emerson et al., Nature Genetics 2017): HLA-Restriction of CMV-Associated Public TCR$\beta$ Sequences.</strong> 
+                    <strong>(A &amp; B) Population Allele Frequencies:</strong> Distribution of HLA-A (left) and HLA-B (right) alleles across the 640 donors, showing high frequencies for common European and North American alleles (e.g., HLA-A*02, A*01, A*03, B*07, B*44, B*08).
+                    <br><strong>(C) HLA Association Matrix:</strong> Grid mapping statistical association between each of the 142 CMV-associated TCR$\beta$ sequences (rows) and specific HLA-A and HLA-B alleles (columns). Shaded squares denote statistically significant association ($P \le 1.0 \times 10^{-3}$, Fisher's exact test). Exactly 57 TCR$\beta$ sequences show strict restriction to specific HLA alleles. Callout labels highlight validated public CDR3 clonotypes (e.g., <code>CASSLAPGATNEKLFF</code>, <code>CASSLIGVSSYNEQFF</code>, <code>CASSPSQNTEAFF</code>).
+                </div>
+            </div>
+
+            <h3>The Biological Consequence of HLA Restriction:</h3>
+            <p>
+                Because each HLA allele possesses a distinct peptide-binding cleft with unique anchor pockets, an individual carrying <strong>HLA-A*02:01</strong> will present completely different CMV peptide fragments than an individual carrying <strong>HLA-B*07:02</strong>.
+            </p>
+            <p>
+                Consequently, a public T-cell receptor specific for an HLA-A*02:01-restricted peptide will <strong>only expand in CMV-infected individuals who carry the HLA-A*02:01 gene</strong>! If a person lacks HLA-A*02:01, that public T cell has nothing to bind to and remains at naïve baseline levels.
+            </p>
+            <p>
+                <strong>The Ultimate Genomic Reversal:</strong> Emerson et al. realized this relationship works in both directions. Because specific public TCRs only expand in the presence of specific HLA alleles, the authors inverted their algorithm: they used the presence of public TCR clonotypes to <strong>predict the host's germline HLA alleles</strong> directly from blood RNA/DNA sequencing, achieving $>90\%$ concordance with clinical HLA genotyping!
+            </p>
+        </section>
+
+        <!-- 7. The Double-Edged Sword & Clinical Translation -->
+        <section>
+            <h2>7. The Double-Edged Sword: From Pathogen Defense to Autoimmunity &amp; Pharmacogenomics</h2>
+            <p>
+                The evolutionary pressure driving HLA diversity is clear: high polymorphism prevents a single pathogen from evading the immune defenses of an entire host species. Heterozygote advantage ensures that individuals carrying two distinct alleles at each HLA locus can present a broader repertoire of foreign peptides.
+            </p>
+            <p>
+                However, this hyper-variable machinery is a <strong>double-edged sword</strong>. The exact same biophysical cleft properties that allow HLA molecules to present pathogen peptides with high affinity can inadvertently trigger catastrophic immune attacks against self-tissues or adverse responses to pharmacological drugs:
+            </p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Clinical Condition</th>
+                        <th style="width: 30%;">Restricting HLA Allele</th>
+                        <th style="width: 45%;">Molecular &amp; Immunogenomic Mechanism</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Type 1 Diabetes (T1D)</strong></td>
+                        <td>HLA-DQB1*02:01 / *03:02<br><em>(MHC Class II)</em></td>
+                        <td>Polymorphic substitution of non-aspartic acid residues at position 57 (non-Asp57) in the HLA-DQ $\beta$ chain alters the P9 electrostatic anchor pocket, enabling high-affinity presentation of pancreatic insulin B-chain and GAD65 peptides to autoreactive CD4+ T cells.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Celiac Disease</strong></td>
+                        <td>HLA-DQ2.5 (DQA1*05:01 / DQB1*02:01) &amp; HLA-DQ8</td>
+                        <td>Tissue transglutaminase 2 (tTG2) deamidates neutral glutamine residues in dietary gluten into negatively charged glutamic acid. These negative charges fit with high electrostatic complementarity into basic P4, P6, P7, and P9 anchor pockets of HLA-DQ2.5, driving mucosal destruction.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ankylosing Spondylitis</strong></td>
+                        <td>HLA-B*27<br><em>(MHC Class I)</em></td>
+                        <td>Carriers possess an odds ratio exceeding 40 for inflammatory spinal arthropathy. Mechanisms include presentation of arthritogenic microbial peptides that cross-react with self-cartilage (molecular mimicry), alongside HLA-B27 heavy-chain misfolding and homodimerization inducing cellular ER stress.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Abacavir Hypersensitivity (SCAR)</strong></td>
+                        <td>HLA-B*57:01<br><em>(MHC Class I)</em></td>
+                        <td>The small-molecule antiretroviral drug abacavir binds non-covalently into the F-pocket of the HLA-B*57:01 peptide-binding groove. This alters the shape and electrostatic charge of the cleft, causing the presenting complex to display novel self-peptides that trigger massive, fatal CD8+ systemic autoimmunity (Illing et al., Nature 2012).</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Modern Clinical Translation: The Rise of "Liquid Immune Biopsies"</h3>
+            <p>
+                The clinical paradigm established by Emerson et al. has rapidly expanded from basic science into frontline medical diagnostics. Traditional antibody serology suffers from major limitations:
+            </p>
+            <ul style="margin-left: 24px; margin-bottom: 16px; line-height: 1.65;">
+                <li><strong>Waning Antibody Titers:</strong> Circulating IgG and IgM antibodies decay with half-lives of weeks to months, often yielding false-negative serology tests years after initial exposure. In contrast, memory T cells persist in peripheral blood for decades.</li>
+                <li><strong>Immunocompromised &amp; Organ Transplant Patients:</strong> In solid-organ and bone marrow transplant recipients receiving B-cell depleting therapies (e.g. rituximab) or calcineurin inhibitors, humoral antibody synthesis is severely blunted. Immunosequencing directly detects cellular T-cell memory clones even when serum antibodies are completely undetectable.</li>
+                <li><strong>FDA Emergency Authorization (T-Detect COVID):</strong> In 2021, the US FDA granted Emergency Use Authorization to Adaptive Biotechnologies' <em>T-Detect COVID</em> assay, the first clinical diagnostic based directly on high-throughput TCR sequencing and machine-learning classification developed under the Emerson et al. framework.</li>
+            </ul>
+        </section>
+
+        <!-- 8. PRE-CLASS READING QUIZ & FIGURE ANNOTATION GUIDE -->
+        <section class="quiz-callout-card">
+            <h3>📝 Pre-Class Reading Mastery Quiz &amp; Figure Annotation Guide</h3>
+            <p>
+                The <strong>Lecture 8 Pre-Class Reading Quiz</strong> opens on Canvas on <strong>Thursday, October 15, 2026, at 00:00 (Midnight) and closes at 20:00 (8:00 PM EDT)</strong>.
+            </p>
+            <p>
+                Following our established course standard, <strong>Question 1 (2.0 Points &mdash; Mandatory Proof-of-Work Upload)</strong> requires you to download the master machine-learning classifier diagram from Emerson et al. (Figure 2), perform a guided quantitative analysis, and upload your personalized annotated diagram with your verified student watermark. Submissions without the handwritten or digitally typed watermark will receive zero credit.
+            </p>
+
+            <div style="background: #FFFFFF; border: 1.5px solid #CBD5E1; border-radius: 6px; padding: 18px 20px; margin: 16px 0;">
+                <h4 style="color: #9D2235; font-size: 1.02rem; margin-bottom: 8px; font-weight: 800;">Step-by-Step Instructions for Question 1 (Mandatory Proof-of-Work):</h4>
+                <ol style="margin-left: 20px; line-height: 1.65; color: var(--slate-700);">
+                    <li><strong>Download the Image:</strong> Download <a href="images/emerson_fig2_classifier.jpg" target="_blank" style="color: #9D2235; font-weight: 700;">emerson_fig2_classifier.jpg</a> to your tablet, computer, or phone.</li>
+                    <li><strong>Annotate the Optimal Feature Threshold (Panel A):</strong> Locate the boxed region in Panel A at $P \le 1.0 \times 10^{-4}$ (above which 142 features are selected). Draw a green circle or box around this point and label it: <code>"Optimal Classifier Sweet Spot (142 Features, CV AUROC = 0.93)"</code>.</li>
+                    <li><strong>Identify the Overfitting Trap (Panel A):</strong> Trace the cross-validation curve (orange circles) as it plunges downward at $P \le 1.0 \times 10^{-2}$ (78,566 features). Draw a red downward arrow pointing to the CV point and write: <code>"Severe Overfitting / Dimensionality Curse (memorizing private noise)"</code>.</li>
+                    <li><strong>Record the Empirical False Discovery Rate (Panel B):</strong> In Panel B, draw a horizontal or vertical dashed pointer to the FDR value at $P \le 10^{-4}$ and neatly annotate: <code>"FDR ≈ 20% (via label permutation)"</code>.</li>
+                    <li><strong>Characterize the Memory Burden Distribution (Panel C):</strong> On Panel C, point an arrow to the orange spike near 0.00% and label it: <code>"CMV- Negative Controls (median &lt; 0.001%)"</code>. Point a second arrow to the extended blue distribution and label it: <code>"CMV+ Chronic Infection Clonal Expansion (up to 0.04% of repertoire)"</code>.</li>
+                    <li><strong>Derive the 4 Clinical Diagnostic Metrics (Panel D):</strong> In the margin or bottom whitespace of Panel D, use the numbers inside the confusion matrix inset (observed vs. predicted) to write out the mathematical derivations:
+                        <ul style="margin-left: 18px; margin-top: 4px; margin-bottom: 4px; font-family: var(--font-mono); font-size: 0.85rem;">
+                            <li>Sensitivity = 248 / (248 + 39) = 248 / 287 = <strong>86.4%</strong></li>
+                            <li>Specificity = 322 / (322 + 31) = 322 / 353 = <strong>91.2%</strong></li>
+                            <li>Overall Accuracy = (248 + 322) / 640 = 570 / 640 = <strong>89.1%</strong></li>
+                            <li>Diagnostic Odds Ratio (DOR) = (248 × 322) / (31 × 39) = 79,856 / 1,209 = <strong>66.1</strong></li>
+                        </ul>
+                    </li>
+                    <li><strong>Add Your Verified Watermark:</strong> In the upper-right or lower-left corner of the canvas, handwrite or digitally type: <code>[Your Full Name] • [AccessNet ID] • [Date]</code>.</li>
+                    <li><strong>Upload to Canvas:</strong> Export as PNG, JPG, or PDF and upload under Question 1 of the reading quiz.</li>
+                </ol>
+                <div style="margin-top: 14px; display: flex; gap: 12px; flex-wrap: wrap;">
+                    <a href="images/emerson_fig2_classifier.jpg" download class="btn-download">
+                        📥 Download Emerson Figure 2 Template (.jpg)
+                    </a>
+                    <a href="https://templeu.instructure.com/courses/178614/quizzes" target="_blank" class="btn-download" style="background: var(--temple-cherry);">
+                        📝 Open Canvas Reading Quizzes Portal
+                    </a>
+                </div>
+            </div>
+
+            <p style="font-size: 0.90rem; color: #92400E; margin-bottom: 0;">
+                <strong>Questions 2–5 (1.0 Point each):</strong> Assess somatic V(D)J recombination mechanisms (TdT non-templated nucleotide additions and RAG1/2 cleavage), convergent recombination generating public TCR clonotypes, the immunogenetics of HLA Class I restriction, and why T-cell immunosequencing provides superior diagnostic durability compared to waning antibody serology in immunocompromised patient cohorts.
+            </p>
+        </section>
+
+        <footer>
+            <div>BIOL 3111/5111: Genomics in Medicine &bull; Department of Biology &bull; Temple University</div>
+            <div><a href="syllabus.html" style="color: var(--temple-cherry); font-weight: 700;">Back to Course Syllabus</a></div>
+        </footer>
+    </div>
+</body>
+</html>
