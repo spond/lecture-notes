@@ -1,0 +1,2879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 8: The Double-Edged Sword — Host Immunology, HLA Diversity, and Autoimmune Disease | BIOL 3111</title>
+    
+    <!-- Trailing-Slash Auto-Enforcer -->
+    <script>
+        (function() {
+            var p = window.location.pathname;
+            if (p.endsWith('/index.html') || p.endsWith('.html')) return;
+            if (p.indexOf('.') === -1 && !p.endsWith('/')) {
+                window.location.replace(window.location.protocol + '//' + window.location.host + p + '/' + window.location.search + window.location.hash);
+            }
+        })();
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@600;700;800;900&family=Roboto+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- MathJax -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+
+        :root {
+            /* Retro-Bauhaus & Swiss Modernist High-Contrast Palette */
+            --bg-color: #F4F0E8;           /* Warm archival paper ground */
+            --slide-bg: #FCFAF6;          /* Crisp light bone/parchment interior */
+            --ink-black: #121316;         /* Dense carbon drafting ink */
+            --ink-slate: #2D3139;         /* Secondary body text */
+            --ink-muted: #5C626F;         /* Muted technical annotations */
+            --temple-cherry: #9D2235;     /* Constructivist Cherry / Vermilion */
+            --bauhaus-blue: #1D4ED8;      /* Bauhaus Cobalt / Ultramarine */
+            --bauhaus-emerald: #0F766E;   /* Deep Spruce / Technical Teal */
+            --bauhaus-amber: #B45309;     /* Warm Ochre / Burnt Amber */
+            --bauhaus-purple: #6D28D9;    /* Deep Violet */
+            --rule-ink: #1A1C20;          /* The defining 1.5px/2.0px solid ink rule */
+            --rule-subtle: #D8D4CA;       /* Fine internal hairline grid rules */
+            --card-bg: #FFFFFF;
+            
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-heading: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            --transition-speed: 0.14s;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--ink-black);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        #progress-container {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 5px;
+            background: #E5E1D5; z-index: 1000;
+        }
+        #progress-bar {
+            height: 100%; width: 3.7%;
+            background: var(--temple-cherry);
+            transition: width var(--transition-speed) ease-out;
+        }
+
+        header {
+            position: fixed; top: 0; left: 0; right: 0; height: 48px;
+            padding: 0 32px; display: flex; align-items: center; justify-content: space-between;
+            background: var(--bg-color); border-bottom: 2px solid var(--rule-ink); z-index: 999;
+        }
+        .header-left {
+            display: flex; align-items: center; gap: 12px;
+            font-family: var(--font-heading); font-weight: 800; font-size: 0.98rem;
+            letter-spacing: -0.01em;
+        }
+        .header-badge {
+            background: var(--temple-cherry); color: #FFFFFF;
+            padding: 2px 8px; border-radius: 2px; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            border: 1.5px solid var(--rule-ink); box-shadow: 1.5px 1.5px 0px var(--rule-ink);
+        }
+        .header-right {
+            display: flex; align-items: center; gap: 16px;
+            font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-slate); font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        #stage {
+            flex: 1; width: 100vw; height: 100vh;
+            padding: 56px 32px 44px 32px;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+        }
+
+        .slide {
+            position: absolute; inset: 56px 32px 44px 32px;
+            display: none; flex-direction: column; justify-content: space-between;
+            background: var(--slide-bg); border-radius: 3px;
+            border: 2px solid var(--rule-ink);
+            box-shadow: 4px 4px 0px var(--rule-ink);
+            padding: 16px 26px; overflow: hidden;
+        }
+        .slide.active { display: flex; animation: slideFadeIn 0.16s ease-out; }
+
+        @keyframes slideFadeIn {
+            from { opacity: 0; transform: translateY(2px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Slide Typography */
+        .slide-header {
+            margin-bottom: 8px;
+            display: flex; justify-content: space-between; align-items: flex-start;
+            border-bottom: 1.5px solid var(--rule-ink); padding-bottom: 6px;
+            flex-shrink: 0;
+        }
+        .slide-category {
+            font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800;
+            color: var(--temple-cherry); text-transform: uppercase; letter-spacing: 0.06em;
+            margin-bottom: 2px;
+        }
+        .slide-title {
+            font-family: var(--font-heading); font-size: 2.15rem; font-weight: 900;
+            color: var(--ink-black); letter-spacing: -0.025em; line-height: 1.15;
+        }
+        .slide-subtitle {
+            font-size: 1.05rem; font-weight: 600; color: var(--ink-muted); margin-top: 2px;
+        }
+
+        /* Content Layouts */
+        .grid-2col {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+            align-items: stretch; flex: 1; min-height: 0;
+        }
+        .grid-3col {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+            align-items: stretch; flex: 1; min-height: 0;
+        }
+
+        .card {
+            background: var(--card-bg); border: 1.5px solid var(--rule-ink);
+            border-radius: 2px; box-shadow: 2px 2px 0px var(--rule-ink);
+            padding: 14px 18px; display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 0;
+        }
+        .card-cherry { border-left: 6px solid var(--temple-cherry); }
+        .card-blue { border-left: 6px solid var(--bauhaus-blue); }
+        .card-emerald { border-left: 6px solid var(--bauhaus-emerald); }
+        .card-amber { border-left: 6px solid var(--bauhaus-amber); }
+        .card-purple { border-left: 6px solid var(--bauhaus-purple); }
+
+        .card-title {
+            font-family: var(--font-heading); font-size: 1.22rem; font-weight: 800;
+            color: var(--ink-black); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+        }
+
+        .content-list {
+            list-style: none; display: flex; flex-direction: column; gap: 8px;
+            font-size: 1.06rem; line-height: 1.46; color: var(--ink-slate);
+        }
+        .content-list li {
+            position: relative; padding-left: 18px;
+        }
+        .content-list li::before {
+            content: "■"; position: absolute; left: 0; top: 0.15em;
+            color: var(--temple-cherry); font-size: 0.72rem;
+        }
+        .content-list strong {
+            color: var(--ink-black); font-weight: 700;
+        }
+
+        .takeaway-strip {
+            background: #EFF6FF; border: 1.5px solid var(--rule-ink);
+            border-left: 6px solid var(--bauhaus-blue);
+            padding: 8px 14px; border-radius: 2px;
+            font-size: 0.96rem; line-height: 1.40; color: var(--ink-black);
+            margin-top: 8px; box-shadow: 2px 2px 0px var(--rule-ink);
+            flex-shrink: 0;
+        }
+        .takeaway-strip-cherry {
+            background: #FEF2F2; border-left-color: var(--temple-cherry);
+        }
+        .takeaway-strip-emerald {
+            background: #ECFDF5; border-left-color: var(--bauhaus-emerald);
+        }
+        .takeaway-strip-amber {
+            background: #FFFBEB; border-left-color: var(--bauhaus-amber);
+        }
+        .takeaway-strip-purple {
+            background: #FAF5FF; border-left-color: var(--bauhaus-purple);
+        }
+
+        /* Hero Visual Containers */
+        .hero-visual-card {
+            background: #FFFFFF; border: 1.5px solid var(--rule-ink);
+            border-radius: 2px; box-shadow: 2px 2px 0px var(--rule-ink);
+            padding: 12px 16px; display: flex; flex-direction: column;
+            align-items: center; justify-content: space-between; flex: 1;
+            position: relative; overflow: hidden; min-height: 0;
+        }
+        .hero-img {
+            max-width: 100%; max-height: 100%; object-fit: contain;
+            border-radius: 2px; flex: 1; min-height: 0;
+        }
+
+        /* Interactive Timers and Badges */
+        .passcode-pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: #FFFBEB; border: 1.5px solid var(--rule-ink);
+            padding: 3px 10px; border-radius: 2px;
+            font-family: var(--font-mono); font-size: 0.88rem; font-weight: 800;
+            color: #92400E; box-shadow: 1.5px 1.5px 0px var(--rule-ink);
+        }
+        .timer-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #F8FAFC; border: 1.5px solid var(--rule-ink);
+            padding: 3px 10px; border-radius: 2px;
+            font-family: var(--font-mono); font-size: 0.95rem; font-weight: 800;
+            color: #0F172A; box-shadow: 1.5px 1.5px 0px var(--rule-ink);
+        }
+        .timer-btn {
+            background: var(--temple-cherry); color: #FFFFFF;
+            border: 1px solid var(--rule-ink); padding: 2px 8px; border-radius: 2px;
+            font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700;
+            cursor: pointer;
+        }
+        .timer-btn:hover { background: #781827; }
+
+        /* Sprint 4-Track Interface */
+        .sprint-tab-bar {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+            margin-bottom: 8px;
+        }
+        .sprint-tab-btn {
+            background: #F1F5F9; border: 1.5px solid var(--rule-ink);
+            border-radius: 2px; padding: 6px 8px;
+            font-family: var(--font-mono); font-size: 0.85rem; font-weight: 800;
+            color: #475569; cursor: pointer; text-align: center;
+            box-shadow: 1.5px 1.5px 0px var(--rule-ink);
+        }
+        .sprint-tab-btn.active {
+            background: var(--temple-cherry); color: #FFFFFF;
+        }
+        .sprint-pane {
+            display: none; flex-direction: column; gap: 8px; flex: 1; min-height: 0;
+        }
+        .sprint-pane.active {
+            display: flex;
+        }
+
+        /* Instructor Specifics & Debrief Drawer */
+        .instructor-box {
+            display: none;
+            position: absolute;
+            bottom: 14px;
+            left: 24px;
+            right: 24px;
+            max-height: 48%;
+            overflow-y: auto;
+            background: #FFFBEB;
+            border: 2px solid #B45309;
+            border-left: 8px solid #D97706;
+            padding: 12px 18px;
+            border-radius: 4px;
+            font-size: 0.94rem;
+            line-height: 1.48;
+            color: #78350F;
+            box-shadow: 4px 4px 0px rgba(26, 28, 32, 0.35);
+            z-index: 500;
+        }
+        body.show-instructor-notes .instructor-box {
+            display: block;
+        }
+        .instructor-toggle-btn {
+            display: none;
+            background: #FDE68A;
+            border: 1.5px solid #B45309;
+            border-radius: 2px;
+            padding: 2px 10px;
+            font-family: var(--font-mono);
+            font-size: 0.80rem;
+            font-weight: 800;
+            color: #78350F;
+            cursor: pointer;
+            box-shadow: 1.5px 1.5px 0px #B45309;
+        }
+        .instructor-toggle-btn:hover {
+            background: #FCD34D;
+        }
+        body.is-instructor .instructor-toggle-btn {
+            display: inline-block;
+        }
+
+        /* Navigation Footer */
+        footer {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 38px;
+            padding: 0 32px; display: flex; align-items: center; justify-content: space-between;
+            background: var(--bg-color); border-top: 2px solid var(--rule-ink); z-index: 999;
+            font-family: var(--font-mono); font-size: 0.85rem;
+        }
+        .nav-btn {
+            background: #FFFFFF; border: 1.5px solid var(--rule-ink);
+            padding: 3px 10px; border-radius: 2px; font-family: var(--font-mono);
+            font-size: 0.82rem; font-weight: 800; cursor: pointer;
+            box-shadow: 1.5px 1.5px 0px var(--rule-ink);
+        }
+        .nav-btn:hover { background: #F8FAFC; }
+
+        /* Data Tables */
+        .data-table {
+            width: 100%; border-collapse: collapse; font-size: 0.95rem; line-height: 1.40;
+            border: 1.5px solid var(--rule-ink);
+        }
+        .data-table th, .data-table td {
+            border: 1px solid var(--rule-ink); padding: 6px 10px; text-align: left;
+        }
+        .data-table th {
+            background: #F1F5F9; font-family: var(--font-heading); font-weight: 800;
+        }
+        .data-table tr:nth-child(even) { background: #F8FAFC; }
+
+        /* Laptop / Medium Display Fine-Tuning */
+        @media (max-height: 850px) and (min-width: 821px) {
+            .slide { padding: 12px 20px; }
+            .slide-title { font-size: 1.85rem; }
+            .card-title { font-size: 1.10rem; }
+            .content-list { font-size: 0.96rem; line-height: 1.38; }
+            .takeaway-strip { font-size: 0.88rem; padding: 6px 10px; }
+        }
+
+        /* ==========================================================================
+           Mobile & Touch Devices: iPhone, Android, and Narrow Viewports (<= 820px)
+           ========================================================================== */
+        @media (max-width: 820px) {
+            html, body {
+                height: auto !important;
+                min-height: 100vh !important;
+                overflow-x: hidden !important;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                touch-action: pan-y !important;
+            }
+
+            header {
+                position: fixed !important;
+                top: 0 !important; left: 0 !important; right: 0 !important;
+                height: 44px !important;
+                padding: 0 10px !important;
+                background: var(--bg-color) !important;
+                border-bottom: 2px solid var(--rule-ink) !important;
+                z-index: 9999 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+            }
+            .header-left {
+                font-size: 0.80rem !important;
+                gap: 6px !important;
+                display: flex !important;
+                align-items: center !important;
+            }
+            .header-left span:last-child {
+                display: none !important;
+            }
+            .header-badge {
+                font-size: 0.72rem !important;
+                padding: 2px 7px !important;
+                flex-shrink: 0 !important;
+            }
+            .header-right {
+                gap: 6px !important;
+                font-size: 0.75rem !important;
+                flex-shrink: 0 !important;
+            }
+            .header-right > span:not(#slide-num-disp) {
+                display: none !important;
+            }
+            #slide-num-disp {
+                font-size: 0.75rem !important;
+                padding: 2px 6px !important;
+            }
+
+            #stage {
+                position: relative !important;
+                width: 100vw !important;
+                height: auto !important;
+                min-height: calc(100vh - 94px) !important;
+                padding: 50px 10px 62px 10px !important;
+                display: block !important;
+                overflow: visible !important;
+                box-sizing: border-box !important;
+            }
+
+            .slide {
+                position: relative !important;
+                inset: auto !important;
+                width: 100% !important;
+                height: auto !important;
+                min-height: calc(100vh - 120px) !important;
+                padding: 14px 14px 18px 14px !important;
+                overflow: visible !important;
+                display: none !important;
+                box-shadow: 2px 2px 0px var(--rule-ink) !important;
+                box-sizing: border-box !important;
+                margin: 0 auto !important;
+            }
+            .slide.active {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 12px !important;
+                justify-content: flex-start !important;
+            }
+
+            .slide-header {
+                margin-bottom: 6px !important;
+                padding-bottom: 6px !important;
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: flex-start !important;
+                gap: 8px !important;
+            }
+            .slide-category {
+                font-size: 0.70rem !important;
+                margin-bottom: 2px !important;
+            }
+            .slide-title {
+                font-size: 1.30rem !important;
+                line-height: 1.22 !important;
+                letter-spacing: -0.015em !important;
+            }
+            .slide-subtitle {
+                font-size: 0.84rem !important;
+                line-height: 1.36 !important;
+                margin-top: 3px !important;
+            }
+
+            .grid-2col, .grid-3col {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 12px !important;
+                flex: none !important;
+                min-height: auto !important;
+                width: 100% !important;
+            }
+
+            .card {
+                padding: 12px 14px !important;
+                min-height: auto !important;
+                flex: none !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                box-shadow: 2px 2px 0px var(--rule-ink) !important;
+            }
+            .card-title {
+                font-size: 1.02rem !important;
+                margin-bottom: 6px !important;
+            }
+            .content-list {
+                font-size: 0.88rem !important;
+                line-height: 1.45 !important;
+                gap: 6px !important;
+            }
+            .content-list li {
+                padding-left: 14px !important;
+            }
+
+            .takeaway-strip {
+                font-size: 0.84rem !important;
+                line-height: 1.40 !important;
+                padding: 8px 12px !important;
+                margin-top: 8px !important;
+            }
+
+            .hero-visual-card {
+                padding: 10px 12px !important;
+                min-height: auto !important;
+                flex: none !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            .hero-img {
+                max-width: 100% !important;
+                height: auto !important;
+                max-height: 280px !important;
+                object-fit: contain !important;
+            }
+            svg {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+
+            .sprint-tab-bar {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 6px !important;
+                margin-bottom: 8px !important;
+            }
+            .sprint-tab-btn {
+                font-size: 0.76rem !important;
+                padding: 6px 8px !important;
+            }
+            .timer-badge {
+                font-size: 0.82rem !important;
+                padding: 2px 6px !important;
+            }
+            .timer-btn {
+                font-size: 0.72rem !important;
+                padding: 2px 6px !important;
+            }
+            .passcode-pill {
+                font-size: 0.76rem !important;
+                padding: 2px 6px !important;
+            }
+
+            footer {
+                position: fixed !important;
+                bottom: 0 !important; left: 0 !important; right: 0 !important;
+                height: 48px !important;
+                padding: 0 10px !important;
+                gap: 8px !important;
+                background: var(--bg-color) !important;
+                border-top: 2px solid var(--rule-ink) !important;
+                z-index: 9999 !important;
+            }
+            footer > div:first-child span {
+                display: none !important;
+            }
+            .nav-btn {
+                padding: 6px 12px !important;
+                font-size: 0.80rem !important;
+                min-height: 36px !important;
+            }
+            footer label {
+                display: none !important;
+            }
+            #slide-select {
+                max-width: 155px !important;
+                font-size: 0.75rem !important;
+                padding: 4px 6px !important;
+                min-height: 36px !important;
+            }
+
+            .instructor-box {
+                position: fixed !important;
+                bottom: 50px !important;
+                left: 8px !important;
+                right: 8px !important;
+                max-height: 60vh !important;
+                padding: 10px 14px !important;
+                font-size: 0.86rem !important;
+                z-index: 10000 !important;
+            }
+            .instructor-toggle-btn {
+                font-size: 0.72rem !important;
+                padding: 2px 6px !important;
+            }
+
+            .data-table {
+                display: block !important;
+                width: 100% !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                font-size: 0.80rem !important;
+            }
+            .data-table th, .data-table td {
+                padding: 4px 6px !important;
+            }
+        }
+    
+    </style>
+</head>
+<body>
+    <div id="progress-container"><div id="progress-bar"></div></div>
+
+    <header>
+        <div class="header-left">
+            <span class="header-badge">BIOL 3111/5111</span>
+            <span>Lecture 8: Host Immunology &amp; HLA Diversity</span>
+        </div>
+        <div class="header-right">
+            
+            <span>Temple University &bull; Fall 2026</span>
+            <span id="slide-num-disp" style="background: #FFFFFF; border: 1.5px solid var(--rule-ink); padding: 2px 8px; border-radius: 2px;">1 / 27</span>
+        </div>
+    </header>
+
+    <main id="stage">
+
+        <section class="slide active" data-slide="1">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">BIOL 3111/5111 &bull; Genomics in Medicine &bull; Lecture 08</div>
+                    <h2 class="slide-title">The Double-Edged Sword: Host Immunology, HLA Diversity, and Autoimmune Disease</h2>
+                    <div class="slide-subtitle">Somatic V(D)J recombination, high-throughput TCR immunosequencing, and the immunogenetics of breaking tolerance.</div>
+                </div>
+                <span class="header-badge">Slide 01</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: Course Module Framing -->
+                <div class="card card-cherry">
+                    <div>
+                        <div class="card-title">⚔️ The Evolutionary Trade-Off</div>
+                        <ul class="content-list">
+                            <li><strong>Infinite Repertoire vs. Finite Genome:</strong> Somatic recombination breaks Mendelian inheritance rules to generate $>10^15$ unique T-cell receptors from a handful of germline segments.</li>
+                            <li><strong>The Living Diagnostic Ledger:</strong> High-throughput TCR immunosequencing reads a patient's historical pathogen exposures directly from peripheral blood DNA.</li>
+                            <li><strong>The Autoimmune Price:</strong> Pathogen-driven balancing selection sustains hyper-polymorphic HLA alleles that inadvertently trigger autoimmune destruction and severe adverse drug reactions.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-cherry">
+                        <strong>Clinical Thesis:</strong> Host immunogenomics reveals that autoimmune diseases are not random biological glitches; they are the unavoidable evolutionary tax paid for species-level pathogen survival.
+                    </div>
+                </div>
+
+                <!-- Right Card: Macromolecular Visual Schematic -->
+                <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; padding: 16px;">
+                    <svg viewBox="0 0 520 380" style="width: 100%; height: 100%; max-height: 440px;">
+                        <!-- Background Grid Lines -->
+                        <line x1="20" y1="70" x2="500" y2="70" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4,4"/>
+                        <line x1="20" y1="190" x2="500" y2="190" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4,4"/>
+                        <line x1="20" y1="310" x2="500" y2="310" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4,4"/>
+
+                        <!-- T-Cell Receptor (Top) -->
+                        <g transform="translate(110, 20)">
+                            <rect x="0" y="0" width="135" height="70" rx="4" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
+                            <text x="67" y="30" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="800" fill="#1E3A8A">TCR Vα Domain</text>
+                            <text x="67" y="52" text-anchor="middle" font-family="Roboto Mono" font-size="11" fill="#2563EB">Germline CDR1/2</text>
+
+                            <rect x="165" y="0" width="135" height="70" rx="4" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
+                            <text x="232" y="30" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="800" fill="#1E3A8A">TCR Vβ Domain</text>
+                            <text x="232" y="52" text-anchor="middle" font-family="Roboto Mono" font-size="11" fill="#2563EB">Germline CDR1/2</text>
+
+                            <!-- Hypervariable CDR3 Loops projecting downward -->
+                            <path d="M 80 70 Q 100 120 140 135" fill="none" stroke="#9D2235" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 220 70 Q 200 120 160 135" fill="none" stroke="#9D2235" stroke-width="4" stroke-linecap="round"/>
+                            <circle cx="150" cy="135" r="8" fill="#9D2235" stroke="#121316" stroke-width="2"/>
+                            <text x="150" y="118" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="800" fill="#9D2235">Hypervariable CDR3 (TdT)</text>
+                        </g>
+
+                        <!-- Antigenic Peptide (Middle) -->
+                        <g transform="translate(160, 170)">
+                            <rect x="0" y="0" width="200" height="30" rx="15" fill="#FEF3C7" stroke="#B45309" stroke-width="2.5"/>
+                            <text x="100" y="20" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#92400E">Viral / Self Peptide (8–10 aa)</text>
+                        </g>
+
+                        <!-- HLA Class I Molecule (Bottom) -->
+                        <g transform="translate(90, 220)">
+                            <!-- Alpha 1 and Alpha 2 helices forming the cleft -->
+                            <rect x="0" y="0" width="160" height="55" rx="4" fill="#F0FDF4" stroke="#0F766E" stroke-width="2"/>
+                            <text x="80" y="26" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="800" fill="#065F46">HLA α1 Domain</text>
+                            <text x="80" y="44" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" fill="#047857">Polymorphic Wall</text>
+
+                            <rect x="180" y="0" width="160" height="55" rx="4" fill="#F0FDF4" stroke="#0F766E" stroke-width="2"/>
+                            <text x="260" y="26" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="800" fill="#065F46">HLA α2 Domain</text>
+                            <text x="260" y="44" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" fill="#047857">Anchor Pockets A–F</text>
+
+                            <!-- Beta-2 Microglobulin Support -->
+                            <rect x="90" y="65" width="160" height="42" rx="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+                            <text x="170" y="91" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="700" fill="#475569">β2-Microglobulin</text>
+                        </g>
+
+                        <!-- Structural Interaction Labels -->
+                        <text x="25" y="55" font-family="Roboto Mono" font-size="10" font-weight="700" fill="#1D4ED8">&larr; Host T-Cell</text>
+                        <text x="25" y="250" font-family="Roboto Mono" font-size="10" font-weight="700" fill="#0F766E">&larr; Target Cell</text>
+                    </svg>
+                    <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-muted); margin-top: 8px;">
+                        The Tripartite Complex: Host TCR &bull; Antigenic Peptide &bull; Presenting HLA Groove
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="2">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Prologue &bull; Intellectual Architecture</div>
+                    <h2 class="slide-title">Three Clinical Mysteries Solved by Immunogenomics</h2>
+                    <div class="slide-subtitle">How genomic diversity shields our species while compromising individual self-tolerance.</div>
+                </div>
+                <span class="header-badge">Slide 02</span>
+            </div>
+
+            <div class="grid-3col">
+                <!-- Mystery 1 -->
+                <div class="card card-cherry">
+                    <div>
+                        <div class="card-title">🧬 The Repertoire Paradox</div>
+                        <ul class="content-list">
+                            <li><strong>The Genomic Math:</strong> 20,000 protein-coding genes must defend against trillions of rapidly mutating pathogens.</li>
+                            <li><strong>The Solution:</strong> Somatic V(D)J cutting and <strong>TdT enzyme insertions</strong> construct $>10^15$ CDR3 loops.</li>
+                            <li><strong>The Diagnostic Ledger:</strong> Deep sequencing detects identical public TCRs across unrelated patients to diagnose past viral infections.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-cherry">
+                        <strong>Movements 1 &amp; 2:</strong> V(D)J Recombination &amp; High-Throughput AIRR Classification.
+                    </div>
+                </div>
+
+                <!-- Mystery 2 -->
+                <div class="card card-emerald">
+                    <div>
+                        <div class="card-title">🛡️ The Architecture of Restriction</div>
+                        <ul class="content-list">
+                            <li><strong>Hyper-Polymorphism:</strong> Chromosome 6p21 harbors over 4,000 distinct HLA-B alleles in the human population.</li>
+                            <li><strong>Balancing Selection:</strong> Heterozygote advantage prevents single pathogens from evading an entire host species.</li>
+                            <li><strong>Pocket Chemistry:</strong> Allele-specific anchor pockets (A–F) dictate exactly which peptide fragments can be displayed to T cells.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-emerald">
+                        <strong>Movement 3:</strong> MHC Structural Diversity &amp; Reverse HLA Genotyping.
+                    </div>
+                </div>
+
+                <!-- Mystery 3 -->
+                <div class="card card-purple">
+                    <div>
+                        <div class="card-title">⚡ Breaking Tolerance &amp; SCAR</div>
+                        <ul class="content-list">
+                            <li><strong>Autoimmune Glitch:</strong> A single neutral residue at position 57 of HLA-DQ alters the P9 pocket, triggering Type 1 Diabetes.</li>
+                            <li><strong>Enzymatic Neo-Epitopes:</strong> Tissue transglutaminase converts neutral dietary gluten into negatively charged Celiac triggers.</li>
+                            <li><strong>Pharmacogenomic Collapse:</strong> Abacavir reshapes the HLA-B*57:01 groove, inducing lethal systemic CD8+ autoimmunity.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-purple">
+                        <strong>Movements 4 &amp; 6:</strong> Autoimmune Mechanisms &amp; Targeted Biologics.
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="3">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 1 &bull; Repertoire Mechanics</div>
+                    <h2 class="slide-title">Combinatorial vs. Junctional Diversity: Solving the Math Problem</h2>
+                    <div class="slide-subtitle">How developing lymphocytes generate trillions of receptors from a compact germline template.</div>
+                </div>
+                <span class="header-badge">Slide 03</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: The Mathematical Contrast -->
+                <div class="card card-blue">
+                    <div>
+                        <div class="card-title">🧮 Two Layers of Repertoire Generation</div>
+                        <ul class="content-list">
+                            <li><strong>Combinatorial Diversity:</strong> Developing lymphocytes randomly select one <strong>Variable (V)</strong>, one <strong>Diversity (D)</strong>, and one <strong>Joining (J)</strong> gene segment from the inherited germline chromosome.</li>
+                            <li><strong>The Combinatorial Ceiling:</strong> Pairing ~48 $V_\beta$ and 13 $J_\beta$ segments with ~54 $V_\alpha$ and 61 $J_\alpha$ segments yields only $\sim 4.1 	imes 10^6$ distinct combinations.</li>
+                            <li><strong>The Junctional Explosion:</strong> The actual human T-cell receptor repertoire exceeds <strong>$10^15$ unique sequences</strong>, driven almost entirely by enzymatic insertions at the segment junctions.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-cherry">
+                        <strong>Pedagogical Rule:</strong> Combinatorial pairing selects the coarse structural framework; <strong>junctional diversity</strong> builds the hypervariable antigen-recognition interface.
+                    </div>
+                </div>
+
+                <!-- Right Card: Visual Flow Diagram -->
+                <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF;">
+                    <svg viewBox="0 0 500 320" style="width: 100%; height: 100%; max-height: 300px;">
+                        <!-- Germline DNA Configuration -->
+                        <g transform="translate(20, 20)">
+                            <text x="0" y="16" font-family="Inter Tight" font-size="12" font-weight="800" fill="#0F172A">1. Inherited Germline DNA (Chromosome 7q34)</text>
+                            
+                            <!-- V Segments -->
+                            <rect x="0" y="30" width="80" height="32" rx="3" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <text x="40" y="50" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="700" fill="#1E40AF">Vβ (1–48)</text>
+
+                            <!-- Intron / Spacers -->
+                            <line x1="80" y1="46" x2="160" y2="46" stroke="#94A3B8" stroke-width="2"/>
+                            
+                            <!-- D Segments -->
+                            <rect x="160" y="30" width="60" height="32" rx="3" fill="#FEF3C7" stroke="#B45309" stroke-width="1.5"/>
+                            <text x="190" y="50" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="700" fill="#92400E">Dβ (1–2)</text>
+
+                            <line x1="220" y1="46" x2="300" y2="46" stroke="#94A3B8" stroke-width="2"/>
+
+                            <!-- J Segments -->
+                            <rect x="300" y="30" width="70" height="32" rx="3" fill="#D1FAE5" stroke="#047857" stroke-width="1.5"/>
+                            <text x="335" y="50" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="700" fill="#065F46">Jβ (1–13)</text>
+
+                            <line x1="370" y1="46" x2="460" y2="46" stroke="#94A3B8" stroke-width="2"/>
+                            <rect x="410" y="30" width="50" height="32" rx="3" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+                            <text x="435" y="50" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="700" fill="#475569">Cβ</text>
+                        </g>
+
+                        <!-- Mathematical Arrow -->
+                        <path d="M 250 85 L 250 120" stroke="#9D2235" stroke-width="2.5" marker-end="url(#arrow)"/>
+                        <text x="260" y="110" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#9D2235">Somatic Recombination &amp; Junctional Diversification</text>
+
+                        <!-- Rearranged Repertoire Output -->
+                        <g transform="translate(20, 135)">
+                            <text x="0" y="16" font-family="Inter Tight" font-size="12" font-weight="800" fill="#0F172A">2. Mature Rearranged V-D-J Product</text>
+
+                            <rect x="30" y="30" width="110" height="42" rx="3" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                            <text x="85" y="56" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#1E40AF">Vβ Segment</text>
+
+                            <!-- Junctional Inset Box -->
+                            <rect x="140" y="24" width="180" height="54" rx="4" fill="#FEE2E2" stroke="#9D2235" stroke-width="2.5" stroke-dasharray="3,3"/>
+                            
+                            <text x="170" y="56" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="800" fill="#991B1B">N-add</text>
+                            <text x="230" y="56" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="800" fill="#B45309">Dβ</text>
+                            <text x="290" y="56" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="800" fill="#991B1B">N-add</text>
+
+                            <rect x="320" y="30" width="110" height="42" rx="3" fill="#D1FAE5" stroke="#047857" stroke-width="2"/>
+                            <text x="375" y="56" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#065F46">Jβ Segment</text>
+                        </g>
+
+                        <!-- Quantitative Summary Footer in SVG -->
+                        <g transform="translate(30, 240)">
+                            <rect x="0" y="0" width="440" height="50" rx="3" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+                            <text x="110" y="24" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="700" fill="#475569">Combinatorial Pool</text>
+                            <text x="110" y="40" text-anchor="middle" font-family="Roboto Mono" font-size="13" font-weight="800" fill="#1D4ED8">&sim; 4.1 &times; 10⁶</text>
+
+                            <line x1="220" y1="10" x2="220" y2="40" stroke="#CBD5E1" stroke-width="1.5"/>
+
+                            <text x="330" y="24" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="700" fill="#475569">Total Junctional Repertoire</text>
+                            <text x="330" y="40" text-anchor="middle" font-family="Roboto Mono" font-size="13" font-weight="800" fill="#9D2235">&gt; 10¹⁵ Sequences</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="4">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 1 &bull; Molecular Mechanics</div>
+                    <h2 class="slide-title">The Enzymatic Scissors: RAG1/2 Endonucleases &amp; Hairpin Cleavage</h2>
+                    <div class="slide-subtitle">How precision double-strand breaks initiate receptor diversification under the strict 12/23 rule.</div>
+                </div>
+                <span class="header-badge">Slide 04</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: Molecular Enzymology -->
+                <div class="card card-emerald">
+                    <div>
+                        <div class="card-title">✂️ The Recombination Signal Machine</div>
+                        <ul class="content-list">
+                            <li><strong>Recombination Signal Sequences (RSS):</strong> Conserved heptamer (7 bp) and nonamer (9 bp) sequences flank every V, D, and J coding segment across the genome.</li>
+                            <li><strong>The 12/23 Rule:</strong> The <strong>RAG1/RAG2 complex</strong> catalyzes cleavage exclusively between a 12-bp spacer (one DNA helical turn) and a 23-bp spacer (two helical turns), preventing direct V-to-V joining.</li>
+                            <li><strong>Closed Hairpin Formation:</strong> RAG cleavage leaves a covalently sealed, closed DNA hairpin on the coding ends, halting spontaneous DNA repair.</li>
+                            <li><strong>Artemis Endonuclease:</strong> The <strong>Artemis enzyme</strong> cuts open the hairpins at an off-center site, generating single-stranded overhangs known as <strong>P-nucleotides</strong> (palindromic sequences).</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-emerald">
+                        <strong>Clinical Pathology:</strong> Biallelic loss-of-function mutations in RAG1 or RAG2 cause severe combined immunodeficiency (SCID), completely abolishing T- and B-cell maturation.
+                    </div>
+                </div>
+
+                <!-- Right Card: Hairpin Biochemical Diagram -->
+                <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF;">
+                    <svg viewBox="0 0 500 320" style="width: 100%; height: 100%; max-height: 300px;">
+                        <!-- Step A: Intact RSS & Cleavage -->
+                        <g transform="translate(30, 20)">
+                            <text x="0" y="14" font-family="Inter Tight" font-size="11" font-weight="800" fill="#0F172A">A. RAG1/2 Cleavage at Recombination Signals</text>
+                            
+                            <!-- DNA Double Strand -->
+                            <rect x="20" y="24" width="120" height="24" rx="2" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <text x="80" y="40" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="700" fill="#1E40AF">V Segment</text>
+
+                            <!-- RSS: 7-mer and 9-mer -->
+                            <rect x="140" y="24" width="22" height="24" fill="#FDE047" stroke="#CA8A04" stroke-width="1"/>
+                            <text x="151" y="40" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" font-weight="700">7</text>
+                            
+                            <rect x="162" y="30" width="30" height="12" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1"/>
+                            <text x="177" y="39" text-anchor="middle" font-family="Roboto Mono" font-size="7.5" fill="#475569">23 bp</text>
+
+                            <rect x="192" y="24" width="26" height="24" fill="#FDE047" stroke="#CA8A04" stroke-width="1"/>
+                            <text x="205" y="40" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" font-weight="700">9</text>
+
+                            <!-- Scissors Icon -->
+                            <text x="135" y="18" font-family="Inter" font-size="15" fill="#9D2235">✂️</text>
+                        </g>
+
+                        <!-- Step B: Closed Hairpin -->
+                        <g transform="translate(30, 110)">
+                            <text x="0" y="14" font-family="Inter Tight" font-size="11" font-weight="800" fill="#0F172A">B. Covalently Sealed Coding Hairpin</text>
+                            
+                            <rect x="20" y="24" width="110" height="24" rx="2" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <path d="M 130 24 C 145 24 145 48 130 48" fill="none" stroke="#9D2235" stroke-width="3"/>
+                            <text x="155" y="40" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#9D2235">Closed Hairpin</text>
+                        </g>
+
+                        <!-- Step C: Artemis Asymmetric Cleavage -->
+                        <g transform="translate(30, 200)">
+                            <text x="0" y="14" font-family="Inter Tight" font-size="11" font-weight="800" fill="#0F172A">C. Asymmetric Hairpin Opening by Artemis</text>
+                            
+                            <rect x="20" y="24" width="110" height="12" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <rect x="20" y="36" width="130" height="12" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.5"/>
+                            
+                            <!-- Overhang -->
+                            <rect x="130" y="36" width="30" height="12" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.5"/>
+                            <text x="145" y="46" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" font-weight="800" fill="#854D0E">P-nucl</text>
+
+                            <path d="M 142 16 L 142 34" stroke="#047857" stroke-width="2" marker-end="url(#arrow)"/>
+                            <text x="150" y="24" font-family="Inter Tight" font-size="9.5" font-weight="800" fill="#047857">Artemis Cut</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="5">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 1 &bull; Molecular Mechanics</div>
+                    <h2 class="slide-title">TdT Polymerase: The Engine of Non-Templated Diversity</h2>
+                    <div class="slide-subtitle">Random nucleotide additions decouple the antigen-binding loop from the inherited genome.</div>
+                </div>
+                <span class="header-badge">Slide 05</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: TdT Properties -->
+                <div class="card card-cherry">
+                    <div>
+                        <div class="card-title">🧬 The Template-Independent Generator</div>
+                        <ul class="content-list">
+                            <li><strong>Uniquely Template-Independent:</strong> Unlike standard replicative DNA polymerases, <strong>Terminal deoxynucleotidyl transferase (TdT)</strong> synthesizes DNA without a template strand.</li>
+                            <li><strong>N-Nucleotide Insertion:</strong> TdT randomly incorporates non-templated (<strong>N-nucleotides</strong>) onto the single-stranded 3'-ends created by Artemis cleavage.</li>
+                            <li><strong>Variable Exonuclease Trimming:</strong> Concurrently, exonucleases chew back terminal nucleotides, creating unpredictable deletions before double-strand break repair.</li>
+                            <li><strong>NHEJ Ligation:</strong> Non-Homologous End Joining enzymes (Ku70/80 and DNA Ligase IV) seal the finalized junction into a functional coding frame.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-cherry">
+                        <strong>Evolutionary Insight:</strong> TdT inserts pure somatic noise into the germline code, generating an antigen-binding pocket unique to that individual cell lineage.
+                    </div>
+                </div>
+
+                <!-- Right Card: Step-by-Step Nucleotide Addition SVG -->
+                <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF;">
+                    <svg viewBox="0 0 500 320" style="width: 100%; height: 100%; max-height: 300px;">
+                        <!-- Cut End 1 (V-segment) -->
+                        <g transform="translate(30, 40)">
+                            <rect x="0" y="0" width="130" height="34" rx="3" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                            <text x="65" y="22" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#1E40AF">Vβ Segment</text>
+                            
+                            <text x="145" y="24" font-family="Roboto Mono" font-size="14" font-weight="800" fill="#1E40AF">...T G T G C C</text>
+                        </g>
+
+                        <!-- TdT Enzyme Action -->
+                        <g transform="translate(190, 100)">
+                            <ellipse cx="60" cy="30" rx="55" ry="32" fill="#FEE2E2" stroke="#9D2235" stroke-width="2"/>
+                            <text x="60" y="28" text-anchor="middle" font-family="Inter Tight" font-size="12" font-weight="900" fill="#991B1B">TdT Enzyme</text>
+                            <text x="60" y="44" text-anchor="middle" font-family="Roboto Mono" font-size="9" fill="#7F1D1D">+ dNTP Pool</text>
+                        </g>
+
+                        <!-- Incoming N-nucleotides -->
+                        <g transform="translate(160, 180)">
+                            <rect x="0" y="0" width="180" height="36" rx="4" fill="#FEF3C7" stroke="#B45309" stroke-width="2"/>
+                            <text x="90" y="23" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#92400E">A G C C T A T T G</text>
+                            <text x="90" y="48" text-anchor="middle" font-family="Roboto Mono" font-size="9" font-weight="700" fill="#B45309">Non-Templated N-Additions</text>
+                        </g>
+
+                        <!-- Cut End 2 (J-segment) -->
+                        <g transform="translate(290, 240)">
+                            <text x="0" y="24" font-family="Roboto Mono" font-size="14" font-weight="800" fill="#047857">T T C T T T G G C...</text>
+                            <rect x="150" y="0" width="130" height="34" rx="3" fill="#D1FAE5" stroke="#047857" stroke-width="2"/>
+                            <text x="215" y="22" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#065F46">Jβ Segment</text>
+                        </g>
+                    </svg>
+                    <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--ink-muted); margin-top: 4px;">
+                        TdT adds random nucleotides at the V-D and D-J junctions before ligation.
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="6">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 1 &bull; Structural Anatomy</div>
+                    <h2 class="slide-title">The Epicenter of Recognition: Anatomy of the CDR3 Loop</h2>
+                    <div class="slide-subtitle">Spatial division of labor: germline loops dock onto MHC; hypervariable loops contact the peptide.</div>
+                </div>
+                <span class="header-badge">Slide 06</span>
+            </div>
+
+            <!-- Hero Visual Layout (Pattern B) -->
+            <div class="hero-visual-card" style="padding: 16px 20px;">
+                <svg viewBox="0 0 920 400" style="width: 100%; height: 100%; max-height: 480px;">
+                    <!-- Top Panel: TCR Variable Domain Structure -->
+                    <g transform="translate(180, 20)">
+                        <!-- V-domain Backbone -->
+                        <path d="M 40 10 C 40 80 120 110 280 110 C 440 110 520 80 520 10" fill="#F8FAFC" stroke="#1A1C20" stroke-width="2.5"/>
+                        <text x="280" y="55" text-anchor="middle" font-family="Inter Tight" font-size="16" font-weight="900" fill="#1E293B">T-Cell Receptor Heterodimer (Vα / Vβ Chains)</text>
+                        <text x="280" y="80" text-anchor="middle" font-family="Roboto Mono" font-size="12" fill="#64748B">Antigen Recognition Surface &bull; Diagonal Docking Orientation</text>
+
+                        <!-- Outer Loops: CDR1 & CDR2 (Germline) -->
+                        <path d="M 90 100 Q 80 190 105 230" fill="none" stroke="#1D4ED8" stroke-width="4.5" stroke-linecap="round"/>
+                        <circle cx="105" cy="230" r="5" fill="#1D4ED8"/>
+                        <text x="80" y="250" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="800" fill="#1D4ED8">CDR1α</text>
+
+                        <path d="M 170 105 Q 160 190 185 230" fill="none" stroke="#1D4ED8" stroke-width="4.5" stroke-linecap="round"/>
+                        <circle cx="185" cy="230" r="5" fill="#1D4ED8"/>
+                        <text x="185" y="250" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="800" fill="#1D4ED8">CDR2α</text>
+
+                        <!-- Central Loop: CDR3 (Junctional, TdT) -->
+                        <path d="M 245 110 Q 280 270 280 285 Q 280 270 315 110" fill="none" stroke="#9D2235" stroke-width="6.5" stroke-linecap="round"/>
+                        <circle cx="280" cy="285" r="9" fill="#9D2235" stroke="#121316" stroke-width="2.5"/>
+                        <text x="280" y="315" text-anchor="middle" font-family="Roboto Mono" font-size="13.5" font-weight="900" fill="#9D2235">CDR3 Loop (V-D-J Junction + TdT Insertions)</text>
+
+                        <path d="M 375 105 Q 400 190 375 230" fill="none" stroke="#1D4ED8" stroke-width="4.5" stroke-linecap="round"/>
+                        <circle cx="375" cy="230" r="5" fill="#1D4ED8"/>
+                        <text x="375" y="250" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="800" fill="#1D4ED8">CDR2β</text>
+
+                        <path d="M 450 100 Q 480 190 455 230" fill="none" stroke="#1D4ED8" stroke-width="4.5" stroke-linecap="round"/>
+                        <circle cx="455" cy="230" r="5" fill="#1D4ED8"/>
+                        <text x="480" y="250" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="800" fill="#1D4ED8">CDR1β</text>
+                    </g>
+
+                    <!-- Bottom Target: HLA Peptide-Binding Cleft -->
+                    <g transform="translate(180, 290)">
+                        <!-- HLA Alpha Helices -->
+                        <rect x="30" y="40" width="150" height="34" rx="17" fill="#DCFCE7" stroke="#047857" stroke-width="2.5"/>
+                        <text x="105" y="62" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#047857">HLA α1-Helix Wall</text>
+
+                        <!-- Peptide docked in cleft -->
+                        <rect x="195" y="34" width="170" height="42" rx="10" fill="#FEF3C7" stroke="#B45309" stroke-width="3"/>
+                        <text x="280" y="60" text-anchor="middle" font-family="Roboto Mono" font-size="13" font-weight="900" fill="#92400E">Antigenic Peptide (8–10 aa)</text>
+
+                        <rect x="380" y="40" width="150" height="34" rx="17" fill="#DCFCE7" stroke="#047857" stroke-width="2.5"/>
+                        <text x="455" y="62" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#047857">HLA α2-Helix Wall</text>
+                    </g>
+
+                    <!-- Explanatory Callout Annotations -->
+                    <g transform="translate(20, 110)">
+                        <rect x="0" y="0" width="145" height="85" rx="3" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
+                        <text x="72" y="24" text-anchor="middle" font-family="Inter Tight" font-size="12" font-weight="800" fill="#1E3A8A">Germline Loops</text>
+                        <text x="72" y="44" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="700" fill="#1D4ED8">CDR1 &amp; CDR2</text>
+                        <text x="72" y="64" text-anchor="middle" font-family="Inter" font-size="10" fill="#475569">Encoded by V segment</text>
+                        <text x="72" y="77" text-anchor="middle" font-family="Inter" font-size="10" font-weight="700" fill="#1E40AF">Docks to HLA α-helices</text>
+                    </g>
+
+                    <g transform="translate(745, 110)">
+                        <rect x="0" y="0" width="155" height="85" rx="3" fill="#FEF2F2" stroke="#9D2235" stroke-width="2"/>
+                        <text x="77" y="24" text-anchor="middle" font-family="Inter Tight" font-size="12" font-weight="800" fill="#991B1B">Somatic Loop</text>
+                        <text x="77" y="44" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="700" fill="#9D2235">CDR3 (V-D-J + TdT)</text>
+                        <text x="77" y="64" text-anchor="middle" font-family="Inter" font-size="10" fill="#475569">Hypervariable sequence</text>
+                        <text x="77" y="77" text-anchor="middle" font-family="Inter" font-size="10" font-weight="700" fill="#991B1B">Interrogates peptide</text>
+                    </g>
+                </svg>
+                <div class="takeaway-strip takeaway-strip-blue" style="width: 100%; margin-top: 10px;">
+                    <strong>Structural Rule:</strong> Germline-encoded CDR1/2 loops anchor the TCR to conserved host MHC alpha-helices; somatic CDR3 loops plunge into the cleft to read foreign peptide sequences.
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="7">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 2 &bull; High-Throughput AIRR</div>
+                    <h2 class="slide-title">Reading the Living Ledger: The Immunosequencing Pipeline</h2>
+                    <div class="slide-subtitle">Multiplex PCR and synthetic standard templates quantify millions of unique T-cell receptors.</div>
+                </div>
+                <span class="header-badge">Slide 07</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: Experimental Method -->
+                <div class="card card-blue">
+                    <div>
+                        <div class="card-title">🔬 Taming PCR Amplification Bias</div>
+                        <ul class="content-list">
+                            <li><strong>The Amplification Barrier:</strong> Standard multiplex PCR distorts repertoire readouts because different primers bind with unequal thermodynamic efficiencies.</li>
+                            <li><strong>Synthetic Standard Pool:</strong> Emerson et al. spiked in synthetic internal standards (Carlson et al. 2013) to calibrate 60 forward $V_\beta$ and 13 reverse $J_\beta$ primers to equal amplification rates.</li>
+                            <li><strong>85 Million Unique Sequences:</strong> Profiling 640 healthy donors (287 CMV+, 353 CMV-) yielded the largest cellular immune dataset ever assembled at that time.</li>
+                            <li><strong>Feature Extraction:</strong> Sequencing specifically targeted the hypervariable CDR3 loop to identify public diagnostic biomarkers.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-blue">
+                        <strong>Technological Advance:</strong> Calibrated multiplex PCR transforms qualitative immune diversity into an absolute quantitative ledger of cellular clonal expansions.
+                    </div>
+                </div>
+
+                <!-- Right Card: Emerson Fig 1 -->
+                <div class="card" style="padding: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF;">
+                    <img src="images/emerson_fig1_workflow.jpg" alt="Emerson et al. Figure 1: Immunosequencing and Feature Selection Pipeline" class="hero-img" style="max-height: 460px; width: 100%; height: auto; object-fit: contain;">
+                    <div style="font-family: var(--font-mono); font-size: 0.84rem; color: var(--ink-muted); margin-top: 8px; text-align: center;">
+                        Emerson et al. (Nature Genetics 2017) &bull; Multiplex TCRβ deep sequencing across 640 donors.
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="8">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 2 &bull; Population Immunogenomics</div>
+                    <h2 class="slide-title">The Public vs. Private Paradox: Convergent Recombination</h2>
+                    <div class="slide-subtitle">Why unrelated individuals carry identical T-cell receptors despite astronomical sequence diversity.</div>
+                </div>
+                <span class="header-badge">Slide 08</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: The Paradox & Theoretical Framework -->
+                <div class="card card-cherry">
+                    <div>
+                        <div class="card-title">🧩 Resolving the Immunological Paradox</div>
+                        <ul class="content-list">
+                            <li><strong>The Classical Dogma:</strong> Because theoretical diversity (&gt;10<sup>15</sup>) vastly exceeds individual cell counts (10<sup>11</sup>), all immune repertoires were presumed strictly unique (<strong>"private"</strong>).</li>
+                            <li><strong>Empirical Discovery:</strong> Emerson et al. identified identical <strong>"public" TCR clonotypes</strong> shared across hundreds of completely unrelated CMV-seropositive individuals.</li>
+                            <li><strong>Generation Probability (<em>P</em><sub>gen</sub>):</strong> Recombination events requiring zero or few TdT insertions form with probabilities orders of magnitude higher than average sequences.</li>
+                            <li><strong>Codon Degeneracy:</strong> Many distinct V(D)J nucleotide rearrangements converge onto the exact same primary amino acid sequence.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-cherry">
+                        <strong>The Mechanism:</strong> High generation probability (<em>P</em><sub>gen</sub>) plus strong pathogen-driven clonal selection causes identical public TCRs to emerge repeatedly across independent human hosts.
+                    </div>
+                </div>
+
+                <!-- Right Card: Convergent Recombination Schematic SVG -->
+                <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; padding: 14px;">
+                    <svg viewBox="0 0 500 320" style="width: 100%; height: 100%; max-height: 460px;">
+                        <!-- Three independent donors -->
+                        <g transform="translate(20, 20)">
+                            <rect x="0" y="0" width="130" height="40" rx="3" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <text x="65" y="18" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="800" fill="#1E3A8A">Donor A (Unrelated)</text>
+                            <text x="65" y="32" text-anchor="middle" font-family="Roboto Mono" font-size="9" fill="#1D4ED8">TGT GCC AGC AGC...</text>
+
+                            <rect x="160" y="0" width="130" height="40" rx="3" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <text x="225" y="18" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="800" fill="#1E3A8A">Donor B (Unrelated)</text>
+                            <text x="225" y="32" text-anchor="middle" font-family="Roboto Mono" font-size="9" fill="#1D4ED8">TGC GCT TCC TCG...</text>
+
+                            <rect x="320" y="0" width="130" height="40" rx="3" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <text x="385" y="18" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="800" fill="#1E3A8A">Donor C (Unrelated)</text>
+                            <text x="385" y="32" text-anchor="middle" font-family="Roboto Mono" font-size="9" fill="#1D4ED8">TGT GCA AGT AGC...</text>
+                        </g>
+
+                        <!-- Three converging arrows -->
+                        <path d="M 85 65 L 210 130" stroke="#94A3B8" stroke-width="2" marker-end="url(#arrow)"/>
+                        <path d="M 225 65 L 225 130" stroke="#94A3B8" stroke-width="2" marker-end="url(#arrow)"/>
+                        <path d="M 385 65 L 240 130" stroke="#94A3B8" stroke-width="2" marker-end="url(#arrow)"/>
+                        <text x="225" y="105" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="700" fill="#64748B">Codon Degeneracy</text>
+
+                        <!-- Single Convergent Amino Acid Sequence -->
+                        <g transform="translate(90, 140)">
+                            <rect x="0" y="0" width="270" height="50" rx="4" fill="#FEE2E2" stroke="#9D2235" stroke-width="2.5"/>
+                            <text x="135" y="24" text-anchor="middle" font-family="Inter Tight" font-size="12" font-weight="900" fill="#991B1B">Public CDR3 Amino Acid Clonotype</text>
+                            <text x="135" y="42" text-anchor="middle" font-family="Roboto Mono" font-size="13" font-weight="800" fill="#7F1D1D">CASSLAPGATNEKLFF</text>
+                        </g>
+
+                        <!-- Antigen Selection Boost -->
+                        <path d="M 225 195 L 225 240" stroke="#9D2235" stroke-width="2.5" marker-end="url(#arrow)"/>
+                        <text x="300" y="220" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#9D2235">+ CMV Viral Infection</text>
+
+                        <g transform="translate(70, 245)">
+                            <rect x="0" y="0" width="310" height="44" rx="3" fill="#FEF3C7" stroke="#B45309" stroke-width="2"/>
+                            <text x="155" y="18" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="800" fill="#92400E">Clonal Expansion Across Donors</text>
+                            <text x="155" y="34" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="700" fill="#B45309">Detectably enriched in 186 / 287 CMV+ Patients</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="9">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 2 &bull; Machine Learning Diagnostics</div>
+                    <h2 class="slide-title">Calibrating the Sweet Spot: Avoiding the Overfitting Cliff</h2>
+                    <div class="slide-subtitle">Emerson Figure 2 proves how high-dimensional feature selection prevents memorizing biological noise.</div>
+                </div>
+                <span class="header-badge">Slide 09</span>
+            </div>
+
+            <!-- Hero Visual Layout (Pattern B) -->
+            <div class="hero-visual-card" style="padding: 14px 20px;">
+                <div style="display: flex; gap: 32px; align-items: center; justify-content: center; flex: 1; width: 100%; min-height: 0;">
+                    <img src="images/emerson_fig2_classifier.jpg" alt="Emerson Figure 2: Classification Performance and Overfitting" class="hero-img" style="max-height: 480px; width: auto; object-fit: contain;">
+                    
+                    <!-- Callout Synthesis Card beside figure -->
+                    <div style="width: 380px; display: flex; flex-direction: column; gap: 14px; flex-shrink: 0;">
+                        <div class="card card-emerald" style="padding: 14px 18px;">
+                            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 1.05rem; color: #065F46;">
+                                🎯 The Optimal Sweet Spot (<em>P</em> &le; 10<sup>&minus;4</sup>)
+                            </div>
+                            <div style="font-size: 0.94rem; color: #334155; line-height: 1.48; margin-top: 6px;">
+                                <strong>142 public TCRβ features:</strong> Training AUROC = 0.98, Cross-Validation AUROC = <strong>0.93</strong>. FDR controlled at ~20% via 100 label permutations.
+                            </div>
+                        </div>
+
+                        <div class="card card-cherry" style="padding: 14px 18px;">
+                            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 1.05rem; color: #991B1B;">
+                                📉 The Overfitting Trap (<em>P</em> &le; 10<sup>&minus;2</sup>)
+                            </div>
+                            <div style="font-size: 0.94rem; color: #334155; line-height: 1.48; margin-top: 6px;">
+                                <strong>78,566 features admitted:</strong> Training AUROC appears perfect (1.00), but cross-validation crashes to <strong>0.70</strong> because the algorithm memorized private donor noise.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="takeaway-strip takeaway-strip-emerald" style="width: 100%; margin-top: 8px;">
+                    <strong>Machine Learning Law:</strong> High training accuracy is meaningless without blind cross-validation; biological classifiers must restrict feature counts to maintain generalization on real patients.
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="10">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 2 &bull; Clinical Translation</div>
+                    <h2 class="slide-title">Pathogen Memory Burden: The Repertoire Compression Metric</h2>
+                    <div class="slide-subtitle">Condensing 85 million sequencing reads into an actionable diagnostic scalar for clinical decision-making.</div>
+                </div>
+                <span class="header-badge">Slide 10</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: Metric Derivation -->
+                <div class="card card-purple">
+                    <div>
+                        <div class="card-title">📐 The Memory Burden Equation</div>
+                        <p style="font-size: 0.98rem; color: #334155; line-height: 1.45; margin-bottom: 8px;">
+                            The authors condensed the presence of all 142 diagnostic TCR clonotypes into a single scalar value, the <strong>Pathogen Memory Burden ($M_i$)</strong>:
+                        </p>
+                        <div style="background: #F8FAFC; border: 1.5px solid var(--rule-ink); padding: 8px 12px; border-radius: 2px; font-family: var(--font-mono); font-size: 0.98rem; text-align: center; margin-bottom: 10px;">
+                            $$M_i = \frac{\sum_{k \in \text{CMV Catalog}} \text{Reads}(k)}{\text{Total TCR Reads}_i} \times 100\%$$
+                        </div>
+                        <ul class="content-list">
+                            <li><strong>CMV-Negative Donors:</strong> $M_i$ clusters tightly near zero (median $< 0.001\%$ of peripheral repertoire).</li>
+                            <li><strong>CMV-Positive Donors:</strong> Chronic antigenic stimulation expands memory clones to form an elevated distribution reaching up to $0.04\%$.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-purple">
+                        <strong>Clinical Advantage:</strong> Memory T-cell clones persist for decades in peripheral blood, avoiding the false-negative pitfalls of waning antibody titers.
+                    </div>
+                </div>
+
+                <!-- Right Card: Confusion Matrix & Diagnostic Derivations -->
+                <div class="card card-emerald">
+                    <div>
+                        <div class="card-title">📊 Cross-Validation Performance (N = 640)</div>
+                        <table class="data-table" style="margin-bottom: 12px;">
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Predicted CMV+</th>
+                                    <th>Predicted CMV–</th>
+                                    <th>Total Donors</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Observed CMV+</strong></td>
+                                    <td style="color: #047857; font-weight: 800;">248 (TP)</td>
+                                    <td style="color: #991B1B; font-weight: 800;">39 (FN)</td>
+                                    <td><strong>287</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Observed CMV–</strong></td>
+                                    <td style="color: #991B1B; font-weight: 800;">31 (FP)</td>
+                                    <td style="color: #047857; font-weight: 800;">322 (TN)</td>
+                                    <td><strong>353</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <ul class="content-list" style="font-size: 0.98rem;">
+                            <li><strong>Diagnostic Sensitivity:</strong> $248 / 287 = \mathbf{86.4\%}$ (True Positive Rate)</li>
+                            <li><strong>Diagnostic Specificity:</strong> $322 / 353 = \mathbf{91.2\%}$ (True Negative Rate)</li>
+                            <li><strong>Overall Accuracy:</strong> $(248 + 322) / 640 = \mathbf{89.1\%}$</li>
+                            <li><strong>Diagnostic Odds Ratio:</strong> $\frac{248 \times 322}{31 \times 39} = \mathbf{66.1}$</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="11">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 2 &bull; Active Learning Checkpoint</div>
+                    <h2 class="slide-title">Spot Check 1: Somatic V(D)J Recombination &amp; TdT Diversity</h2>
+                    <div class="slide-subtitle">Live 2-minute checkpoint assessing the molecular mechanics of receptor generation.</div>
+                </div>
+                <span class="header-badge">Slide 11</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: The Question -->
+                <div class="card card-amber">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span class="passcode-pill">🔑 Passcode: RECOMB-26-TDT</span>
+                            <span class="timer-badge">
+                                ⏱️ <span id="spot1-timer-disp">02:00</span>
+                                <button type="button" class="timer-btn" id="spot1-timer-btn" onclick="startTimer('spot1-timer-disp', 'spot1-timer-btn', 120)">Start</button>
+                                <button type="button" class="timer-btn" style="background:#64748B;" onclick="resetTimer('spot1-timer-disp', 'spot1-timer-btn', 120)">Reset</button>
+                            </span>
+                        </div>
+
+                        <p style="font-size: 1.08rem; font-weight: 700; color: #1E293B; line-height: 1.45; margin-bottom: 12px;">
+                            Combinatorial pairing of germline V, D, and J segments generates fewer than 10⁷ potential T-cell receptor combinations. Which molecular mechanism generates the astronomical junctional diversity (>10¹⁵ sequences) concentrated in the CDR3 loop?
+                        </p>
+
+                        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.94rem;">
+                            <div style="background: #F8FAFC; border: 1px solid var(--rule-ink); padding: 8px 12px; border-radius: 2px;">
+                                <strong>A.</strong> Terminal deoxynucleotidyl transferase (TdT) randomly inserts non-templated (N) nucleotides at the cut junctions, while exonucleases chew back terminal bases before repair.
+                            </div>
+                            <div style="background: #F8FAFC; border: 1px solid var(--rule-ink); padding: 8px 12px; border-radius: 2px;">
+                                <strong>B.</strong> DNA methyltransferases add epigenetic modifications that cause ribosomes to read codons backwards during TCR mRNA translation.
+                            </div>
+                            <div style="background: #F8FAFC; border: 1px solid var(--rule-ink); padding: 8px 12px; border-radius: 2px;">
+                                <strong>C.</strong> The RAG1/RAG2 complex captures circulating mitochondrial DNA fragments and splices them into the TCR beta chain as decoys.
+                            </div>
+                            <div style="background: #F8FAFC; border: 1px solid var(--rule-ink); padding: 8px 12px; border-radius: 2px;">
+                                <strong>D.</strong> Host reverse transcriptases capture viral RNA fragments and integrate them directly into germline bone marrow stem cells.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Card: Active Submission Portal Instructions -->
+                <div class="card card-cherry" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div class="card-title">📝 Canvas Submission Instructions</div>
+                        <ul class="content-list">
+                            <li><strong>Open Canvas Quizzes:</strong> Navigate to <em>Course 178614 &rarr; Quizzes</em> on your phone or laptop.</li>
+                            <li><strong>Select Assessment:</strong> Click on <strong>Lecture 8 Spot Check 1</strong>.</li>
+                            <li><strong>Enter Passcode:</strong> Type <code>RECOMB-26-TDT</code> to unlock your attempt.</li>
+                            <li><strong>Scoring Policy:</strong> 1.0 Point possible &bull; 2 allowed attempts &bull; Highest score kept.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-amber">
+                        💡 <strong>Concept Anchor:</strong> Without TdT activity, human immune repertoires would be restricted to germline-encoded combinatorial pairings, collapsing immunological resistance to novel pathogens.
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="12">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 3 &bull; Structural Immunology</div>
+                    <h2 class="slide-title">MHC Class I vs. Class II Architecture: Groove Geometry</h2>
+                    <div class="slide-subtitle">Closed vs. open peptide-binding clefts dictate antigen length and cellular targeting.</div>
+                </div>
+                <span class="header-badge">Slide 12</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: Comparative Biochemistry Table -->
+                <div class="card card-emerald">
+                    <div>
+                        <div class="card-title">🔬 Structural &amp; Functional Comparison</div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>MHC Class I</th>
+                                    <th>MHC Class II</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Genetic Loci</strong></td>
+                                    <td>HLA-A, HLA-B, HLA-C</td>
+                                    <td>HLA-DP, HLA-DQ, HLA-DR</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Chain Structure</strong></td>
+                                    <td>Polymorphic $\alpha$ chain + $\beta_2\text{m}$</td>
+                                    <td>Heterodimer of $\alpha$ and $\beta$ chains</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Groove Geometry</strong></td>
+                                    <td><strong>Closed at both ends</strong></td>
+                                    <td><strong>Open-ended groove</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Peptide Length</strong></td>
+                                    <td>Strictly 8–10 amino acids</td>
+                                    <td>13–25 amino acids (variable)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cellular Target</strong></td>
+                                    <td><strong>CD8+ Cytotoxic T cells</strong></td>
+                                    <td><strong>CD4+ Helper T cells</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Antigen Source</strong></td>
+                                    <td>Intracellular (viral/cytosol)</td>
+                                    <td>Extracellular (endocytosed)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-emerald">
+                        <strong>Structural Rule:</strong> Class I closed ends restrict presentation to short, precisely cleaved intracellular peptides; Class II open grooves permit longer extracellular fragments to extend outward.
+                    </div>
+                </div>
+
+                <!-- Right Card: Top-Down Cleft Crystallography SVG -->
+                <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; padding: 14px;">
+                    <svg viewBox="0 0 520 360" style="width: 100%; height: 100%; max-height: 460px;">
+                        <!-- MHC Class I Top-Down View -->
+                        <g transform="translate(30, 20)">
+                            <text x="0" y="18" font-family="Inter Tight" font-size="13" font-weight="900" fill="#065F46">MHC Class I: Closed-End Groove (Strictly 8–10 aa)</text>
+
+                            <!-- Beta Sheet Floor -->
+                            <rect x="20" y="32" width="420" height="90" rx="4" fill="#F0FDF4" stroke="#86EFAC" stroke-width="2"/>
+                            
+                            <!-- Left Helix (Alpha 1) -->
+                            <path d="M 20 32 Q 230 46 440 32" fill="none" stroke="#047857" stroke-width="8" stroke-linecap="round"/>
+                            <!-- Right Helix (Alpha 2) -->
+                            <path d="M 20 122 Q 230 108 440 122" fill="none" stroke="#047857" stroke-width="8" stroke-linecap="round"/>
+
+                            <!-- Pinched Closed Ends (Conserved Tyrosines) -->
+                            <line x1="20" y1="32" x2="20" y2="122" stroke="#047857" stroke-width="7"/>
+                            <line x1="440" y1="32" x2="440" y2="122" stroke="#047857" stroke-width="7"/>
+
+                            <!-- Bound Peptide -->
+                            <rect x="36" y="67" width="388" height="20" rx="10" fill="#FEF08A" stroke="#CA8A04" stroke-width="2.5"/>
+                            <circle cx="56" cy="77" r="6" fill="#B45309"/>
+                            <circle cx="404" cy="77" r="6" fill="#B45309"/>
+                            <text x="230" y="82" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="900" fill="#854D0E">9-mer Peptide Trapped Inside Cleft</text>
+                            
+                            <text x="230" y="142" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="700" fill="#047857">Closed Ends Anchor Free N- and C-Termini</text>
+                        </g>
+
+                        <!-- MHC Class II Top-Down View -->
+                        <g transform="translate(30, 185)">
+                            <text x="0" y="18" font-family="Inter Tight" font-size="13" font-weight="900" fill="#1E3A8A">MHC Class II: Open-Ended Groove (Extended 13–25 aa)</text>
+
+                            <!-- Beta Sheet Floor -->
+                            <rect x="50" y="32" width="360" height="90" rx="4" fill="#EFF6FF" stroke="#93C5FD" stroke-width="2"/>
+                            
+                            <!-- Left Helix (Alpha 1) -->
+                            <path d="M 10 32 Q 230 46 450 32" fill="none" stroke="#1D4ED8" stroke-width="8" stroke-linecap="round"/>
+                            <!-- Right Helix (Beta 1) -->
+                            <path d="M 10 122 Q 230 108 450 122" fill="none" stroke="#1D4ED8" stroke-width="8" stroke-linecap="round"/>
+
+                            <!-- Overhanging Extended Peptide -->
+                            <rect x="0" y="67" width="460" height="20" rx="10" fill="#FED7AA" stroke="#EA580C" stroke-width="2.5"/>
+                            <text x="230" y="82" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="900" fill="#9A3412">15-mer Extends Freely Beyond Both Ends</text>
+
+                            <text x="230" y="142" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="700" fill="#1D4ED8">Open Ends Accommodate Variable Flanking Sequences</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="13">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 3 &bull; Population Genetics</div>
+                    <h2 class="slide-title">Hyper-Polymorphism &amp; Balancing Selection at Chromosome 6p21</h2>
+                    <div class="slide-subtitle">Why the human leukocyte antigen locus maintains thousands of distinct co-dominant alleles.</div>
+                </div>
+                <span class="header-badge">Slide 13</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: Evolutionary Forces -->
+                <div class="card card-purple">
+                    <div>
+                        <div class="card-title">🌍 The Most Diverse Loci in the Genome</div>
+                        <ul class="content-list">
+                            <li><strong>Dense Chromosomal Cluster:</strong> The MHC locus spans ~4 Mb on chromosome 6p21.3, packing over 200 genes involved in immune defense.</li>
+                            <li><strong>Thousands of Unique Alleles:</strong> Global population sequencing has identified over <strong>4,000 distinct HLA-B alleles</strong> and $>3,000$ HLA-A alleles.</li>
+                            <li><strong>Heterozygote Advantage:</strong> Individuals carrying heterozygous alleles at HLA-A, -B, and -C present up to 6 distinct peptide suites, maximizing pathogen detection.</li>
+                            <li><strong>Negative Frequency-Dependent Selection:</strong> Rare alleles provide evolutionary protection because local pathogens have not yet evolved escape mutations against them.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-purple">
+                        <strong>Evolutionary Rule:</strong> Balancing selection preserves hyper-polymorphism across millennia, preventing any single infectious outbreak from extinguishing the species.
+                    </div>
+                </div>
+
+                <!-- Right Card: Chromosome Map & Allele Counts SVG -->
+                <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF;">
+                    <svg viewBox="0 0 500 320" style="width: 100%; height: 100%; max-height: 300px;">
+                        <!-- Chromosome 6 Ideogram -->
+                        <g transform="translate(30, 20)">
+                            <text x="0" y="14" font-family="Inter Tight" font-size="11" font-weight="800" fill="#0F172A">Chromosome 6p21.3 Map (~4.0 Mb Region)</text>
+                            
+                            <!-- Chromosome Bar -->
+                            <rect x="20" y="24" width="400" height="18" rx="9" fill="#E2E8F0" stroke="#64748B" stroke-width="1.5"/>
+                            <rect x="180" y="24" width="60" height="18" fill="#9D2235" stroke="#781827" stroke-width="1"/>
+                            <text x="210" y="37" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" font-weight="800" fill="#FFFFFF">6p21.3</text>
+                        </g>
+
+                        <!-- Gene Loci Decomposition -->
+                        <g transform="translate(30, 85)">
+                            <!-- Class II -->
+                            <rect x="20" y="0" width="120" height="50" rx="3" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <text x="80" y="20" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="800" fill="#1E3A8A">MHC Class II</text>
+                            <text x="80" y="38" text-anchor="middle" font-family="Roboto Mono" font-size="9" fill="#1D4ED8">DP &bull; DQ &bull; DR</text>
+
+                            <!-- Class III -->
+                            <rect x="150" y="0" width="100" height="50" rx="3" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+                            <text x="200" y="20" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="800" fill="#334155">MHC Class III</text>
+                            <text x="200" y="38" text-anchor="middle" font-family="Roboto Mono" font-size="9" fill="#475569">Complement &bull; TNF</text>
+
+                            <!-- Class I -->
+                            <rect x="260" y="0" width="160" height="50" rx="3" fill="#F0FDF4" stroke="#047857" stroke-width="1.5"/>
+                            <text x="340" y="20" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="800" fill="#065F46">MHC Class I</text>
+                            <text x="340" y="38" text-anchor="middle" font-family="Roboto Mono" font-size="9" fill="#047857">HLA-B &bull; HLA-C &bull; HLA-A</text>
+                        </g>
+
+                        <!-- Allele Count Bar Chart Inset -->
+                        <g transform="translate(30, 165)">
+                            <text x="0" y="14" font-family="Inter Tight" font-size="11" font-weight="800" fill="#0F172A">Global Allele Counts (IPD-IMGT/HLA Database)</text>
+
+                            <!-- HLA-A -->
+                            <text x="40" y="35" font-family="Roboto Mono" font-size="10" font-weight="700">HLA-A</text>
+                            <rect x="90" y="24" width="220" height="15" fill="#047857" rx="2"/>
+                            <text x="320" y="36" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#047857">> 3,800 alleles</text>
+
+                            <!-- HLA-B -->
+                            <text x="40" y="60" font-family="Roboto Mono" font-size="10" font-weight="700">HLA-B</text>
+                            <rect x="90" y="49" width="280" height="15" fill="#9D2235" rx="2"/>
+                            <text x="380" y="61" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#9D2235">> 4,800 alleles</text>
+
+                            <!-- HLA-C -->
+                            <text x="40" y="85" font-family="Roboto Mono" font-size="10" font-weight="700">HLA-C</text>
+                            <rect x="90" y="74" width="180" height="15" fill="#1D4ED8" rx="2"/>
+                            <text x="280" y="86" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#1D4ED8">> 3,100 alleles</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="14">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 3 &bull; Structural Biochemistry</div>
+                    <h2 class="slide-title">Anchor Pockets (A–F): The Lock-and-Key Chemistry of Presentation</h2>
+                    <div class="slide-subtitle">Polymorphic pocket residues determine which viral or self peptides can dock inside the groove.</div>
+                </div>
+                <span class="header-badge">Slide 14</span>
+            </div>
+
+            <!-- Hero Visual Layout (Pattern B) -->
+            <div class="hero-visual-card" style="padding: 16px 20px;">
+                <svg viewBox="0 0 920 400" style="width: 100%; height: 100%; max-height: 480px;">
+                    <!-- Groove Cross Section Schematic -->
+                    <g transform="translate(40, 20)">
+                        <!-- Groove Floor and Walls -->
+                        <path d="M 20 40 L 20 180 C 20 240 120 270 420 270 C 720 270 820 240 820 180 L 820 40" fill="#F8FAFC" stroke="#1A1C20" stroke-width="3"/>
+                        <text x="420" y="305" text-anchor="middle" font-family="Inter Tight" font-size="15" font-weight="900" fill="#334155">MHC Class I Peptide-Binding Groove Floor (Cleft Cross-Section)</text>
+
+                        <!-- Pockets A through F -->
+                        <!-- Pocket A -->
+                        <rect x="50" y="170" width="85" height="65" rx="4" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2"/>
+                        <text x="92" y="200" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#1E293B">Pocket A</text>
+                        <text x="92" y="220" text-anchor="middle" font-family="Roboto Mono" font-size="10" fill="#64748B">N-term NH3+</text>
+
+                        <!-- Pocket B (Primary N-term Anchor) -->
+                        <rect x="155" y="170" width="115" height="85" rx="4" fill="#FEE2E2" stroke="#9D2235" stroke-width="2.5"/>
+                        <text x="212" y="202" text-anchor="middle" font-family="Roboto Mono" font-size="13" font-weight="900" fill="#991B1B">Pocket B</text>
+                        <text x="212" y="222" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="800" fill="#7F1D1D">(P2 Anchor)</text>
+                        <text x="212" y="242" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" fill="#991B1B">Met45 / Val67</text>
+
+                        <!-- Pockets C, D, E (Intermediate Pockets) -->
+                        <rect x="290" y="170" width="80" height="50" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+                        <text x="330" y="200" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="700">Pocket C</text>
+
+                        <rect x="385" y="170" width="80" height="50" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+                        <text x="425" y="200" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="700">Pocket D</text>
+
+                        <rect x="480" y="170" width="80" height="50" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+                        <text x="520" y="200" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="700">Pocket E</text>
+
+                        <!-- Pocket F (Primary C-term Anchor) -->
+                        <rect x="580" y="170" width="125" height="85" rx="4" fill="#FEE2E2" stroke="#9D2235" stroke-width="2.5"/>
+                        <text x="642" y="202" text-anchor="middle" font-family="Roboto Mono" font-size="13" font-weight="900" fill="#991B1B">Pocket F</text>
+                        <text x="642" y="222" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="800" fill="#7F1D1D">(P9 Anchor)</text>
+                        <text x="642" y="242" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" fill="#991B1B">Leu81 / Tyr116</text>
+
+                        <!-- The Docked Peptide Backbone -->
+                        <path d="M 70 100 Q 420 130 690 100" fill="none" stroke="#B45309" stroke-width="6.5" stroke-linecap="round"/>
+                        
+                        <!-- Peptide Side Chains dipping down into anchor pockets -->
+                        <!-- P2 side chain dipping into Pocket B -->
+                        <path d="M 212 110 L 212 175" stroke="#9D2235" stroke-width="3.5" marker-end="url(#arrow)"/>
+                        <circle cx="212" cy="180" r="7" fill="#9D2235"/>
+                        <text x="212" y="80" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="900" fill="#9D2235">P2: Leu / Met (Primary Anchor)</text>
+
+                        <!-- P9 side chain dipping into Pocket F -->
+                        <path d="M 642 110 L 642 175" stroke="#9D2235" stroke-width="3.5" marker-end="url(#arrow)"/>
+                        <circle cx="642" cy="180" r="7" fill="#9D2235"/>
+                        <text x="642" y="80" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="900" fill="#9D2235">P9: Val / Leu / Ile (C-Terminal Anchor)</text>
+
+                        <!-- Solvent-Exposed Residues pointing UP toward TCR -->
+                        <path d="M 420 120 L 420 50" stroke="#1D4ED8" stroke-width="3.5" marker-end="url(#arrow)"/>
+                        <circle cx="420" cy="45" r="7" fill="#1D4ED8"/>
+                        <text x="420" y="32" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="900" fill="#1D4ED8">P5: Solvent-Exposed Contact with TCR CDR3 Loop</text>
+                    </g>
+                </svg>
+                <div class="takeaway-strip takeaway-strip-cherry" style="width: 100%; margin-top: 10px;">
+                    <strong>Biochemical Rule:</strong> Pockets B and F anchor the peptide tightly into the HLA floor; central solvent-exposed residues (P4–P7) project upward to engage the T-cell receptor CDR3 loop.
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="15">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 3 &bull; Population Genetics</div>
+                    <h2 class="slide-title">MHC Restriction: Reverse HLA Genotyping from Blood Repertoires</h2>
+                    <div class="slide-subtitle">Emerson Figure 3 links public TCR expansion to host HLA alleles and inverts the diagnostic paradigm.</div>
+                </div>
+                <span class="header-badge">Slide 15</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: Biological Restriction & The Inversion -->
+                <div class="card card-blue">
+                    <div>
+                        <div class="card-title">🔄 The Principle of MHC Restriction</div>
+                        <ul class="content-list">
+                            <li><strong>Binary Recognition:</strong> A T-cell receptor recognizes an antigenic peptide exclusively when presented in the context of a matching host HLA allele.</li>
+                            <li><strong>Allele-Specific Clonal Expansion:</strong> A public TCR targeting an HLA-A*02:01-restricted CMV epitope expands only in individuals carrying the HLA-A*02:01 gene.</li>
+                            <li><strong>57 Restricted TCR Signatures:</strong> In Figure 3C, exactly 57 of the 142 diagnostic TCRs exhibited strict statistical restriction ($P \le 10^-3$) to specific HLA-A and HLA-B alleles.</li>
+                            <li><strong>Reverse HLA Genotyping:</strong> By observing which restricted TCR clonotypes expanded, Emerson et al. predicted host germline HLA alleles directly from blood RNA/DNA with $>90\%$ clinical accuracy.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-blue">
+                        <strong>Clinical Paradigm:</strong> Your blood T-cell repertoire records not only what pathogens you have fought, but also the germline HLA alleles you inherited from your parents.
+                    </div>
+                </div>
+
+                <!-- Right Card: Emerson Figure 3 Image -->
+                <div class="card" style="padding: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF;">
+                    <img src="images/emerson_fig3_hla_restriction.jpg" alt="Emerson Figure 3: HLA Restriction Grid and Association Matrix" class="hero-img" style="max-height: 470px; width: 100%; height: auto; object-fit: contain;">
+                    <div style="font-family: var(--font-mono); font-size: 0.84rem; color: var(--ink-muted); margin-top: 8px; text-align: center;">
+                        Emerson Figure 3: Association grid mapping 142 diagnostic TCRs against HLA-A and HLA-B alleles.
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="16">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 3 &bull; Active Learning Checkpoint</div>
+                    <h2 class="slide-title">Spot Check 2: HLA Class I Architecture &amp; Restriction</h2>
+                    <div class="slide-subtitle">Live 2-minute checkpoint assessing the structural basis of MHC-restricted clonal expansion.</div>
+                </div>
+                <span class="header-badge">Slide 16</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: The Question -->
+                <div class="card card-amber">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span class="passcode-pill">🔑 Passcode: MHC-POCKET-26</span>
+                            <span class="timer-badge">
+                                ⏱️ <span id="spot2-timer-disp">02:00</span>
+                                <button type="button" class="timer-btn" id="spot2-timer-btn" onclick="startTimer('spot2-timer-disp', 'spot2-timer-btn', 120)">Start</button>
+                                <button type="button" class="timer-btn" style="background:#64748B;" onclick="resetTimer('spot2-timer-disp', 'spot2-timer-btn', 120)">Reset</button>
+                            </span>
+                        </div>
+
+                        <p style="font-size: 1.05rem; font-weight: 700; color: #1E293B; line-height: 1.45; margin-bottom: 12px;">
+                            In Emerson et al., 57 of the 142 diagnostic TCRβ clonotypes exhibited strict statistical association (P ≤ 10⁻³) with specific HLA-A and HLA-B alleles. Why does a diagnostic classifier require a multi-feature panel of public TCRs rather than a single universal biomarker?
+                        </p>
+
+                        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.92rem;">
+                            <div style="background: #F8FAFC; border: 1px solid var(--rule-ink); padding: 8px 12px; border-radius: 2px;">
+                                <strong>A.</strong> T cells recognize foreign peptides presented within specific HLA anchor pockets; a public TCR can expand only in patients carrying that restricting HLA allele.
+                            </div>
+                            <div style="background: #F8FAFC; border: 1px solid var(--rule-ink); padding: 8px 12px; border-radius: 2px;">
+                                <strong>B.</strong> HLA Class I proteins act as restriction endonucleases that actively destroy TCR genes in patients who lack matching CMV viral strains.
+                            </div>
+                            <div style="background: #F8FAFC; border: 1px solid var(--rule-ink); padding: 8px 12px; border-radius: 2px;">
+                                <strong>C.</strong> Individuals carrying HLA-B alleles are completely incapable of producing T-cell receptors because HLA-B represses RAG1/2 transcription.
+                            </div>
+                            <div style="background: #F8FAFC; border: 1px solid var(--rule-ink); padding: 8px 12px; border-radius: 2px;">
+                                <strong>D.</strong> Public TCRs only expand in individuals harboring homozygous genomic deletions encompassing the entire MHC locus on chromosome 6.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Card: Canvas Submission Callout -->
+                <div class="card card-emerald" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div class="card-title">📝 Canvas Submission Instructions</div>
+                        <ul class="content-list">
+                            <li><strong>Open Canvas Quizzes:</strong> Go to <em>Course 178614 &rarr; Quizzes</em> on your device.</li>
+                            <li><strong>Select Assessment:</strong> Click on <strong>Lecture 8 Spot Check 2</strong>.</li>
+                            <li><strong>Enter Passcode:</strong> Enter <code>MHC-POCKET-26</code>.</li>
+                            <li><strong>Grading Policy:</strong> 1.0 Point possible &bull; 2 allowed attempts &bull; Highest score kept.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-amber">
+                        💡 <strong>Clinical Synthesis:</strong> Because no single HLA allele is present in 100% of human beings, universal diagnostics must assemble orthogonal TCR signatures across multiple HLA genetic backgrounds.
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="17">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 4 &bull; Immune Tolerance</div>
+                    <h2 class="slide-title">Central Tolerance: The Thymic Checkpoint &amp; Autoreactive Escape</h2>
+                    <div class="slide-subtitle">How AIRE-mediated negative selection deletes self-reactive clones—and why low-affinity cells survive.</div>
+                </div>
+                <span class="header-badge">Slide 17</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: Thymic Selection Biology -->
+                <div class="card card-purple">
+                    <div>
+                        <div class="card-title">🏛️ The Thymic Quality Control Filter</div>
+                        <ul class="content-list">
+                            <li><strong>Tissue-Restricted Antigens (TRAs):</strong> The transcription factor <strong>AIRE (Autoimmune Regulator)</strong> drives thymic expression of peripheral tissue proteins, including insulin and myelin.</li>
+                            <li><strong>Negative Selection (Clonal Deletion):</strong> Developing thymocytes displaying high affinity for self-antigen/HLA complexes undergo programmed cell death (<strong>apoptosis</strong>).</li>
+                            <li><strong>The Tolerance Leak:</strong> Negative selection is an avidity threshold; thymocytes binding self-peptides with intermediate or weak avidity evade deletion and enter the peripheral circulation.</li>
+                            <li><strong>Peripheral Tolerance:</strong> Regulatory T cells (<strong>Tregs</strong>) and inhibitory checkpoint receptors (CTLA-4, PD-1) actively suppress these circulating autoreactive cells under healthy conditions.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-purple">
+                        <strong>Immunological Reality:</strong> Every healthy individual harbors latent autoreactive T cells; autoimmune disease emerges when specific HLA alleles present self-antigens with aberrantly high affinity.
+                    </div>
+                </div>
+
+                <!-- Right Card: Thymic Selection Funnel SVG -->
+                <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF;">
+                    <svg viewBox="0 0 500 320" style="width: 100%; height: 100%; max-height: 300px;">
+                        <!-- Thymus Funnel -->
+                        <g transform="translate(50, 20)">
+                            <text x="200" y="16" text-anchor="middle" font-family="Inter Tight" font-size="12" font-weight="800" fill="#0F172A">Thymic Medullary Selection Cascade</text>
+
+                            <!-- Broad Top: Random V(D)J Pool -->
+                            <polygon points="40,30 360,30 260,160 140,160" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
+                            <text x="200" y="55" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="700" fill="#1E40AF">Random V(D)J T-Cell Pool (>10¹⁵ Clones)</text>
+
+                            <!-- AIRE Self-Peptide Display -->
+                            <rect x="110" y="80" width="180" height="32" rx="3" fill="#FEE2E2" stroke="#9D2235" stroke-width="1.5"/>
+                            <text x="200" y="100" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#991B1B">AIRE Self-Antigen Display</text>
+                            
+                            <!-- Deletion Arrow -->
+                            <path d="M 295 96 L 370 96" stroke="#9D2235" stroke-width="2.5" marker-end="url(#arrow)"/>
+                            <text x="375" y="100" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#991B1B">Clonal Deletion (Apoptosis)</text>
+
+                            <!-- Narrow Neck: Surviving Cells -->
+                            <rect x="140" y="160" width="120" height="50" rx="3" fill="#DCFCE7" stroke="#047857" stroke-width="2"/>
+                            <text x="200" y="180" text-anchor="middle" font-family="Inter Tight" font-size="10.5" font-weight="800" fill="#065F46">Foreign-Reactive Pool</text>
+                            <text x="200" y="196" text-anchor="middle" font-family="Roboto Mono" font-size="9" fill="#047857">Low/Zero Self-Avidity</text>
+
+                            <!-- Leakage Arrow to Periphery -->
+                            <path d="M 140 185 L 60 230" stroke="#CA8A04" stroke-width="2" marker-end="url(#arrow)"/>
+                            <rect x="10" y="235" width="160" height="48" rx="3" fill="#FEF9C3" stroke="#CA8A04" stroke-width="1.5"/>
+                            <text x="90" y="254" text-anchor="middle" font-family="Inter Tight" font-size="10" font-weight="800" fill="#854D0E">The Autoreactive Leak</text>
+                            <text x="90" y="270" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" fill="#713F12">Latent intermediate-avidity T cells</text>
+
+                            <!-- Main Stream to Periphery -->
+                            <path d="M 200 210 L 200 250" stroke="#047857" stroke-width="2.5" marker-end="url(#arrow)"/>
+                            <rect x="130" y="255" width="140" height="40" rx="3" fill="#F0FDF4" stroke="#047857" stroke-width="1.5"/>
+                            <text x="200" y="278" text-anchor="middle" font-family="Inter Tight" font-size="10.5" font-weight="800" fill="#065F46">Peripheral Repertoire</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="18">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 4 &bull; Autoimmune Structural Genetics</div>
+                    <h2 class="slide-title">Type 1 Diabetes: The non-Asp57 Electrostatic Switch at HLA-DQB1</h2>
+                    <div class="slide-subtitle">Substituting a single neutral residue alters the P9 anchor pocket, enabling high-affinity insulin presentation.</div>
+                </div>
+                <span class="header-badge">Slide 18</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: Structural Mechanism -->
+                <div class="card card-cherry">
+                    <div>
+                        <div class="card-title">⚡ The Salt-Bridge Molecular Switch</div>
+                        <ul class="content-list">
+                            <li><strong>The Protective State (Asp57):</strong> In neutral alleles, negatively charged <strong>Aspartic Acid at position 57 (Asp57)</strong> of the DQ $\beta$ chain forms a salt bridge with Arg79 on the $\alpha$ chain.</li>
+                            <li><strong>The Diabetogenic Mutation (non-Asp57):</strong> Susceptibility alleles (HLA-DQB1*02:01 and *03:02) encode neutral residues (<strong>Ala57, Val57, or Ser57</strong>) instead of Asp.</li>
+                            <li><strong>P9 Pocket Charge Inversion:</strong> Eliminating the negative charge breaks the salt bridge, leaving basic Arg residues exposed and making the <strong>P9 anchor pocket electropositive</strong>.</li>
+                            <li><strong>Autoantigen Docking:</strong> This positive pocket binds acidic residues in <strong>insulin B-chain (InsB9–23)</strong> and <strong>GAD65</strong> self-peptides, triggering CD4+ cytotoxic islet destruction.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-cherry">
+                        <strong>Biophysical Takeaway:</strong> A single inherited carboxylate loss (&minus;COO<sup>&minus;</sup>) in one HLA anchor pocket accounts for over 50% of the genetic risk for juvenile Type 1 Diabetes.
+                    </div>
+                </div>
+
+                <!-- Right Card: Electrostatic Pocket Model SVG -->
+                <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; padding: 14px;">
+                    <svg viewBox="0 0 520 360" style="width: 100%; height: 100%; max-height: 460px;">
+                        <!-- Protective State: Asp57 -->
+                        <g transform="translate(20, 15)">
+                            <rect x="0" y="0" width="225" height="135" rx="4" fill="#F0FDF4" stroke="#047857" stroke-width="2"/>
+                            <text x="112" y="24" text-anchor="middle" font-family="Inter Tight" font-size="12" font-weight="900" fill="#065F46">PROTECTIVE: Asp57 Allele</text>
+
+                            <!-- Salt Bridge Diagram -->
+                            <circle cx="70" cy="65" r="18" fill="#FEE2E2" stroke="#9D2235" stroke-width="2"/>
+                            <text x="70" y="70" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="900" fill="#991B1B">Asp57 (-)</text>
+
+                            <line x1="90" y1="65" x2="135" y2="65" stroke="#121316" stroke-width="2.5" stroke-dasharray="3,3"/>
+                            <text x="112" y="55" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" font-weight="800">Salt Bridge</text>
+
+                            <circle cx="155" cy="65" r="18" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
+                            <text x="155" y="70" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="900" fill="#1E40AF">Arg79 (+)</text>
+
+                            <!-- P9 Status -->
+                            <rect x="25" y="98" width="175" height="26" rx="2" fill="#FFFFFF" stroke="#047857" stroke-width="1.5"/>
+                            <text x="112" y="115" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#047857">P9 Pocket: Neutral / Shielded</text>
+                        </g>
+
+                        <!-- Diabetogenic State: Ala57 -->
+                        <g transform="translate(275, 15)">
+                            <rect x="0" y="0" width="225" height="135" rx="4" fill="#FEF2F2" stroke="#9D2235" stroke-width="2"/>
+                            <text x="112" y="24" text-anchor="middle" font-family="Inter Tight" font-size="12" font-weight="900" fill="#991B1B">RISK: non-Asp57 (Ala / Val / Ser)</text>
+
+                            <!-- Broken Bridge -->
+                            <circle cx="70" cy="65" r="18" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+                            <text x="70" y="70" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="900" fill="#475569">Ala57 (0)</text>
+
+                            <text x="112" y="60" text-anchor="middle" font-family="Inter" font-size="13" font-weight="800" fill="#DC2626">✕ Broken</text>
+
+                            <circle cx="155" cy="65" r="18" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
+                            <text x="155" y="70" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="900" fill="#1E40AF">Arg79 (+)</text>
+
+                            <!-- Exposed P9 Pocket -->
+                            <rect x="25" y="98" width="175" height="26" rx="2" fill="#FFFFFF" stroke="#9D2235" stroke-width="2"/>
+                            <text x="112" y="115" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="900" fill="#991B1B">P9 Pocket: Electropositive (+)</text>
+                        </g>
+
+                        <!-- Docking of Acidic Insulin Peptide -->
+                        <g transform="translate(20, 170)">
+                            <rect x="0" y="0" width="480" height="165" rx="4" fill="#F8FAFC" stroke="#1A1C20" stroke-width="2"/>
+                            <text x="240" y="28" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="900" fill="#0F172A">Insulin B-Chain Peptide (InsB9–23) Docking Cascade</text>
+
+                            <!-- Docked Peptide -->
+                            <path d="M 40 80 Q 240 115 440 80" fill="none" stroke="#B45309" stroke-width="5"/>
+                            
+                            <!-- Acidic P9 Anchor Glu/Asp attracted to positive P9 -->
+                            <circle cx="390" cy="85" r="13" fill="#DC2626" stroke="#121316" stroke-width="2"/>
+                            <text x="390" y="91" text-anchor="middle" font-family="Roboto Mono" font-size="13" font-weight="900" fill="#FFFFFF">-</text>
+                            
+                            <path d="M 390 102 L 390 128" stroke="#1D4ED8" stroke-width="3" stroke-dasharray="3,3" marker-end="url(#arrow)"/>
+                            <text x="390" y="145" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#1D4ED8">Arg79 (+) P9 Anchor</text>
+
+                            <text x="210" y="142" font-family="Inter" font-size="11" font-weight="800" fill="#991B1B">
+                                High-Affinity Binding &rarr; CD4+ T-Cell Activation &rarr; Beta Islet Lysis
+                            </text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="19">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 4 &bull; Mucosal Immunogenomics</div>
+                    <h2 class="slide-title">Celiac Disease: Enzymatic Neo-Epitope Creation via tTG2 Deamidation</h2>
+                    <div class="slide-subtitle">How human tissue transglutaminase converts neutral dietary gluten into high-affinity HLA-DQ2.5 ligands.</div>
+                </div>
+                <span class="header-badge">Slide 19</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: Biochemical Pathway -->
+                <div class="card card-emerald">
+                    <div>
+                        <div class="card-title">🍞 The Gluten-tTG2-DQ2.5 Axis</div>
+                        <ul class="content-list">
+                            <li><strong>Protease Resistance:</strong> Dietary gluten proteins (gliadins) are rich in proline and neutral <strong>glutamine (Gln, Q)</strong> residues, resisting gastric and pancreatic enzymatic breakdown.</li>
+                            <li><strong>Enzymatic Deamidation:</strong> In the intestinal lamina propria, <strong>tissue transglutaminase 2 (tTG2)</strong> deamidates neutral glutamine into negatively charged <strong>glutamic acid (Glu, E)</strong>.</li>
+                            <li><strong>Complementary Electrostatic Docking:</strong> HLA-DQ2.5 (DQA1*05:01 / DQB1*02:01) carries basic, positively charged residues in its <strong>P4, P6, P7, and P9 pockets</strong>.</li>
+                            <li><strong>Villous Atrophy:</strong> Deamidated gluten binds DQ2.5 with high affinity, activating mucosal CD4+ helper T cells that coordinate enterocyte apoptosis and total villous blunting.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-emerald">
+                        <strong>Clinical Diagnostic Key:</strong> Over 95% of Celiac patients carry HLA-DQ2.5 or HLA-DQ8; absence of both alleles carries a >99% negative predictive value, ruling out the disease.
+                    </div>
+                </div>
+
+                <!-- Right Card: Reaction Schematic SVG -->
+                <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; padding: 14px;">
+                    <svg viewBox="0 0 520 370" style="width: 100%; height: 100%; max-height: 440px;">
+                        <!-- Step 1: Ingested Gluten Fragment -->
+                        <g transform="translate(30, 20)">
+                            <text x="0" y="14" font-family="Inter Tight" font-size="11.5" font-weight="800" fill="#0F172A">1. Ingested Dietary Gluten (Neutral Gliadin Fragment)</text>
+                            
+                            <rect x="20" y="24" width="240" height="32" rx="16" fill="#FEF3C7" stroke="#B45309" stroke-width="1.5"/>
+                            <text x="140" y="44" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="700" fill="#92400E">- P - Q - Q - P - F - P -</text>
+                            
+                            <!-- Neutral Glutamine Callout -->
+                            <circle cx="100" cy="40" r="10" fill="#FBBF24" stroke="#92400E" stroke-width="1.5"/>
+                            <text x="100" y="44" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" font-weight="900">Q (0)</text>
+                            <text x="320" y="44" font-family="Roboto Mono" font-size="9.5" fill="#64748B">Cannot bind HLA-DQ2.5</text>
+                        </g>
+
+                        <!-- Step 2: tTG2 Deamidation Reaction -->
+                        <g transform="translate(30, 105)">
+                            <path d="M 140 5 L 140 38" stroke="#047857" stroke-width="2.5" marker-end="url(#arrow)"/>
+                            <rect x="165" y="10" width="220" height="26" rx="3" fill="#DCFCE7" stroke="#047857" stroke-width="1.5"/>
+                            <text x="275" y="27" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#065F46">tTG2 Deamidation (-CONH₂ &rarr; -COO⁻)</text>
+                        </g>
+
+                        <!-- Step 3: Negatively Charged Neo-Epitope -->
+                        <g transform="translate(30, 165)">
+                            <text x="0" y="14" font-family="Inter Tight" font-size="11.5" font-weight="800" fill="#0F172A">2. Deamidated Neo-Epitope (Negatively Charged Glutamic Acid)</text>
+                            
+                            <rect x="20" y="24" width="240" height="32" rx="16" fill="#FEE2E2" stroke="#9D2235" stroke-width="2"/>
+                            <text x="140" y="44" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="700" fill="#991B1B">- P - E - Q - P - F - P -</text>
+
+                            <!-- Negative Glutamic Acid Callout -->
+                            <circle cx="100" cy="40" r="10" fill="#DC2626" stroke="#7F1D1D" stroke-width="1.5"/>
+                            <text x="100" y="44" text-anchor="middle" font-family="Roboto Mono" font-size="9" font-weight="900" fill="#FFFFFF">E (-)</text>
+                        </g>
+
+                        <!-- Step 4: High-Affinity Docking in HLA-DQ2.5 Cleft -->
+                        <g transform="translate(30, 260)">
+                            <rect x="20" y="0" width="420" height="75" rx="3" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <text x="230" y="22" text-anchor="middle" font-family="Inter Tight" font-size="11.5" font-weight="800" fill="#1E3A8A">3. High-Affinity Docking in HLA-DQ2.5 Basic Pockets</text>
+
+                            <!-- Basic Pockets Attraction -->
+                            <rect x="70" y="34" width="45" height="24" rx="2" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <text x="92" y="50" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#1D4ED8">P4 (+)</text>
+
+                            <rect x="130" y="34" width="45" height="24" rx="2" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <text x="152" y="50" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#1D4ED8">P6 (+)</text>
+
+                            <rect x="190" y="34" width="45" height="24" rx="2" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <text x="212" y="50" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#1D4ED8">P9 (+)</text>
+
+                            <text x="325" y="50" font-family="Inter" font-size="10.5" font-weight="800" fill="#9D2235">&rarr; Severe Mucosal Lysis</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="20">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 4 &bull; Clinical Pharmacogenomics</div>
+                    <h2 class="slide-title">Drug-Induced Autoimmunity: Abacavir &amp; The Altered HLA-B*57:01 Cleft</h2>
+                    <div class="slide-subtitle">A small synthetic drug nests in Pocket F, reprogramming the presenting self-peptide repertoire.</div>
+                </div>
+                <span class="header-badge">Slide 20</span>
+            </div>
+
+            <!-- Hero Visual Layout (Pattern B) -->
+            <div class="hero-visual-card" style="padding: 12px 20px;">
+                <svg viewBox="0 0 920 380" style="width: 100%; height: 100%; max-height: 460px;">
+                    <!-- Normal HLA-B*57:01 Cleft (Left) -->
+                    <g transform="translate(40, 20)">
+                        <rect x="0" y="0" width="390" height="280" rx="4" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+                        <text x="195" y="26" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="800" fill="#334155">A. Baseline HLA-B*57:01 (No Drug)</text>
+
+                        <!-- Groove Shape -->
+                        <path d="M 45 75 L 45 190 C 45 235 90 245 195 245 C 300 245 345 235 345 190 L 345 75" fill="#FFFFFF" stroke="#1A1C20" stroke-width="2.5"/>
+                        
+                        <!-- Empty F-Pocket -->
+                        <rect x="235" y="185" width="80" height="48" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+                        <text x="275" y="214" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="700">Pocket F</text>
+
+                        <!-- Normal Self-Peptide with Tryptophan/Phenylalanine Anchor -->
+                        <rect x="75" y="115" width="240" height="24" rx="12" fill="#DCFCE7" stroke="#047857" stroke-width="2"/>
+                        <circle cx="275" cy="127" r="8" fill="#047857"/>
+                        <text x="180" y="132" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#065F46">Normal Self Peptide (C-term Trp/Phe)</text>
+
+                        <text x="195" y="268" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#047857">Tolerated by CD8+ T Cells (No Reaction)</text>
+                    </g>
+
+                    <!-- Abacavir Bound HLA-B*57:01 Cleft (Right) -->
+                    <g transform="translate(490, 20)">
+                        <rect x="0" y="0" width="390" height="280" rx="4" fill="#FEF2F2" stroke="#9D2235" stroke-width="2"/>
+                        <text x="195" y="26" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="900" fill="#991B1B">B. Abacavir-Bound Cleft (Altered Repertoire)</text>
+
+                        <!-- Groove Shape -->
+                        <path d="M 45 75 L 45 190 C 45 235 90 245 195 245 C 300 245 345 235 345 190 L 345 75" fill="#FFFFFF" stroke="#1A1C20" stroke-width="2.5"/>
+
+                        <!-- Abacavir Molecule Nesting in Pocket F -->
+                        <rect x="235" y="185" width="80" height="48" rx="3" fill="#FEE2E2" stroke="#9D2235" stroke-width="2"/>
+                        <circle cx="275" cy="209" r="14" fill="#9D2235"/>
+                        <text x="275" y="214" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="900" fill="#FFFFFF">Drug</text>
+
+                        <!-- Novel Self-Peptide with smaller anchor (Ile/Leu) -->
+                        <rect x="75" y="115" width="240" height="24" rx="12" fill="#FEF08A" stroke="#CA8A04" stroke-width="2"/>
+                        <circle cx="255" cy="127" r="7" fill="#B45309"/>
+                        <text x="165" y="132" text-anchor="middle" font-family="Roboto Mono" font-size="9" font-weight="800" fill="#854D0E">Novel Self-Peptide (Ile/Leu)</text>
+
+                        <!-- Massive CD8+ Attack -->
+                        <text x="195" y="268" text-anchor="middle" font-family="Inter" font-size="11.5" font-weight="900" fill="#DC2626">
+                            ⚡ Massive Systemic CD8+ Autoimmune Attack
+                        </text>
+                    </g>
+                </svg>
+                <div class="takeaway-strip takeaway-strip-cherry" style="width: 100%; margin-top: 6px;">
+                    <strong>Precision Medicine Paradigm:</strong> Mandatory genetic screening for HLA-B*57:01 prior to abacavir prescription completely eliminated hypersensitivity cases, serving as a global gold standard for pharmacogenomics.
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="21">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 4 &bull; Active Learning Checkpoint</div>
+                    <h2 class="slide-title">Spot Check 3: Autoimmune Structural Mechanisms</h2>
+                    <div class="slide-subtitle">Live 2-minute checkpoint assessing the molecular basis of loss of self-tolerance.</div>
+                </div>
+                <span class="header-badge">Slide 21</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: The Question -->
+                <div class="card card-amber">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span class="passcode-pill">🔑 Passcode: SCAR-HLA-5701</span>
+                            <span class="timer-badge">
+                                ⏱️ <span id="spot3-timer-disp">02:00</span>
+                                <button type="button" class="timer-btn" id="spot3-timer-btn" onclick="startTimer('spot3-timer-disp', 'spot3-timer-btn', 120)">Start</button>
+                                <button type="button" class="timer-btn" style="background:#64748B;" onclick="resetTimer('spot3-timer-disp', 'spot3-timer-btn', 120)">Reset</button>
+                            </span>
+                        </div>
+
+                        <p style="font-size: 1.05rem; font-weight: 700; color: #1E293B; line-height: 1.45; margin-bottom: 12px;">
+                            Which molecular mechanism correctly explains how the small-molecule antiretroviral drug abacavir triggers fatal systemic hypersensitivity reactions exclusively in individuals carrying HLA-B*57:01?
+                        </p>
+
+                        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.92rem;">
+                            <div style="background: #F8FAFC; border: 1px solid var(--rule-ink); padding: 8px 12px; border-radius: 2px;">
+                                <strong>A.</strong> Abacavir binds non-covalently into the F-pocket of HLA-B*57:01, altering the cleft geometry and presenting novel self-peptides that trigger massive CD8+ autoimmune attack.
+                            </div>
+                            <div style="background: #F8FAFC; border: 1px solid var(--rule-ink); padding: 8px 12px; border-radius: 2px;">
+                                <strong>B.</strong> Abacavir acts as a topoisomerase poison that selectively cuts chromosome 6p21 into fragments in HIV-infected monocytes.
+                            </div>
+                            <div style="background: #F8FAFC; border: 1px solid var(--rule-ink); padding: 8px 12px; border-radius: 2px;">
+                                <strong>C.</strong> Abacavir binds to dietary gluten, causing tissue transglutaminase 2 to undergo immediate systemic crystallization.
+                            </div>
+                            <div style="background: #F8FAFC; border: 1px solid var(--rule-ink); padding: 8px 12px; border-radius: 2px;">
+                                <strong>D.</strong> Abacavir selectively mutates Asp57 into Alanine in mitochondrial ribosomal RNA subunits.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Card: Canvas Submission Callout -->
+                <div class="card card-purple" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div class="card-title">📝 Canvas Submission Instructions</div>
+                        <ul class="content-list">
+                            <li><strong>Open Canvas Quizzes:</strong> Go to <em>Course 178614 &rarr; Quizzes</em> on your device.</li>
+                            <li><strong>Select Assessment:</strong> Click on <strong>Lecture 8 Spot Check 3</strong>.</li>
+                            <li><strong>Enter Passcode:</strong> Type <code>SCAR-HLA-5701</code>.</li>
+                            <li><strong>Scoring Policy:</strong> 1.0 Point possible &bull; 2 allowed attempts &bull; Highest score kept.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-amber">
+                        💡 <strong>Clinical Takeaway:</strong> Pharmacogenomics demonstrates that drug toxicity can result from drug-induced alterations to the immune presentation machinery, rather than impaired hepatic drug metabolism alone.
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="22">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 5 &bull; In-Class Collaborative Sprint</div>
+                    <h2 class="slide-title">Sprint: The Clinical Immunogenomics Board</h2>
+                    <div class="slide-subtitle">Four real-world clinical cases evaluated across auditorium seating quadrants (15:00 active window).</div>
+                </div>
+                <span class="header-badge">Slide 22</span>
+            </div>
+
+            <!-- Main Sprint Container -->
+            <div class="card card-cherry" style="flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 12px 18px;">
+                <!-- Controls Bar -->
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--rule-ink); padding-bottom: 8px; margin-bottom: 8px;">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <span class="passcode-pill">🔑 Passcode: TOLERANCE-2026</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: #475569;">4.0 Points Possible &bull; Teams of 2–3</span>
+                    </div>
+
+                    <span class="timer-badge">
+                        ⏱️ <span id="sprint-timer-disp">15:00</span>
+                        <button type="button" class="timer-btn" id="sprint-timer-btn" onclick="startTimer('sprint-timer-disp', 'sprint-timer-btn', 900)">Start</button>
+                        <button type="button" class="timer-btn" style="background:#64748B;" onclick="resetTimer('sprint-timer-disp', 'sprint-timer-btn', 900)">Reset</button>
+                    </span>
+                </div>
+
+                <!-- 4 Track Selector Buttons -->
+                <div class="sprint-tab-bar">
+                    <button type="button" class="sprint-tab-btn active" onclick="switchSprintTab(0)">
+                        Track 1: Pediatric Endocrinology (NW)
+                    </button>
+                    <button type="button" class="sprint-tab-btn" onclick="switchSprintTab(1)">
+                        Track 2: Gastroenterology (NE)
+                    </button>
+                    <button type="button" class="sprint-tab-btn" onclick="switchSprintTab(2)">
+                        Track 3: Renal Transplant (SW)
+                    </button>
+                    <button type="button" class="sprint-tab-btn" onclick="switchSprintTab(3)">
+                        Track 4: HIV Pharmacogenomics (SE)
+                    </button>
+                </div>
+
+                <!-- Sprint Panes -->
+                <div style="flex: 1; min-height: 0; display: flex; flex-direction: column;">
+                    <!-- Track 1 Pane -->
+                    <div class="sprint-pane active" id="sprint-pane-0">
+                        <div style="background: #FEF2F2; border-left: 4px solid #9D2235; padding: 10px 14px; border-radius: 2px;">
+                            <strong style="color: #9D2235; font-size: 1.05rem;">Case 1 (NW / Rows A–G Left): Type 1 Diabetes Risk &amp; Preventative Biologics</strong>
+                            <p style="font-size: 0.95rem; line-height: 1.45; color: #334155; margin-top: 4px;">
+                                A 4-year-old child whose sibling has Type 1 Diabetes undergoes screening. Genetic testing reveals homozygous <code>HLA-DQB1*02:01 / *03:02</code> (both non-Asp57 alleles). Serum testing detects high titers of anti-GAD65 and anti-IA2 autoantibodies, but fasting glucose remains normal (Stage 1 T1D).
+                            </p>
+                            <ul style="font-size: 0.92rem; line-height: 1.42; margin-top: 6px; padding-left: 20px; color: #1E293B;">
+                                <li><strong>Question 1A:</strong> Explain how homozygous non-Asp57 alleles alter the electrostatic charge of Pocket P9 in HLA-DQ to permit presentation of insulin B-chain and GAD65 peptides.</li>
+                                <li><strong>Question 1B:</strong> In 2022, the US FDA approved <em>Teplizumab (TZIELD)</em>, an anti-CD3 monoclonal antibody, for Stage 2 T1D. How does transiently targeting the CD3 complex on T cells delay clinical onset of insulin dependence?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Track 2 Pane -->
+                    <div class="sprint-pane" id="sprint-pane-1">
+                        <div style="background: #F0FDF4; border-left: 4px solid #047857; padding: 10px 14px; border-radius: 2px;">
+                            <strong style="color: #065F46; font-size: 1.05rem;">Case 2 (NE / Rows A–G Right): Seronegative Celiac vs. Dietary Elimination</strong>
+                            <p style="font-size: 0.95rem; line-height: 1.45; color: #334155; margin-top: 4px;">
+                                A 28-year-old patient reports severe bloating and abdominal pain after eating wheat. Six months ago, the patient eliminated gluten completely. Anti-tTG IgA serology is currently negative, but the patient refuses a 6-week gluten challenge prior to endoscopy. The physician orders HLA-DQ genotyping.
+                            </p>
+                            <ul style="font-size: 0.92rem; line-height: 1.42; margin-top: 6px; padding-left: 20px; color: #1E293B;">
+                                <li><strong>Question 2A:</strong> Why is anti-tTG antibody serology frequently false-negative in patients actively maintaining a gluten-free diet?</li>
+                                <li><strong>Question 2B:</strong> If HLA genotyping reveals the patient is negative for both HLA-DQ2.5 and HLA-DQ8, why does this test have a >99% negative predictive value that completely rules out Celiac disease without a biopsy?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Track 3 Pane -->
+                    <div class="sprint-pane" id="sprint-pane-2">
+                        <div style="background: #EFF6FF; border-left: 4px solid #1D4ED8; padding: 10px 14px; border-radius: 2px;">
+                            <strong style="color: #1E3A8A; font-size: 1.05rem;">Case 3 (SW / Rows H–N Left): CMV Reactivation in Renal Transplantation</strong>
+                            <p style="font-size: 0.95rem; line-height: 1.45; color: #334155; margin-top: 4px;">
+                                A 52-year-old kidney transplant recipient on Tacrolimus and Mycophenolate presents with unexplained fever and rising serum creatinine. Conventional CMV IgG and IgM ELISA titers are undetectable. The transplant team orders high-throughput TCRβ immunosequencing of peripheral blood.
+                            </p>
+                            <ul style="font-size: 0.92rem; line-height: 1.42; margin-top: 6px; padding-left: 20px; color: #1E293B;">
+                                <li><strong>Question 3A:</strong> Why does standard antibody serology fail in immunosuppressed organ transplant patients, and how does Pathogen Memory Burden ($M_i$) overcome this limitation?</li>
+                                <li><strong>Question 3B:</strong> Repertoire sequencing reveals $M_i = 0.028\%$ with robust expansion of HLA-A*02-restricted public TCR clonotypes. Does this patient have active CMV exposure? What therapy should be initiated?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Track 4 Pane -->
+                    <div class="sprint-pane" id="sprint-pane-3">
+                        <div style="background: #FAF5FF; border-left: 4px solid #6D28D9; padding: 10px 14px; border-radius: 2px;">
+                            <strong style="color: #5B21B6; font-size: 1.05rem;">Case 4 (SE / Rows H–N Right): Clinical Pharmacogenomics &amp; Abacavir</strong>
+                            <p style="font-size: 0.95rem; line-height: 1.45; color: #334155; margin-top: 4px;">
+                                A 34-year-old patient newly diagnosed with HIV-1 is evaluated for initial antiretroviral therapy (ART). The clinical team considers prescribing a fixed-dose combination containing abacavir. Routine baseline pharmacogenomic screening returns a positive test for <code>HLA-B*57:01</code>.
+                            </p>
+                            <ul style="font-size: 0.92rem; line-height: 1.42; margin-top: 6px; padding-left: 20px; color: #1E293B;">
+                                <li><strong>Question 4A:</strong> Describe the biophysical mechanism by which abacavir induces severe cutaneous adverse reactions (SCAR) in HLA-B*57:01 carriers.</li>
+                                <li><strong>Question 4B:</strong> Why must this patient never be prescribed abacavir, and what alternative nucleoside reverse transcriptase inhibitor (NRTI) backbone should be selected?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Submission Callout -->
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--rule-ink); padding-top: 8px; margin-top: 6px; font-size: 0.88rem;">
+                    <span>Submit your team's consensus deductions under <strong>Lecture 8 In-Class Sprint</strong> on Canvas.</span>
+                    <a href="https://templeu.instructure.com/courses/178614/quizzes" target="_blank" style="color: var(--temple-cherry); font-weight: 800; font-family: var(--font-mono);">Open Canvas Sprint Portal &rarr;</a>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="23">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 6 &bull; Therapeutic Engineering</div>
+                    <h2 class="slide-title">Monoclonal Antibodies: The Engineering Evolution from -omab to -umab</h2>
+                    <div class="slide-subtitle">How recombinant protein engineering eliminated immunogenicity in clinical biologics.</div>
+                </div>
+                <span class="header-badge">Slide 23</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: The Nomenclature Decoder -->
+                <div class="card card-blue">
+                    <div>
+                        <div class="card-title">🏷️ Decoding Monoclonal Drug Nomenclature</div>
+                        <ul class="content-list">
+                            <li><strong>Murine (-omab, 100% Mouse):</strong> Early hybridoma technology generated foreign mouse proteins that triggered neutralizing <strong>Human Anti-Mouse Antibodies (HAMA)</strong>.</li>
+                            <li><strong>Chimeric (-ximab, ~65% Human):</strong> Engineers fused mouse variable domains onto human constant domains, creating drugs like <strong>Rituximab</strong> and <strong>Infliximab</strong>.</li>
+                            <li><strong>Humanized (-zumab, >90% Human):</strong> Molecular biologists grafted only the mouse CDR loops onto a human framework scaffold, minimizing anti-drug responses.</li>
+                            <li><strong>Fully Human (-umab, 100% Human):</strong> Transgenic mice carrying human immunoglobulin loci produce fully human biologics like <strong>Adalimumab</strong> (Humira).</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-blue">
+                        <strong>Pharmacological Rule:</strong> As human sequence homology increases from 0% to 100%, anti-drug neutralizing antibody formation drops, extending drug half-life in human serum.
+                    </div>
+                </div>
+
+                <!-- Right Card: Structural Schematic SVG -->
+                <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF;">
+                    <svg viewBox="0 0 500 320" style="width: 100%; height: 100%; max-height: 300px;">
+                        <!-- Four Antibody Generations -->
+                        <!-- 1. Murine -->
+                        <g transform="translate(10, 20)">
+                            <text x="50" y="16" text-anchor="middle" font-family="Inter Tight" font-size="10.5" font-weight="800" fill="#991B1B">Murine (-omab)</text>
+                            <!-- Y-shape: 100% mouse (red) -->
+                            <rect x="35" y="60" width="30" height="50" rx="3" fill="#FEE2E2" stroke="#9D2235" stroke-width="2"/>
+                            <rect x="15" y="30" width="30" height="35" rx="3" fill="#FEE2E2" stroke="#9D2235" stroke-width="2"/>
+                            <rect x="55" y="30" width="30" height="35" rx="3" fill="#FEE2E2" stroke="#9D2235" stroke-width="2"/>
+                            <text x="50" y="125" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" fill="#7F1D1D">0% Human</text>
+                            <text x="50" y="138" text-anchor="middle" font-family="Roboto Mono" font-size="8" fill="#DC2626">High HAMA</text>
+                        </g>
+
+                        <!-- 2. Chimeric -->
+                        <g transform="translate(130, 20)">
+                            <text x="50" y="16" text-anchor="middle" font-family="Inter Tight" font-size="10.5" font-weight="800" fill="#B45309">Chimeric (-ximab)</text>
+                            <!-- Constant: Human (blue); Variable: Mouse (red) -->
+                            <rect x="35" y="60" width="30" height="50" rx="3" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
+                            <rect x="15" y="30" width="30" height="35" rx="3" fill="#FEE2E2" stroke="#9D2235" stroke-width="2"/>
+                            <rect x="55" y="30" width="30" height="35" rx="3" fill="#FEE2E2" stroke="#9D2235" stroke-width="2"/>
+                            <text x="50" y="125" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" fill="#1E3A8A">~65% Human</text>
+                            <text x="50" y="138" text-anchor="middle" font-family="Roboto Mono" font-size="8" fill="#B45309">e.g. Rituximab</text>
+                        </g>
+
+                        <!-- 3. Humanized -->
+                        <g transform="translate(250, 20)">
+                            <text x="50" y="16" text-anchor="middle" font-family="Inter Tight" font-size="10.5" font-weight="800" fill="#047857">Humanized (-zumab)</text>
+                            <!-- Constant and Framework: Blue; CDR loops: Red dots -->
+                            <rect x="35" y="60" width="30" height="50" rx="3" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
+                            <rect x="15" y="30" width="30" height="35" rx="3" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
+                            <rect x="55" y="30" width="30" height="35" rx="3" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
+                            <!-- CDR loops -->
+                            <circle cx="20" cy="35" r="4" fill="#9D2235"/>
+                            <circle cx="80" cy="35" r="4" fill="#9D2235"/>
+                            <text x="50" y="125" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" fill="#065F46">>90% Human</text>
+                            <text x="50" y="138" text-anchor="middle" font-family="Roboto Mono" font-size="8" fill="#047857">CDR Grafted</text>
+                        </g>
+
+                        <!-- 4. Fully Human -->
+                        <g transform="translate(370, 20)">
+                            <text x="50" y="16" text-anchor="middle" font-family="Inter Tight" font-size="10.5" font-weight="800" fill="#1D4ED8">Human (-umab)</text>
+                            <!-- 100% Human (all blue) -->
+                            <rect x="35" y="60" width="30" height="50" rx="3" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2.5"/>
+                            <rect x="15" y="30" width="30" height="35" rx="3" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2.5"/>
+                            <rect x="55" y="30" width="30" height="35" rx="3" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2.5"/>
+                            <text x="50" y="125" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" fill="#1D4ED8">100% Human</text>
+                            <text x="50" y="138" text-anchor="middle" font-family="Roboto Mono" font-size="8" fill="#1D4ED8">e.g. Humira</text>
+                        </g>
+
+                        <!-- Evolutionary Banner Bottom -->
+                        <g transform="translate(20, 190)">
+                            <rect x="0" y="0" width="460" height="80" rx="3" fill="#F8FAFC" stroke="#1A1C20" stroke-width="1.5"/>
+                            <text x="230" y="24" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="800" fill="#0F172A">The Pharmacokinetic Consequence</text>
+                            
+                            <path d="M 40 45 L 420 45" stroke="#1D4ED8" stroke-width="3" marker-end="url(#arrow)"/>
+                            <text x="40" y="65" font-family="Roboto Mono" font-size="9" fill="#991B1B">High Immunogenicity (Short Half-Life)</text>
+                            <text x="320" y="65" font-family="Roboto Mono" font-size="9" fill="#047857">Zero Immunogenicity (Long Half-Life)</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="24">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 6 &bull; Precision Therapeutics</div>
+                    <h2 class="slide-title">Targeted Biologics: Intercepting the Autoimmune Cascade</h2>
+                    <div class="slide-subtitle">Precision blockade replaces non-specific immunosuppression in clinical rheumatology and gastroenterology.</div>
+                </div>
+                <span class="header-badge">Slide 24</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: Biologic Mechanism Table -->
+                <div class="card card-emerald">
+                    <div>
+                        <div class="card-title">🎯 Clinical Biologic Toolkit</div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Therapeutic Class</th>
+                                    <th>Molecular Target</th>
+                                    <th>Drug Example</th>
+                                    <th>Clinical Indications</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Anti-TNF-α Biologics</strong></td>
+                                    <td>Neutralizes soluble &amp; membrane TNF-α</td>
+                                    <td>Adalimumab (Humira), Infliximab</td>
+                                    <td>Rheumatoid Arthritis, Crohn's Disease</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>B-Cell Depletion</strong></td>
+                                    <td>Binds CD20 surface receptor</td>
+                                    <td>Rituximab (Rituxan)</td>
+                                    <td>Systemic Lupus, Multiple Sclerosis</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Co-stimulation Blocker</strong></td>
+                                    <td>Binds CD80/86 (blocks CD28)</td>
+                                    <td>Abatacept (CTLA-4-Ig)</td>
+                                    <td>Severe Refractory Arthritis</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Anti-IL-12 / IL-23</strong></td>
+                                    <td>p40 cytokine subunit</td>
+                                    <td>Ustekinumab (Stelara)</td>
+                                    <td>Plaque Psoriasis, Ulcerative Colitis</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-emerald">
+                        <strong>Clinical Milestone:</strong> By targeting specific ligand-receptor interactions, biologics induce deep mucosal and synovial healing without suppressing total bone marrow hematopoiesis.
+                    </div>
+                </div>
+
+                <!-- Right Card: Multi-Node Interception Cascade SVG -->
+                <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF;">
+                    <svg viewBox="0 0 500 320" style="width: 100%; height: 100%; max-height: 300px;">
+                        <!-- Cascade Node 1: APC Co-stimulation -->
+                        <g transform="translate(20, 20)">
+                            <rect x="0" y="0" width="130" height="50" rx="3" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <text x="65" y="20" text-anchor="middle" font-family="Inter Tight" font-size="10.5" font-weight="800" fill="#1E3A8A">Antigen Presentation</text>
+                            <text x="65" y="36" text-anchor="middle" font-family="Roboto Mono" font-size="9" fill="#1D4ED8">CD80/86 &bull; CD28</text>
+
+                            <!-- Interception 1 -->
+                            <rect x="140" y="10" width="110" height="30" rx="3" fill="#FEF2F2" stroke="#9D2235" stroke-width="1.5"/>
+                            <text x="195" y="28" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" font-weight="800" fill="#991B1B">🛑 Abatacept</text>
+                        </g>
+
+                        <!-- Arrow 1 to 2 -->
+                        <path d="M 85 70 L 85 100" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <!-- Cascade Node 2: T-Cell Activation & Clonal Expansion -->
+                        <g transform="translate(20, 105)">
+                            <rect x="0" y="0" width="130" height="50" rx="3" fill="#F0FDF4" stroke="#047857" stroke-width="1.5"/>
+                            <text x="65" y="20" text-anchor="middle" font-family="Inter Tight" font-size="10.5" font-weight="800" fill="#065F46">T-Cell Activation</text>
+                            <text x="65" y="36" text-anchor="middle" font-family="Roboto Mono" font-size="9" fill="#047857">Th1 &bull; Th17 Expansion</text>
+
+                            <!-- Interception 2 -->
+                            <rect x="140" y="10" width="110" height="30" rx="3" fill="#FEF2F2" stroke="#9D2235" stroke-width="1.5"/>
+                            <text x="195" y="28" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" font-weight="800" fill="#991B1B">🛑 Ustekinumab</text>
+                        </g>
+
+                        <!-- Arrow 2 to 3 -->
+                        <path d="M 85 155 L 85 185" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+                        <!-- Cascade Node 3: B-Cell Help & Autoantibodies -->
+                        <g transform="translate(20, 190)">
+                            <rect x="0" y="0" width="130" height="50" rx="3" fill="#FAF5FF" stroke="#6D28D9" stroke-width="1.5"/>
+                            <text x="65" y="20" text-anchor="middle" font-family="Inter Tight" font-size="10.5" font-weight="800" fill="#5B21B6">B-Cell Expansion</text>
+                            <text x="65" y="36" text-anchor="middle" font-family="Roboto Mono" font-size="9" fill="#6D28D9">CD20+ B Cells</text>
+
+                            <!-- Interception 3 -->
+                            <rect x="140" y="10" width="110" height="30" rx="3" fill="#FEF2F2" stroke="#9D2235" stroke-width="1.5"/>
+                            <text x="195" y="28" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" font-weight="800" fill="#991B1B">🛑 Rituximab</text>
+                        </g>
+
+                        <!-- Downstream Cytokine Storm & Destruction -->
+                        <g transform="translate(280, 80)">
+                            <rect x="0" y="0" width="180" height="130" rx="4" fill="#FEF2F2" stroke="#9D2235" stroke-width="2"/>
+                            <text x="90" y="24" text-anchor="middle" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#991B1B">Tissue Damage</text>
+                            
+                            <text x="90" y="50" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" fill="#7F1D1D">TNF-α &bull; IL-1 &bull; IL-6</text>
+
+                            <rect x="25" y="70" width="130" height="30" rx="3" fill="#FFFFFF" stroke="#9D2235" stroke-width="2"/>
+                            <text x="90" y="89" text-anchor="middle" font-family="Roboto Mono" font-size="9" font-weight="800" fill="#9D2235">🛑 Anti-TNF (Humira)</text>
+
+                            <text x="90" y="118" text-anchor="middle" font-family="Inter" font-size="8.5" font-weight="700" fill="#991B1B">Stops Joint / Gut Lysis</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="25">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 6 &bull; Next-Generation Cell Therapies</div>
+                    <h2 class="slide-title">The Cellular Frontier: CAR-T Repertoire Resets &amp; Engineered Tregs</h2>
+                    <div class="slide-subtitle">Rebooting the immune system: eradicating autoreactive lineages to induce drug-free remission.</div>
+                </div>
+                <span class="header-badge">Slide 25</span>
+            </div>
+
+            <!-- Hero Visual Layout (Pattern B) -->
+            <div class="hero-visual-card">
+                <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: center; flex: 1; width: 100%; min-height: 0;">
+                    <!-- Left: Clinical Paradigm Summary -->
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div class="card card-purple" style="padding: 12px 16px;">
+                            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 1.05rem; color: #5B21B6;">
+                                🔄 The CD19 CAR-T "Immune Reboot" (Nature Medicine 2022)
+                            </div>
+                            <div style="font-size: 0.90rem; color: #334155; line-height: 1.45; margin-top: 6px;">
+                                Autologous <strong>anti-CD19 CAR-T cells</strong> completely ablate the pathogenic B-cell compartment in patients with severe Systemic Lupus Erythematosus (SLE). The bone marrow subsequently reconstitutes a completely naive, non-autoreactive B-cell repertoire, yielding long-term drug-free remission (Mackensen et al. 2022).
+                            </div>
+                        </div>
+
+                        <div class="card card-emerald" style="padding: 12px 16px;">
+                            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 1.05rem; color: #065F46;">
+                                🛡️ Engineered Antigen-Specific CAR-Tregs
+                            </div>
+                            <div style="font-size: 0.90rem; color: #334155; line-height: 1.45; margin-top: 6px;">
+                                Synthetic introduction of FoxP3-driven <strong>regulatory T-cell (Treg)</strong> constructs engineered to recognize organ-specific HLA complexes (e.g. HLA-A2 in kidney grafts) restores dominant peripheral tolerance without systemic immunosuppression.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Repertoire Reset Timeline SVG -->
+                    <div style="background: #FFFFFF; border: 1.5px solid var(--rule-ink); border-radius: 2px; padding: 12px; display: flex; align-items: center; justify-content: center;">
+                        <svg viewBox="0 0 380 260" style="width: 100%; height: 100%; max-height: 250px;">
+                            <!-- Timeline Axis -->
+                            <line x1="30" y1="200" x2="350" y2="200" stroke="#1A1C20" stroke-width="2"/>
+                            <text x="35" y="218" font-family="Roboto Mono" font-size="8.5">Day 0</text>
+                            <text x="150" y="218" font-family="Roboto Mono" font-size="8.5">Month 1</text>
+                            <text x="270" y="218" font-family="Roboto Mono" font-size="8.5">Month 6+</text>
+
+                            <!-- CAR-T Infusion -->
+                            <path d="M 40 40 L 40 195" stroke="#9D2235" stroke-width="2.5" stroke-dasharray="3,3"/>
+                            <rect x="15" y="15" width="100" height="24" rx="2" fill="#FEE2E2" stroke="#9D2235" stroke-width="1.5"/>
+                            <text x="65" y="31" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" font-weight="800" fill="#991B1B">CAR-T Infusion</text>
+
+                            <!-- B-Cell Curve: Drops to Zero, then returns naive -->
+                            <!-- Stage 1: High autoreactive -->
+                            <path d="M 30 70 L 40 70 Q 50 195 80 198 L 180 198 Q 230 195 280 100 L 350 100" fill="none" stroke="#1D4ED8" stroke-width="3.5"/>
+                            <text x="90" y="65" font-family="Roboto Mono" font-size="8.5" font-weight="700" fill="#DC2626">Autoreactive B Cells</text>
+                            <text x="130" y="190" font-family="Roboto Mono" font-size="8" font-weight="800" fill="#991B1B">Total B-Cell Aplasia</text>
+
+                            <!-- Stage 2: Reconstituted Naive -->
+                            <text x="300" y="90" font-family="Roboto Mono" font-size="8.5" font-weight="800" fill="#047857">Reconstituted Naïve B Pool (Zero Autoantibodies)</text>
+
+                            <!-- Autoantibody Curve: Plunges -->
+                            <path d="M 30 110 Q 120 120 180 170 Q 250 195 350 198" fill="none" stroke="#B45309" stroke-width="2.5" stroke-dasharray="4,4"/>
+                            <text x="80" y="125" font-family="Roboto Mono" font-size="8" font-weight="700" fill="#B45309">Anti-dsDNA Autoantibody Titers</text>
+                        </svg>
+                    </div>
+                </div>
+                <div class="takeaway-strip takeaway-strip-purple" style="width: 100%; margin-top: 6px;">
+                    <strong>The Therapeutic Horizon:</strong> Instead of managing autoimmune symptoms with chronic anti-inflammatory drugs, cellular therapy achieves permanent curative remission by wiping and rebooting the adaptive repertoire.
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="26">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 7 &bull; Grand Synthesis</div>
+                    <h2 class="slide-title">The Master Synthesis: Host Immunology &amp; Autoimmunity Matrix</h2>
+                    <div class="slide-subtitle">Connecting molecular diversification, statistical immunosequencing, and precision therapeutics.</div>
+                </div>
+                <span class="header-badge">Slide 26</span>
+            </div>
+
+            <!-- Hero Visual Matrix Layout (Pattern B) -->
+            <div class="hero-visual-card" style="padding: 12px 16px;">
+                <table class="data-table" style="font-size: 0.94rem; line-height: 1.42;">
+                    <thead>
+                        <tr>
+                            <th style="width: 18%; padding: 8px 12px; font-size: 0.98rem;">Genomic Domain</th>
+                            <th style="width: 25%; padding: 8px 12px; font-size: 0.98rem;">Molecular Mechanism</th>
+                            <th style="width: 22%; padding: 8px 12px; font-size: 0.98rem;">Quantitative Assay / Metric</th>
+                            <th style="width: 20%; padding: 8px 12px; font-size: 0.98rem;">Clinical Consequence</th>
+                            <th style="width: 15%; padding: 8px 12px; font-size: 0.98rem;">Therapeutic Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. V(D)J Diversity</strong></td>
+                            <td>RAG1/2 cleavage + TdT non-templated (N) nucleotide addition</td>
+                            <td>Theoretical Repertoire: <strong>&gt;10<sup>15</sup> unique sequences</strong></td>
+                            <td>Omenn Syndrome / SCID if defective; infinite pathogen defense</td>
+                            <td>Bone marrow / HSC gene therapy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. AIRR Sequencing</strong></td>
+                            <td>Convergent recombination + high <em>P</em><sub>gen</sub> public clonotype expansion</td>
+                            <td>Pathogen Memory Burden: <em>M<sub>i</sub></em> = (&Sigma; CMV Reads) / (Total Reads)</td>
+                            <td>Decadal diagnostic record of past viral exposure (CMV, COVID)</td>
+                            <td>Diagnostic classification (Emerson et al.)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. HLA Polymorphism</strong></td>
+                            <td>Anchor pockets (A–F) enforce strict peptide-binding motifs</td>
+                            <td>Balancing selection: <strong>>4,800 HLA-B alleles</strong></td>
+                            <td>MHC restriction; prevents single pathogen population sweeps</td>
+                            <td>Donor matching in transplantation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. Autoimmunity (T1D &amp; Celiac)</strong></td>
+                            <td>non-Asp57 electropositive P9 pocket; tTG2 glutamine deamidation</td>
+                            <td>Genetic OR > 40; high autoantibody titers (anti-GAD65, anti-tTG)</td>
+                            <td>Destruction of pancreatic beta islets; intestinal villous blunting</td>
+                            <td>Teplizumab (anti-CD3); gluten elimination</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5. SCAR Pharmacogenomics</strong></td>
+                            <td>Abacavir binds Pocket F of HLA-B*57:01, altering self-peptides</td>
+                            <td>Mandatory pre-prescription genotyping (zero cases)</td>
+                            <td>Fatal systemic CD8+ hypersensitivity multi-organ failure</td>
+                            <td>Alternative NRTIs (Biktarvy / Tenofovir)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>6. Targeted Biologics</strong></td>
+                            <td>Recombinant mAb evolution (-omab &rarr; -umab); CAR-T B-cell reset</td>
+                            <td>Complete B-cell aplasia &rarr; naive reconstitution</td>
+                            <td>Reversal of severe refractory autoimmune inflammation</td>
+                            <td>Humira, Rituxan, CD19 CAR-T</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="takeaway-strip takeaway-strip-blue" style="width: 100%; margin-top: 8px;">
+                    <strong>Unified Paradigm:</strong> The immune system is an evolving, somatic Darwinian machine; unlocking its genetic and structural rules transforms clinical diagnosis, transplantation, and autoimmune therapy.
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="27">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Movement 7 &bull; Concept Mastery &amp; Course Horizons</div>
+                    <h2 class="slide-title">Concept Mastery &amp; Preview of Lecture 9: Cancer Genomics</h2>
+                    <div class="slide-subtitle">Complete your Summative Quiz and prepare for somatic Darwinian evolution in human oncology.</div>
+                </div>
+                <span class="header-badge">Slide 27</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: Summative Quiz Portal -->
+                <div class="card card-cherry" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span class="passcode-pill">🔑 Passcode: IMMUNO-MASTER-2026</span>
+                            <span class="timer-badge">
+                                ⏱️ <span id="summative-timer-disp">07:00</span>
+                                <button type="button" class="timer-btn" id="summative-timer-btn" onclick="startTimer('summative-timer-disp', 'summative-timer-btn', 420)">Start</button>
+                                <button type="button" class="timer-btn" style="background:#64748B;" onclick="resetTimer('summative-timer-disp', 'summative-timer-btn', 420)">Reset</button>
+                            </span>
+                        </div>
+
+                        <div class="card-title">📝 Summative Mastery Quiz (5.0 Points)</div>
+                        <ul class="content-list" style="font-size: 1.02rem; line-height: 1.5;">
+                            <li><strong>Q1:</strong> Somatic V(D)J mechanics &amp; TdT non-templated nucleotide insertions.</li>
+                            <li><strong>Q2:</strong> Convergent recombination, <em>P</em><sub>gen</sub>, and public TCR diagnostic biomarkers.</li>
+                            <li><strong>Q3:</strong> MHC Class I vs. Class II cleft geometry and peptide anchor motifs.</li>
+                            <li><strong>Q4:</strong> Electrostatic basis of non-Asp57 in juvenile Type 1 Diabetes.</li>
+                            <li><strong>Q5:</strong> Monoclonal antibody engineering (-omab &rarr; -umab) and targeted biologics.</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-cherry">
+                        <strong>Quiz Policy:</strong> 7-minute limit &bull; 3 allowed attempts &bull; Highest score kept on Canvas.
+                    </div>
+                </div>
+
+                <!-- Right Card: Lecture 9 Preview & Midterm Launch -->
+                <div class="card card-blue" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div class="card-title">🦀 Preview of Lecture 9 &bull; Oct 22</div>
+                        <p style="font-size: 1.04rem; font-weight: 700; color: #1E3A8A; line-height: 1.45; margin-bottom: 10px;">
+                            Cancer Genomics I: The Rogue Genome &mdash; Somatic Evolution, Mutational Signatures, and Hallmarks
+                        </p>
+                        <ul class="content-list" style="font-size: 1.0rem; line-height: 1.5;">
+                            <li><strong>Cancer as Clonal Evolution:</strong> Driver mutations, passenger baggage, and Knudson's two-hit hypothesis.</li>
+                            <li><strong>COSMIC Mutational Signatures:</strong> Decoding tumor DNA damage history from trinucleotide contexts (UV, tobacco, APOBEC).</li>
+                            <li><strong>Midterm Research Project Launch:</strong> Teams of two authorized; AI and Non-AI tracks; expanded Honors scope (+40%).</li>
+                        </ul>
+                    </div>
+                    <div style="background: #EFF6FF; border: 1.5px solid var(--rule-ink); padding: 10px 14px; border-radius: 2px; font-size: 0.98rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 700; color: #1E3A8A;">📑 Read the Midterm Guide:</span>
+                        <a href="midterm.html" style="color: var(--temple-cherry); font-weight: 800; font-family: var(--font-mono);">midterm.html &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    
+    </main>
+
+    <footer>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <button type="button" class="nav-btn" onclick="prevSlide()">&larr; Prev</button>
+            <button type="button" class="nav-btn" onclick="nextSlide()">Next &rarr;</button>
+            <span style="color: var(--ink-muted); font-size: 0.80rem; margin-left: 8px;">Use &larr; &rarr; keys, Spacebar, or Jump Menu</span>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: center;">
+            <label for="slide-select" style="font-size: 0.82rem; font-weight: 700; color: var(--ink-slate);">Jump:</label>
+            <select id="slide-select" onchange="showSlide(parseInt(this.value, 10))" style="font-family: var(--font-mono); font-size: 0.80rem; padding: 2px 6px; border: 1.5px solid var(--rule-ink); border-radius: 2px; background: #FFFFFF;">
+                <option value="1">Slide 01: The Double-Edged Sword: Host Immunology, HLA ...</option>
+                <option value="2">Slide 02: Three Clinical Mysteries Solved by Immunogeno...</option>
+                <option value="3">Slide 03: Combinatorial vs. Junctional Diversity: Solvi...</option>
+                <option value="4">Slide 04: The Enzymatic Scissors: RAG1/2 Endonucleases ...</option>
+                <option value="5">Slide 05: TdT Polymerase: The Engine of Non-Templated D...</option>
+                <option value="6">Slide 06: The Epicenter of Recognition: Anatomy of the ...</option>
+                <option value="7">Slide 07: Reading the Living Ledger: The Immunosequenci...</option>
+                <option value="8">Slide 08: The Public vs. Private Paradox: Convergent Re...</option>
+                <option value="9">Slide 09: Calibrating the Sweet Spot: Avoiding the Over...</option>
+                <option value="10">Slide 10: Pathogen Memory Burden: The Repertoire Compre...</option>
+                <option value="11">Slide 11: Spot Check 1: Somatic V(D)J Recombination & T...</option>
+                <option value="12">Slide 12: MHC Class I vs. Class II Architecture: Groove...</option>
+                <option value="13">Slide 13: Hyper-Polymorphism & Balancing Selection at C...</option>
+                <option value="14">Slide 14: Anchor Pockets (A–F): The Lock-and-Key Chemis...</option>
+                <option value="15">Slide 15: MHC Restriction: Reverse HLA Genotyping from ...</option>
+                <option value="16">Slide 16: Spot Check 2: HLA Class I Architecture & Rest...</option>
+                <option value="17">Slide 17: Central Tolerance: The Thymic Checkpoint & Au...</option>
+                <option value="18">Slide 18: Type 1 Diabetes: The non-Asp57 Electrostatic ...</option>
+                <option value="19">Slide 19: Celiac Disease: Enzymatic Neo-Epitope Creatio...</option>
+                <option value="20">Slide 20: Drug-Induced Autoimmunity: Abacavir & The Alt...</option>
+                <option value="21">Slide 21: Spot Check 3: Autoimmune Structural Mechanism...</option>
+                <option value="22">Slide 22: Sprint: The Clinical Immunogenomics Board</option>
+                <option value="23">Slide 23: Monoclonal Antibodies: The Engineering Evolut...</option>
+                <option value="24">Slide 24: Targeted Biologics: Intercepting the Autoimmu...</option>
+                <option value="25">Slide 25: The Cellular Frontier: CAR-T Repertoire Reset...</option>
+                <option value="26">Slide 26: The Master Synthesis: Host Immunology & Autoi...</option>
+                <option value="27">Slide 27: Concept Mastery & Preview of Lecture 9: Cance...</option>
+            </select>
+        </div>
+    </footer>
+
+    <!-- Interactive Navigation, Timers, Sprint Tabs & Swipe Script -->
+    <script>
+        var currentSlide = 1;
+        var totalSlides = 27;
+
+        function showSlide(n) {
+            if (n < 1) n = 1;
+            if (n > totalSlides) n = totalSlides;
+            currentSlide = n;
+
+            var slides = document.querySelectorAll('.slide');
+            slides.forEach(function(s) {
+                s.classList.remove('active');
+            });
+
+            var active = document.querySelector('.slide[data-slide="' + n + '"]');
+            if (active) active.classList.add('active');
+
+            var bar = document.getElementById('progress-bar');
+            if (bar) bar.style.width = (n / totalSlides * 100) + '%';
+
+            var disp = document.getElementById('slide-num-disp');
+            if (disp) disp.textContent = n + ' / ' + totalSlides;
+
+            var sel = document.getElementById('slide-select');
+            if (sel) sel.value = n;
+
+            window.location.hash = 'slide-' + n;
+            window.scrollTo(0, 0);
+        }
+
+        function toggleInstructorNotes() {
+            document.body.classList.toggle('show-instructor-notes');
+        }
+
+        function nextSlide() { showSlide(currentSlide + 1); }
+        function prevSlide() { showSlide(currentSlide - 1); }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                showSlide(1);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                showSlide(totalSlides);
+            } else if (e.key === 'd' || e.key === 'D') {
+                toggleInstructorNotes();
+            } else if (e.key === 'Escape' && document.body.classList.contains('show-instructor-notes')) {
+                toggleInstructorNotes();
+            }
+        });
+
+        // Touch Swipe Navigation for Mobile
+        var touchStartX = 0;
+        var touchStartY = 0;
+        var touchStartTime = 0;
+        var isHorizontalSwipe = false;
+
+        window.addEventListener('touchstart', function(e) {
+            if (e.touches && e.touches.length === 1) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                touchStartTime = Date.now();
+                isHorizontalSwipe = false;
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchmove', function(e) {
+            if (e.touches && e.touches.length === 1) {
+                var moveX = e.touches[0].clientX - touchStartX;
+                var moveY = e.touches[0].clientY - touchStartY;
+                if (Math.abs(moveX) > 20 && Math.abs(moveX) > Math.abs(moveY) * 1.5) {
+                    isHorizontalSwipe = true;
+                }
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchend', function(e) {
+            if (e.changedTouches && e.changedTouches.length === 1) {
+                var touchEndX = e.changedTouches[0].clientX;
+                var touchEndY = e.changedTouches[0].clientY;
+                var diffX = touchEndX - touchStartX;
+                var diffY = touchEndY - touchStartY;
+                var duration = Date.now() - touchStartTime;
+
+                // Ignore interactive controls
+                var target = e.target;
+                if (target && (target.closest('button') || target.closest('input') || target.closest('select') || target.closest('a') || target.closest('footer') || target.closest('header'))) {
+                    return;
+                }
+
+                if (isHorizontalSwipe || (duration < 600 && Math.abs(diffX) >= 40 && Math.abs(diffX) > Math.abs(diffY) * 1.5)) {
+                    if (diffX < 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+            }
+        }, { passive: true });
+
+        window.addEventListener('DOMContentLoaded', function() {
+            var hash = window.location.hash;
+            if (hash && hash.startsWith('#slide-')) {
+                var s = parseInt(hash.replace('#slide-', ''), 10);
+                if (!isNaN(s)) showSlide(s);
+            } else {
+                showSlide(1);
+            }
+        });
+
+        // Countdown Timer Engine
+        var activeTimers = {};
+
+        function formatTimerDisp(sec) {
+            var m = Math.floor(sec / 60);
+            var s = sec % 60;
+            return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+        }
+
+        function startTimer(dispId, btnId, totalSec) {
+            var btn = document.getElementById(btnId);
+            var disp = document.getElementById(dispId);
+            if (!btn || !disp) return;
+
+            if (!activeTimers[dispId]) {
+                activeTimers[dispId] = {
+                    remaining: totalSec,
+                    timerId: null,
+                    totalSec: totalSec
+                };
+            }
+
+            var state = activeTimers[dispId];
+
+            if (state.timerId) {
+                // Pause
+                clearInterval(state.timerId);
+                state.timerId = null;
+                btn.textContent = 'Start';
+                btn.style.background = '';
+            } else {
+                // Start / Resume
+                if (state.remaining <= 0) {
+                    state.remaining = state.totalSec;
+                }
+                disp.textContent = formatTimerDisp(state.remaining);
+                btn.textContent = 'Pause';
+                btn.style.background = '#B45309';
+
+                state.timerId = setInterval(function() {
+                    if (state.remaining > 0) {
+                        state.remaining--;
+                        disp.textContent = formatTimerDisp(state.remaining);
+                    } else {
+                        clearInterval(state.timerId);
+                        state.timerId = null;
+                        btn.textContent = 'Done!';
+                        btn.style.background = '#047857';
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTimer(dispId, btnId, totalSec) {
+            var btn = document.getElementById(btnId);
+            var disp = document.getElementById(dispId);
+            if (!disp) return;
+
+            if (activeTimers[dispId] && activeTimers[dispId].timerId) {
+                clearInterval(activeTimers[dispId].timerId);
+            }
+
+            activeTimers[dispId] = {
+                remaining: totalSec,
+                timerId: null,
+                totalSec: totalSec
+            };
+
+            disp.textContent = formatTimerDisp(totalSec);
+            if (btn) {
+                btn.textContent = 'Start';
+                btn.style.background = '';
+            }
+        }
+
+        // In-Class Sprint Tab Switching
+        function switchSprintTab(idx) {
+            var btns = document.querySelectorAll('.sprint-tab-btn');
+            var panes = document.querySelectorAll('.sprint-pane');
+            btns.forEach(function(b, i) {
+                if (i === idx) b.classList.add('active');
+                else b.classList.remove('active');
+            });
+            panes.forEach(function(p, i) {
+                if (i === idx) p.classList.add('active');
+                else p.classList.remove('active');
+            });
+        }
+    </script>
+</body>
+</html>
