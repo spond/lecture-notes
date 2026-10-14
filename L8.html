@@ -594,7 +594,7 @@
         <div class="header-right">
             
             <span>Temple University &bull; Fall 2026</span>
-            <span id="slide-num-disp" style="background: #FFFFFF; border: 1.5px solid var(--rule-ink); padding: 2px 8px; border-radius: 2px;">1 / 31</span>
+            <span id="slide-num-disp" style="background: #FFFFFF; border: 1.5px solid var(--rule-ink); padding: 2px 8px; border-radius: 2px;">1 / 32</span>
         </div>
     </header>
 
@@ -617,7 +617,7 @@
                         <div class="card-title">⚔️ The Core Biological Trade-Off</div>
                         <ul class="content-list">
                             <li><strong>The Numbers Puzzle:</strong> Humans inherit only ~20,000 protein-coding genes, yet our body must recognize trillions of constantly mutating viruses and bacteria.</li>
-                            <li><strong>The Genetic Solution:</strong> Developing immune cells deliberately cut, shuffle, and add random letters to their own DNA to build over <strong>$10^15$ unique immune sensors</strong>.</li>
+                            <li><strong>The Genetic Solution:</strong> Developing immune cells deliberately cut, shuffle, and add random letters to their own DNA to build over <strong>$10^{15}$ unique immune sensors</strong>.</li>
                             <li><strong>The Blood Memory Log:</strong> Because victorious immune cells multiply and stay in our blood for decades, sequencing a drop of blood reveals a permanent record of past infections.</li>
                             <li><strong>The Autoimmune Price:</strong> The same sensitive machinery that spots hidden viruses can accidentally lock onto our own healthy tissues—causing Type 1 Diabetes, Celiac disease, and fatal drug allergies.</li>
                         </ul>
@@ -629,37 +629,39 @@
 
                 <!-- Right Card: Macromolecular Visual Schematic -->
                 <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; padding: 16px;">
-                    <svg viewBox="0 0 520 380" style="width: 100%; height: 100%; max-height: 440px;">
+                    <svg viewBox="0 0 560 380" style="width: 100%; height: 100%; max-height: 440px;">
                         <!-- Background Grid Lines -->
-                        <line x1="20" y1="70" x2="500" y2="70" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4,4"/>
-                        <line x1="20" y1="190" x2="500" y2="190" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4,4"/>
-                        <line x1="20" y1="310" x2="500" y2="310" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4,4"/>
+                        <line x1="20" y1="70" x2="540" y2="70" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4,4"/>
+                        <line x1="20" y1="190" x2="540" y2="190" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4,4"/>
+                        <line x1="20" y1="310" x2="540" y2="310" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4,4"/>
 
                         <!-- T-Cell Receptor (Top) -->
-                        <g transform="translate(110, 18)">
-                            <rect x="0" y="0" width="135" height="72" rx="4" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
-                            <text x="67" y="28" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="800" fill="#1E3A8A">TCR α-Chain</text>
-                            <text x="67" y="48" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" fill="#2563EB">Outer Finger (CDR1/2)</text>
+                        <g transform="translate(125, 18)">
+                            <rect x="0" y="0" width="160" height="72" rx="4" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
+                            <text x="80" y="28" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="800" fill="#1E3A8A">TCR α-Chain</text>
+                            <text x="80" y="48" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" fill="#2563EB">Outer Finger (CDR1/2)</text>
 
-                            <rect x="165" y="0" width="135" height="72" rx="4" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
-                            <text x="232" y="28" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="800" fill="#1E3A8A">TCR β-Chain</text>
-                            <text x="232" y="48" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" fill="#2563EB">Outer Finger (CDR1/2)</text>
+                            <rect x="180" y="0" width="160" height="72" rx="4" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
+                            <text x="260" y="28" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="800" fill="#1E3A8A">TCR β-Chain</text>
+                            <text x="260" y="48" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" fill="#2563EB">Outer Finger (CDR1/2)</text>
 
                             <!-- Hypervariable CDR3 Loops projecting downward -->
-                            <path d="M 80 72 Q 100 122 140 137" fill="none" stroke="#9D2235" stroke-width="4" stroke-linecap="round"/>
-                            <path d="M 220 72 Q 200 122 160 137" fill="none" stroke="#9D2235" stroke-width="4" stroke-linecap="round"/>
-                            <circle cx="150" cy="137" r="8" fill="#9D2235" stroke="#121316" stroke-width="2"/>
-                            <text x="150" y="118" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="800" fill="#9D2235">Center Finger: CDR3 Loop</text>
+                            <path d="M 85 72 Q 115 130 162 140" fill="none" stroke="#9D2235" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 255 72 Q 225 130 178 140" fill="none" stroke="#9D2235" stroke-width="4" stroke-linecap="round"/>
+                            <circle cx="170" cy="140" r="7" fill="#9D2235" stroke="#121316" stroke-width="2"/>
+                            <!-- Pill badge behind text so red curves never cross letters -->
+                            <rect x="78" y="96" width="184" height="20" rx="10" fill="#FFFFFF" stroke="#FECDD3" stroke-width="1.5"/>
+                            <text x="170" y="110" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="800" fill="#9D2235">Center Finger: CDR3 Loop</text>
                         </g>
 
                         <!-- Antigenic Peptide (Middle) -->
-                        <g transform="translate(145, 168)">
-                            <rect x="0" y="0" width="230" height="32" rx="16" fill="#FEF3C7" stroke="#B45309" stroke-width="2.5"/>
-                            <text x="115" y="21" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="800" fill="#92400E">Chopped Peptide (8–10 amino acids)</text>
+                        <g transform="translate(155, 170)">
+                            <rect x="0" y="0" width="280" height="32" rx="16" fill="#FEF3C7" stroke="#B45309" stroke-width="2.5"/>
+                            <text x="140" y="21" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="800" fill="#92400E">Chopped Peptide (8–10 amino acids)</text>
                         </g>
 
                         <!-- HLA Class I Molecule (Bottom) -->
-                        <g transform="translate(90, 220)">
+                        <g transform="translate(125, 220)">
                             <!-- Alpha 1 and Alpha 2 helices forming the cleft -->
                             <rect x="0" y="0" width="160" height="55" rx="4" fill="#F0FDF4" stroke="#0F766E" stroke-width="2"/>
                             <text x="80" y="25" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="800" fill="#065F46">HLA Left Wall (α1)</text>
@@ -675,10 +677,10 @@
                         </g>
 
                         <!-- Structural Interaction Labels -->
-                        <text x="16" y="48" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#1D4ED8">1. T-Cell</text>
-                        <text x="16" y="62" font-family="Roboto Mono" font-size="9.5" font-weight="700" fill="#1D4ED8">(Scanner)</text>
-                        <text x="16" y="245" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#0F766E">2. Body Cell</text>
-                        <text x="16" y="259" font-family="Roboto Mono" font-size="9.5" font-weight="700" fill="#0F766E">(Display Tray)</text>
+                        <text x="12" y="48" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#1D4ED8">1. T-Cell</text>
+                        <text x="12" y="62" font-family="Roboto Mono" font-size="9.5" font-weight="700" fill="#1D4ED8">(Scanner)</text>
+                        <text x="12" y="245" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#0F766E">2. Body Cell</text>
+                        <text x="12" y="259" font-family="Roboto Mono" font-size="9.5" font-weight="700" fill="#0F766E">(Display Tray)</text>
                     </svg>
                     <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-muted); margin-top: 8px;">
                         The Immune Handshake: T-Cell Scanner (Top) &bull; Protein Fragment (Middle) &bull; HLA Display Tray (Bottom)
@@ -691,11 +693,87 @@
         <section class="slide" data-slide="2">
             <div class="slide-header">
                 <div>
-                    <div class="slide-category">Prologue &bull; Zero-Assumption Primer</div>
-                    <h2 class="slide-title">Immunology 101: How Your Body Spots Viruses Hiding Inside Cells</h2>
-                    <div class="slide-subtitle">Before we look at genes, let's meet the three molecular players you need to know for today's lecture.</div>
+                    <div class="slide-category">Prologue &bull; Zero-Assumption Primer (Part 1)</div>
+                    <h2 class="slide-title">Immunology 101: The Three Lines of Defense (Innate, B Cells, and T Cells)</h2>
+                    <div class="slide-subtitle">How hardwired first responders, antibody sharpshooters, and T-cell inspectors divide the work of protecting your body.</div>
                 </div>
                 <span class="header-badge">Slide 02</span>
+            </div>
+
+            <div class="grid-2col">
+                <!-- Left Card: The 3 Branches Explained Simply -->
+                <div class="card card-emerald">
+                    <div>
+                        <div class="card-title">🛡️ How the Three Immune Branches Work Together</div>
+                        <ul class="content-list">
+                            <li><strong>1. Innate Immunity (Hardwired First Responders):</strong> <strong>Macrophages</strong> and <strong>dendritic cells</strong> use fixed, inherited sensors (<strong>Toll-Like Receptors / TLRs</strong>) to spot microbes in minutes, release inflammatory <strong>cytokines</strong> (<strong>TNF-$\alpha$, IL-6</strong>), and chop up invaders to wake up adaptive cells.</li>
+                            <li><strong>2. Adaptive B Cells (Outside-the-Cell Antibodies):</strong> <strong>B cells</strong> shuffle their DNA (<strong>V(D)J</strong>) and fine-tune it (<strong>somatic hypermutation</strong>) to secrete Y-shaped <strong>Antibodies</strong> that lock directly onto the <strong>3D outside surface</strong> of whole viruses floating in blood.</li>
+                            <li><strong>3. Adaptive T Cells (Inside-the-Cell Inspectors):</strong> Once a virus hides <em>inside</em> a cell, antibodies cannot reach it; <strong>T cells</strong> inspect chopped protein strips (<strong>peptides</strong>) on <strong>HLA trays</strong> to kill infected cells (<strong>CD8+</strong>) or command B cells (<strong>CD4+</strong>).</li>
+                            <li><strong>Why All Three Matter in Autoimmunity:</strong> In Lupus and Arthritis, <strong>innate cells</strong> release TNF-$\alpha$, <strong>Helper T cells</strong> give the false alarm, and <strong>B cells</strong> pump out tissue-destroying <strong>autoantibodies</strong>!</li>
+                        </ul>
+                    </div>
+                    <div class="takeaway-strip takeaway-strip-emerald">
+                        <strong>Key Distinction:</strong> <strong>B-cell antibodies</strong> grab whole 3D viruses <em>outside</em> cells (no HLA needed); <strong>T cells</strong> only read chopped linear peptides on <strong>HLA trays</strong>!
+                    </div>
+                </div>
+
+                <!-- Right Card: 3-Tier Immune Architecture SVG -->
+                <div style="background: #FFFFFF; border: 1.5px solid var(--rule-ink); border-radius: 4px; padding: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <svg viewBox="0 0 540 365" style="width: 100%; height: 100%; max-height: 440px;">
+                        <!-- Tier 1: Innate Immunity -->
+                        <rect x="12" y="10" width="516" height="98" rx="6" fill="#FFFBEB" stroke="#B45309" stroke-width="2"/>
+                        <text x="26" y="31" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#92400E">1. INNATE IMMUNITY (First Responders &bull; Minutes to Hours)</text>
+                        <text x="26" y="53" font-family="Inter" font-size="10.5" fill="#334155">&bull; <tspan font-weight="800" fill="#78350F">Macrophages &amp; Dendritic Cells</tspan> use fixed germline <tspan font-weight="800">TLR sensors</tspan></text>
+                        <text x="26" y="72" font-family="Inter" font-size="10.5" fill="#334155">&bull; Releases inflammatory <tspan font-weight="800" fill="#991B1B">TNF-α &amp; IL-6 cytokines</tspan> (fever &amp; swelling)</text>
+                        <text x="26" y="91" font-family="Inter" font-size="10.5" fill="#334155">&bull; <tspan font-weight="800" fill="#065F46">The Bridge:</tspan> Eats microbe &rarr; chops into peptides &rarr; loads onto HLA!</text>
+
+                        <rect x="396" y="34" width="120" height="66" rx="4" fill="#FEF3C7" stroke="#B45309" stroke-width="1.5"/>
+                        <text x="456" y="53" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="900" fill="#92400E">FIXED DNA</text>
+                        <text x="456" y="69" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#78350F">Zero gene shuffling</text>
+                        <text x="456" y="86" text-anchor="middle" font-family="Roboto Mono" font-size="9" font-weight="800" fill="#B45309">Wakes Adaptive &darr;</text>
+
+                        <!-- Bridge Connector -->
+                        <line x1="270" y1="108" x2="270" y2="132" stroke="#1A1C20" stroke-width="2.5"/>
+                        <rect x="135" y="111" width="270" height="18" rx="9" fill="#F1F5F9" stroke="#64748B" stroke-width="1.2"/>
+                        <text x="270" y="123" text-anchor="middle" font-family="Roboto Mono" font-size="9" font-weight="800" fill="#334155">&darr; Activates Adaptive Immunity (Days to Life) &darr;</text>
+
+                        <!-- Tier 2: Adaptive B Cells -->
+                        <rect x="12" y="134" width="516" height="104" rx="6" fill="#ECFDF5" stroke="#047857" stroke-width="2"/>
+                        <text x="26" y="155" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#065F46">2. ADAPTIVE B CELLS (Outside-the-Cell Antibodies)</text>
+                        <text x="26" y="177" font-family="Inter" font-size="10.5" fill="#334155">&bull; Secrete Y-shaped <tspan font-weight="800" fill="#065F46">Antibodies (BCRs)</tspan> floating in blood &amp; mucus</text>
+                        <text x="26" y="196" font-family="Inter" font-size="10.5" fill="#334155">&bull; Lock directly onto <tspan font-weight="800">3D surface shapes</tspan> of whole, intact viruses</text>
+                        <text x="26" y="215" font-family="Inter" font-size="10.5" fill="#334155">&bull; Built via <tspan font-weight="800">V(D)J DNA shuffling</tspan> + <tspan font-weight="800" fill="#047857">Somatic Hypermutation (AID)</tspan></text>
+
+                        <rect x="396" y="160" width="120" height="68" rx="4" fill="#DCFCE7" stroke="#047857" stroke-width="1.5"/>
+                        <text x="456" y="179" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="900" fill="#065F46">OUTSIDE CELLS</text>
+                        <text x="456" y="195" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#065F46">Whole 3D Virus</text>
+                        <text x="456" y="213" text-anchor="middle" font-family="Roboto Mono" font-size="9" font-weight="800" fill="#047857">(No HLA Needed)</text>
+
+                        <!-- Tier 3: Adaptive T Cells -->
+                        <rect x="12" y="250" width="516" height="104" rx="6" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
+                        <text x="26" y="271" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#1E3A8A">3. ADAPTIVE T CELLS (Inside-the-Cell Inspectors)</text>
+                        <text x="26" y="293" font-family="Inter" font-size="10.5" fill="#334155">&bull; <tspan font-weight="800" fill="#9D2235">Blind to whole viruses;</tspan> ONLY inspect chopped peptides in <tspan font-weight="800">HLA trays</tspan></text>
+                        <text x="26" y="312" font-family="Inter" font-size="10.5" fill="#334155">&bull; <tspan font-weight="800" fill="#1E3A8A">CD8+ Killer T Cells:</tspan> Destroy virus-infected or cancerous body cells</text>
+                        <text x="26" y="331" font-family="Inter" font-size="10.5" fill="#334155">&bull; <tspan font-weight="800" fill="#1E3A8A">CD4+ Helper T Cells:</tspan> Give launch orders to B cells &amp; macrophages</text>
+
+                        <rect x="396" y="276" width="120" height="68" rx="4" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.5"/>
+                        <text x="456" y="295" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="900" fill="#1E3A8A">INSIDE CELLS</text>
+                        <text x="456" y="311" text-anchor="middle" font-family="Inter" font-size="9.5" fill="#1E3A8A">Chopped Peptide</text>
+                        <text x="456" y="329" text-anchor="middle" font-family="Roboto Mono" font-size="9" font-weight="800" fill="#9D2235">Needs HLA Tray!</text>
+                    </svg>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="slide" data-slide="3">
+            <div class="slide-header">
+                <div>
+                    <div class="slide-category">Prologue &bull; Zero-Assumption Primer (Part 2)</div>
+                    <h2 class="slide-title">Immunology 101: How T Cells Spot Viruses Hiding Inside Cells</h2>
+                    <div class="slide-subtitle">Zooming in on the three molecular players at the heart of today's lecture: Peptide, HLA Tray, and TCR Scanner.</div>
+                </div>
+                <span class="header-badge">Slide 03</span>
             </div>
 
             <div class="grid-2col">
@@ -706,7 +784,7 @@
                         <ul class="content-list">
                             <li><strong>Why Antibodies Aren't Enough:</strong> Antibodies float in the blood outside cells. Once a virus slips <em>inside</em> a human cell, floating antibodies are completely blind to it.</li>
                             <li><strong>Player 1 — The Peptide (Protein Strip):</strong> Every cell in your body constantly chops up samples of its internal proteins into short 8–10 amino acid strips called <strong>peptides</strong>.</li>
-                            <li><strong>Player 2 — The HLA Molecule (The Display Tray):</strong><strong>HLA (Human Leukocyte Antigen)</strong> proteins act like molecular serving trays that carry those chopped peptides up to the cell surface for inspection.</li>
+                            <li><strong>Player 2 — The HLA Molecule (The Display Tray):</strong> <strong>HLA (Human Leukocyte Antigen)</strong> proteins act like molecular serving trays that carry those chopped peptides up to the cell surface for inspection.</li>
                             <li><strong>Player 3 — The T-Cell Receptor / TCR (The Scanner):</strong> Patrolling <strong>T cells</strong> use their <strong>TCR</strong> to touch the HLA tray: if the peptide is human (<strong>"Self"</strong>), the cell is spared; if viral (<strong>"Foreign"</strong>), the T cell destroys the infected cell.</li>
                         </ul>
                     </div>
@@ -724,14 +802,14 @@
 
                         <!-- Step 1: Chopping Protein -->
                         <g transform="translate(40, 210)">
-                            <rect x="0" y="0" width="135" height="75" rx="4" fill="#FFFFFF" stroke="#047857" stroke-width="1.5"/>
-                            <text x="67" y="20" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="800" fill="#065F46">Step 1: Chop Up</text>
-                            <text x="67" y="38" text-anchor="middle" font-family="Inter" font-size="10" fill="#334155">Cell shreds internal</text>
-                            <text x="67" y="52" text-anchor="middle" font-family="Inter" font-size="10" fill="#334155">proteins into strips</text>
-                            <text x="67" y="67" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#B45309">(8–10 aa Peptides)</text>
+                            <rect x="0" y="0" width="145" height="75" rx="4" fill="#FFFFFF" stroke="#047857" stroke-width="1.5"/>
+                            <text x="72" y="20" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="800" fill="#065F46">Step 1: Chop Up</text>
+                            <text x="72" y="38" text-anchor="middle" font-family="Inter" font-size="10" fill="#334155">Cell shreds internal</text>
+                            <text x="72" y="52" text-anchor="middle" font-family="Inter" font-size="10" fill="#334155">proteins into strips</text>
+                            <text x="72" y="67" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#B45309">(8–10 aa Peptides)</text>
                         </g>
 
-                        <path d="M 180 247 L 208 247" stroke="#047857" stroke-width="2.5" marker-end="url(#arrow)"/>
+                        <path d="M 190 247 L 210 247" stroke="#047857" stroke-width="2.5"/>
 
                         <!-- Step 2: Load onto HLA Tray -->
                         <g transform="translate(215, 210)">
@@ -743,16 +821,16 @@
                         </g>
 
                         <!-- Arrow Going Up to Cell Surface -->
-                        <path d="M 365 247 L 415 247 L 415 170" fill="none" stroke="#047857" stroke-width="2.5"/>
+                        <path d="M 365 247 L 415 247 L 415 185" fill="none" stroke="#047857" stroke-width="2.5"/>
 
                         <!-- Cell Surface Membrane Label -->
                         <text x="90" y="178" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#047857">Cell Surface Membrane &uarr;</text>
 
                         <!-- HLA Tray on Surface -->
                         <g transform="translate(355, 130)">
-                            <path d="M 15 55 L 15 25 L 40 25 L 40 40 L 80 40 L 80 25 L 105 25 L 105 55 Z" fill="#DCFCE7" stroke="#047857" stroke-width="2"/>
-                            <rect x="42" y="22" width="36" height="14" rx="7" fill="#FEF08A" stroke="#B45309" stroke-width="2"/>
-                            <text x="60" y="32" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" font-weight="900" fill="#92400E">Peptide</text>
+                            <path d="M 15 55 L 15 25 L 36 25 L 36 42 L 84 42 L 84 25 L 105 25 L 105 55 Z" fill="#DCFCE7" stroke="#047857" stroke-width="2"/>
+                            <rect x="38" y="22" width="44" height="16" rx="8" fill="#FEF08A" stroke="#B45309" stroke-width="2"/>
+                            <text x="60" y="33" text-anchor="middle" font-family="Roboto Mono" font-size="8.5" font-weight="900" fill="#92400E">Peptide</text>
                         </g>
 
                         <!-- Top Half: Patrolling T Cell -->
@@ -763,10 +841,10 @@
                             <text x="30" y="70" font-family="Inter" font-size="11" fill="#991B1B">&bull; Viral "Foreign" Peptide &rarr; <tspan font-weight="800" fill="#991B1B">Destroy infected cell!</tspan></text>
                             <text x="30" y="90" font-family="Inter" font-size="11" fill="#6D28D9">&bull; Autoimmune Mistake &rarr; <tspan font-weight="800" fill="#5B21B6">Attacks healthy "Self" cell!</tspan></text>
 
-                            <!-- TCR Scanner reaching down from T-cell -->
-                            <rect x="398" y="90" width="34" height="28" rx="3" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
-                            <path d="M 415 118 L 415 145" stroke="#9D2235" stroke-width="4" stroke-linecap="round"/>
-                            <text x="342" y="135" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#9D2235">TCR Scanner &rarr;</text>
+                            <!-- TCR Scanner reaching down from T-cell to touch top of Peptide -->
+                            <rect x="377" y="90" width="36" height="26" rx="3" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                            <path d="M 395 116 L 395 135" stroke="#9D2235" stroke-width="4" stroke-linecap="round"/>
+                            <text x="368" y="130" text-anchor="end" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#9D2235">TCR Scanner &rarr;</text>
                         </g>
                     </svg>
                 </div>
@@ -774,14 +852,14 @@
             
         </section>
     
-        <section class="slide" data-slide="3">
+        <section class="slide" data-slide="4">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Prologue &bull; Lecture Roadmap</div>
                     <h2 class="slide-title">Three Clinical Mysteries We Will Solve Today</h2>
                     <div class="slide-subtitle">Following the journey from T-cell DNA shuffling to autoimmune disease and modern cures.</div>
                 </div>
-                <span class="header-badge">Slide 03</span>
+                <span class="header-badge">Slide 04</span>
             </div>
 
             <div class="grid-3col">
@@ -790,7 +868,7 @@
                     <div>
                         <div class="card-title">🧬 1. The Scanner Paradox</div>
                         <ul class="content-list">
-                            <li><strong>The Question:</strong> How can a human genome with only 20,000 genes build over <strong>$10^15$ different T-Cell Receptor (TCR) scanners</strong>?</li>
+                            <li><strong>The Question:</strong> How can a human genome with only 20,000 genes build over <strong>$10^{15}$ different T-Cell Receptor (TCR) scanners</strong>?</li>
                             <li><strong>The Mechanism:</strong> Developing T cells use molecular scissors (<strong>RAG1/2</strong>) and a random letter generator (<strong>TdT</strong>) to mutate their own DNA.</li>
                             <li><strong>Clinical Payoff:</strong> We can sequence a patient's blood T cells to read their lifelong history of viral infections.</li>
                         </ul>
@@ -811,7 +889,7 @@
                         </ul>
                     </div>
                     <div class="takeaway-strip takeaway-strip-emerald">
-                        <strong>Movement 3:</strong> MHC/HLAGroove Architecture &amp; Anchor Pockets.
+                        <strong>Movement 3:</strong> MHC/HLA Groove Architecture &amp; Anchor Pockets.
                     </div>
                 </div>
 
@@ -833,14 +911,14 @@
             
         </section>
     
-        <section class="slide" data-slide="4">
+        <section class="slide" data-slide="5">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 1 &bull; Repertoire Mechanics</div>
                     <h2 class="slide-title">Two Steps to Build a Receptor: Shuffling vs. Customizing</h2>
                     <div class="slide-subtitle">Developing T cells deliberately cut and edit their own DNA to turn 170 gene pieces into 10<sup>15</sup> scanners.</div>
                 </div>
-                <span class="header-badge">Slide 04</span>
+                <span class="header-badge">Slide 05</span>
             </div>
 
             <div class="grid-2col">
@@ -931,14 +1009,14 @@
             
         </section>
     
-        <section class="slide" data-slide="5">
+        <section class="slide" data-slide="6">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 1 &bull; Molecular Mechanics</div>
                     <h2 class="slide-title">The Cutting Machine: RAG1/2 Scissors &amp; Hairpin Loops</h2>
                     <div class="slide-subtitle">Three simple mechanical steps ensure T cells cut the right gene segments in the right order.</div>
                 </div>
-                <span class="header-badge">Slide 05</span>
+                <span class="header-badge">Slide 06</span>
             </div>
 
             <div class="grid-2col">
@@ -959,32 +1037,32 @@
 
                 <!-- Right Card: Hairpin Biochemical Diagram -->
                 <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; padding: 14px;">
-                    <svg viewBox="0 0 520 350" style="width: 100%; height: 100%; max-height: 440px;">
+                    <svg viewBox="0 0 520 365" style="width: 100%; height: 100%; max-height: 440px;">
                         <!-- Step A: 12/23 Spacer Rule & RAG Scissors -->
-                        <g transform="translate(25, 18)">
+                        <g transform="translate(25, 14)">
                             <text x="0" y="16" font-family="Inter Tight" font-size="12.5" font-weight="900" fill="#0F172A">Step 1: RAG1/2 Scissors Cut Between 12-bp &amp; 23-bp Plugs</text>
                             
-                            <rect x="10" y="30" width="120" height="32" rx="4" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
-                            <text x="70" y="50" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="800" fill="#1E40AF">V Segment</text>
+                            <rect x="10" y="42" width="120" height="32" rx="4" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+                            <text x="70" y="62" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="800" fill="#1E40AF">V Segment</text>
 
                             <!-- 23-bp Plug -->
-                            <rect x="130" y="34" width="85" height="24" rx="3" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.5"/>
-                            <text x="172" y="50" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#854D0E">23-bp Plug</text>
+                            <rect x="130" y="46" width="85" height="24" rx="3" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.5"/>
+                            <text x="172" y="62" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#854D0E">23-bp Plug</text>
 
                             <!-- Cut Line -->
-                            <line x1="130" y1="22" x2="130" y2="70" stroke="#9D2235" stroke-width="2.5" stroke-dasharray="3,2"/>
-                            <text x="130" y="18" text-anchor="middle" font-family="Inter" font-size="15">✂️</text>
+                            <line x1="130" y1="36" x2="130" y2="82" stroke="#9D2235" stroke-width="2.5" stroke-dasharray="3,2"/>
+                            <text x="130" y="34" text-anchor="middle" font-family="Inter" font-size="13" font-weight="900" fill="#9D2235">✂</text>
 
                             <!-- 12-bp Plug + D Segment -->
-                            <rect x="255" y="34" width="85" height="24" rx="3" fill="#FED7AA" stroke="#EA580C" stroke-width="1.5"/>
-                            <text x="297" y="50" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#9A3412">12-bp Plug</text>
+                            <rect x="255" y="46" width="85" height="24" rx="3" fill="#FED7AA" stroke="#EA580C" stroke-width="1.5"/>
+                            <text x="297" y="62" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="800" fill="#9A3412">12-bp Plug</text>
 
-                            <rect x="340" y="30" width="110" height="32" rx="4" fill="#FEF3C7" stroke="#B45309" stroke-width="2"/>
-                            <text x="395" y="50" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="800" fill="#92400E">D Segment</text>
+                            <rect x="340" y="42" width="110" height="32" rx="4" fill="#FEF3C7" stroke="#B45309" stroke-width="2"/>
+                            <text x="395" y="62" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="800" fill="#92400E">D Segment</text>
                         </g>
 
                         <!-- Step B: Closed Hairpin Loop -->
-                        <g transform="translate(25, 125)">
+                        <g transform="translate(25, 132)">
                             <text x="0" y="16" font-family="Inter Tight" font-size="12.5" font-weight="900" fill="#0F172A">Step 2: Cut DNA Ends Seal Into Closed Hairpin Loops</text>
                             
                             <!-- Top and bottom DNA strands of V segment -->
@@ -999,19 +1077,19 @@
                         </g>
 
                         <!-- Step C: Artemis Opens the Loop Off-Center -->
-                        <g transform="translate(25, 230)">
+                        <g transform="translate(25, 240)">
                             <text x="0" y="16" font-family="Inter Tight" font-size="12.5" font-weight="900" fill="#0F172A">Step 3: Artemis Snips the Loop Off-Center (Sticky Overhang)</text>
                             
-                            <rect x="10" y="34" width="150" height="16" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.5"/>
-                            <rect x="10" y="50" width="190" height="16" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <rect x="10" y="42" width="150" height="16" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.5"/>
+                            <rect x="10" y="58" width="190" height="16" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.5"/>
                             
                             <!-- Overhang Tail -->
-                            <rect x="160" y="50" width="45" height="16" fill="#FEF08A" stroke="#CA8A04" stroke-width="2"/>
-                            <text x="182" y="62" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="900" fill="#854D0E">Tail</text>
+                            <rect x="160" y="58" width="45" height="16" fill="#FEF08A" stroke="#CA8A04" stroke-width="2"/>
+                            <text x="182" y="70" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="900" fill="#854D0E">Tail</text>
 
-                            <path d="M 175 18 L 175 44" stroke="#047857" stroke-width="2.5" marker-end="url(#arrow)"/>
-                            <text x="295" y="42" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#047857">Artemis Off-Center Cut</text>
-                            <text x="295" y="60" font-family="Roboto Mono" font-size="10.5" font-weight="700" fill="#475569">Ready for random letter insertions!</text>
+                            <path d="M 175 26 L 175 52" stroke="#047857" stroke-width="2.5" marker-end="url(#arrow)"/>
+                            <text x="295" y="48" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#047857">Artemis Off-Center Cut</text>
+                            <text x="295" y="66" font-family="Roboto Mono" font-size="10.5" font-weight="700" fill="#475569">Ready for random letter insertions!</text>
                         </g>
                     </svg>
                 </div>
@@ -1019,14 +1097,14 @@
             
         </section>
     
-        <section class="slide" data-slide="6">
+        <section class="slide" data-slide="7">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 1 &bull; Molecular Mechanics</div>
                     <h2 class="slide-title">TdT Polymerase: The Cell's Random DNA Letter Generator</h2>
                     <div class="slide-subtitle">Unlike normal DNA copy enzymes, TdT invents brand-new DNA sequences without a template.</div>
                 </div>
-                <span class="header-badge">Slide 06</span>
+                <span class="header-badge">Slide 07</span>
             </div>
 
             <div class="grid-2col">
@@ -1097,60 +1175,61 @@
             
         </section>
     
-        <section class="slide" data-slide="7">
+        <section class="slide" data-slide="8">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 1 &bull; Structural Anatomy</div>
                     <h2 class="slide-title">Three Pairs of Molecular Fingers: Why CDR3 Is the Bullseye</h2>
                     <div class="slide-subtitle">Outer fingers (CDR1 &amp; CDR2) grip the host HLA tray; the center finger (CDR3) touches the viral peptide.</div>
                 </div>
-                <span class="header-badge">Slide 07</span>
+                <span class="header-badge">Slide 08</span>
             </div>
 
             <!-- Hero Visual Layout (Pattern B) -->
             <div class="hero-visual-card" style="padding: 14px 20px;">
-                <svg viewBox="0 0 920 395" style="width: 100%; height: 100%; max-height: 465px;">
+                <svg viewBox="0 0 920 405" style="width: 100%; height: 100%; max-height: 465px;">
                     <!-- Top Panel: TCR Variable Domain Structure -->
-                    <g transform="translate(180, 15)">
-                        <!-- V-domain Body -->
-                        <path d="M 40 10 C 40 80 120 110 280 110 C 440 110 520 80 520 10" fill="#F8FAFC" stroke="#1A1C20" stroke-width="2.5"/>
-                        <text x="280" y="50" text-anchor="middle" font-family="Inter Tight" font-size="16" font-weight="900" fill="#1E293B">T-Cell Receptor Scanner (TCR α &amp; β Chains)</text>
-                        <text x="280" y="75" text-anchor="middle" font-family="Roboto Mono" font-size="12" fill="#475569">CDR = Complementarity-Determining Region ("Molecular Fingers")</text>
+                    <g transform="translate(180, 10)">
+                        <!-- V-domain Body widened so text sits 100% inside -->
+                        <path d="M 10 5 C 10 85 95 108 280 108 C 465 108 550 85 550 5" fill="#F8FAFC" stroke="#1A1C20" stroke-width="2.5"/>
+                        <text x="280" y="42" text-anchor="middle" font-family="Inter Tight" font-size="16" font-weight="900" fill="#1E293B">T-Cell Receptor Scanner (TCR α &amp; β Chains)</text>
+                        <text x="280" y="68" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" fill="#475569">CDR = Complementarity-Determining Region ("Molecular Fingers")</text>
 
                         <!-- Outer Fingers: CDR1 & CDR2 (Germline) -->
-                        <path d="M 90 98 Q 80 185 105 225" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round"/>
-                        <circle cx="105" cy="225" r="6" fill="#1D4ED8"/>
-                        <text x="75" y="246" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#1D4ED8">CDR1 (Outer)</text>
+                        <path d="M 85 94 Q 75 180 105 220" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round"/>
+                        <circle cx="105" cy="220" r="6" fill="#1D4ED8"/>
+                        <text x="72" y="242" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#1D4ED8">CDR1 (Outer)</text>
 
-                        <path d="M 170 105 Q 160 185 185 225" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round"/>
-                        <circle cx="185" cy="225" r="6" fill="#1D4ED8"/>
-                        <text x="180" y="246" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#1D4ED8">CDR2 (Outer)</text>
+                        <path d="M 170 103 Q 160 180 185 220" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round"/>
+                        <circle cx="185" cy="220" r="6" fill="#1D4ED8"/>
+                        <text x="180" y="242" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#1D4ED8">CDR2 (Outer)</text>
 
                         <!-- Center Finger: CDR3 (Junctional Seam + TdT) -->
-                        <path d="M 245 110 Q 280 265 280 280 Q 280 265 315 110" fill="none" stroke="#9D2235" stroke-width="7" stroke-linecap="round"/>
-                        <circle cx="280" cy="280" r="10" fill="#9D2235" stroke="#121316" stroke-width="2.5"/>
-                        <text x="280" y="310" text-anchor="middle" font-family="Roboto Mono" font-size="13.5" font-weight="900" fill="#9D2235">CDR3 Center Finger (V-D-J Seam + TdT Random Letters)</text>
+                        <path d="M 245 108 Q 280 250 280 264 Q 280 250 315 108" fill="none" stroke="#9D2235" stroke-width="7" stroke-linecap="round"/>
+                        <circle cx="280" cy="264" r="9" fill="#9D2235" stroke="#121316" stroke-width="2.5"/>
+                        <rect x="85" y="280" width="390" height="24" rx="12" fill="#FFF1F2" stroke="#FECDD3" stroke-width="1.5"/>
+                        <text x="280" y="296" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="900" fill="#9D2235">CDR3 Center Finger (V-D-J Seam + TdT Random Letters)</text>
 
-                        <path d="M 375 105 Q 400 185 375 225" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round"/>
-                        <circle cx="375" cy="225" r="6" fill="#1D4ED8"/>
-                        <text x="380" y="246" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#1D4ED8">CDR2 (Outer)</text>
+                        <path d="M 380 103 Q 400 180 375 220" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round"/>
+                        <circle cx="375" cy="220" r="6" fill="#1D4ED8"/>
+                        <text x="380" y="242" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#1D4ED8">CDR2 (Outer)</text>
 
-                        <path d="M 450 98 Q 480 185 455 225" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round"/>
-                        <circle cx="455" cy="225" r="6" fill="#1D4ED8"/>
-                        <text x="485" y="246" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#1D4ED8">CDR1 (Outer)</text>
+                        <path d="M 465 94 Q 485 180 455 220" fill="none" stroke="#1D4ED8" stroke-width="5" stroke-linecap="round"/>
+                        <circle cx="455" cy="220" r="6" fill="#1D4ED8"/>
+                        <text x="488" y="242" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#1D4ED8">CDR1 (Outer)</text>
                     </g>
 
-                    <!-- Bottom Target: HLA Display Tray -->
-                    <g transform="translate(180, 285)">
-                        <rect x="25" y="40" width="155" height="38" rx="18" fill="#DCFCE7" stroke="#047857" stroke-width="2.5"/>
-                        <text x="102" y="64" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#047857">HLA Tray Left Rail</text>
+                    <!-- Bottom Target: HLA Display Tray (shifted down so zero overlap with CDR3 pill) -->
+                    <g transform="translate(180, 310)">
+                        <rect x="25" y="32" width="155" height="38" rx="18" fill="#DCFCE7" stroke="#047857" stroke-width="2.5"/>
+                        <text x="102" y="56" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#047857">HLA Tray Left Rail</text>
 
                         <!-- Viral Peptide in center -->
-                        <rect x="190" y="32" width="180" height="46" rx="10" fill="#FEF3C7" stroke="#B45309" stroke-width="3"/>
-                        <text x="280" y="60" text-anchor="middle" font-family="Roboto Mono" font-size="13" font-weight="900" fill="#92400E">Viral Peptide (8–10 aa)</text>
+                        <rect x="190" y="24" width="180" height="46" rx="10" fill="#FEF3C7" stroke="#B45309" stroke-width="3"/>
+                        <text x="280" y="52" text-anchor="middle" font-family="Roboto Mono" font-size="13" font-weight="900" fill="#92400E">Viral Peptide (8–10 aa)</text>
 
-                        <rect x="380" y="40" width="155" height="38" rx="18" fill="#DCFCE7" stroke="#047857" stroke-width="2.5"/>
-                        <text x="457" y="64" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#047857">HLA Tray Right Rail</text>
+                        <rect x="380" y="32" width="155" height="38" rx="18" fill="#DCFCE7" stroke="#047857" stroke-width="2.5"/>
+                        <text x="457" y="56" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#047857">HLA Tray Right Rail</text>
                     </g>
 
                     <!-- Left Explanatory Box -->
@@ -1178,14 +1257,14 @@
             
         </section>
     
-        <section class="slide" data-slide="8">
+        <section class="slide" data-slide="9">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 1 &bull; Active Learning Checkpoint</div>
                     <h2 class="slide-title">Spot Check 1: Somatic V(D)J Recombination &amp; TdT Diversity</h2>
                     <div class="slide-subtitle">Live 2-minute checkpoint testing how T cells build &gt;10<sup>15</sup> unique CDR3 scanners right after learning the mechanism.</div>
                 </div>
-                <span class="header-badge">Slide 08</span>
+                <span class="header-badge">Slide 09</span>
             </div>
 
             <div class="grid-2col">
@@ -1241,14 +1320,14 @@
             
         </section>
     
-        <section class="slide" data-slide="9">
+        <section class="slide" data-slide="10">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 2 &bull; Reading the Blood Memory Log</div>
                     <h2 class="slide-title">How to Count Millions of T Cells: Multiplex PCR &amp; Calibration</h2>
                     <div class="slide-subtitle">Emerson et al. (2017) solved "greedy primer" bias to sequence 85 million unique receptors across 640 people.</div>
                 </div>
-                <span class="header-badge">Slide 09</span>
+                <span class="header-badge">Slide 10</span>
             </div>
 
             <div class="grid-2col">
@@ -1279,14 +1358,14 @@
             
         </section>
     
-        <section class="slide" data-slide="10">
+        <section class="slide" data-slide="11">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 2 &bull; Population Immunogenomics</div>
                     <h2 class="slide-title">Private vs. Public TCRs: Lottery Tickets vs. Easy Rolls</h2>
                     <div class="slide-subtitle">Why do strangers share identical T-cell receptors if 10<sup>15</sup> sequences are possible?</div>
                 </div>
-                <span class="header-badge">Slide 10</span>
+                <span class="header-badge">Slide 11</span>
             </div>
 
             <div class="grid-2col">
@@ -1351,14 +1430,14 @@
             
         </section>
     
-        <section class="slide" data-slide="11">
+        <section class="slide" data-slide="12">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 2 &bull; Population Immunogenomics</div>
                     <h2 class="slide-title">Convergent Recombination: Different DNA Spellings, Same Protein Scanner</h2>
                     <div class="slide-subtitle">Genetic synonyms and viral clonal expansion make public TCRs stand out in infected patients.</div>
                 </div>
-                <span class="header-badge">Slide 11</span>
+                <span class="header-badge">Slide 12</span>
             </div>
 
             <div class="grid-2col">
@@ -1399,6 +1478,7 @@
                         <path d="M 90 74 L 220 132" stroke="#047857" stroke-width="2.5" marker-end="url(#arrow)"/>
                         <path d="M 260 74 L 260 132" stroke="#047857" stroke-width="2.5" marker-end="url(#arrow)"/>
                         <path d="M 430 74 L 300 132" stroke="#047857" stroke-width="2.5" marker-end="url(#arrow)"/>
+                        <rect x="75" y="93" width="370" height="22" rx="11" fill="#F0FDF4" stroke="#047857" stroke-width="1.5"/>
                         <text x="260" y="108" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="800" fill="#047857">Different DNA Codons Spell the Same Amino Acids!</text>
 
                         <!-- Single Convergent Amino Acid Sequence -->
@@ -1410,7 +1490,7 @@
 
                         <!-- Antigen Selection Boost -->
                         <path d="M 260 206 L 260 248" stroke="#9D2235" stroke-width="3" marker-end="url(#arrow)"/>
-                        <text x="355" y="232" font-family="Roboto Mono" font-size="10.5" font-weight="900" fill="#9D2235">+ CMV Virus Infection (10,000&times; Division)</text>
+                        <text x="274" y="232" text-anchor="start" font-family="Roboto Mono" font-size="10.5" font-weight="900" fill="#9D2235">+ CMV Virus Infection (10,000&times; Division)</text>
 
                         <g transform="translate(60, 255)">
                             <rect x="0" y="0" width="400" height="66" rx="5" fill="#FEF3C7" stroke="#B45309" stroke-width="2.5"/>
@@ -1423,23 +1503,23 @@
             
         </section>
     
-        <section class="slide" data-slide="12">
+        <section class="slide" data-slide="13">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 2 &bull; Machine Learning Diagnostics</div>
                     <h2 class="slide-title">Avoiding the Overfitting Trap: Why 142 TCRs Beat 78,566</h2>
                     <div class="slide-subtitle">Emerson Figure 2 shows why memorizing private patient noise ruins blind clinical predictions.</div>
                 </div>
-                <span class="header-badge">Slide 12</span>
+                <span class="header-badge">Slide 13</span>
             </div>
 
             <!-- Hero Visual Layout (Pattern B) -->
             <div class="hero-visual-card" style="padding: 12px 20px;">
-                <div style="display: flex; gap: 26px; align-items: center; justify-content: center; flex: 1; width: 100%; min-height: 0;">
-                    <img src="images/emerson_fig2_classifier.jpg" alt="Emerson Figure 2: Classification Performance and Overfitting" class="hero-img" style="max-height: 465px; width: auto; object-fit: contain;">
+                <div style="display: flex; gap: 40px; align-items: center; justify-content: center; flex: 1; width: 100%; min-height: 0;">
+                    <img src="images/emerson_fig2_classifier.jpg" alt="Emerson Figure 2: Classification Performance and Overfitting" class="hero-img" style="max-height: 490px; width: auto; flex: 0 1 auto; object-fit: contain; margin: 0; border: 1.5px solid #E2E8F0; padding: 8px; background: #FFFFFF; border-radius: 4px;">
                     
                     <!-- Callout Synthesis Cards beside figure -->
-                    <div style="width: 410px; display: flex; flex-direction: column; gap: 10px; flex-shrink: 0;">
+                    <div style="width: 520px; display: flex; flex-direction: column; gap: 12px; flex-shrink: 0;">
                         <!-- Plain-English Decoder Box -->
                         <div class="card card-blue" style="padding: 10px 14px;">
                             <div style="font-family: var(--font-heading); font-weight: 800; font-size: 0.98rem; color: #1E3A8A;">
@@ -1478,14 +1558,14 @@
             
         </section>
     
-        <section class="slide" data-slide="13">
+        <section class="slide" data-slide="14">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 2 &bull; Clinical Biomarker Scoring</div>
                     <h2 class="slide-title">Pathogen Memory Burden (<em>M<sub>i</sub></em>): One Number to Diagnose Exposure</h2>
                     <div class="slide-subtitle">Turning 85 million DNA reads into a simple blood fraction that outlasts waning antibodies.</div>
                 </div>
-                <span class="header-badge">Slide 13</span>
+                <span class="header-badge">Slide 14</span>
             </div>
 
             <div class="grid-2col">
@@ -1570,14 +1650,14 @@
             
         </section>
     
-        <section class="slide" data-slide="14">
+        <section class="slide" data-slide="15">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 2 &bull; Clinical Validation</div>
                     <h2 class="slide-title">Grading the Blood Test: The 640-Patient Confusion Matrix</h2>
                     <div class="slide-subtitle">How clinicians measure Sensitivity, Specificity, and Accuracy from blind patient predictions.</div>
                 </div>
-                <span class="header-badge">Slide 14</span>
+                <span class="header-badge">Slide 15</span>
             </div>
 
             <div class="grid-2col">
@@ -1641,14 +1721,14 @@
             
         </section>
     
-        <section class="slide" data-slide="15">
+        <section class="slide" data-slide="16">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 3 &bull; Structural Immunology</div>
                     <h2 class="slide-title">Two Types of Display Trays: Class I (Shoebox) vs. Class II (Hot Dog Bun)</h2>
                     <div class="slide-subtitle">Note: <strong>MHC</strong> is the general vertebrate name; <strong>HLA</strong> is the human version of the exact same trays!</div>
                 </div>
-                <span class="header-badge">Slide 15</span>
+                <span class="header-badge">Slide 16</span>
             </div>
 
             <div class="grid-2col">
@@ -1753,14 +1833,14 @@
             
         </section>
     
-        <section class="slide" data-slide="16">
+        <section class="slide" data-slide="17">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 3 &bull; Evolutionary Genetics</div>
                     <h2 class="slide-title">Why Humans Have 10,000+ HLA Versions: Balancing Selection</h2>
                     <div class="slide-subtitle">If everyone carried the same HLA display tray, a single mutated virus could wipe out humanity.</div>
                 </div>
-                <span class="header-badge">Slide 16</span>
+                <span class="header-badge">Slide 17</span>
             </div>
 
             <div class="grid-2col">
@@ -1837,14 +1917,14 @@
             
         </section>
     
-        <section class="slide" data-slide="17">
+        <section class="slide" data-slide="18">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 3 &bull; Structural Biochemistry</div>
                     <h2 class="slide-title">Tent Pegs &amp; Sockets: How Peptides Lock Into HLA Anchor Pockets</h2>
                     <div class="slide-subtitle">Peptide positions P2 and P9 plug downward into the HLA tray floor; middle positions (P4–P7) point up to the T cell.</div>
                 </div>
-                <span class="header-badge">Slide 17</span>
+                <span class="header-badge">Slide 18</span>
             </div>
 
             <!-- Hero Visual Layout (Pattern B) -->
@@ -1858,31 +1938,31 @@
                         <text x="420" y="334" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="700" fill="#475569">P1–P9 = The 9 Amino Acids of the Viral Peptide from Start (P1) to End (P9)</text>
 
                         <!-- Pockets A through F -->
-                        <rect x="50" y="175" width="85" height="65" rx="4" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2"/>
-                        <text x="92" y="205" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#1E293B">Pocket A</text>
-                        <text x="92" y="225" text-anchor="middle" font-family="Roboto Mono" font-size="10" fill="#475569">Holds P1 Start</text>
+                        <rect x="42" y="175" width="98" height="65" rx="4" fill="#E2E8F0" stroke="#94A3B8" stroke-width="2"/>
+                        <text x="91" y="205" text-anchor="middle" font-family="Roboto Mono" font-size="12" font-weight="800" fill="#1E293B">Pocket A</text>
+                        <text x="91" y="225" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" fill="#475569">Holds P1 Start</text>
 
                         <!-- Pocket B (Primary P2 Socket) -->
-                        <rect x="150" y="175" width="125" height="88" rx="4" fill="#FEE2E2" stroke="#9D2235" stroke-width="2.5"/>
-                        <text x="212" y="204" text-anchor="middle" font-family="Roboto Mono" font-size="13" font-weight="900" fill="#991B1B">Pocket B Socket</text>
-                        <text x="212" y="224" text-anchor="middle" font-family="Inter" font-size="11" font-weight="800" fill="#7F1D1D">Grips P2 Tent Peg</text>
-                        <text x="212" y="245" text-anchor="middle" font-family="Roboto Mono" font-size="10" fill="#991B1B">(Varies by HLA gene!)</text>
+                        <rect x="148" y="175" width="136" height="88" rx="4" fill="#FEE2E2" stroke="#9D2235" stroke-width="2.5"/>
+                        <text x="216" y="204" text-anchor="middle" font-family="Roboto Mono" font-size="12.5" font-weight="900" fill="#991B1B">Pocket B Socket</text>
+                        <text x="216" y="224" text-anchor="middle" font-family="Inter" font-size="11" font-weight="800" fill="#7F1D1D">Grips P2 Tent Peg</text>
+                        <text x="216" y="245" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" fill="#991B1B">(Varies by HLA gene!)</text>
 
                         <!-- Pockets C, D, E -->
-                        <rect x="290" y="175" width="80" height="50" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
-                        <text x="330" y="205" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="700">Pocket C</text>
+                        <rect x="294" y="175" width="80" height="50" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+                        <text x="334" y="205" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="700">Pocket C</text>
 
-                        <rect x="385" y="175" width="80" height="50" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
-                        <text x="425" y="205" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="700">Pocket D</text>
+                        <rect x="386" y="175" width="80" height="50" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+                        <text x="426" y="205" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="700">Pocket D</text>
 
-                        <rect x="480" y="175" width="80" height="50" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
-                        <text x="520" y="205" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="700">Pocket E</text>
+                        <rect x="478" y="175" width="80" height="50" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+                        <text x="518" y="205" text-anchor="middle" font-family="Roboto Mono" font-size="11.5" font-weight="700">Pocket E</text>
 
                         <!-- Pocket F (Primary P9 Socket) -->
-                        <rect x="575" y="175" width="135" height="88" rx="4" fill="#FEE2E2" stroke="#9D2235" stroke-width="2.5"/>
-                        <text x="642" y="204" text-anchor="middle" font-family="Roboto Mono" font-size="13" font-weight="900" fill="#991B1B">Pocket F Socket</text>
-                        <text x="642" y="224" text-anchor="middle" font-family="Inter" font-size="11" font-weight="800" fill="#7F1D1D">Grips P9 Tent Peg</text>
-                        <text x="642" y="245" text-anchor="middle" font-family="Roboto Mono" font-size="10" fill="#991B1B">(Varies by HLA gene!)</text>
+                        <rect x="570" y="175" width="142" height="88" rx="4" fill="#FEE2E2" stroke="#9D2235" stroke-width="2.5"/>
+                        <text x="641" y="204" text-anchor="middle" font-family="Roboto Mono" font-size="12.5" font-weight="900" fill="#991B1B">Pocket F Socket</text>
+                        <text x="641" y="224" text-anchor="middle" font-family="Inter" font-size="11" font-weight="800" fill="#7F1D1D">Grips P9 Tent Peg</text>
+                        <text x="641" y="245" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" fill="#991B1B">(Varies by HLA gene!)</text>
 
                         <!-- The Docked 9-aa Peptide Backbone -->
                         <path d="M 80 105 Q 420 135 680 105" fill="none" stroke="#B45309" stroke-width="7" stroke-linecap="round"/>
@@ -1910,14 +1990,14 @@
             
         </section>
     
-        <section class="slide" data-slide="18">
+        <section class="slide" data-slide="19">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 3 &bull; Population Genetics</div>
                     <h2 class="slide-title">MHC Restriction: Reading Your Parent's HLA Genes from T Cells</h2>
                     <div class="slide-subtitle">Because a T cell only expands when its matching HLA tray is present, expanded T cells reveal your HLA genotype!</div>
                 </div>
-                <span class="header-badge">Slide 18</span>
+                <span class="header-badge">Slide 19</span>
             </div>
 
             <div class="grid-2col">
@@ -1947,14 +2027,14 @@
             
         </section>
     
-        <section class="slide" data-slide="19">
+        <section class="slide" data-slide="20">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 3 &bull; Active Learning Checkpoint</div>
                     <h2 class="slide-title">Spot Check 2: HLA Display Trays &amp; MHC Restriction</h2>
                     <div class="slide-subtitle">Live 2-minute checkpoint testing why a clinical diagnostic needs a panel of 142 TCRs across diverse patients.</div>
                 </div>
-                <span class="header-badge">Slide 19</span>
+                <span class="header-badge">Slide 20</span>
             </div>
 
             <div class="grid-2col">
@@ -2010,14 +2090,14 @@
             
         </section>
     
-        <section class="slide" data-slide="20">
+        <section class="slide" data-slide="21">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 4 &bull; Immune Tolerance</div>
                     <h2 class="slide-title">T-Cell Boot Camp: How the Thymus Deletes Self-Attacking Cells</h2>
                     <div class="slide-subtitle">Because TdT generates random scanners, the thymus must test every rookie T cell against human proteins.</div>
                 </div>
-                <span class="header-badge">Slide 20</span>
+                <span class="header-badge">Slide 21</span>
             </div>
 
             <div class="grid-2col">
@@ -2039,42 +2119,42 @@
 
                 <!-- Right Card: Thymic Selection Funnel SVG -->
                 <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; padding: 14px;">
-                    <svg viewBox="0 0 520 350" style="width: 100%; height: 100%; max-height: 440px;">
+                    <svg viewBox="0 0 540 350" style="width: 100%; height: 100%; max-height: 440px;">
                         <!-- Thymus Funnel -->
-                        <g transform="translate(30, 15)">
+                        <g transform="translate(20, 15)">
                             <text x="230" y="18" text-anchor="middle" font-family="Inter Tight" font-size="13.5" font-weight="900" fill="#0F172A">Inside the Thymus ("T-Cell Boot Camp")</text>
 
                             <!-- Broad Top: Random V(D)J Pool -->
-                            <polygon points="40,32 420,32 300,170 160,170" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2.5"/>
+                            <polygon points="15,32 445,32 330,168 130,168" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2.5"/>
                             <text x="230" y="58" text-anchor="middle" font-family="Inter Tight" font-size="12" font-weight="900" fill="#1E40AF">1. Random Rookie T-Cell Pool (&gt;10¹⁵ Scanners)</text>
 
                             <!-- AIRE Self-Peptide Display -->
-                            <rect x="115" y="80" width="230" height="40" rx="4" fill="#FEE2E2" stroke="#9D2235" stroke-width="2"/>
-                            <text x="230" y="98" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="900" fill="#991B1B">2. AIRE "Sample Platter" Test</text>
-                            <text x="230" y="113" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="700" fill="#7F1D1D">(Tests rookies against human insulin, myelin...)</text>
+                            <rect x="95" y="78" width="270" height="44" rx="4" fill="#FEE2E2" stroke="#9D2235" stroke-width="2"/>
+                            <text x="230" y="96" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="900" fill="#991B1B">2. AIRE "Sample Platter" Test</text>
+                            <text x="230" y="113" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="700" fill="#7F1D1D">(Tests rookies against human proteins)</text>
                             
                             <!-- Deletion Arrow -->
-                            <path d="M 348 100 L 405 100" stroke="#9D2235" stroke-width="3" marker-end="url(#arrow)"/>
-                            <text x="410" y="96" font-family="Inter Tight" font-size="10.5" font-weight="900" fill="#991B1B">Strong Self-Grip:</text>
-                            <text x="410" y="112" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#DC2626">DELETED! ☠️</text>
+                            <path d="M 368 100 L 402 100" stroke="#9D2235" stroke-width="3" marker-end="url(#arrow)"/>
+                            <text x="408" y="96" text-anchor="start" font-family="Inter Tight" font-size="10.5" font-weight="900" fill="#991B1B">Strong Self-Grip:</text>
+                            <text x="408" y="112" text-anchor="start" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#DC2626">DELETED! ☠</text>
 
                             <!-- Narrow Neck: Surviving Cells -->
-                            <rect x="160" y="170" width="140" height="48" rx="4" fill="#DCFCE7" stroke="#047857" stroke-width="2"/>
-                            <text x="230" y="192" text-anchor="middle" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#065F46">Graduating T Cells</text>
-                            <text x="230" y="208" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" fill="#047857">Enter Bloodstream</text>
+                            <rect x="155" y="168" width="150" height="48" rx="4" fill="#DCFCE7" stroke="#047857" stroke-width="2"/>
+                            <text x="230" y="190" text-anchor="middle" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#065F46">Graduating T Cells</text>
+                            <text x="230" y="206" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" fill="#047857">Enter Bloodstream</text>
 
                             <!-- Left Branch: The Leak -->
-                            <path d="M 160 194 L 95 242" stroke="#CA8A04" stroke-width="2.5" marker-end="url(#arrow)"/>
-                            <rect x="0" y="248" width="215" height="68" rx="4" fill="#FEF9C3" stroke="#CA8A04" stroke-width="2"/>
-                            <text x="107" y="268" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="900" fill="#854D0E">⚠️ Weak Self-Reactive Escapees</text>
-                            <text x="107" y="286" text-anchor="middle" font-family="Inter" font-size="10" fill="#713F12">Kept quiet by <strong>Treg Police</strong> unless</text>
-                            <text x="107" y="302" text-anchor="middle" font-family="Inter" font-size="10" font-weight="800" fill="#991B1B">HLA tray suddenly grips self tightly!</text>
+                            <path d="M 155 194 L 105 242" stroke="#CA8A04" stroke-width="2.5" marker-end="url(#arrow)"/>
+                            <rect x="0" y="246" width="230" height="72" rx="4" fill="#FEF9C3" stroke="#CA8A04" stroke-width="2"/>
+                            <text x="115" y="266" text-anchor="middle" font-family="Inter Tight" font-size="11" font-weight="900" fill="#854D0E">⚠️ Weak Self-Reactive Escapees</text>
+                            <text x="115" y="285" text-anchor="middle" font-family="Inter" font-size="10" fill="#713F12">Kept quiet by <tspan font-weight="800">Treg Police</tspan> unless</text>
+                            <text x="115" y="302" text-anchor="middle" font-family="Inter" font-size="10" font-weight="800" fill="#991B1B">HLA tray suddenly grips self tightly!</text>
 
                             <!-- Right Branch: Normal Virus Fighters -->
-                            <path d="M 300 194 L 355 242" stroke="#047857" stroke-width="2.5" marker-end="url(#arrow)"/>
-                            <rect x="245" y="248" width="215" height="68" rx="4" fill="#F0FDF4" stroke="#047857" stroke-width="2"/>
-                            <text x="352" y="272" text-anchor="middle" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#065F46">✓ Safe Virus-Fighting T Cells</text>
-                            <text x="352" y="294" text-anchor="middle" font-family="Roboto Mono" font-size="10" fill="#047857">Ignore self &bull; Attack pathogens</text>
+                            <path d="M 305 194 L 355 242" stroke="#047857" stroke-width="2.5" marker-end="url(#arrow)"/>
+                            <rect x="255" y="246" width="230" height="72" rx="4" fill="#F0FDF4" stroke="#047857" stroke-width="2"/>
+                            <text x="370" y="272" text-anchor="middle" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#065F46">✓ Safe Virus-Fighting T Cells</text>
+                            <text x="370" y="294" text-anchor="middle" font-family="Roboto Mono" font-size="10" fill="#047857">Ignore self &bull; Attack pathogens</text>
                         </g>
                     </svg>
                 </div>
@@ -2082,14 +2162,14 @@
             
         </section>
     
-        <section class="slide" data-slide="21">
+        <section class="slide" data-slide="22">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 4 &bull; Roadmap to Autoimmunity</div>
                     <h2 class="slide-title">Three Ways an HLA Display Tray Triggers an Autoimmune Attack</h2>
                     <div class="slide-subtitle">Compare how genetics, gut enzymes, or prescription drugs alter the HLA groove in our next three cases.</div>
                 </div>
-                <span class="header-badge">Slide 21</span>
+                <span class="header-badge">Slide 22</span>
             </div>
 
             <div class="grid-3col">
@@ -2153,14 +2233,14 @@
             
         </section>
     
-        <section class="slide" data-slide="22">
+        <section class="slide" data-slide="23">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 4 &bull; Case 1: Inherited Pocket Charge</div>
                     <h2 class="slide-title">Type 1 Diabetes: How One Missing Charge Turns HLA Into an Insulin Magnet</h2>
                     <div class="slide-subtitle">Losing a single negative charge at position 57 leaves Pocket P9 positively charged (+), trapping negative (&minus;) insulin peptides.</div>
                 </div>
-                <span class="header-badge">Slide 22</span>
+                <span class="header-badge">Slide 23</span>
             </div>
 
             <div class="grid-2col">
@@ -2253,14 +2333,14 @@
             
         </section>
     
-        <section class="slide" data-slide="23">
+        <section class="slide" data-slide="24">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 4 &bull; Case 2: Enzyme-Modified Food Peptide</div>
                     <h2 class="slide-title">Celiac Disease: A Gut Enzyme Adds a Negative (&minus;) Charge to Gluten</h2>
                     <div class="slide-subtitle">In T1D, a gene changes the pocket's charge; in Celiac, human enzyme <strong>tTG2</strong> changes the food's charge!</div>
                 </div>
-                <span class="header-badge">Slide 23</span>
+                <span class="header-badge">Slide 24</span>
             </div>
 
             <div class="grid-2col">
@@ -2338,14 +2418,14 @@
             
         </section>
     
-        <section class="slide" data-slide="24">
+        <section class="slide" data-slide="25">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 4 &bull; Case 3: Drug Wedge in the Pocket</div>
                     <h2 class="slide-title">Abacavir &amp; HLA-B*57:01: The "Pebble in the Pocket" Drug Allergy</h2>
                     <div class="slide-subtitle">An HIV pill wedges into Pocket F, forcing unfamiliar human peptides onto the tray and triggering a whole-body attack.</div>
                 </div>
-                <span class="header-badge">Slide 24</span>
+                <span class="header-badge">Slide 25</span>
             </div>
 
             <!-- Hero Visual Layout (Pattern B) -->
@@ -2404,14 +2484,14 @@
             
         </section>
     
-        <section class="slide" data-slide="25">
+        <section class="slide" data-slide="26">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 4 &bull; Active Learning Checkpoint</div>
                     <h2 class="slide-title">Spot Check 3: How HLA Grooves Trigger Autoimmunity</h2>
                     <div class="slide-subtitle">Live 2-minute checkpoint testing the "Pebble in the Pocket" mechanism of Abacavir hypersensitivity.</div>
                 </div>
-                <span class="header-badge">Slide 25</span>
+                <span class="header-badge">Slide 26</span>
             </div>
 
             <div class="grid-2col">
@@ -2467,14 +2547,14 @@
             
         </section>
     
-        <section class="slide" data-slide="26">
+        <section class="slide" data-slide="27">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 5 &bull; In-Class Collaborative Sprint</div>
                     <h2 class="slide-title">Sprint: The Clinical Immunogenomics Board</h2>
                     <div class="slide-subtitle">Four clinical mysteries solved by your auditorium quadrant using today's slides (15:00 team window).</div>
                 </div>
-                <span class="header-badge">Slide 26</span>
+                <span class="header-badge">Slide 27</span>
             </div>
 
             <!-- Main Sprint Container -->
@@ -2577,14 +2657,14 @@
             
         </section>
     
-        <section class="slide" data-slide="27">
+        <section class="slide" data-slide="28">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 6 &bull; Engineering Immune Therapies</div>
                     <h2 class="slide-title">How to Read Drug Names: Antibody Engineering from <em>-omab</em> to <em>-umab</em></h2>
                     <div class="slide-subtitle">Replacing foreign mouse protein (red) with human protein (blue) stops the body from attacking the medicine.</div>
                 </div>
-                <span class="header-badge">Slide 27</span>
+                <span class="header-badge">Slide 28</span>
             </div>
 
             <div class="grid-2col">
@@ -2686,14 +2766,14 @@
             
         </section>
     
-        <section class="slide" data-slide="28">
+        <section class="slide" data-slide="29">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 6 &bull; Precision Therapeutics</div>
                     <h2 class="slide-title">Targeted Biologics: Molecular Scalpels Replace Steroid Sledgehammers</h2>
                     <div class="slide-subtitle">Instead of shutting down the whole immune system, biologics cut one specific wire in the autoimmune attack.</div>
                 </div>
-                <span class="header-badge">Slide 28</span>
+                <span class="header-badge">Slide 29</span>
             </div>
 
             <div class="grid-2col">
@@ -2745,53 +2825,57 @@
 
                 <!-- Right Card: Multi-Node Interception Cascade SVG -->
                 <div class="card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FFFFFF; padding: 14px;">
-                    <svg viewBox="0 0 520 350" style="width: 100%; height: 100%; max-height: 440px;">
-                        <text x="260" y="20" text-anchor="middle" font-family="Inter Tight" font-size="13.5" font-weight="900" fill="#0F172A">The Autoimmune Chain Reaction &amp; Where Drugs Cut It</text>
+                    <svg viewBox="0 0 540 350" style="width: 100%; height: 100%; max-height: 440px;">
+                        <text x="270" y="20" text-anchor="middle" font-family="Inter Tight" font-size="13.5" font-weight="900" fill="#0F172A">The Autoimmune Chain Reaction &amp; Where Drugs Cut It</text>
 
                         <!-- Step 1: HLA Tray & T-Cell Wake-Up -->
-                        <g transform="translate(20, 36)">
+                        <g transform="translate(15, 36)">
                             <rect x="0" y="0" width="210" height="58" rx="4" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="2"/>
                             <text x="105" y="22" text-anchor="middle" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#1E3A8A">Step 1: HLA Tray Wakes T Cell</text>
                             <text x="105" y="42" text-anchor="middle" font-family="Roboto Mono" font-size="10" fill="#1D4ED8">Needs CD80/86 Handshake</text>
 
-                            <rect x="230" y="8" width="245" height="42" rx="4" fill="#FEF2F2" stroke="#9D2235" stroke-width="2"/>
-                            <text x="352" y="34" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="900" fill="#991B1B">🛑 Cut #1: Abatacept (Blocks Handshake)</text>
+                            <line x1="210" y1="29" x2="230" y2="29" stroke="#9D2235" stroke-width="2" stroke-dasharray="3,2"/>
+                            <rect x="230" y="8" width="280" height="42" rx="4" fill="#FEF2F2" stroke="#9D2235" stroke-width="2"/>
+                            <text x="370" y="34" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="900" fill="#991B1B">🛑 Cut #1: Abatacept (Blocks Handshake)</text>
                         </g>
 
-                        <path d="M 125 96 L 125 118" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+                        <path d="M 120 96 L 120 118" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
 
                         <!-- Step 2: T-Cell Alarm Signals -->
-                        <g transform="translate(20, 122)">
+                        <g transform="translate(15, 122)">
                             <rect x="0" y="0" width="210" height="58" rx="4" fill="#F0FDF4" stroke="#047857" stroke-width="2"/>
                             <text x="105" y="22" text-anchor="middle" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#065F46">Step 2: T Cells Shout Alarm</text>
                             <text x="105" y="42" text-anchor="middle" font-family="Roboto Mono" font-size="10" fill="#047857">Secretes IL-12 / IL-23 Signals</text>
 
-                            <rect x="230" y="8" width="245" height="42" rx="4" fill="#FEF2F2" stroke="#9D2235" stroke-width="2"/>
-                            <text x="352" y="34" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="900" fill="#991B1B">🛑 Cut #2: Ustekinumab (Mutes Alarm)</text>
+                            <line x1="210" y1="29" x2="230" y2="29" stroke="#9D2235" stroke-width="2" stroke-dasharray="3,2"/>
+                            <rect x="230" y="8" width="280" height="42" rx="4" fill="#FEF2F2" stroke="#9D2235" stroke-width="2"/>
+                            <text x="370" y="34" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="900" fill="#991B1B">🛑 Cut #2: Ustekinumab (Mutes Alarm)</text>
                         </g>
 
-                        <path d="M 125 182 L 125 204" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+                        <path d="M 120 182 L 120 204" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
 
                         <!-- Step 3: B-Cell Autoantibodies -->
-                        <g transform="translate(20, 208)">
+                        <g transform="translate(15, 208)">
                             <rect x="0" y="0" width="210" height="58" rx="4" fill="#FAF5FF" stroke="#6D28D9" stroke-width="2"/>
                             <text x="105" y="22" text-anchor="middle" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#5B21B6">Step 3: B Cells Make Auto-Abs</text>
                             <text x="105" y="42" text-anchor="middle" font-family="Roboto Mono" font-size="10" fill="#6D28D9">CD20+ B-Cell Factories</text>
 
-                            <rect x="230" y="8" width="245" height="42" rx="4" fill="#FEF2F2" stroke="#9D2235" stroke-width="2"/>
-                            <text x="352" y="34" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="900" fill="#991B1B">🛑 Cut #3: Rituximab (Clears B Cells)</text>
+                            <line x1="210" y1="29" x2="230" y2="29" stroke="#9D2235" stroke-width="2" stroke-dasharray="3,2"/>
+                            <rect x="230" y="8" width="280" height="42" rx="4" fill="#FEF2F2" stroke="#9D2235" stroke-width="2"/>
+                            <text x="370" y="34" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="900" fill="#991B1B">🛑 Cut #3: Rituximab (Clears B Cells)</text>
                         </g>
 
-                        <path d="M 125 268 L 125 290" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+                        <path d="M 120 268 L 120 290" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
 
                         <!-- Step 4: Final Tissue Fire (TNF-alpha) -->
-                        <g transform="translate(20, 294)">
+                        <g transform="translate(15, 294)">
                             <rect x="0" y="0" width="210" height="48" rx="4" fill="#FEF3C7" stroke="#B45309" stroke-width="2"/>
                             <text x="105" y="20" text-anchor="middle" font-family="Inter Tight" font-size="11.5" font-weight="900" fill="#92400E">Step 4: TNF-α Tissue Fire</text>
                             <text x="105" y="37" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" fill="#B45309">Damages Joints &amp; Gut Wall</text>
 
-                            <rect x="230" y="4" width="245" height="42" rx="4" fill="#DCFCE7" stroke="#047857" stroke-width="2.5"/>
-                            <text x="352" y="30" text-anchor="middle" font-family="Roboto Mono" font-size="11" font-weight="900" fill="#065F46">🛑 Cut #4: Humira (Mops Up TNF-α!)</text>
+                            <line x1="210" y1="24" x2="230" y2="24" stroke="#047857" stroke-width="2" stroke-dasharray="3,2"/>
+                            <rect x="230" y="4" width="280" height="42" rx="4" fill="#DCFCE7" stroke="#047857" stroke-width="2.5"/>
+                            <text x="370" y="30" text-anchor="middle" font-family="Roboto Mono" font-size="10.5" font-weight="900" fill="#065F46">🛑 Cut #4: Humira (Mops Up TNF-α!)</text>
                         </g>
                     </svg>
                 </div>
@@ -2799,14 +2883,14 @@
             
         </section>
     
-        <section class="slide" data-slide="29">
+        <section class="slide" data-slide="30">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 6 &bull; Next-Generation Cell Therapies</div>
                     <h2 class="slide-title">Pressing "Ctrl+Alt+Delete": CAR-T Cells Reboot the Immune System</h2>
                     <div class="slide-subtitle">A single infusion of engineered T cells wipes out bad Lupus B cells so the body grows a fresh, healthy repertoire.</div>
                 </div>
-                <span class="header-badge">Slide 29</span>
+                <span class="header-badge">Slide 30</span>
             </div>
 
             <!-- Hero Visual Layout (Pattern B) -->
@@ -2835,14 +2919,14 @@
 
                     <!-- Right: Repertoire Reset Timeline SVG -->
                     <div style="background: #FFFFFF; border: 1.5px solid var(--rule-ink); border-radius: 4px; padding: 14px; display: flex; align-items: center; justify-content: center; height: 100%;">
-                        <svg viewBox="0 0 440 310" style="width: 100%; height: 100%; max-height: 360px;">
-                            <text x="220" y="20" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="900" fill="#0F172A">Timeline of a Lupus "Immune Factory Reset"</text>
+                        <svg viewBox="0 0 450 310" style="width: 100%; height: 100%; max-height: 360px;">
+                            <text x="225" y="20" text-anchor="middle" font-family="Inter Tight" font-size="13" font-weight="900" fill="#0F172A">Timeline of a Lupus "Immune Factory Reset"</text>
 
                             <!-- Timeline Axis -->
-                            <line x1="35" y1="255" x2="415" y2="255" stroke="#1A1C20" stroke-width="2.5"/>
+                            <line x1="35" y1="255" x2="425" y2="255" stroke="#1A1C20" stroke-width="2.5"/>
                             <text x="45" y="278" font-family="Roboto Mono" font-size="10.5" font-weight="800" fill="#334155">Day 0</text>
                             <text x="185" y="278" font-family="Roboto Mono" font-size="10.5" font-weight="800" fill="#334155">Month 1–2</text>
-                            <text x="335" y="278" font-family="Roboto Mono" font-size="10.5" font-weight="800" fill="#047857">Month 4+ (Cured!)</text>
+                            <text x="330" y="278" font-family="Roboto Mono" font-size="10.5" font-weight="800" fill="#047857">Month 4+ (Cured!)</text>
 
                             <!-- CAR-T Infusion -->
                             <path d="M 55 58 L 55 250" stroke="#9D2235" stroke-width="2.5" stroke-dasharray="4,3"/>
@@ -2850,20 +2934,23 @@
                             <text x="87" y="50" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="900" fill="#991B1B">1x CAR-T Infusion</text>
 
                             <!-- B-Cell Curve: Drops to Zero, then returns naive -->
-                            <path d="M 35 95 L 55 95 Q 75 248 115 250 L 220 250 Q 275 245 320 115 L 405 115" fill="none" stroke="#1D4ED8" stroke-width="4.5"/>
+                            <path d="M 35 95 L 55 95 Q 75 248 115 250 L 220 250 Q 275 245 320 115 L 415 115" fill="none" stroke="#1D4ED8" stroke-width="4.5"/>
+
+                            <!-- Autoantibody Curve: Plunges and stays at 0 (drawn BEFORE boxes so it never cuts across text) -->
+                            <path d="M 35 135 Q 115 145 180 220 Q 240 248 415 250" fill="none" stroke="#B45309" stroke-width="3.5" stroke-dasharray="5,4"/>
+
+                            <!-- Opaque Pill Badge for Autoantibody Curve Label -->
+                            <rect x="92" y="122" width="212" height="24" rx="4" fill="#FFFBEB" stroke="#B45309" stroke-width="1.5"/>
+                            <text x="198" y="138" text-anchor="middle" font-family="Roboto Mono" font-size="10" font-weight="900" fill="#B45309">Lupus Autoantibodies Drop to 0</text>
                             
-                            <!-- Labels for 3 Phases -->
-                            <rect x="145" y="198" width="145" height="40" rx="4" fill="#FEF2F2" stroke="#9D2235" stroke-width="1.5"/>
-                            <text x="217" y="216" text-anchor="middle" font-family="Inter Tight" font-size="10.5" font-weight="900" fill="#991B1B">Phase 1: Total Wipeout</text>
-                            <text x="217" y="231" text-anchor="middle" font-family="Roboto Mono" font-size="9" fill="#7F1D1D">(All Bad B Cells Gone)</text>
+                            <!-- Labels for 3 Phases (drawn ON TOP of curves with solid backgrounds) -->
+                            <rect x="135" y="192" width="155" height="42" rx="4" fill="#FEF2F2" stroke="#9D2235" stroke-width="1.5"/>
+                            <text x="212" y="210" text-anchor="middle" font-family="Inter Tight" font-size="10.5" font-weight="900" fill="#991B1B">Phase 1: Total Wipeout</text>
+                            <text x="212" y="226" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" fill="#7F1D1D">(All Bad B Cells Gone)</text>
 
-                            <rect x="260" y="58" width="165" height="44" rx="4" fill="#DCFCE7" stroke="#047857" stroke-width="2"/>
-                            <text x="342" y="77" text-anchor="middle" font-family="Inter Tight" font-size="10.5" font-weight="900" fill="#065F46">Phase 2: Fresh Reboot!</text>
-                            <text x="342" y="93" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#047857">Healthy Baby B Cells Grow</text>
-
-                            <!-- Autoantibody Curve: Plunges and stays at 0 -->
-                            <path d="M 35 135 Q 115 145 180 220 Q 240 248 405 250" fill="none" stroke="#B45309" stroke-width="3.5" stroke-dasharray="5,4"/>
-                            <text x="125" y="148" font-family="Roboto Mono" font-size="10" font-weight="900" fill="#B45309">Lupus Autoantibodies Drop to 0</text>
+                            <rect x="265" y="55" width="170" height="44" rx="4" fill="#DCFCE7" stroke="#047857" stroke-width="2"/>
+                            <text x="350" y="74" text-anchor="middle" font-family="Inter Tight" font-size="10.5" font-weight="900" fill="#065F46">Phase 2: Fresh Reboot!</text>
+                            <text x="350" y="90" text-anchor="middle" font-family="Roboto Mono" font-size="9.5" font-weight="800" fill="#047857">Healthy Baby B Cells Grow</text>
                         </svg>
                     </div>
                 </div>
@@ -2874,14 +2961,14 @@
             
         </section>
     
-        <section class="slide" data-slide="30">
+        <section class="slide" data-slide="31">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 7 &bull; Grand Synthesis</div>
                     <h2 class="slide-title">Lecture 8 Master Cheat Sheet: From DNA Scissors to Immune Resets</h2>
                     <div class="slide-subtitle">Keep this 6-part summary table in mind as you launch today's Summative Mastery Quiz!</div>
                 </div>
-                <span class="header-badge">Slide 30</span>
+                <span class="header-badge">Slide 31</span>
             </div>
 
             <!-- Hero Visual Matrix Layout (Pattern B) -->
@@ -2948,14 +3035,14 @@
             
         </section>
     
-        <section class="slide" data-slide="31">
+        <section class="slide" data-slide="32">
             <div class="slide-header">
                 <div>
                     <div class="slide-category">Movement 7 &bull; Concept Mastery &amp; Course Horizons</div>
                     <h2 class="slide-title">Summative Mastery Quiz &amp; Preview of Lecture 9: Cancer Genomics</h2>
                     <div class="slide-subtitle">Unlock today's 5-question Mastery Quiz on Canvas and preview next week's dive into oncology.</div>
                 </div>
-                <span class="header-badge">Slide 31</span>
+                <span class="header-badge">Slide 32</span>
             </div>
 
             <div class="grid-2col">
@@ -3020,36 +3107,37 @@
             <label for="slide-select" style="font-size: 0.82rem; font-weight: 700; color: var(--ink-slate);">Jump:</label>
             <select id="slide-select" onchange="showSlide(parseInt(this.value, 10))" style="font-family: var(--font-mono); font-size: 0.80rem; padding: 2px 6px; border: 1.5px solid var(--rule-ink); border-radius: 2px; background: #FFFFFF;">
                 <option value="1">Slide 01: The Double-Edged Sword: Host Immunology, HLA ...</option>
-                <option value="2">Slide 02: Immunology 101: How Your Body Spots Viruses H...</option>
-                <option value="3">Slide 03: Three Clinical Mysteries We Will Solve Today</option>
-                <option value="4">Slide 04: Two Steps to Build a Receptor: Shuffling vs. ...</option>
-                <option value="5">Slide 05: The Cutting Machine: RAG1/2 Scissors & Hairpi...</option>
-                <option value="6">Slide 06: TdT Polymerase: The Cell's Random DNA Letter ...</option>
-                <option value="7">Slide 07: Three Pairs of Molecular Fingers: Why CDR3 Is...</option>
-                <option value="8">Slide 08: Spot Check 1: Somatic V(D)J Recombination & T...</option>
-                <option value="9">Slide 09: How to Count Millions of T Cells: Multiplex P...</option>
-                <option value="10">Slide 10: Private vs. Public TCRs: Lottery Tickets vs. ...</option>
-                <option value="11">Slide 11: Convergent Recombination: Different DNA Spell...</option>
-                <option value="12">Slide 12: Avoiding the Overfitting Trap: Why 142 TCRs B...</option>
-                <option value="13">Slide 13: Pathogen Memory Burden (Mi): One Number to Di...</option>
-                <option value="14">Slide 14: Grading the Blood Test: The 640-Patient Confu...</option>
-                <option value="15">Slide 15: Two Types of Display Trays: Class I (Shoebox)...</option>
-                <option value="16">Slide 16: Why Humans Have 10,000+ HLA Versions: Balanci...</option>
-                <option value="17">Slide 17: Tent Pegs & Sockets: How Peptides Lock Into H...</option>
-                <option value="18">Slide 18: MHC Restriction: Reading Your Parent's HLA Ge...</option>
-                <option value="19">Slide 19: Spot Check 2: HLA Display Trays & MHC Restric...</option>
-                <option value="20">Slide 20: T-Cell Boot Camp: How the Thymus Deletes Self...</option>
-                <option value="21">Slide 21: Three Ways an HLA Display Tray Triggers an Au...</option>
-                <option value="22">Slide 22: Type 1 Diabetes: How One Missing Charge Turns...</option>
-                <option value="23">Slide 23: Celiac Disease: A Gut Enzyme Adds a Negative ...</option>
-                <option value="24">Slide 24: Abacavir & HLA-B*57:01: The "Pebble in the Po...</option>
-                <option value="25">Slide 25: Spot Check 3: How HLA Grooves Trigger Autoimm...</option>
-                <option value="26">Slide 26: Sprint: The Clinical Immunogenomics Board</option>
-                <option value="27">Slide 27: How to Read Drug Names: Antibody Engineering ...</option>
-                <option value="28">Slide 28: Targeted Biologics: Molecular Scalpels Replac...</option>
-                <option value="29">Slide 29: Pressing "Ctrl+Alt+Delete": CAR-T Cells Reboo...</option>
-                <option value="30">Slide 30: Lecture 8 Master Cheat Sheet: From DNA Scisso...</option>
-                <option value="31">Slide 31: Summative Mastery Quiz & Preview of Lecture 9...</option>
+                <option value="2">Slide 02: Immunology 101: The Three Lines of Defense (I...</option>
+                <option value="3">Slide 03: Immunology 101: How T Cells Spot Viruses Hidi...</option>
+                <option value="4">Slide 04: Three Clinical Mysteries We Will Solve Today</option>
+                <option value="5">Slide 05: Two Steps to Build a Receptor: Shuffling vs. ...</option>
+                <option value="6">Slide 06: The Cutting Machine: RAG1/2 Scissors & Hairpi...</option>
+                <option value="7">Slide 07: TdT Polymerase: The Cell's Random DNA Letter ...</option>
+                <option value="8">Slide 08: Three Pairs of Molecular Fingers: Why CDR3 Is...</option>
+                <option value="9">Slide 09: Spot Check 1: Somatic V(D)J Recombination & T...</option>
+                <option value="10">Slide 10: How to Count Millions of T Cells: Multiplex P...</option>
+                <option value="11">Slide 11: Private vs. Public TCRs: Lottery Tickets vs. ...</option>
+                <option value="12">Slide 12: Convergent Recombination: Different DNA Spell...</option>
+                <option value="13">Slide 13: Avoiding the Overfitting Trap: Why 142 TCRs B...</option>
+                <option value="14">Slide 14: Pathogen Memory Burden (Mi): One Number to Di...</option>
+                <option value="15">Slide 15: Grading the Blood Test: The 640-Patient Confu...</option>
+                <option value="16">Slide 16: Two Types of Display Trays: Class I (Shoebox)...</option>
+                <option value="17">Slide 17: Why Humans Have 10,000+ HLA Versions: Balanci...</option>
+                <option value="18">Slide 18: Tent Pegs & Sockets: How Peptides Lock Into H...</option>
+                <option value="19">Slide 19: MHC Restriction: Reading Your Parent's HLA Ge...</option>
+                <option value="20">Slide 20: Spot Check 2: HLA Display Trays & MHC Restric...</option>
+                <option value="21">Slide 21: T-Cell Boot Camp: How the Thymus Deletes Self...</option>
+                <option value="22">Slide 22: Three Ways an HLA Display Tray Triggers an Au...</option>
+                <option value="23">Slide 23: Type 1 Diabetes: How One Missing Charge Turns...</option>
+                <option value="24">Slide 24: Celiac Disease: A Gut Enzyme Adds a Negative ...</option>
+                <option value="25">Slide 25: Abacavir & HLA-B*57:01: The "Pebble in the Po...</option>
+                <option value="26">Slide 26: Spot Check 3: How HLA Grooves Trigger Autoimm...</option>
+                <option value="27">Slide 27: Sprint: The Clinical Immunogenomics Board</option>
+                <option value="28">Slide 28: How to Read Drug Names: Antibody Engineering ...</option>
+                <option value="29">Slide 29: Targeted Biologics: Molecular Scalpels Replac...</option>
+                <option value="30">Slide 30: Pressing "Ctrl+Alt+Delete": CAR-T Cells Reboo...</option>
+                <option value="31">Slide 31: Lecture 8 Master Cheat Sheet: From DNA Scisso...</option>
+                <option value="32">Slide 32: Summative Mastery Quiz & Preview of Lecture 9...</option>
             </select>
         </div>
     </footer>
@@ -3057,7 +3145,7 @@
     <!-- Interactive Navigation, Timers, Sprint Tabs & Swipe Script -->
     <script>
         var currentSlide = 1;
-        var totalSlides = 31;
+        var totalSlides = 32;
 
         function showSlide(n) {
             if (n < 1) n = 1;
