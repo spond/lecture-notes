@@ -2550,108 +2550,122 @@
         <section class="slide" data-slide="27">
             <div class="slide-header">
                 <div>
-                    <div class="slide-category">Movement 5 &bull; In-Class Collaborative Sprint</div>
-                    <h2 class="slide-title">Sprint: The Clinical Immunogenomics Board</h2>
-                    <div class="slide-subtitle">Four clinical mysteries solved by your auditorium quadrant using today's slides (15:00 team window).</div>
+                    <div class="slide-category">Movement 5 &bull; In-Class Clinical Sprint (Single Unified Track)</div>
+                    <h2 class="slide-title">In-Class Sprint: The Clinical Immunogenomics Board</h2>
+                    <div class="slide-subtitle">One unified investigation for all teams: solve the three HLA patient cases and upload your Digital Proof-of-Work on Canvas.</div>
                 </div>
                 <span class="header-badge">Slide 27</span>
             </div>
 
-            <!-- Main Sprint Container -->
-            <div class="card card-cherry" style="flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 12px 18px;">
-                <!-- Controls Bar -->
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--rule-ink); padding-bottom: 8px; margin-bottom: 8px;">
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <span class="passcode-pill">🔑 Passcode: TOLERANCE-2026</span>
-                        <span style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: #475569;">4.0 Points Possible &bull; Teams of 2–3</span>
-                    </div>
+            <!-- Top Controls Bar -->
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #FFFFFF; border: 1.5px solid var(--rule-ink); border-radius: 4px; padding: 8px 16px; margin-bottom: 12px; box-shadow: 2px 2px 0px var(--rule-ink);">
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <span class="passcode-pill">🔑 Passcode: TOLERANCE-2026</span>
+                    <span style="font-family: var(--font-mono); font-size: 0.88rem; font-weight: 800; color: #9D2235; background: #FEF2F2; border: 1px solid #9D2235; padding: 2px 8px; border-radius: 2px;">SINGLE UNIFIED TRACK &bull; 4.0 PTS</span>
+                    <span style="font-family: var(--font-mono); font-size: 0.84rem; font-weight: 700; color: #475569;">Work in Pairs (Both Submit on Canvas)</span>
+                </div>
 
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <a href="https://templeu.instructure.com/courses/178614/quizzes" target="_blank" style="background: #EFF6FF; color: #1D4ED8; border: 1.5px solid var(--rule-ink); padding: 4px 10px; border-radius: 2px; font-family: var(--font-mono); font-size: 0.84rem; font-weight: 800; text-decoration: none; box-shadow: 1.5px 1.5px 0px var(--rule-ink);">
+                        🔗 Open Canvas Sprint &rarr;
+                    </a>
                     <span class="timer-badge">
                         ⏱️ <span id="sprint-timer-disp">15:00</span>
                         <button type="button" class="timer-btn" id="sprint-timer-btn" onclick="startTimer('sprint-timer-disp', 'sprint-timer-btn', 900)">Start</button>
                         <button type="button" class="timer-btn" style="background:#64748B;" onclick="resetTimer('sprint-timer-disp', 'sprint-timer-btn', 900)">Reset</button>
                     </span>
                 </div>
+            </div>
 
-                <!-- 4 Track Selector Buttons -->
-                <div class="sprint-tab-bar">
-                    <button type="button" class="sprint-tab-btn active" onclick="switchSprintTab(0)">
-                        Track 1: Pediatric Diabetes (NW)
-                    </button>
-                    <button type="button" class="sprint-tab-btn" onclick="switchSprintTab(1)">
-                        Track 2: Celiac Rule-Out (NE)
-                    </button>
-                    <button type="button" class="sprint-tab-btn" onclick="switchSprintTab(2)">
-                        Track 3: Kidney Transplant CMV (SW)
-                    </button>
-                    <button type="button" class="sprint-tab-btn" onclick="switchSprintTab(3)">
-                        Track 4: HIV Drug Safety (SE)
-                    </button>
-                </div>
-
-                <!-- Sprint Panes -->
-                <div style="flex: 1; min-height: 0; display: flex; flex-direction: column;">
-                    <!-- Track 1 Pane -->
-                    <div class="sprint-pane active" id="sprint-pane-0">
-                        <div style="background: #FEF2F2; border-left: 4px solid #9D2235; padding: 10px 14px; border-radius: 2px;">
-                            <strong style="color: #9D2235; font-size: 1.05rem;">Case 1 (NW / Rows A–G Left): Childhood Type 1 Diabetes Risk &amp; Prevention (See Slide 22)</strong>
-                            <p style="font-size: 0.95rem; line-height: 1.45; color: #334155; margin-top: 4px;">
-                                A 4-year-old child whose sister has Type 1 Diabetes undergoes screening. DNA testing reveals two copies of <code>HLA-DQB1*02:01 / *03:02</code> (both <code>non-Asp57</code> alleles). Blood tests detect anti-insulin and anti-GAD65 autoantibodies, though blood sugar is still normal (Stage 1 T1D).
-                            </p>
-                            <ul style="font-size: 0.92rem; line-height: 1.42; margin-top: 6px; padding-left: 20px; color: #1E293B;">
-                                <li><strong>Question 1A:</strong> Using Slide 22, explain how missing the negative Asp57 charge turns Pocket P9 of HLA-DQ into a positive (+) magnet for insulin peptides.</li>
-                                <li><strong>Question 1B:</strong> In 2022, the FDA approved <em>Teplizumab (TZIELD)</em>, an antibody drug that binds CD3 on T cells to calm them down. Why is catching this child at Stage 1 (before beta cells are destroyed) so critical?</li>
-                            </ul>
-                        </div>
+            <!-- Two-Column Unified Sprint Body -->
+            <div class="grid-2col" style="flex: 1; min-height: 0;">
+                <!-- Left Card: The 3 Canvas Deliverables -->
+                <div class="card card-cherry" style="padding: 14px 18px;">
+                    <div>
+                        <div class="card-title">🩺 Your Three Unified Sprint Deliverables</div>
+                        <ul class="content-list" style="gap: 10px;">
+                            <li>
+                                <strong>Part 1 (Canvas Q1 &bull; 1.0 Pt) — Autoimmune &amp; Celiac HLA Audit:</strong><br>
+                                &bull; <em>Patient A (4 yo):</em> Homozygous <code>HLA-DQB1*02:01 / *03:02</code> (<code>non-Asp57</code>) with anti-insulin &amp; anti-GAD65 autoantibodies. How does losing negative Asp57 turn Pocket P9 into a positive (+) magnet for insulin (Slide 23)?<br>
+                                &bull; <em>Patient B (28 yo):</em> Gluten-free for 6 months (negative antibodies) and DNA test is <strong>negative for both <code>HLA-DQ2.5</code> and <code>HLA-DQ8</code></strong>. Why does this rule out Celiac disease (&gt;99% NPV) without a biopsy (Slide 24)?
+                            </li>
+                            <li>
+                                <strong>Part 2 (Canvas Q2 &bull; 2.0 Pts) — Mandatory Digital Proof-of-Work:</strong><br>
+                                Query the live <strong>IPD-IMGT/HLA Database</strong> or <strong>Emerson Figure 3</strong> (follow Steps 1–3 on the right) and upload your annotated screenshot file.
+                            </li>
+                            <li>
+                                <strong>Part 3 (Canvas Q3 &bull; 1.0 Pt) — Pharmacogenomic Safety Guardrail:</strong><br>
+                                &bull; <em>Patient C (34 yo HIV-1+):</em> Baseline DNA screen comes back <strong>positive for <code>HLA-B*57:01</code></strong>. Using the "Pebble in the Pocket" mechanism (Slide 25), why is <strong>abacavir</strong> banned for life and what safe alternative backbone is used?
+                            </li>
+                        </ul>
                     </div>
-
-                    <!-- Track 2 Pane -->
-                    <div class="sprint-pane" id="sprint-pane-1">
-                        <div style="background: #F0FDF4; border-left: 4px solid #047857; padding: 10px 14px; border-radius: 2px;">
-                            <strong style="color: #065F46; font-size: 1.05rem;">Case 2 (NE / Rows A–G Right): Ruling Out Celiac Disease Without a Biopsy (See Slide 23)</strong>
-                            <p style="font-size: 0.95rem; line-height: 1.45; color: #334155; margin-top: 4px;">
-                                A 28-year-old patient has stomach pain after eating bread and stopped eating gluten 6 months ago on their own. Their blood antibody test for Celiac is now negative, and they refuse to eat wheat for 6 weeks for an intestinal biopsy. The doctor orders an <code>HLA-DQ</code> DNA test instead.
-                            </p>
-                            <ul style="font-size: 0.92rem; line-height: 1.42; margin-top: 6px; padding-left: 20px; color: #1E293B;">
-                                <li><strong>Question 2A:</strong> Why do Celiac antibody blood tests often turn false-negative after a patient stops eating wheat gluten for several months?</li>
-                                <li><strong>Question 2B:</strong> Using Slide 23, if the DNA test shows the patient has <strong>neither <code>HLA-DQ2.5</code> nor <code>HLA-DQ8</code></strong>, why does that rule out Celiac disease with &gt;99% certainty even while on a gluten-free diet?</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Track 3 Pane -->
-                    <div class="sprint-pane" id="sprint-pane-2">
-                        <div style="background: #EFF6FF; border-left: 4px solid #1D4ED8; padding: 10px 14px; border-radius: 2px;">
-                            <strong style="color: #1E3A8A; font-size: 1.05rem;">Case 3 (SW / Rows H–N Left): Hidden CMV Infection in a Kidney Transplant Patient (See Slide 13)</strong>
-                            <p style="font-size: 0.95rem; line-height: 1.45; color: #334155; margin-top: 4px;">
-                                A 52-year-old kidney transplant patient taking immune-suppressing drugs develops a high fever and kidney inflammation. Standard CMV antibody blood tests come back negative (0 antibodies), so the team orders Emerson's TCRβ blood sequencing test.
-                            </p>
-                            <ul style="font-size: 0.92rem; line-height: 1.42; margin-top: 6px; padding-left: 20px; color: #1E293B;">
-                                <li><strong>Question 3A:</strong> Why can't doctors trust standard antibody blood tests in transplant patients taking B-cell/immune-suppressing medications?</li>
-                                <li><strong>Question 3B:</strong> Using Slide 13, the patient's Pathogen Memory Burden comes back elevated at $M_i = 0.028\%$ (versus $&lt;0.001\%$ in uninfected people). Does this patient have active CMV, and should antiviral therapy start immediately?</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Track 4 Pane -->
-                    <div class="sprint-pane" id="sprint-pane-3">
-                        <div style="background: #FAF5FF; border-left: 4px solid #6D28D9; padding: 10px 14px; border-radius: 2px;">
-                            <strong style="color: #5B21B6; font-size: 1.05rem;">Case 4 (SE / Rows H–N Right): Preventing a Fatal HIV Drug Reaction (See Slide 24)</strong>
-                            <p style="font-size: 0.95rem; line-height: 1.45; color: #334155; margin-top: 4px;">
-                                A 34-year-old patient newly diagnosed with HIV-1 is being evaluated for daily antiviral pills. Before writing a prescription containing <strong>abacavir</strong>, the clinic runs a mandatory genetic test that comes back <strong>positive for <code>HLA-B*57:01</code></strong>.
-                            </p>
-                            <ul style="font-size: 0.92rem; line-height: 1.42; margin-top: 6px; padding-left: 20px; color: #1E293B;">
-                                <li><strong>Question 4A:</strong> Using Slide 24 ("Pebble in the Pocket"), explain what would happen inside this patient's <code>HLA-B*57:01</code> trays if they swallowed an abacavir pill.</li>
-                                <li><strong>Question 4B:</strong> What should the doctor do with the abacavir prescription, and why does switching to an alternative HIV pill (like Biktarvy/tenofovir) completely prevent this reaction?</li>
-                            </ul>
-                        </div>
+                    <div class="takeaway-strip takeaway-strip-cherry">
+                        <strong>Team Rule:</strong> Discuss all three parts with your partner, then each student submits their own Canvas quiz and Proof-of-Work screenshot.
                     </div>
                 </div>
 
-                <!-- Footer Submission Callout -->
-                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--rule-ink); padding-top: 8px; margin-top: 6px; font-size: 0.88rem;">
-                    <span>Submit your team's consensus answers under <strong>Lecture 8 In-Class Sprint</strong> on Canvas.</span>
-                    <a href="https://templeu.instructure.com/courses/178614/quizzes" target="_blank" style="color: var(--temple-cherry); font-weight: 800; font-family: var(--font-mono);">Open Canvas Sprint Portal &rarr;</a>
+                <!-- Right Card: Unsolved Clinical Matrix + Digital Proof-of-Work Checklist -->
+                <div class="card card-emerald" style="padding: 14px 18px; background: #FFFFFF;">
+                    <div>
+                        <div class="card-title" style="color: #065F46; justify-content: space-between;">
+                            <span>🖥️ Mandatory Digital Proof-of-Work (2.0 Pts)</span>
+                            <span style="font-family: var(--font-mono); font-size: 0.78rem; background: #DCFCE7; color: #065F46; padding: 2px 8px; border-radius: 2px; border: 1px solid #047857;">FILE UPLOAD REQUIRED</span>
+                        </div>
+
+                        <!-- Unsolved Patient Character Matrix -->
+                        <table class="comparison-table" style="margin-top: 6px; margin-bottom: 14px; font-size: 0.88rem;">
+                            <thead>
+                                <tr>
+                                    <th>Patient Case</th>
+                                    <th>HLA Genotype Result</th>
+                                    <th>Groove / Pocket Mechanism</th>
+                                    <th>Clinical Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Patient A</strong> (4 yo)</td>
+                                    <td><code>DQB1*02:01/*03:02</code> (<code>non-Asp57</code>)</td>
+                                    <td style="color: #9D2235; font-weight: 700;">[ Solve in Q1 ]</td>
+                                    <td>Stage 1 T1D Monitoring</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Patient B</strong> (28 yo)</td>
+                                    <td><code>DQ2.5(&minus;) / DQ8(&minus;)</code></td>
+                                    <td style="color: #047857; font-weight: 700;">[ Solve in Q1 ]</td>
+                                    <td>Rule Out Celiac (&gt;99% NPV)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Patient C</strong> (34 yo)</td>
+                                    <td><code>HLA-B*57:01</code> Positive</td>
+                                    <td style="color: #6D28D9; font-weight: 700;">[ Solve in Q3 ]</td>
+                                    <td style="color: #9D2235; font-weight: 700;">[ Solve in Q3 ]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Step-by-Step Proof-of-Work Instructions -->
+                        <div style="background: #F0FDF4; border: 1.5px solid #047857; border-radius: 4px; padding: 10px 14px;">
+                            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 0.98rem; color: #065F46; margin-bottom: 6px;">
+                                📸 How to Complete Your Proof-of-Work Upload (Canvas Q2):
+                            </div>
+                            <ul style="font-size: 0.89rem; line-height: 1.44; color: #1E293B; padding-left: 18px; margin: 0;">
+                                <li style="margin-bottom: 5px;">
+                                    <strong>Step 1 (Open Live Resource):</strong> Open either the <a href="https://www.ebi.ac.uk/ipd/imgt/hla/" target="_blank" style="color: #047857; font-weight: 800; text-decoration: underline;">IPD-IMGT/HLA Database (ebi.ac.uk/ipd/imgt/hla/)</a> and search allele <code>HLA-B*57:01</code>, <strong>OR</strong> open <a href="https://doi.org/10.1038/ng.3822" target="_blank" style="color: #047857; font-weight: 800; text-decoration: underline;">Emerson et al. (Nature Genetics 2017)</a> Figure 3 (Slide 17).
+                                </li>
+                                <li style="margin-bottom: 5px;">
+                                    <strong>Step 2 (Highlight Evidence):</strong> Take a screenshot and circle or highlight either the <code>HLA-B*57:01</code> allele entry (Exons 2–3 groove region) <strong>OR</strong> one HLA-restricted public TCR row in Emerson Figure 3.
+                                </li>
+                                <li>
+                                    <strong>Step 3 (Upload to Canvas):</strong> Upload your screenshot (<code>PNG</code>, <code>JPG</code>, or <code>PDF</code>) directly into <strong>Question 2</strong> of the <strong>Lecture 8 In-Class Sprint</strong> on Canvas.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="takeaway-strip takeaway-strip-emerald">
+                        <strong>Zero Paper Needed:</strong> Your uploaded screenshot on Canvas Q2 serves as your verified digital Proof-of-Work (2.0 of the 4.0 Sprint points)!
+                    </div>
                 </div>
             </div>
             
@@ -3132,7 +3146,7 @@
                 <option value="24">Slide 24: Celiac Disease: A Gut Enzyme Adds a Negative ...</option>
                 <option value="25">Slide 25: Abacavir & HLA-B*57:01: The "Pebble in the Po...</option>
                 <option value="26">Slide 26: Spot Check 3: How HLA Grooves Trigger Autoimm...</option>
-                <option value="27">Slide 27: Sprint: The Clinical Immunogenomics Board</option>
+                <option value="27">Slide 27: In-Class Sprint: The Clinical Immunogenomics ...</option>
                 <option value="28">Slide 28: How to Read Drug Names: Antibody Engineering ...</option>
                 <option value="29">Slide 29: Targeted Biologics: Molecular Scalpels Replac...</option>
                 <option value="30">Slide 30: Pressing "Ctrl+Alt+Delete": CAR-T Cells Reboo...</option>
