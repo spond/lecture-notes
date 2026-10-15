@@ -1331,18 +1331,27 @@
             </div>
 
             <div class="grid-2col">
-                <!-- Left Card: Experimental Method -->
+                <!-- Left Card: Experimental Method & CMV Benchmark -->
                 <div class="card card-blue">
                     <div>
-                        <div class="card-title">🔬 Solving the "Greedy Primer" Problem</div>
+                        <div class="card-title">🔬 Multiplex PCR Calibration &amp; The CMV Benchmark</div>
                         <ul class="content-list">
-                            <li><strong>Why Multiplex PCR Is Needed:</strong> Because T cells can pick any of 60 $V_\beta$ and 13 $J_\beta$ pieces, scientists must mix <strong>73 PCR primers in one tube</strong> (<strong>multiplex PCR</strong>) to copy every CDR3 loop in a blood sample.</li>
+                            <li><strong>Why Multiplex PCR Is Needed:</strong> Because T cells can pick any of 60 $V_\beta$ and 13 $J_\beta$ pieces, scientists mix <strong>73 PCR primers in one tube</strong> (<strong>multiplex PCR</strong>) to copy every CDR3 loop in a blood sample.</li>
                             <li><strong>The "Greedy Primer" Bias:</strong> Left uncalibrated, some primers bind DNA more tightly and copy 10&times; faster, making rare T cells look artificially common.</li>
-                            <li><strong>The Synthetic Control Solution:</strong> Emerson's team tested their primers on a <strong>1:1 synthetic control mix</strong> of all V–J pairs and adjusted primer concentrations until every piece copied at the exact same rate.</li>
-                            <li><strong>85 Million Unique TCRs:</strong> Sequencing blood from <strong>640 donors</strong> (287 CMV+, 353 CMV&minus;) created a massive catalog of human T-cell memory.</li>
+                            <li><strong>The Synthetic Control Solution:</strong> Emerson's team tested primers on a <strong>1:1 synthetic control mix</strong> of all V–J pairs and adjusted concentrations until every piece copied at the exact same rate.</li>
                         </ul>
+
+                        <!-- What Is CMV Callout Box -->
+                        <div style="background: #EFF6FF; border: 1.5px solid #BFDBFE; border-left: 4px solid #2563EB; padding: 10px 14px; margin-top: 10px; border-radius: 4px;">
+                            <div style="font-family: var(--font-heading); font-size: 1.05rem; font-weight: 800; color: #1E3A8A; margin-bottom: 4px;">
+                                🦠 What Is CMV &amp; Why Use It as the Benchmark?
+                            </div>
+                            <div style="font-size: 0.98rem; line-height: 1.48; color: #1E40AF;">
+                                <strong>Cytomegalovirus (CMV)</strong>, a common herpesvirus carried silently by over 50% of adults, establishes lifelong latency in human cells. The immune system commits up to <strong>10%–20% of all memory T cells</strong> strictly to keep CMV suppressed. Because CMV leaves such a massive, permanent immune footprint, Emerson et al. sequenced blood from <strong>640 donors (287 CMV+, 353 CMV&minus;)</strong> to prove an algorithm can read viral history from T-cell DNA alone.
+                            </div>
+                        </div>
                     </div>
-                    <div class="takeaway-strip takeaway-strip-blue">
+                    <div class="takeaway-strip takeaway-strip-blue" style="margin-top: 10px;">
                         <strong>Laboratory Breakthrough:</strong> Synthetic calibration turns DNA sequencing into an exact census counter—revealing how many copies of each T-cell scanner exist in a drop of blood.
                     </div>
                 </div>
@@ -2558,7 +2567,7 @@
             </div>
 
             <!-- Top Controls Bar -->
-            <div style="display: flex; justify-content: space-between; align-items: center; background: #FFFFFF; border: 1.5px solid var(--rule-ink); border-radius: 4px; padding: 8px 16px; margin-bottom: 12px; box-shadow: 2px 2px 0px var(--rule-ink);">
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #FFFFFF; border: 1.5px solid var(--rule-ink); border-radius: 4px; padding: 6px 14px; margin-bottom: 8px; box-shadow: 2px 2px 0px var(--rule-ink);">
                 <div style="display: flex; gap: 12px; align-items: center;">
                     <span class="passcode-pill">🔑 Passcode: TOLERANCE-2026</span>
                     <span style="font-family: var(--font-mono); font-size: 0.88rem; font-weight: 800; color: #9D2235; background: #FEF2F2; border: 1px solid #9D2235; padding: 2px 8px; border-radius: 2px;">SINGLE UNIFIED TRACK &bull; 4.0 PTS</span>
@@ -2580,10 +2589,10 @@
             <!-- Two-Column Unified Sprint Body -->
             <div class="grid-2col" style="flex: 1; min-height: 0;">
                 <!-- Left Card: The 3 Canvas Deliverables -->
-                <div class="card card-cherry" style="padding: 14px 18px;">
+                <div class="card card-cherry" style="padding: 10px 16px;">
                     <div>
                         <div class="card-title">🩺 Your Three Unified Sprint Deliverables</div>
-                        <ul class="content-list" style="gap: 10px;">
+                        <ul class="content-list" style="gap: 8px;">
                             <li>
                                 <strong>Part 1 (Canvas Q1 &bull; 1.0 Pt) — Autoimmune &amp; Celiac HLA Audit:</strong><br>
                                 &bull; <em>Patient A (4 yo):</em> Homozygous <code>HLA-DQB1*02:01 / *03:02</code> (<code>non-Asp57</code>) with anti-insulin &amp; anti-GAD65 autoantibodies. How does losing negative Asp57 turn Pocket P9 into a positive (+) magnet for insulin (Slide 23)?<br>
@@ -2605,7 +2614,7 @@
                 </div>
 
                 <!-- Right Card: Unsolved Clinical Matrix + Digital Proof-of-Work Checklist -->
-                <div class="card card-emerald" style="padding: 14px 18px; background: #FFFFFF;">
+                <div class="card card-emerald" style="padding: 10px 16px; background: #FFFFFF;">
                     <div>
                         <div class="card-title" style="color: #065F46; justify-content: space-between;">
                             <span>🖥️ Mandatory Digital Proof-of-Work (2.0 Pts)</span>
@@ -2613,7 +2622,7 @@
                         </div>
 
                         <!-- Unsolved Patient Character Matrix -->
-                        <table class="data-table" style="margin-top: 6px; margin-bottom: 14px; font-size: 0.88rem;">
+                        <table class="data-table" style="margin-top: 4px; margin-bottom: 8px; font-size: 0.86rem;">
                             <thead>
                                 <tr>
                                     <th>Patient Case</th>
@@ -2645,15 +2654,15 @@
                         </table>
 
                         <!-- Step-by-Step Proof-of-Work Instructions -->
-                        <div style="background: #F0FDF4; border: 1.5px solid #047857; border-radius: 4px; padding: 10px 14px;">
-                            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 0.98rem; color: #065F46; margin-bottom: 6px;">
+                        <div style="background: #F0FDF4; border: 1.5px solid #047857; border-radius: 4px; padding: 8px 12px;">
+                            <div style="font-family: var(--font-heading); font-weight: 800; font-size: 0.95rem; color: #065F46; margin-bottom: 4px;">
                                 📸 How to Complete Your Proof-of-Work Upload (Canvas Q2):
                             </div>
-                            <ul style="font-size: 0.89rem; line-height: 1.44; color: #1E293B; padding-left: 18px; margin: 0;">
-                                <li style="margin-bottom: 5px;">
+                            <ul style="font-size: 0.86rem; line-height: 1.4; color: #1E293B; padding-left: 16px; margin: 0;">
+                                <li style="margin-bottom: 3px;">
                                     <strong>Step 1 (Open Live Resource):</strong> Open either the <a href="https://www.ebi.ac.uk/ipd/imgt/hla/" target="_blank" style="color: #047857; font-weight: 800; text-decoration: underline;">IPD-IMGT/HLA Database (ebi.ac.uk/ipd/imgt/hla/)</a> and search allele <code>HLA-B*57:01</code>, <strong>OR</strong> open <a href="https://doi.org/10.1038/ng.3822" target="_blank" style="color: #047857; font-weight: 800; text-decoration: underline;">Emerson et al. (Nature Genetics 2017)</a> Figure 3 (Slide 17).
                                 </li>
-                                <li style="margin-bottom: 5px;">
+                                <li style="margin-bottom: 3px;">
                                     <strong>Step 2 (Highlight Evidence):</strong> Take a screenshot and circle or highlight either the <code>HLA-B*57:01</code> allele entry (Exons 2–3 groove region) <strong>OR</strong> one HLA-restricted public TCR row in Emerson Figure 3.
                                 </li>
                                 <li>
