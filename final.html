@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        (function() {
+            var path = window.location.pathname;
+            if (path && !path.endsWith('/') && !path.split('/').pop().includes('.')) {
+                window.location.replace(path + '/' + window.location.search + window.location.hash);
+            }
+        })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Capstone Project: End-to-End Translational &amp; Therapeutic Dossier | BIOL 3111 / 5111</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Inter+Tight:wght@600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --temple-cherry: #9D2235;
+            --temple-cherry-dark: #781827;
+            --temple-cherry-light: #FDF2F4;
+            --slate-900: #0F172A;
+            --slate-800: #1E293B;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-400: #94A3B8;
+            --slate-200: #E2E8F0;
+            --slate-100: #F1F5F9;
+            --slate-50: #F8FAFC;
+            --text-main: #1E293B;
+            --bauhaus-blue: #1D4ED8;
+            --bauhaus-emerald: #0F766E;
+            --bauhaus-amber: #B45309;
+            --bauhaus-purple: #6D28D9;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-heading: 'Inter Tight', var(--font-sans);
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--temple-cherry);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            z-index: 1000;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 0 0 6px 0;
+            transition: top 0.2s ease;
+        }
+        .skip-link:focus { top: 0; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            background-color: var(--slate-50);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 48px 56px;
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+            border-left: 1px solid var(--slate-200);
+            border-right: 1px solid var(--slate-200);
+            min-height: 100vh;
+        }
+
+        /* Top Nav Bar */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--slate-200);
+            font-size: 0.85rem;
+        }
+        .top-nav a {
+            color: var(--slate-600);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.15s;
+        }
+        .top-nav a:hover { color: var(--temple-cherry); }
+        .top-nav-links { display: flex; gap: 16px; align-items: center; }
+
+        header {
+            border-bottom: 3px solid var(--temple-cherry);
+            padding-bottom: 28px;
+            margin-bottom: 36px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--temple-cherry-light);
+            border: 1px solid #FECDD3;
+            color: var(--temple-cherry);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .lead-quote {
+            background: #F8FAFC;
+            border-left: 4px solid var(--slate-400);
+            padding: 12px 18px;
+            font-style: italic;
+            color: var(--slate-600);
+            font-size: 0.92rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 24px;
+        }
+
+        .logistics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 12px;
+            background: var(--slate-50);
+            border: 1px solid var(--slate-200);
+            border-radius: 10px;
+            padding: 18px 20px;
+            font-size: 0.86rem;
+            color: var(--slate-700);
+            margin-bottom: 24px;
+        }
+
+        .logistics-grid div strong {
+            color: var(--slate-900);
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.76rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            letter-spacing: -0.01em;
+            margin: 36px 0 16px 0;
+            padding-bottom: 8px;
+            border-bottom: 1.5px solid var(--slate-200);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--slate-800);
+            margin: 22px 0 10px 0;
+        }
+
+        p { margin-bottom: 14px; font-size: 0.96rem; color: var(--slate-700); }
+
+        ul, ol { margin: 0 0 16px 24px; font-size: 0.95rem; color: var(--slate-700); }
+        li { margin-bottom: 6px; }
+
+        strong { color: var(--slate-900); }
+
+        /* Callout Boxes */
+        .callout {
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 0.92rem;
+            border-left: 4px solid;
+        }
+        .callout-title {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 0.98rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .callout-blue { background: #EFF6FF; border-left-color: var(--bauhaus-blue); border: 1px solid #BFDBFE; border-left-width: 4px; color: #1E3A8A; }
+        .callout-blue .callout-title { color: #1E40AF; }
+
+        .callout-cherry { background: var(--temple-cherry-light); border-left-color: var(--temple-cherry); border: 1px solid #FECDD3; border-left-width: 4px; color: #881337; }
+        .callout-cherry .callout-title { color: var(--temple-cherry); }
+
+        .callout-green { background: #ECFDF5; border-left-color: var(--bauhaus-emerald); border: 1px solid #A7F3D0; border-left-width: 4px; color: #064E3B; }
+        .callout-green .callout-title { color: #065F46; }
+
+        .callout-amber { background: #FFFBEB; border-left-color: var(--bauhaus-amber); border: 1px solid #FDE68A; border-left-width: 4px; color: #78350F; }
+        .callout-amber .callout-title { color: #92400E; }
+
+        .callout-purple { background: #FAF5FF; border-left-color: var(--bauhaus-purple); border: 1px solid #E9D5FF; border-left-width: 4px; color: #4C1D95; }
+        .callout-purple .callout-title { color: #6D28D9; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0 24px 0;
+            font-size: 0.88rem;
+            border: 1px solid var(--slate-200);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 10px 14px;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--slate-200);
+        }
+        th {
+            background-color: var(--slate-800);
+            color: #FFFFFF;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.84rem;
+            letter-spacing: 0.02em;
+        }
+        tr:nth-child(even) { background-color: var(--slate-50); }
+        tr:hover { background-color: #F1F5F9; }
+
+        /* Code & Monospace */
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.86rem;
+            background: #F1F5F9;
+            color: #0F172A;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--slate-200);
+        }
+
+        pre {
+            background: #0F172A;
+            color: #F8FAFC;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            overflow-x: auto;
+            margin: 14px 0 20px 0;
+            line-height: 1.45;
+        }
+
+        /* Interactive Track Switcher */
+        .track-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .track-card {
+            border: 2px solid var(--slate-200);
+            border-radius: 10px;
+            padding: 20px;
+            background: #FFFFFF;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .track-card.active-a {
+            border-color: var(--bauhaus-purple);
+            background: #FCFAFF;
+        }
+        .track-card.active-b {
+            border-color: var(--bauhaus-emerald);
+            background: #FAFEFC;
+        }
+        .track-badge {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        /* Tier Steps Visual Cards */
+        .tier-card {
+            background: #FFFFFF;
+            border: 1px solid var(--slate-200);
+            border-left: 5px solid var(--slate-400);
+            border-radius: 6px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .tier-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .tier-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .tier-title {
+            font-family: var(--font-heading);
+            font-size: 1.02rem;
+            font-weight: 800;
+            color: var(--slate-900);
+        }
+        .tier-tag {
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: var(--slate-100);
+            color: var(--slate-700);
+            font-weight: 600;
+        }
+
+        /* Database Quick Launch Buttons */
+        .db-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin: 16px 0 24px 0;
+        }
+        .db-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid var(--slate-200);
+            border-radius: 8px;
+            background: var(--slate-50);
+            text-decoration: none;
+            color: var(--slate-800);
+            font-size: 0.82rem;
+            font-weight: 600;
+            transition: all 0.15s;
+        }
+        .db-btn:hover {
+            background: #FFFFFF;
+            border-color: var(--temple-cherry);
+            color: var(--temple-cherry);
+            box-shadow: 0 3px 10px rgba(157, 34, 53, 0.12);
+            transform: translateY(-2px);
+        }
+        .db-icon { font-size: 1.25rem; margin-bottom: 4px; }
+
+        /* Interactive Filter Bar */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .filter-btn {
+            background: #FFFFFF;
+            border: 1px solid var(--slate-200);
+            color: var(--slate-700);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.80rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--temple-cherry);
+            color: #FFFFFF;
+            border-color: var(--temple-cherry);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--slate-200);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.92rem;
+            margin-bottom: 16px;
+            outline: none;
+        }
+        .search-box:focus { border-color: var(--temple-cherry); }
+
+        .disease-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            max-height: 480px;
+            overflow-y: auto;
+            padding-right: 6px;
+            margin-bottom: 24px;
+        }
+        .disease-card {
+            background: #FFFFFF;
+            border: 1px solid var(--slate-200);
+            border-radius: 8px;
+            padding: 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .disease-card-title {
+            font-family: var(--font-heading);
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 4px;
+        }
+        .disease-genes {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--bauhaus-blue);
+            margin-bottom: 6px;
+        }
+        .disease-desc {
+            font-size: 0.82rem;
+            color: var(--slate-600);
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+        .disease-category-tag {
+            align-self: flex-start;
+            font-family: var(--font-mono);
+            font-size: 0.70rem;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            background: var(--slate-100);
+            border-radius: 3px;
+            color: var(--slate-600);
+            font-weight: 600;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            background: var(--slate-800);
+            color: #FFFFFF;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.15s;
+        }
+        .copy-btn:hover { background: var(--temple-cherry); }
+
+        /* Early Bird Calculator */
+        .calc-box {
+            background: #FFFFFF;
+            border: 2px solid var(--bauhaus-emerald);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .calc-slider {
+            width: 100%;
+            margin: 12px 0;
+        }
+        .calc-result {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ECFDF5;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: 1px solid #A7F3D0;
+            margin-top: 10px;
+        }
+        .calc-score {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #065F46;
+        }
+
+        /* Print Styles */
+        @media print {
+            body { background: #FFFFFF; }
+            .container { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+            .top-nav, .filter-bar, .search-box, .copy-btn, .calc-box, .db-grid { display: none !important; }
+            h2 { page-break-after: avoid; }
+            table, .tier-card { page-break-inside: avoid; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 24px 20px; }
+            .track-cards-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="container" id="main-content">
+        <!-- Top Navigation -->
+        <nav class="top-nav" aria-label="Course navigation">
+            <a href="index.html">&larr; Back to Course Portal</a>
+            <div class="top-nav-links">
+                <a href="syllabus.html">Syllabus</a>
+                <a href="midterm.html">Midterm Guide</a>
+                <a href="FINAL_ASSIGNMENT.md" download style="color: var(--temple-cherry); font-weight: 700;">⬇ Download Markdown Spec (.md)</a>
+            </div>
+        </nav>
+
+        <!-- Header -->
+        <header>
+            <div class="badge">🏛️ BIOL 3111 / 5111 &bull; Fall 2026 Capstone (Weeks 8–14 Synthesis)</div>
+            <h1>Final Capstone Project: End-to-End Translational &amp; Therapeutic Dossier</h1>
+            <p class="subtitle">
+                From Molecular Target Architecture to Clinical Trial Forensics, Pharmacogenomic Safety Gates, and AI/Policy Audit
+            </p>
+
+            <div class="quote-box">
+                "Discovering a disease gene is only the opening chapter. Translating that target into a medicine that extends human survival—without bankrupting the healthcare system or poisoning patients at the genetic tails of drug metabolism—is the true test of genomic medicine."
+            </div>
+
+            <div class="logistics-grid">
+                <div>
+                    <strong>Official Due Date</strong>
+                    Tuesday, Dec 15, 2026 (23:59 EST)
+                </div>
+                <div>
+                    <strong>Weight / Contribution</strong>
+                    300 Points (30% of Final Course Grade)
+                </div>
+                <div>
+                    <strong>Target Narrative Length</strong>
+                    Standard: ~6–8 pgs &bull; Honors/5111: ~8–9 pgs
+                </div>
+                <div>
+                    <strong>Early-Bird Bonus (Dec 8–14)</strong>
+                    Up to +60 Points (20% Max / 2 Letter Grades)
+                </div>
+                <div>
+                    <strong>Topic Selection Rule</strong>
+                    Must Be a Brand-New Topic (No Midterm Overlap)
+                </div>
+                <div>
+                    <strong>Honors / Grad Scope</strong>
+                    Dual-Trial Audit + Fig 5 + Tier 9 Resistance
+                </div>
+            </div>
+        </header>
+
+        <!-- 1. Executive Summary -->
+        <section>
+            <h2>1. Executive Summary &amp; Scientific Mission</h2>
+            <p>
+                While your Midterm Research Project dissected the multi-omic <em>causes</em> of human disease (Weeks 1–7: germline variants, structural CNVs, GWAS/PRS, chromatin conformation, and GTEx eQTLs), the second half of <strong>Genomics in Medicine</strong> (Weeks 8–14) confronts the translational gauntlet: <strong>How do we turn a molecular target into an effective therapy that survives randomized clinical trials and safely navigates human pharmacogenomic diversity?</strong>
+            </p>
+            <p>
+                <strong>Your Mission:</strong> Select <strong>one precision therapeutic regimen, targeted drug, biologic/cell therapy, or pharmacogenomic intervention</strong>—representing a <strong>brand-new disease or drug distinct from your Midterm topic</strong>. You will author a publication-grade <strong>End-to-End Translational &amp; Therapeutic Dossier</strong> auditing your therapy across five empirical databases:
+            </p>
+            <ol style="margin-left: 22px; margin-bottom: 16px; line-height: 1.65;">
+                <li><strong>Target &amp; Somatic/Structural Landscape:</strong> <code>cBioPortal</code>, <code>COSMIC</code>, <code>RCSB PDB / AlphaFold</code>, or <code>ClinVar</code>.</li>
+                <li><strong>Drug Engineering, Delivery Route &amp; Packaging:</strong> Small molecule (<code>-ib</code>), antibody/ADC (<code>-mab</code>), CAR-T (<code>-cel</code>), ASO/siRNA, or CRISPR; oral first-pass vs. parenteral delivery.</li>
+                <li><strong>Clinical Trial Forensics:</strong> <code>ClinicalTrials.gov</code> NCT record, control arm fairness, Intention-to-Treat vs. Per-Protocol, Hazard Ratio, Number Needed to Treat (<code>NNT</code>), surrogate paradox, and enrollment diversity.</li>
+                <li><strong>Pharmacogenomic Safety Gate:</strong> <code>ClinPGx</code> (<code>PharmGKB</code>) &amp; <code>CPIC</code> Level 1A dosing guidelines, Star-Allele Activity Score math, prodrug vs. active-drug risk inversion, and <code>gnomAD</code> ancestry frequencies.</li>
+                <li><strong>Bioethics, Cost-Effectiveness &amp; AI Stress-Test:</strong> Wholesale cost, <code>$/QALY</code>, press-release hype vs. FDA Boxed Warnings, and stress-testing a frontier LLM on a complex patient edge case.</li>
+            </ol>
+
+            <!-- Mandatory Non-Overlap & Regimen-Wide PGx Rule -->
+            <div class="callout callout-amber" style="margin-top: 20px;">
+                <div class="callout-title">⚠️ Two Essential Ground Rules: Fresh Topic &amp; The Regimen-Wide PGx Rule</div>
+                <ul style="margin-left: 18px; line-height: 1.6; font-size: 0.88rem;">
+                    <li><strong>1. Mandatory Non-Overlap with Midterm:</strong> You <strong>must choose a brand-new disease, drug, or therapeutic modality</strong> distinct from your Midterm Research Project. Recycling narrative text or figures from your Midterm is strictly prohibited.</li>
+                    <li style="margin-top: 6px;"><strong>2. The Regimen-Wide Pharmacogenomics (<code>PGx</code>) Rule for Biologics / CAR-T / Gene Therapies:</strong> If your primary drug is a small molecule with a direct <code>CPIC</code> / <code>FDA</code> pharmacogene (e.g., Clopidogrel/<code>CYP2C19</code>, Warfarin/<code>CYP2C9+VKORC1</code>, Codeine/<code>CYP2D6</code>, Tamoxifen/<code>CYP2D6</code>, Abacavir/<code>HLA-B*57:01</code>, Simvastatin/<code>SLCO1B1</code>), audit that primary gene–drug pair. <strong>If your primary therapy is a biologic (<code>-mab</code>), ADC, CAR-T (<code>-cel</code>), ASO, or CRISPR therapy not cleared by CYP450s</strong>, you must audit the mandatory <code>CPIC</code> / <code>ClinPGx</code> pharmacogene governing its <strong>combination chemotherapy backbone, conditioning regimen, or toxicity-rescue drug</strong> (e.g., <code>DPYD</code> &amp; <code>UGT1A1</code> in FOLFIRINOX/capecitabine backbones; <code>G6PD</code> rasburicase in CAR-T/leukemia tumor lysis prophylaxis; <code>TPMT</code> + <code>NUDT15</code> in ALL maintenance; <code>APOE &epsilon;4/&epsilon;4</code> ARIA gating in Alzheimer's mAbs; or busulfan <code>GSTP1</code> conditioning in <em>Casgevy</em>).</li>
+                </ul>
+            </div>
+
+            <!-- Team Collaboration Policy Card -->
+            <div class="callout callout-blue" style="margin-top: 20px; border-left-color: #0284C7; background: #F0F9FF;">
+                <div class="callout-title" style="color: #0369A1; font-size: 1.02rem;">
+                    👥 Collaboration Policy: Solo or Teams of Two
+                </div>
+                <ul style="font-size: 0.85rem; color: #0369A1; margin-left: 18px; line-height: 1.6;">
+                    <li><strong>Solo or Pairs (2):</strong> Author independently or in a team of two (you may keep your Midterm partner on a brand-new topic, form a new pair, or work solo).</li>
+                    <li><strong>Single Joint Submission &amp; CRediT Statement:</strong> Submit one unified manuscript on Canvas with both authors' names, AccessNet IDs, track status, and a brief <strong>Author Contribution Statement</strong>.</li>
+                    <li><strong>Mixed Teams:</strong> If a Standard undergraduate pairs with an Honors or Graduate student, the joint paper must fulfill the <strong>Honors / Graduate Track specification</strong> in full.</li>
+                </ul>
+            </div>
+
+            <!-- Honors Track Expansion Card -->
+            <div class="callout callout-purple" style="margin-top: 20px; border-left-color: #7C3AED; background: #FAF5FF;">
+                <div class="callout-title" style="color: #6B21A8; font-size: 1.02rem;">
+                    🎓 The Honors &amp; Graduate Track Addendum (BIOL 3111H / BIOL 5111 &mdash; ~40% Scope Expansion)
+                </div>
+                <div style="overflow-x: auto; margin-top: 10px;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; background: #FFFFFF; border-radius: 6px; overflow: hidden;">
+                        <thead>
+                            <tr style="background: #F3E8FF; color: #581C87; text-align: left;">
+                                <th style="padding: 8px 12px; border: 1px solid #E9D5FF;">Dimension</th>
+                                <th style="padding: 8px 12px; border: 1px solid #E9D5FF;">Standard Track (BIOL 3111)</th>
+                                <th style="padding: 8px 12px; border: 1px solid #E9D5FF;">Honors / Graduate (3111H / 5111)</th>
+                                <th style="padding: 8px 12px; border: 1px solid #E9D5FF; text-align: center;">Expansion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; font-weight: 700;">Core Narrative Length</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF;">~6–8 pages (~2,500–3,400 words)</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; font-weight: 600; color: #6B21A8;">~8–9 pages (~3,600–4,500 words)</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; text-align: center; font-weight: 700; color: #047857;">+35–40% Text</td>
+                            </tr>
+                            <tr style="background: #FAF5FF;">
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; font-weight: 700;">Clinical Trial Audit</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF;">1 pivotal Phase 2/3 NCT trial</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; font-weight: 600; color: #6B21A8;"><strong>Dual-Trial Comparative Autopsy:</strong> Compare 2 NCT trials (e.g., pivotal vs. confirmatory, negative, or ancestry-divergent trial)</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; text-align: center; font-weight: 700; color: #047857;">2 Trials</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; font-weight: 700;">Translational Tiers</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF;">8 Translational Tiers (Tiers 1–8)</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; font-weight: 600; color: #6B21A8;"><strong>9 Tiers:</strong> Adds <strong>Tier 9 (Acquired Resistance, Clonal Escape &amp; Next-Gen Countermeasures)</strong></td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; text-align: center; font-weight: 700; color: #047857;">+Tier 9</td>
+                            </tr>
+                            <tr style="background: #FAF5FF;">
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; font-weight: 700;">Mandatory Figures</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF;"><strong>4 Figures</strong> (Target, Trial, ClinPGx, AI/FDA)</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; font-weight: 600; color: #6B21A8;"><strong>5 Figures</strong> (adds Fig 5: 3D Resistance Binding-Pocket Model or Clonal Escape Plot)</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; text-align: center; font-weight: 700; color: #047857;">+Fig 5</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; font-weight: 700;">Primary Bibliography</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF;">12–15 peer-reviewed articles</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; font-weight: 600; color: #6B21A8;"><strong>18–24 peer-reviewed articles</strong> (verified PMIDs/DOIs)</td>
+                                <td style="padding: 8px 12px; border: 1px solid #E9D5FF; text-align: center; font-weight: 700; color: #047857;">+50% Refs</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. The Two-Track AI Contract -->
+        <section>
+            <h2>2. The Two-Track Generative AI Contract</h2>
+            <p>Declare your authoring track on your title page. All submissions pass through automated PubMed PMID verification, GRCh38/NCT/CPIC identifier validation, and synthetic boilerplate screening:</p>
+            <div class="track-cards-grid">
+                <div class="track-card active-a">
+                    <div>
+                        <span class="track-badge" style="background: #F3E8FF; color: #6D28D9; border: 1px solid #D8B4FE;">Track A</span>
+                        <h3 style="margin-top: 0; color: #581C87;">AI-Assisted Synthesis &amp; Adversarial Audit</h3>
+                        <ul style="font-size: 0.84rem; color: #334155; margin-left: 16px; margin-top: 8px;">
+                            <li><strong>Evaluative Standard:</strong> Graded against <strong>Expert Peer Reviewer Standards</strong> (<em>NEJM</em> / <em>Lancet Oncology</em> rigor). Generic AI filler is penalized ruthlessly.</li>
+                            <li><strong>Mandatory Table 2 (AI Audit &amp; Clinical Stress-Test Table):</strong> Must document <strong>&ge;3 specific instances</strong> where an LLM hallucinated a trial statistic, star-allele score, coordinate, or unsafe clinical dosing recommendation, with primary literature refutations.</li>
+                            <li><strong>Zero-Tolerance Citation Policy:</strong> Every claim requires a verified PMID/DOI. Any fabricated citation receives an automatic zero on the bibliography and a 1-letter grade penalty.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="track-card active-b">
+                    <div>
+                        <span class="track-badge" style="background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0;">Track B</span>
+                        <h3 style="margin-top: 0; color: #065F46;">100% Human-Authored</h3>
+                        <ul style="font-size: 0.84rem; color: #334155; margin-left: 16px; margin-top: 8px;">
+                            <li><strong>Evaluative Standard:</strong> Graded on upper-division undergraduate criteria for conceptual synthesis, accurate trial/PGx analysis, and authentic scientific voice.</li>
+                            <li><strong>Tier 8 AI Vignette Permitted:</strong> Track B authors still run the single Tier 8B clinical prompt on an LLM to critique its diagnostic output, while writing 100% of their paper prose themselves.</li>
+                            <li><strong>Integrity Guardrail:</strong> Undeclared AI prose or fabricated citations in Track B are treated as academic integrity violations (automatic zero).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Interactive Capstone Dossier Explorer -->
+        <section>
+            <h2>3. Interactive Translational Dossier Explorer (20 Pre-Vetted Topics)</h2>
+            <p>
+                Explore 20 pre-vetted Drug–Disease–Trial–PGx dossiers below (each guaranteed to have rich data across <code>cBioPortal/PDB</code>, <code>ClinicalTrials.gov</code>, and <code>ClinPGx/CPIC</code>), or propose a custom topic distinct from your Midterm:
+            </p>
+
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterDiseases('all', this)">All 20 Dossiers</button>
+                <button class="filter-btn" onclick="filterDiseases('oncology', this)">Precision &amp; Immuno-Oncology (8)</button>
+                <button class="filter-btn" onclick="filterDiseases('cardio', this)">Cardiometabolic &amp; Hematology (4)</button>
+                <button class="filter-btn" onclick="filterDiseases('neuro', this)">Neurogenetics &amp; RNA/Gene Rx (4)</button>
+                <button class="filter-btn" onclick="filterDiseases('immuno', this)">Immunology &amp; HLA PGx (3)</button>
+                <button class="filter-btn" onclick="filterDiseases('infectious', this)">Infectious Disease PGx (1)</button>
+            </div>
+
+            <input type="text" id="diseaseSearch" class="search-box" placeholder="Search drug (e.g., Osimertinib, Clopidogrel, Casgevy, T-DXd), gene (KRAS, CYP2C19, DPYD, HLA), or NCT#..." onkeyup="searchDiseases()">
+
+            <div class="disease-list" id="diseaseList">
+                <div class="disease-card" data-category="oncology">
+                    <div>
+                        <div class="disease-card-title">KRAS G12C Non-Small Cell Lung Cancer: Sotorasib vs. Docetaxel</div>
+                        <div class="disease-genes">Target: KRAS (p.Gly12Cys) | Regimen PGx: CYP3A4 / ABCB1 &amp; Platinum/Taxane Co-Rx</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT04303780 (CodeBreaK 200 Phase 3) vs. NCT03600883 (CodeBreaK 100)</div>
+                        <div class="disease-desc">Covalent switch-II pocket trapping of 'undruggable' KRAS G12C; FDA Oncologic Drugs Advisory Committee (ODAC) critique of PFS surrogate bias vs. non-significant Overall Survival; secondary KRAS Y96D and RTK bypass resistance.</div>
+                    </div>
+                    <span class="disease-category-tag">Precision Oncology &bull; Covalent Inhibitor</span>
+                </div>
+
+                <div class="disease-card" data-category="oncology">
+                    <div>
+                        <div class="disease-card-title">HER2-Low Metastatic Breast Cancer: Trastuzumab Deruxtecan (T-DXd)</div>
+                        <div class="disease-genes">Target: ERBB2 (HER2-Low IHC 1+/2+) | Regimen PGx: UGT1A1*28 / CYP3A4 &amp; Capecitabine DPYD</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT03734029 (DESTINY-Breast04) vs. NCT04494425 (DESTINY-Breast06)</div>
+                        <div class="disease-desc">Cleavable tetrapeptide linker + membrane-permeable DXd topoisomerase I payload driving bystander killing; compare to capecitabine/irinotecan control arm (DPYD*2A and UGT1A1*28 toxicity gates); fatal interstitial lung disease (ILD) monitoring.</div>
+                    </div>
+                    <span class="disease-category-tag">Precision Oncology &bull; Antibody-Drug Conjugate</span>
+                </div>
+
+                <div class="disease-card" data-category="oncology">
+                    <div>
+                        <div class="disease-card-title">Germline BRCA1/2 Metastatic Pancreatic Cancer: Olaparib Maintenance</div>
+                        <div class="disease-genes">Target: PARP1 + BRCA1/BRCA2 | Regimen PGx: FOLFIRINOX Lead-In (DPYD *2A/HapB3 &amp; UGT1A1 *28/*6)</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT02184195 (POLO Trial: PFS vs. Final OS Follow-Up)</div>
+                        <div class="disease-desc">PARP1 trapping and homologous recombination deficiency (HRD); mandatory FOLFIRINOX induction chemo PGx (DPYD 5-FU and UGT1A1 SN-38); why PFS doubled (HR=0.53) yet median Overall Survival was identical (19.0 vs. 19.2 mo); somatic BRCA reversion.</div>
+                    </div>
+                    <span class="disease-category-tag">Precision Oncology &bull; Synthetic Lethality</span>
+                </div>
+
+                <div class="disease-card" data-category="oncology">
+                    <div>
+                        <div class="disease-card-title">EGFR-Mutant Lung Adenocarcinoma: Osimertinib First-Line &amp; Chemo Combo</div>
+                        <div class="disease-genes">Target: EGFR (Ex19del / L858R / T790M) | Regimen PGx: CYP3A4/5 + Tamoxifen/Opioid Supportive PGx</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT02296125 (FLAURA) vs. NCT04035486 (FLAURA2 + Platinum/Pemetrexed)</div>
+                        <div class="disease-desc">Irreversible covalent C797 acrylamide warhead overcoming T790M gatekeeper resistance; CNS blood-brain barrier penetration; on-target EGFR C797S cis vs. trans phasing in ctDNA and MET amplification bypass.</div>
+                    </div>
+                    <span class="disease-category-tag">Precision Oncology &bull; 3rd-Gen Kinase Inhibitor</span>
+                </div>
+
+                <div class="disease-card" data-category="oncology">
+                    <div>
+                        <div class="disease-card-title">ER+/HER2- Breast Cancer: Tamoxifen &amp; Ribociclib / Abemaciclib</div>
+                        <div class="disease-genes">Target: ESR1 + CDK4/6 | Regimen PGx: CYP2D6 (*4, *5, *10) + Paroxetine Phenoconversion</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT01958021 (MONALEESA-2) &amp; CPIC Tamoxifen CYP2D6 Guideline Cohort</div>
+                        <div class="disease-desc">Prodrug bioactivation of tamoxifen to endoxifen (100x potency) via hepatic CYP2D6; how CYP2D6 Poor Metabolizers or co-prescribed SSRIs (paroxetine/fluoxetine) abolish endoxifen levels and drive breast cancer recurrence; ESR1 ligand-binding domain mutations.</div>
+                    </div>
+                    <span class="disease-category-tag">Precision Oncology &bull; Endocrine + CDK4/6</span>
+                </div>
+
+                <div class="disease-card" data-category="oncology">
+                    <div>
+                        <div class="disease-card-title">Pediatric B-Cell Acute Lymphoblastic Leukemia: Tisagenlecleucel &amp; 6-MP Backbone</div>
+                        <div class="disease-genes">Target: CD19 (CAR-T) + Purine Salvage | Regimen PGx: TPMT + NUDT15 (6-MP) &amp; G6PD (Rasburicase)</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT02435849 (ELIANA Pivotal Trial) vs. NCT03123939</div>
+                        <div class="disease-desc">Autologous anti-CD19 4-1BB/CD3-zeta CAR-T engineering; tumor lysis syndrome rasburicase G6PD hemolytic gate and maintenance 6-mercaptopurine TPMT (*3A) + NUDT15 (*3 East Asian/Hispanic) 90% dose reduction; CD19 exon 2 splice-skipping escape.</div>
+                    </div>
+                    <span class="disease-category-tag">Immuno-Oncology &bull; CAR-T &amp; Leukemia Maintenance</span>
+                </div>
+
+                <div class="disease-card" data-category="oncology">
+                    <div>
+                        <div class="disease-card-title">Multiple Myeloma t(11;14) vs. Non-t(11;14): The Venetoclax BELLINI Autopsy</div>
+                        <div class="disease-genes">Target: BCL2 + CCND1 t(11;14) | Regimen PGx: CYP3A4/ABCB1 + Rasburicase G6PD TLS Gate</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT02755597 (BELLINI Phase 3) vs. NCT03539744 (CANOVA t(11;14) Trial)</div>
+                        <div class="disease-desc">BH3-mimetic displacement of BIM from BCL2; forensic analysis of the BELLINI surrogate paradox (PFS HR=0.63 favorable, yet Overall Survival HR=2.03 doubled mortality in unselected patients) vs. precision rescue in the t(11;14) biomarker subgroup.</div>
+                    </div>
+                    <span class="disease-category-tag">Precision Oncology &bull; BCL2 Surrogate Paradox</span>
+                </div>
+
+                <div class="disease-card" data-category="oncology">
+                    <div>
+                        <div class="disease-card-title">Resected Melanoma &amp; Pancreatic Cancer: Individualized mRNA-4157 (V940) + Pembrolizumab</div>
+                        <div class="disease-genes">Target: 34 Patient-Specific Neoantigens + PD-1 | Regimen PGx: Patient HLA Class I/II Genotype &amp; irAEs</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT03897881 (KEYNOTE-942 Phase 2b) vs. NCT05968326 (INTerpath-001 Phase 3)</div>
+                        <div class="disease-desc">Tumor-normal WES + NetMHCpan HLA-binding neoantigen prediction + lipid nanoparticle mRNA manufacturing; HLA allelic diversity and neoantigen presentation bottlenecks; B2M loss and MHC-I downregulation escape.</div>
+                    </div>
+                    <span class="disease-category-tag">Immuno-Oncology &bull; Bespoke mRNA Neoantigen Vaccine</span>
+                </div>
+
+                <div class="disease-card" data-category="cardio">
+                    <div>
+                        <div class="disease-card-title">Coronary Stent Thrombosis Prevention: Clopidogrel vs. Genotype-Guided Ticagrelor</div>
+                        <div class="disease-genes">Target: P2Y12 Receptor | Regimen PGx: CYP2C19 (*2, *3 LoF vs. *17 GoF)</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT01742117 (TAILOR-PCI JAMA 2020) vs. NCT01761786 (POPular Genetics NEJM 2019)</div>
+                        <div class="disease-desc">Two-step hepatic CYP2C19 bioactivation of clopidogrel prodrug; why >55% of East Asian and ~30% of European/African patients carry *2/*3 loss-of-function alleles; forensic analysis of TAILOR-PCI's p=0.056 12-month near-miss vs. 79% risk reduction in the first 90 days.</div>
+                    </div>
+                    <span class="disease-category-tag">Cardiovascular PGx &bull; Antiplatelet Prodrug</span>
+                </div>
+
+                <div class="disease-card" data-category="cardio">
+                    <div>
+                        <div class="disease-card-title">Warfarin Anticoagulation: The EU-PACT vs. COAG Ancestry Failure Autopsy</div>
+                        <div class="disease-genes">Target: VKORC1 (-1639G>A) | Regimen PGx: CYP2C9 (*2, *3 vs. African-Enriched *5, *6, *8, *11 &amp; rs12777823)</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT01119300 (EU-PACT NEJM 2013) vs. NCT00839657 (COAG NEJM 2013)</div>
+                        <div class="disease-desc">Dual PK (CYP2C9 S-warfarin clearance) and PD (VKORC1 target expression) dosing; forensic dissection of why COAG's European-centric *2/*3 panel misclassified African-American patients as 'wild-type *1/*1' and caused clinical overdosing.</div>
+                    </div>
+                    <span class="disease-category-tag">Cardiovascular PGx &bull; Dual PK/PD &amp; Algorithmic Equity</span>
+                </div>
+
+                <div class="disease-card" data-category="cardio">
+                    <div>
+                        <div class="disease-card-title">Hypercholesterolemia &amp; Statin Myopathy: Simvastatin SLCO1B1 Gate vs. Inclisiran siRNA</div>
+                        <div class="disease-genes">Target: HMGCR / PCSK9 | Regimen PGx: SLCO1B1*5 (rs4149056) + ABCG2 (Rosuvastatin)</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT00132573 (SEARCH SLCO1B1 GWAS) vs. NCT03399370 (ORION-10 Inclisiran Phase 3)</div>
+                        <div class="disease-desc">Hepatic OATP1B1 (SLCO1B1) transporter uptake defect (c.521T>C, p.Val174Ala) causing 221% systemic simvastatin acid accumulation and rhabdomyolysis (OR=16.9); CPIC switch to rosuvastatin/pravastatin or GalNAc-conjugated PCSK9 siRNA (Inclisiran).</div>
+                    </div>
+                    <span class="disease-category-tag">Cardiometabolic &bull; Hepatic Influx Transporter &amp; RNAi</span>
+                </div>
+
+                <div class="disease-card" data-category="cardio">
+                    <div>
+                        <div class="disease-card-title">Sickle Cell Disease: Exagamglogene Autotemcel (Casgevy) vs. The Voxelotor Withdrawal</div>
+                        <div class="disease-genes">Target: BCL11A Erythroid Enhancer / HBB | Regimen PGx: Busulfan Conditioning GSTP1/GSTA1 PK</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT03745287 (CLIMB SCD-121 Casgevy) vs. NCT03036813 (HOPE Trial Voxelotor Withdrawal)</div>
+                        <div class="disease-desc">CRISPR-Cas9 disruption of the BCL11A +58 GATA1 enhancer to reactivate fetal hemoglobin (HbF) vs. Voxelotor's 2024 global withdrawal (surrogate Hb rise masked tissue hypoxia and vaso-occlusive deaths); myeloablative busulfan conditioning PGx and $2.2M access barriers.</div>
+                    </div>
+                    <span class="disease-category-tag">Hematology &bull; CRISPR Gene Editing vs. Allosteric Hb Modulator</span>
+                </div>
+
+                <div class="disease-card" data-category="neuro">
+                    <div>
+                        <div class="disease-card-title">SOD1 Amyotrophic Lateral Sclerosis (ALS): Tofersen &amp; Neurofilament Surrogates</div>
+                        <div class="disease-genes">Target: SOD1 mRNA (RNase H1 Degradation) | Regimen PGx: CYP1A2 (Riluzole Co-Therapy) &amp; CSF Delivery</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT02623699 (VALOR Phase 3) vs. NCT04856982 (ATLAS Pre-Symptomatic SOD1 Trial)</div>
+                        <div class="disease-desc">Intrathecal gapmer ASO degrading toxic gain-of-function SOD1 mRNA; why 28-week primary ALSFRS-R missed statistical significance while plasma neurofilament light chain (NfL) dropped 55%, winning FDA Accelerated Approval; lagged motor neuron recovery kinetics.</div>
+                    </div>
+                    <span class="disease-category-tag">Neurogenetics &bull; Antisense Oligonucleotide (ASO)</span>
+                </div>
+
+                <div class="disease-card" data-category="neuro">
+                    <div>
+                        <div class="disease-card-title">Spinal Muscular Atrophy (SMA): Onasemnogene Abeparvovec (Zolgensma) vs. Risdiplam</div>
+                        <div class="disease-genes">Target: SMN1 / SMN2 Exon 7 Splicing | Regimen PGx: SMN2 Copy Number (1–4 Copies) &amp; AAV9 Neutralizing Abs</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT03306277 (STR1VE Zolgensma) vs. NCT02913482 (FIREFISH Risdiplam)</div>
+                        <div class="disease-desc">Self-complementary AAV9 systemic SMN1 cDNA replacement vs. oral small-molecule SMN2 U1-snRNP 5' splice-site stabilizer (risdiplam); newborn screening genotype stratification by SMN2 copy number, AAV hepatotoxicity, and $2.1M single-dose pharmacoeconomics.</div>
+                    </div>
+                    <span class="disease-category-tag">Neurogenetics &bull; AAV9 Gene Replacement vs. Splicing Modifiers</span>
+                </div>
+
+                <div class="disease-card" data-category="neuro">
+                    <div>
+                        <div class="disease-card-title">Post-Operative Pain &amp; Psychiatry: Codeine / Tramadol &amp; SSRI CYP2D6 Phenoconversion</div>
+                        <div class="disease-genes">Target: MOR (OPRM1) / SERT | Regimen PGx: CYP2D6 CNVs (*1xN, *2xN, *4, *5) &amp; CYP2C19</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT02576392 (IGNITE PGx Pain Trial) &amp; NCT03093818 (PREPARE Psychiatric/Pain Cohort)</div>
+                        <div class="disease-desc">Why CYP2D6 Ultrarapid Metabolizers (AS > 2.25 via tandem gene duplications enriched in North/East Africa) suffer fatal morphine respiratory depression from standard codeine, while Poor Metabolizers get zero analgesia; SSRI-induced phenoconversion.</div>
+                    </div>
+                    <span class="disease-category-tag">Neurology &amp; Pain PGx &bull; Prodrug Bioactivation</span>
+                </div>
+
+                <div class="disease-card" data-category="neuro">
+                    <div>
+                        <div class="disease-card-title">Early Alzheimer's Disease: Lecanemab &amp; Donanemab Across APOE ε4 Genotypes</div>
+                        <div class="disease-genes">Target: Amyloid-Beta Protofibrils | Regimen PGx: APOE (*ε4/*ε4 Homozygote ARIA-E/H Risk Gate)</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT03887455 (Clarity AD Lecanemab) vs. NCT04437511 (TRAILBLAZER-ALZ 2 Donanemab)</div>
+                        <div class="disease-desc">Fc-gamma receptor microglial clearance of Aβ plaques; mandatory APOE genotyping gate where APOE ε4/ε4 homozygotes face a 3-to-4-fold surge in cerebral edema and microhemorrhage (ARIA-E / ARIA-H) alongside attenuated clinical benefit.</div>
+                    </div>
+                    <span class="disease-category-tag">Neurogenetics &bull; Anti-Amyloid Monoclonal Antibody</span>
+                </div>
+
+                <div class="disease-card" data-category="immuno">
+                    <div>
+                        <div class="disease-card-title">HIV Antiretroviral Therapy: Abacavir &amp; The PREDICT-1 HLA-B*57:01 Trial</div>
+                        <div class="disease-genes">Target: HIV-1 Reverse Transcriptase | Regimen PGx: HLA-B*57:01 (100% NPV Patch-Confirmed Screen)</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT00340080 (PREDICT-1 Double-Blind RCT) vs. NCT00113126 (SHAPE Ancestry Study)</div>
+                        <div class="disease-desc">Non-covalent binding of abacavir inside the F-pocket (Ser116) of HLA-B*57:01 shifts self-peptide presentation (C-terminal Trp/Phe -> Ile/Leu), triggering polyclonal CD8+ T-cell systemic shock; how PREDICT-1 achieved 0.0% immunologically confirmed hypersensitivity.</div>
+                    </div>
+                    <span class="disease-category-tag">Immunogenomics &bull; HLA Altered Peptide Repertoire</span>
+                </div>
+
+                <div class="disease-card" data-category="immuno">
+                    <div>
+                        <div class="disease-card-title">Epilepsy &amp; Gout Severe Cutaneous Reactions: Carbamazepine (HLA-B*15:02) &amp; Allopurinol (HLA-B*58:01)</div>
+                        <div class="disease-genes">Target: SCN1A (VGSC) / Xanthine Oxidase | Regimen PGx: HLA-B*15:02, HLA-A*31:01 &amp; HLA-B*58:01</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT00496626 (Taiwan National HLA-B*15:02 Prospective Screen) &amp; NCT01178047 (HLA-B*58:01)</div>
+                        <div class="disease-desc">Pharmacological interaction with immune receptors (p-i concept) activating granulysin-secreting CD8+ T cells to cause epidermal detachment (SJS/TEN); why testing only HLA-B*15:02 protects Southeast Asians from SJS/TEN but misses HLA-A*31:01 DRESS in Europeans.</div>
+                    </div>
+                    <span class="disease-category-tag">Immunogenomics &bull; TCR p-i Concept &amp; SJS/TEN</span>
+                </div>
+
+                <div class="disease-card" data-category="immuno">
+                    <div>
+                        <div class="disease-card-title">Organ Transplantation &amp; IBD: Tacrolimus (CYP3A5) &amp; Azathioprine (TPMT / NUDT15)</div>
+                        <div class="disease-genes">Target: Calcineurin / Rac1-GTP | Regimen PGx: CYP3A5 (*1 Expressor vs. *3/*6/*7 Non-Expressor) + TPMT/NUDT15</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT01655563 (TACTIC CYP3A5 Transplant RCT) &amp; NCT00578786 (TOPIC IBD Trial)</div>
+                        <div class="disease-desc">Why 'wild-type' CYP3A5*1 expressors (present in ~85% of African-ancestry patients vs. ~15% of Europeans) clear tacrolimus 2x faster and suffer acute graft rejection on standard European-calibrated doses; CPIC 1.5–2x starting dose escalation.</div>
+                    </div>
+                    <span class="disease-category-tag">Autoimmune &amp; Transplant PGx &bull; Calcineurin &amp; Thiopurines</span>
+                </div>
+
+                <div class="disease-card" data-category="infectious">
+                    <div>
+                        <div class="disease-card-title">Plasmodium vivax Radical Cure &amp; Tuberculosis: Tafenoquine (G6PD) &amp; Isoniazid (NAT2)</div>
+                        <div class="disease-genes">Target: P. vivax Hypnozoites / Mycobacterial InhA | Regimen PGx: G6PD (A-, Mediterranean) &amp; NAT2 Slow Acetylator</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.76rem; font-weight: 700; color: #0F766E; margin-bottom: 5px;">🏥 Trials: NCT01376167 (DETECTIVE Tafenoquine Phase 3) &amp; NCT01498419 (NAT2-Guided TB Trial)</div>
+                        <div class="disease-desc">Why quantitative point-of-care G6PD enzyme testing (>70% activity threshold) is mandatory before single-dose tafenoquine to prevent fatal Heinz-body hemolysis in heterozygous females (X-inactivation mosaicism); NAT2 slow-acetylator isoniazid hepatotoxicity.</div>
+                    </div>
+                    <span class="disease-category-tag">Infectious Disease &bull; Antimalarial &amp; Tuberculosis PGx</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. The 8 Translational Tiers (+ Tier 9 for Honors) -->
+        <section>
+            <h2>4. The Translational Characterization Tiers (Tiers 1–8 + Tier 9 for Honors/5111)</h2>
+            <p>Structure your manuscript into clearly titled sections corresponding to each tier:</p>
+
+            <div class="tier-card" style="border-left-color: #9D2235;">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 1: Disease Pathophysiology &amp; The Unmet Therapeutic Bottleneck</span>
+                    <span class="tier-tag">Clinical Baseline</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Define the disease, anatomical/cellular site, staging, and why historical standard-of-care therapy (e.g., non-selective cytotoxic chemotherapy, empirical trial-and-error dosing) fails or produces unacceptable off-target organ toxicity.
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: var(--bauhaus-blue);">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 2: Molecular Target Architecture &amp; Somatic / Immunogenomic Landscape</span>
+                    <span class="tier-tag">cBioPortal &bull; COSMIC &bull; PDB</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Identify the exact molecular target (HGNC symbol, Ensembl ID, GRCh38 coordinates, protein structural domains). For oncology topics, query <strong>cBioPortal</strong> / <strong>COSMIC</strong> to report somatic mutation frequencies, hotspot residues (e.g., <code>KRAS p.Gly12Cys</code>, <code>EGFR p.Leu858Arg</code>), or mutational signatures. For non-oncology topics, report <strong>ClinVar</strong> alleles, <strong>HLA</strong> binding-groove pockets, or target expression.
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: var(--bauhaus-amber);">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 3: Precision Therapeutic Engineering, Delivery Route &amp; Packaging</span>
+                    <span class="tier-tag">Drug Design &bull; First-Pass PK</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Classify the modality (<code>-ib</code> kinase/allosteric inhibitor, <code>-mab</code> antibody/ADC, <code>-cel</code> CAR-T, gapmer ASO, siRNA, or CRISPR). Explain why its specific <strong>route of administration</strong> (oral pill vs. IV vs. intrathecal) and <strong>packaging/formulation</strong> (prodrug mask, enteric coating, cleavable ADC linker, LNP, AAV capsid) are required, and how hepatic first-pass metabolism shapes bioavailability.
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: var(--bauhaus-emerald);">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 4: Pivotal Clinical Trial Architecture &amp; Endpoint Forensics</span>
+                    <span class="tier-tag">ClinicalTrials.gov &bull; Surrogates</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Audit the pivotal trial on <strong>ClinicalTrials.gov</strong> (exact <code>NCT</code> number, phase, sample size <em>N</em>, biomarker inclusion gate, randomization, and blinding). Critique <strong>control arm fairness</strong>, Intention-to-Treat vs. Per-Protocol analysis, and whether the primary endpoint is a true clinical outcome (Overall Survival) or a surrogate (<code>PFS</code>, <code>ORR</code>, biomarker)—evaluating the <strong>Surrogate Paradox</strong>.
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: #0284C7;">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 5: Biostatistical Efficacy, NNT &amp; Trial Demographic Representation</span>
+                    <span class="tier-tag">HR / OR &bull; NNT &bull; Equity</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Report the primary statistical outcomes: Hazard Ratio (<code>HR</code>) or Odds Ratio (<code>OR</code>), 95% CI, <em>p</em>-value, Absolute Risk Reduction (<code>ARR</code>), and calculate <strong>Number Needed to Treat (<code>NNT = 1 / ARR</code>)</strong>. Audit the trial's baseline demographic table (% Black, Hispanic, Asian, White) against real-world disease epidemiology. <em>(Honors/5111: Perform a head-to-head comparative autopsy of TWO clinical trials).</em>
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: var(--bauhaus-purple);">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 6: Pharmacogenomic ADME &amp; Toxicity Safety Gate (ClinPGx / CPIC)</span>
+                    <span class="tier-tag">ClinPGx &bull; CPIC &bull; Star Alleles</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Apply the <strong>Regimen-Wide PGx Rule</strong> using <strong>ClinPGx (PharmGKB)</strong> and <strong>CPIC Guidelines</strong>. Report the key star alleles (<code>*2, *3, *5, *17, *28</code>) or rsIDs, calculate the <strong>CPIC Activity Score (<code>AS</code>)</strong> across metabolizer phenotypes, explain active-drug vs. prodrug risk inversion, evaluate drug–drug <strong>phenoconversion</strong>, and compare allele frequencies across global ancestries in <strong>gnomAD</strong>.
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: #059669;">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 7: Bioethics, Pharmacoeconomics, Health Policy &amp; Access Equity</span>
+                    <span class="tier-tag">$/QALY &bull; GINA &bull; Policy</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    Report the Wholesale Acquisition Cost (<code>WAC</code>) per year/course and evaluate cost-effectiveness (<code>ICER</code> in <code>$/QALY</code> relative to <code>$100k–$150k/QALY</code>). Examine insurance prior-authorization barriers, <strong>GINA</strong> statutory protections vs. life/disability insurance loopholes, or DTC testing pitfalls.
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: #DC2626;">
+                <div class="tier-card-header">
+                    <span class="tier-title">Tier 8: The Hype vs. Reality Verdict &amp; Clinical AI Stress-Test</span>
+                    <span class="tier-tag">FDA Label vs. PR &bull; LLM Audit</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0;">
+                    <strong>Part A (Hype Audit):</strong> Contrast a manufacturer press release or DTC ad against the actual <strong>FDA Boxed Warnings</strong> and Overall Survival data.<br>
+                    <strong>Part B (AI Stress-Test):</strong> Prompt a frontier LLM (ChatGPT, Claude, Gemini) with a complex clinical vignette combining your drug/regimen with a high-risk <code>CPIC</code> diplotype (or unphased <em>cis/trans</em> / phenoconversion trap). Critique what the LLM missed and write the verified clinical consult note.
+                </p>
+            </div>
+
+            <div class="tier-card" style="border-left-color: #7C3AED; background: #FAF5FF;">
+                <div class="tier-card-header">
+                    <span class="tier-title" style="color: #6B21A8;">Tier 9 (Honors / BIOL 5111 Requirement): Acquired Resistance &amp; Next-Gen Countermeasures</span>
+                    <span class="tier-tag" style="background: #F3E8FF; color: #6D28D9; border: 1px solid #D8B4FE;">Honors &bull; BIOL 5111</span>
+                </div>
+                <p style="font-size: 0.88rem; margin-bottom: 0; color: #3B0764;">
+                    Model the Darwinian mechanism of acquired treatment failure (e.g., on-target gatekeeper mutation like <code>EGFR C797S</code> or <code>KRAS Y96D</code>, <code>BRCA2</code> frame-restoring reversion indels, <code>CD19</code> splice-skipping antigen loss, or pathway bypass) and evaluate a next-generation therapeutic countermeasure.
+                </p>
+            </div>
+        </section>
+
+        <!-- 5. Mandatory Database Figures -->
+        <section>
+            <h2>5. Anti-Hallucination Guardrails: Mandatory Database Figures</h2>
+            <p>Embed custom-captured, student-annotated figures from live biomedical portals (<strong>4 Figures for Standard Track</strong>; <strong>5 Figures for Honors/Graduate Track</strong>):</p>
+
+            <div class="db-grid">
+                <a href="https://www.cbioportal.org/" target="_blank" rel="noopener noreferrer" class="db-btn">
+                    <span class="db-icon">🧬</span>
+                    cBioPortal (Cancer)
+                </a>
+                <a href="https://clinicaltrials.gov/" target="_blank" rel="noopener noreferrer" class="db-btn">
+                    <span class="db-icon">🏥</span>
+                    ClinicalTrials.gov
+                </a>
+                <a href="https://www.clinpgx.org/" target="_blank" rel="noopener noreferrer" class="db-btn">
+                    <span class="db-icon">💊</span>
+                    ClinPGx (PharmGKB)
+                </a>
+                <a href="https://cpicpgx.org/guidelines/" target="_blank" rel="noopener noreferrer" class="db-btn">
+                    <span class="db-icon">📋</span>
+                    CPIC Guidelines
+                </a>
+                <a href="https://gnomad.broadinstitute.org/" target="_blank" rel="noopener noreferrer" class="db-btn">
+                    <span class="db-icon">🌍</span>
+                    gnomAD Browser
+                </a>
+                <a href="https://www.rcsb.org/" target="_blank" rel="noopener noreferrer" class="db-btn">
+                    <span class="db-icon">🔬</span>
+                    RCSB PDB / AlphaFold
+                </a>
+                <a href="https://dailymed.nlm.nih.gov/dailymed/" target="_blank" rel="noopener noreferrer" class="db-btn">
+                    <span class="db-icon">⚠️</span>
+                    FDA DailyMed Labels
+                </a>
+            </div>
+
+            <div class="callout callout-amber">
+                <div class="callout-title">📸 Mandatory Figure Specifications</div>
+                <ul style="margin-left: 18px; margin-bottom: 0; line-height: 1.6;">
+                    <li><strong>Figure 1 (Target / Somatic Spectrum / 3D Binding Pocket):</strong> Captured from <strong>cBioPortal</strong> (lollipop plot / OncoPrint), <strong>RCSB PDB / AlphaFold</strong> (3D drug-target complex), or <strong>UCSC/ClinVar</strong> with student callout arrows pointing to the active site or driver mutation.</li>
+                    <li><strong>Figure 2 (ClinicalTrials.gov Design &amp; Endpoint Audit):</strong> Captured from <strong>ClinicalTrials.gov</strong> (Arms/Design or Outcome Results table for your exact <code>NCT</code> number) paired with the trial's Kaplan–Meier curve, annotating HR, ARR/NNT, and demographic enrollment.</li>
+                    <li><strong>Figure 3 (ClinPGx / CPIC Level 1A Dosing Table &amp; gnomAD Ancestry):</strong> Captured from <strong>ClinPGx.org</strong> or <strong>CPICpgx.org</strong> + <strong>gnomAD</strong>, annotating the exact dose cut/switch and highest-risk population frequency.</li>
+                    <li><strong>Figure 4 (FDA Boxed Warning vs. Clinical AI Stress-Test):</strong> Annotated comparison of the <strong>FDA Package Insert Boxed Warning</strong> alongside your <strong>LLM Clinical Edge-Case Prompt &amp; Critique</strong>.</li>
+                    <li style="margin-top: 6px; padding-top: 6px; border-top: 1px dashed #FCD34D;">
+                        <strong style="color: #92400E;">Figure 5 (Honors / BIOL 5111 Requirement):</strong> <strong>3D Structural Resistance Binding-Pocket Model</strong> (PDB/AlphaFold mapping steric hindrance of a resistance mutation) <em>OR</em> <strong>Clonal Evolution / Escape Plot</strong> (cBioPortal serial ctDNA / Nextstrain).
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 6. Required Data Synthesis Tables -->
+        <section>
+            <h2>6. Required Data Synthesis Tables</h2>
+
+            <h3>Table 1: End-to-End Translational &amp; Pharmacogenomic Synthesis Matrix</h3>
+            <p>Mandatory for all submissions. Place immediately after the narrative text:</p>
+            <button class="copy-btn" onclick="copyTable1()">📋 Copy Table 1 Markdown Template</button>
+
+            <pre id="table1Code">| Translational Tier | Focal Element / Gene / Drug | Database Identifier / Accession | Genomic Coordinates (GRCh38) / Star Allele | Quantitative Clinical / Statistical Metric | Primary Reference (PMID / DOI) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Tier 1: Unmet Need** | Disease &amp; Standard-of-Care Failure | OMIM / ICD-10 Code | N/A | 5-yr Survival or SoC Toxicity Rate | PMID: ... |
+| **Tier 2: Target Locus** | Molecular Target Gene &amp; Driver | HGNC; Ensembl; cBioPortal / ClinVar VCV | chrN:start-end (GRCh38) | Mutation Frequency / Kd Binding Affinity | PMID: ... |
+| **Tier 3: Drug Design** | Therapeutic Agent &amp; Route/Packaging | DrugBank Accession / ChEMBL ID | Target Domain / Pocket | Bioavailability (F%), Half-Life (t1/2) | PMID: ... |
+| **Tier 4: Trial Design** | Pivotal Clinical Trial Architecture | ClinicalTrials.gov NCT... | Biomarker Inclusion Gate | Phase, N, Control Arm, Primary Endpoint | PMID: ... |
+| **Tier 5: Trial Efficacy** | Primary Outcome, NNT &amp; Diversity | NCT Results / NEJM / Lancet | % Non-European Enrolled | HR / OR (95% CI), p-value, ARR, NNT | PMID: ... |
+| **Tier 6: PGx Safety Gate** | Regimen Pharmacogene &amp; Diplotype | ClinPGx PA... / CPIC Level 1A; rsID | chrN:start-end; Star Alleles | Activity Score (AS), % Dose Cut, gnomAD AF | PMID: ... |
+| **Tier 7: Policy &amp; Cost** | Pharmacoeconomics &amp; Access | FDA Label / ICER Report | N/A | Annual WAC ($), ICER ($/QALY) | PMID: ... |
+| **Tier 8: Hype &amp; AI Audit** | FDA Boxed Warning vs. AI Vignette | DailyMed / FDA NDA # | Edge-Case Diplotype Tested | Specific AI Failure Mode / Label Warning | PMID: ... |
+| **Tier 9: Resistance (Honors)** | Acquired Escape Mutation &amp; Next-Gen Rx | PDB ID / COSMIC / Second NCT... | chrN:start-end (HGVS c./p.) | Fold-Change IC50 Shift; Comparator Trial HR | PMID: ... |</pre>
+
+            <h3>Table 2 (Track A Only): Mandatory AI Audit &amp; Clinical Stress-Test Table (&ge;3 Cases)</h3>
+            <p>Mandatory for Track A submissions. Document at least <strong>three (3)</strong> specific LLM errors/omissions encountered during your work:</p>
+            <button class="copy-btn" onclick="copyTable2()">📋 Copy Table 2 Markdown Template</button>
+
+            <pre id="table2Code">| # | Exact Prompt Submitted to AI | Raw AI-Generated Text Snippet | The Biological / Clinical Error | Primary Database / Paper Disproving AI | Student's Verified Correction |
+| :-: | :--- | :--- | :--- | :--- | :--- |
+| **1** | *"What is the CPIC Activity Score and codeine dose for CYP2D6 *1/*2x2 paired with paroxetine?"* | *"CYP2D6 *1/*2x2 is an Ultrarapid Metabolizer (AS=3.0), so avoid codeine; paroxetine has no effect on genotype."* | **Phenoconversion Blind Spot:** Ignored that strong CYP2D6 inhibitor paroxetine converts genetic UM/NM into functional PM (AS=0.0). | CPIC CYP2D6 Opioid Guideline (Crews et al., PMID: 33387367). | Model both genetic UM risk and paroxetine phenoconversion block. |
+| **2** | *"Did Olaparib improve Overall Survival in the Phase 3 POLO pancreatic cancer trial (NCT02184195)?"* | *"Yes, POLO demonstrated a statistically significant improvement in both PFS and Overall Survival."* | **Surrogate Endpoint Hallucination:** Conflated PFS (HR=0.53) with final OS, which showed zero difference (19.0 vs 19.2 mo, p=0.3487). | Kindler et al. (J Clin Oncol 2022; PMID: 35834777) &amp; NCT02184195. | Reported exact PFS vs. OS divergence and tissue-agnostic survival critique. |
+| **3** | *"Is testing CYP2C9 *2 and *3 sufficient to guide warfarin dosing in an African-American cohort?"* | *"Yes, CYP2C9 *2 and *3 capture the vast majority of reduced-function alleles across all populations."* | **Eurocentric Panel Bias:** Omitted African-enriched CYP2C9 *5, *6, *8, *11 and rs12777823 that caused the 2013 COAG trial failure. | Kimmel et al. (NEJM 2013; PMID: 24251361) &amp; CPIC 2017 Warfarin Guideline. | Added multi-ancestry CYP2C9 *5/*6/*8/*11 and rs12777823 algorithm rules. |</pre>
+        </section>
+
+        <!-- 7. Early-Bird Bonus Calculator -->
+        <section>
+            <h2>7. The Early-Bird Bonus Calculator (Up to +60 Bonus Points)</h2>
+            <p>
+                Submit up to 7 days prior to the <strong>Tuesday, December 15, 2026</strong> deadline to earn up to <strong>+60 bonus points</strong> (20% of the Capstone's 300-point value, equivalent to 6% of your entire course grade):
+            </p>
+
+            <div class="calc-box">
+                <label for="earlyDays" style="font-weight: 700; font-size: 0.95rem; color: var(--slate-900);">
+                    Select Planned Submission Date:
+                </label>
+                <input type="range" id="earlyDays" class="calc-slider" min="0" max="7" value="7" oninput="updateBonus()">
+                
+                <div class="calc-result">
+                    <div>
+                        <div style="font-weight: 800; font-size: 1.05rem; color: #064E3B;" id="dateLabel">
+                            Tuesday, Dec 8 (7 Days Early)
+                        </div>
+                        <div style="font-size: 0.84rem; color: #047857;" id="bonusDesc">
+                            Maximum Early-Bird Advantage (+60 Points / 2 Full Letter Grades on Project)
+                        </div>
+                    </div>
+                    <div class="calc-score" id="pointsLabel">+60 Points</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Comprehensive Evaluation Rubric (300 Points) -->
+        <section>
+            <h2>8. Comprehensive Evaluation Rubric (300 Points)</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th style="width: 65px; text-align: center;">Pts</th>
+                        <th>Track A Standard (Expert Peer Reviewer)</th>
+                        <th>Track B Standard (100% Human-Authored)</th>
+                        <th>Honors / Graduate Scope (3111H / 5111)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Target Mechanism &amp; Drug Engineering (Tiers 1–3)</strong></td>
+                        <td style="text-align: center; font-weight: 800;">60</td>
+                        <td>Granular structural and biochemical dissection of target, somatic/germline variants, delivery route, first-pass extraction, and formulation packaging. Zero generic filler.</td>
+                        <td>Clear, accurate explanation of disease mechanism, molecular target, drug class, and route of delivery.</td>
+                        <td><strong>Honors:</strong> Integrates structural domain mechanics with multi-pathway systems context.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Clinical Trial Forensics &amp; Diversity Audit (Tiers 4–5)</strong></td>
+                        <td style="text-align: center; font-weight: 800;">75</td>
+                        <td>Rigorous audit of <code>ClinicalTrials.gov</code> NCT record, control arm fairness, ITT vs. Per-Protocol, HR/ARR/NNT math, surrogate paradox critique, and enrollment equity.</td>
+                        <td>Accurate reporting and thoughtful analysis of trial design, endpoints, statistics, and demographic representation.</td>
+                        <td><strong>Honors:</strong> <strong>Dual-Trial Comparative Autopsy</strong> comparing pivotal vs. confirmatory, negative, or subgroup trials.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Pharmacogenomic Safety Gate (ClinPGx/CPIC, Tier 6)</strong></td>
+                        <td style="text-align: center; font-weight: 800;">60</td>
+                        <td>Exact star-allele Activity Score math, active vs. prodrug mechanics, phenoconversion, and <code>gnomAD</code> multi-ancestry frequencies applied accurately under the Regimen-Wide PGx Rule.</td>
+                        <td>Accurate identification and dosing interpretation of the regimen's <code>CPIC</code> / <code>ClinPGx</code> pharmacogene.</td>
+                        <td><strong>Honors:</strong> Models unphased <em>cis/trans</em> or structural CNV assay blind spots and clinical EHR Best Practice Alert workflow.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Mandatory Database Figures &amp; Table 1 Matrix</strong></td>
+                        <td style="text-align: center; font-weight: 800;">45</td>
+                        <td>Figures 1–4 custom-captured from live databases with sharp student annotations; Table 1 100% complete and verified on GRCh38.</td>
+                        <td>Figures 1–4 and Table 1 complete, clearly labeled, and integrated into the text.</td>
+                        <td><strong>Honors:</strong> Includes <strong>Figure 5</strong> (3D resistance structure or clonal escape trajectory) and <strong>Tier 9</strong> matrix row.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5. Policy, Hype Audit, AI Stress-Test &amp; Citations (Tiers 7–8)</strong></td>
+                        <td style="text-align: center; font-weight: 800;">60</td>
+                        <td>Incisive <code>$/QALY</code> &amp; press-release critique; Track A includes rigorous 3-case <strong>Table 2 AI Audit</strong>; 100% of 12–15 PMIDs/DOIs verified in PubMed.</td>
+                        <td>Thoughtful ethics/cost analysis and LLM vignette reflection; 12–15 authentic references in original student voice.</td>
+                        <td><strong>Honors:</strong> Full <strong>Tier 9 Acquired Resistance</strong> narrative + <strong>18–24 verified primary references</strong>.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Footer -->
+        <footer style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--slate-200); font-size: 0.85rem; color: var(--slate-600); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+            <div>
+                BIOL 3111 / 5111 &bull; Fall 2026 &bull; Temple University Department of Biology
+            </div>
+            <div>
+                Instructor: Sergei Pond &bull; TA: Violet Lange
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function filterDiseases(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const cards = document.querySelectorAll('.disease-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function searchDiseases() {
+            const query = document.getElementById('diseaseSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.disease-card');
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function copyTable1() {
+            const code = document.getElementById('table1Code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Table 1 Markdown Template copied to clipboard!');
+            });
+        }
+
+        function copyTable2() {
+            const code = document.getElementById('table2Code').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Table 2 (AI Audit Table) Markdown Template copied to clipboard!');
+            });
+        }
+
+        const bonusSchedule = [
+            { date: "Tuesday, Dec 15 (Official Due Date)", desc: "Standard submission deadline (23:59 EST)", pts: "+0 Points" },
+            { date: "Monday, Dec 14 (1 Day Early)", desc: "+8 Course Bonus Points", pts: "+8 Points" },
+            { date: "Sunday, Dec 13 (2 Days Early)", desc: "+16 Course Bonus Points", pts: "+16 Points" },
+            { date: "Saturday, Dec 12 (3 Days Early)", desc: "+25 Course Bonus Points", pts: "+25 Points" },
+            { date: "Friday, Dec 11 (4 Days Early)", desc: "+34 Course Bonus Points", pts: "+34 Points" },
+            { date: "Thursday, Dec 10 (5 Days Early)", desc: "+42 Course Bonus Points", pts: "+42 Points" },
+            { date: "Wednesday, Dec 9 (6 Days Early)", desc: "+51 Course Bonus Points", pts: "+51 Points" },
+            { date: "Tuesday, Dec 8 (7 Days Early)", desc: "Maximum Early-Bird Advantage (+60 Points / 2 Full Letter Grades on Project)", pts: "+60 Points" }
+        ];
+
+        function updateBonus() {
+            const slider = document.getElementById('earlyDays');
+            const val = parseInt(slider.value);
+            const item = bonusSchedule[val];
+            document.getElementById('dateLabel').innerText = item.date;
+            document.getElementById('bonusDesc').innerText = item.desc;
+            document.getElementById('pointsLabel').innerText = item.pts;
+        }
+    </script>
+</body>
+</html>
