@@ -3,8 +3,14 @@
 *From Molecular Target to Clinical Trial Forensics, Pharmacogenomic Safety Gates, and AI/Policy Audit*
 
 * **Assignment Weight:** 300 Points (30% of 1,000 Total Course Points)
-* **Official Due Date:** Tuesday, December 15, 2026 at 23:59 EST (Canvas Submission)
-* **Early-Bird Bonus Window:** Submit between **Tuesday, December 8 and Monday, December 14, 2026** for up to **+60 bonus points** (maximum 20% bonus on the assignment, equivalent to 6% of the entire course grade or two full letter grades on the project).
+* **Official Hard Due Date:** **Wednesday, December 16, 2026 at 23:59 EST** (Canvas Submission)
+* **🚨 STRICT ZERO-POINT LATE SUBMISSION POLICY:** **Late submissions will receive ZERO points (0 / 300 pts).** There are **NO exceptions** unless formally arranged in advance with the instructor for documented extraordinary circumstances. Canvas locks at 23:59:59 EST on Wednesday, Dec 16.
+* **Early-Bird Bonus Window:** Submit between **Wednesday, December 9 and Tuesday, December 15, 2026** for up to **+60 bonus points** (maximum 20% bonus on the assignment, equivalent to 6% of the entire course grade or two full letter grades on the project).
+
+> **🚨 CRITICAL DEADLINE WARNING — LATE SUBMISSIONS RECEIVE ZERO (0) POINTS:**
+> The Final Capstone Project must be uploaded to Canvas no later than **23:59 (11:59 PM EST) on Wednesday, December 16, 2026**.
+> **Any submission received after 23:59 on Wednesday, December 16 will receive an automatic ZERO (0 / 300 points).**
+> Because final university grades must be calculated and submitted immediately following the deadline, **no late work, grace periods, or unapproved extensions are possible — NO EXCEPTIONS** unless arranged with the instructor in advance for documented extraordinary circumstances. Do not wait until 23:55 to upload your file; use the **Early-Bird Window (Dec 9–15)** to bank bonus points and eliminate technical upload risk.
 * **Mandatory Non-Overlap Rule (Fresh Topic Required):**
   * You **must select a brand-new disease, drug, or therapeutic modality** that does **not** overlap with your Midterm Research Project disease. Self-plagiarism or recycling narrative text/figures from the Midterm will receive an automatic zero on the overlapping sections.
 * **Collaboration Policy:**

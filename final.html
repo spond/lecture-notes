@@ -540,6 +540,24 @@
             </div>
         </nav>
 
+        <!-- ULTRA-PROMINENT HARD DEADLINE & ZERO-POINT LATE POLICY BANNER -->
+        <div style="background: #7F1D1D; color: #FFFFFF; border: 3px solid #EF4444; border-radius: 12px; padding: 22px 26px; margin-bottom: 24px; box-shadow: 0 10px 25px rgba(127, 29, 29, 0.35);">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap;">
+                <span style="background: #FEE2E2; color: #991B1B; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 800; padding: 4px 12px; border-radius: 6px; letter-spacing: 0.05em; text-transform: uppercase;">
+                    🚨 MANDATORY DEADLINE &amp; ZERO-TOLERANCE LATE POLICY
+                </span>
+                <span style="font-family: var(--font-mono); font-size: 0.92rem; font-weight: 700; color: #FCA5A5;">
+                    HARD CUTOFF: WEDNESDAY, DECEMBER 16, 2026 AT 23:59 EST
+                </span>
+            </div>
+            <div style="font-size: 1.25rem; font-weight: 800; line-height: 1.35; margin-bottom: 8px; color: #FFFFFF;">
+                LATE SUBMISSIONS WILL RECEIVE <span style="color: #FDE047; text-decoration: underline;">ZERO POINTS (0 / 300 PTS)</span> — NO EXCEPTIONS.
+            </div>
+            <p style="font-size: 0.95rem; line-height: 1.55; color: #FECACA; margin: 0;">
+                The Final Capstone Project must be uploaded to Canvas by <strong>23:59 (11:59 PM EST) on Wednesday, December 16, 2026</strong>. Because final semester grades must be computed and submitted to the University Registrar immediately after the deadline, <strong>any submission uploaded after 23:59 on December 16 will automatically receive 0 points</strong>—with <strong>NO exceptions</strong> unless formally arranged in advance with the instructor for documented extraordinary circumstances. Do not risk a last-minute Wi-Fi or Canvas timeout: submit during the <strong>Early-Bird Bonus Window (Dec 9–15)</strong> to earn up to <strong>+60 extra credit points</strong> and guarantee on-time delivery.
+            </p>
+        </div>
+
         <!-- Header -->
         <header>
             <div class="badge">🏛️ BIOL 3111 / 5111 &bull; Fall 2026 Capstone (Weeks 8–14 Synthesis)</div>
@@ -553,29 +571,29 @@
             </div>
 
             <div class="logistics-grid">
-                <div>
-                    <strong>Official Due Date</strong>
-                    Tuesday, Dec 15, 2026 (23:59 EST)
+                <div style="border: 2px solid #EF4444; background: rgba(127, 29, 29, 0.45);">
+                    <strong style="color: #FDE047;">Official Hard Due Date</strong>
+                    <span style="color: #FFFFFF; font-weight: 800;">Wednesday, Dec 16, 2026 (23:59 EST)</span>
+                </div>
+                <div style="border: 2px solid #EF4444; background: rgba(127, 29, 29, 0.45);">
+                    <strong style="color: #FDE047;">Strict Late Policy</strong>
+                    <span style="color: #FFFFFF; font-weight: 800;">LATE = ZERO POINTS (0 / 300)</span>
                 </div>
                 <div>
                     <strong>Weight / Contribution</strong>
                     300 Points (30% of Final Course Grade)
                 </div>
                 <div>
-                    <strong>Target Narrative Length</strong>
-                    Standard: ~6–8 pgs &bull; Honors/5111: ~8–9 pgs
-                </div>
-                <div>
-                    <strong>Early-Bird Bonus (Dec 8–14)</strong>
+                    <strong>Early-Bird Bonus (Dec 9–15)</strong>
                     Up to +60 Points (20% Max / 2 Letter Grades)
                 </div>
                 <div>
                     <strong>Topic Selection Rule</strong>
-                    Must Be a Brand-New Topic (No Midterm Overlap)
+                    Brand-New Topic (No Midterm Overlap)
                 </div>
                 <div>
-                    <strong>Honors / Grad Scope</strong>
-                    Dual-Trial Audit + Fig 5 + Tier 9 Resistance
+                    <strong>Target Length &amp; Track Scope</strong>
+                    Std: ~6–8 pgs &bull; Honors/5111: ~8–9 pgs (+Tier 9)
                 </div>
             </div>
         </header>
@@ -1099,23 +1117,23 @@
 | **3** | *"Is testing CYP2C9 *2 and *3 sufficient to guide warfarin dosing in an African-American cohort?"* | *"Yes, CYP2C9 *2 and *3 capture the vast majority of reduced-function alleles across all populations."* | **Eurocentric Panel Bias:** Omitted African-enriched CYP2C9 *5, *6, *8, *11 and rs12777823 that caused the 2013 COAG trial failure. | Kimmel et al. (NEJM 2013; PMID: 24251361) &amp; CPIC 2017 Warfarin Guideline. | Added multi-ancestry CYP2C9 *5/*6/*8/*11 and rs12777823 algorithm rules. |</pre>
         </section>
 
-        <!-- 7. Early-Bird Bonus Calculator -->
+        <!-- 7. Early-Bird Bonus Calculator & Hard Deadline Policy -->
         <section>
-            <h2>7. The Early-Bird Bonus Calculator (Up to +60 Bonus Points)</h2>
+            <h2>7. Early-Bird Bonus Calculator (+60 Pts Max) &amp; Strict Zero-Point Late Cutoff</h2>
             <p>
-                Submit up to 7 days prior to the <strong>Tuesday, December 15, 2026</strong> deadline to earn up to <strong>+60 bonus points</strong> (20% of the Capstone's 300-point value, equivalent to 6% of your entire course grade):
+                Submit up to 7 days prior to the <strong>Wednesday, December 16, 2026 (23:59 EST)</strong> hard deadline to earn up to <strong>+60 bonus points</strong> (20% of the Capstone's 300-point value, equivalent to 6% of your entire course grade):
             </p>
 
             <div class="calc-box">
                 <label for="earlyDays" style="font-weight: 700; font-size: 0.95rem; color: var(--slate-900);">
-                    Select Planned Submission Date:
+                    Select Planned Submission Date (Drag Left to See Hard Cutoff &amp; Late Consequence):
                 </label>
-                <input type="range" id="earlyDays" class="calc-slider" min="0" max="7" value="7" oninput="updateBonus()">
+                <input type="range" id="earlyDays" class="calc-slider" min="-1" max="7" value="7" oninput="updateBonus()">
                 
-                <div class="calc-result">
+                <div class="calc-result" id="calcResultBox">
                     <div>
                         <div style="font-weight: 800; font-size: 1.05rem; color: #064E3B;" id="dateLabel">
-                            Tuesday, Dec 8 (7 Days Early)
+                            Wednesday, Dec 9 (7 Days Early)
                         </div>
                         <div style="font-size: 0.84rem; color: #047857;" id="bonusDesc">
                             Maximum Early-Bird Advantage (+60 Points / 2 Full Letter Grades on Project)
@@ -1123,6 +1141,15 @@
                     </div>
                     <div class="calc-score" id="pointsLabel">+60 Points</div>
                 </div>
+            </div>
+
+            <div style="background: #FEF2F2; border: 2.5px solid #DC2626; border-left: 8px solid #991B1B; border-radius: 10px; padding: 18px 22px; margin-top: 18px;">
+                <div style="font-weight: 800; font-size: 1.05rem; color: #991B1B; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                    🚨 HARD DEADLINE POLICY: WEDNESDAY, DECEMBER 16 AT 23:59 EST — LATE = 0 POINTS
+                </div>
+                <p style="font-size: 0.9rem; color: #7F1D1D; line-height: 1.55; margin: 0;">
+                    Canvas submission closes strictly at <strong>23:59:59 EST on Wednesday, December 16, 2026</strong>. <strong>Any late submission (00:00 EST on Thursday, December 17 or later) will receive ZERO points (0 / 300 pts)</strong>—with <strong>NO exceptions</strong> unless formally arranged in advance with the instructor for documented extraordinary circumstances.
+                </p>
             </div>
         </section>
 
@@ -1233,24 +1260,42 @@
             });
         }
 
-        const bonusSchedule = [
-            { date: "Tuesday, Dec 15 (Official Due Date)", desc: "Standard submission deadline (23:59 EST)", pts: "+0 Points" },
-            { date: "Monday, Dec 14 (1 Day Early)", desc: "+8 Course Bonus Points", pts: "+8 Points" },
-            { date: "Sunday, Dec 13 (2 Days Early)", desc: "+16 Course Bonus Points", pts: "+16 Points" },
-            { date: "Saturday, Dec 12 (3 Days Early)", desc: "+25 Course Bonus Points", pts: "+25 Points" },
-            { date: "Friday, Dec 11 (4 Days Early)", desc: "+34 Course Bonus Points", pts: "+34 Points" },
-            { date: "Thursday, Dec 10 (5 Days Early)", desc: "+42 Course Bonus Points", pts: "+42 Points" },
-            { date: "Wednesday, Dec 9 (6 Days Early)", desc: "+51 Course Bonus Points", pts: "+51 Points" },
-            { date: "Tuesday, Dec 8 (7 Days Early)", desc: "Maximum Early-Bird Advantage (+60 Points / 2 Full Letter Grades on Project)", pts: "+60 Points" }
-        ];
+        const bonusSchedule = {
+            "-1": { date: "🚨 After Wed, Dec 16 at 23:59 EST (LATE)", desc: "AUTOMATIC ZERO POINTS — No late submissions accepted (unless pre-arranged for extraordinary circumstances)", pts: "0 / 300 PTS", late: true },
+            "0": { date: "Wednesday, Dec 16 at 23:59 EST (Hard Cutoff)", desc: "Official Final Deadline (0 Bonus Points — Submit before 23:59 EST!)", pts: "+0 Points", late: false },
+            "1": { date: "Tuesday, Dec 15 (1 Day Early)", desc: "+8 Course Bonus Points", pts: "+8 Points", late: false },
+            "2": { date: "Monday, Dec 14 (2 Days Early)", desc: "+16 Course Bonus Points", pts: "+16 Points", late: false },
+            "3": { date: "Sunday, Dec 13 (3 Days Early)", desc: "+25 Course Bonus Points", pts: "+25 Points", late: false },
+            "4": { date: "Saturday, Dec 12 (4 Days Early)", desc: "+34 Course Bonus Points", pts: "+34 Points", late: false },
+            "5": { date: "Friday, Dec 11 (5 Days Early)", desc: "+42 Course Bonus Points", pts: "+42 Points", late: false },
+            "6": { date: "Thursday, Dec 10 (6 Days Early)", desc: "+51 Course Bonus Points", pts: "+51 Points", late: false },
+            "7": { date: "Wednesday, Dec 9 (7 Days Early)", desc: "Maximum Early-Bird Advantage (+60 Points / 2 Full Letter Grades on Project)", pts: "+60 Points", late: false }
+        };
 
         function updateBonus() {
             const slider = document.getElementById('earlyDays');
-            const val = parseInt(slider.value);
+            const val = String(slider.value);
             const item = bonusSchedule[val];
-            document.getElementById('dateLabel').innerText = item.date;
-            document.getElementById('bonusDesc').innerText = item.desc;
-            document.getElementById('pointsLabel').innerText = item.pts;
+            const dateEl = document.getElementById('dateLabel');
+            const descEl = document.getElementById('bonusDesc');
+            const ptsEl = document.getElementById('pointsLabel');
+            const boxEl = document.getElementById('calcResultBox');
+            dateEl.innerText = item.date;
+            descEl.innerText = item.desc;
+            ptsEl.innerText = item.pts;
+            if (item.late) {
+                boxEl.style.background = '#FEF2F2';
+                boxEl.style.borderColor = '#DC2626';
+                dateEl.style.color = '#991B1B';
+                descEl.style.color = '#B91C1C';
+                ptsEl.style.color = '#DC2626';
+            } else {
+                boxEl.style.background = '#FFFFFF';
+                boxEl.style.borderColor = '#A7F3D0';
+                dateEl.style.color = '#064E3B';
+                descEl.style.color = '#047857';
+                ptsEl.style.color = '#047857';
+            }
         }
     </script>
 </body>
